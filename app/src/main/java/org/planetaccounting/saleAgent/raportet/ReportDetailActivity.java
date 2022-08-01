@@ -35,6 +35,7 @@ import org.w3c.dom.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -65,7 +66,7 @@ public class ReportDetailActivity extends Activity {
     int type;
 
     int totalPage = 0;
-    int currentPage =0;
+    int currentPage = 0;
     private boolean isLoading = false;
 
     @Override
@@ -78,6 +79,7 @@ public class ReportDetailActivity extends Activity {
         binding.recycler.setLayoutManager(mLayoutManager);
         binding.recycler.setItemAnimator(new DefaultItemAnimator());
         adapter = new RaportetListAdapter(type);
+
         if (type == 0) {
             vendorPosts.addAll(realmHelper.getVendors());
             adapter.setVendorPosts(vendorPosts);
@@ -153,7 +155,6 @@ public class ReportDetailActivity extends Activity {
         List<InkasimiDetail> inkasimetList = (ArrayList<InkasimiDetail>) gson.fromJson(inkasimet,
                 new TypeToken<ArrayList<InkasimiDetail>>() {
                 }.getType());
-
 
 
         for (int i = 0; i < inkasimetList.size(); i++) {
@@ -256,8 +257,7 @@ public class ReportDetailActivity extends Activity {
     }
 
 
-
-    private void loadNextPage(){
+    private void loadNextPage() {
         isLoading = true;
 
         if (type == 0) {
@@ -276,13 +276,13 @@ public class ReportDetailActivity extends Activity {
         raportsPostObject.setToken(preferences.getToken());
         raportsPostObject.setUser_id(preferences.getUserId());
 
-        if (currentPage == 0 ){
-            if (!vendorPosts.isEmpty()){
-                raportsPostObject.setLast_document_number(vendorPosts.get(vendorPosts.size()-1).getNo_invoice());
+        if (currentPage == 0) {
+            if (!vendorPosts.isEmpty()) {
+                raportsPostObject.setLast_document_number(vendorPosts.get(vendorPosts.size() - 1).getNo_invoice());
             }
             currentPage++;
             raportsPostObject.setPage(currentPage++);
-        } else  {
+        } else {
             raportsPostObject.setLast_document_number("");
             currentPage++;
             raportsPostObject.setPage(currentPage);
@@ -294,10 +294,10 @@ public class ReportDetailActivity extends Activity {
                     isLoading = false;
 
                     if (responseBody.getSuccess()) {
-                        currentPage=responseBody.getCurrentPage();
-                        totalPage  =responseBody.getTotalPage();
+                        currentPage = responseBody.getCurrentPage();
+                        totalPage = responseBody.getTotalPage();
 
-                        for (ReportsList report:responseBody.data) {
+                        for (ReportsList report : responseBody.data) {
                             VendorPost vendorPost = new VendorPost(report);
                             vendorPosts.add(vendorPost);
                         }
@@ -321,13 +321,13 @@ public class ReportDetailActivity extends Activity {
         raportsPostObject.setToken(preferences.getToken());
         raportsPostObject.setUser_id(preferences.getUserId());
 
-        if (currentPage == 0 ){
-            if (!inkasimiDetails.isEmpty()){
-                raportsPostObject.setLast_document_number(String.valueOf(inkasimiDetails.get(inkasimiDetails.size()-1).getId()));
+        if (currentPage == 0) {
+            if (!inkasimiDetails.isEmpty()) {
+                raportsPostObject.setLast_document_number(String.valueOf(inkasimiDetails.get(inkasimiDetails.size() - 1).getId()));
             }
             currentPage++;
             raportsPostObject.setPage(currentPage++);
-        } else  {
+        } else {
             raportsPostObject.setLast_document_number("");
             currentPage++;
             raportsPostObject.setPage(currentPage);
@@ -339,10 +339,10 @@ public class ReportDetailActivity extends Activity {
                     isLoading = false;
 
                     if (responseBody.getSuccess()) {
-                        currentPage=responseBody.getCurrentPage();
-                        totalPage  =responseBody.getTotalPage();
+                        currentPage = responseBody.getCurrentPage();
+                        totalPage = responseBody.getTotalPage();
 
-                        for (ReportsList report:responseBody.data) {
+                        for (ReportsList report : responseBody.data) {
                             InkasimiDetail inkasimiDetail = new InkasimiDetail(report);
                             inkasimiDetails.add(inkasimiDetail);
                         }
@@ -366,13 +366,13 @@ public class ReportDetailActivity extends Activity {
         raportsPostObject.setToken(preferences.getToken());
         raportsPostObject.setUser_id(preferences.getUserId());
 
-        if (currentPage == 0 ){
-            if (!depositPosts.isEmpty()){
-                raportsPostObject.setLast_document_number(String.valueOf(depositPosts.get(depositPosts.size()-1).getId()));
+        if (currentPage == 0) {
+            if (!depositPosts.isEmpty()) {
+                raportsPostObject.setLast_document_number(String.valueOf(depositPosts.get(depositPosts.size() - 1).getId()));
             }
             currentPage++;
             raportsPostObject.setPage(currentPage++);
-        } else  {
+        } else {
             raportsPostObject.setLast_document_number("");
             currentPage++;
             raportsPostObject.setPage(currentPage);
@@ -384,10 +384,10 @@ public class ReportDetailActivity extends Activity {
                     isLoading = false;
 
                     if (responseBody.getSuccess()) {
-                        currentPage=responseBody.getCurrentPage();
-                        totalPage  =responseBody.getTotalPage();
+                        currentPage = responseBody.getCurrentPage();
+                        totalPage = responseBody.getTotalPage();
 
-                        for (ReportsList report:responseBody.data) {
+                        for (ReportsList report : responseBody.data) {
                             DepositPost depositPost = new DepositPost(report);
                             depositPosts.add(depositPost);
                         }
@@ -405,12 +405,16 @@ public class ReportDetailActivity extends Activity {
     }
 
 
-
     private void showLoader() {
         binding.loader.setVisibility(View.VISIBLE);
     }
 
     private void hideLoader() {
         binding.loader.setVisibility(View.GONE);
+    }
+
+    public double cutTo2(double value) {
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
+
     }
 }

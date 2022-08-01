@@ -9,6 +9,7 @@ import android.content.res.AssetManager;
 import android.databinding.DataBindingUtil;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -38,6 +39,8 @@ import org.planetaccounting.saleAgent.aksionet.ActionActivity;
 import org.planetaccounting.saleAgent.aksionet.ActionPost;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.clients.ClientsActivity;
+import org.planetaccounting.saleAgent.companyimage.GetImages;
+import org.planetaccounting.saleAgent.companyimage.ImageStorage;
 import org.planetaccounting.saleAgent.databinding.ActivityMainBinding;
 import org.planetaccounting.saleAgent.db.DatabaseOperations;
 import org.planetaccounting.saleAgent.depozita.DepositPost;
