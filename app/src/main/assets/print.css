@@ -1,0 +1,99 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 8, 2016, 4:59:33 PM
+    Author     : Administrator
+*/
+
+ body {
+                font-size: 11px;
+                background: white;
+            }
+
+
+
+.table1>thead>tr>th {
+       font-weight: normal;
+    background: #b9c9fe;
+    border-top: 4px solid #aabcde;
+    border-bottom: 1px solid #fff;
+    color: #039;
+    font-size: 13px;
+    font-weight: normal;
+    padding: 0 8px;
+}
+
+.numra {
+    text-align: right;
+}
+
+p {
+    font-size: 11px;
+}
+
+.red {
+    color: red;
+}
+
+.no_padding_lr {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+
+.table_blue > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, 
+.table_blue > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+
+    vertical-align: middle;
+}
+
+.table_blue > tbody > tr:hover > td{
+    background: #d0dafd;
+    color: #339;
+}
+
+.table_blue {
+    border-collapse: collapse;
+    text-align: left;
+    font-size:11px;
+}
+
+.table_blue > thead > tr > th, .table > tbody > tr > th{
+    font-weight: normal;
+    background: #b9c9fe;
+    border-top:4px solid #aabcde;
+    border-bottom:1px solid #fff;
+    color:#039;
+    font-size: 13px;
+    font-weight: normal;
+    padding: 0 8px;
+    
+}
+
+.table_blue > tbody > tr > td {
+    background: #e8edff;
+    border-bottom: 1px solid #fff;
+    color:#669;
+    border-top:1px solid transparent;
+    padding: 0px 8px;
+    font-size: 11px;
+    height: 10px;
+    vertical-align: middle;
+}
+
+.left { float: left; }
+.right { float:right; }
+
+.vertical_text {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    vertical-align: middle;
+  }
+

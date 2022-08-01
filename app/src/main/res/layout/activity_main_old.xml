@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/cLogoImg"
+                    android:layout_width="180dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/pazari_ditor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="150dp"
+                    android:text="Pazari ditor: 0.0" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="powered by PlanetAccounting.org v1.0.17"
+                android:textSize="10sp"
+                android:textStyle="italic" />
+
+            <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                tools:context="org.planetaccounting.saleAgent.MainActivity">
+
+                <LinearLayout
+                    android:layout_width="900dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/fatura_button"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:onClick="openInvoiceActivity"
+                            android:text="Fatura"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+
+                        <Button
+                            android:id="@+id/kthimMalli_button"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:onClick="openKthimMalli"
+                            android:text="Kthim Malli"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton"
+                            android:visibility="visible" />
+
+                        <Button
+                            android:id="@+id/porosite_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:onClick="openOrderActivity"
+                            android:text="Porositë"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/stoku_button"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:onClick="openStockActivity"
+                            android:text="Stoku"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+
+                        <Button
+                            android:id="@+id/transfere_buton"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:text="Transfere"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+
+                        <Button
+                            android:id="@+id/ngarkime_button"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="Ngarkime"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/Inksimi"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:text="Inkasimi"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+
+
+                        <Button
+                            android:id="@+id/inksimipes"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="Inkasimi"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton"
+                            android:visibility="invisible" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/Depozit"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="Depozitat"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+
+                        <Button
+                            android:id="@+id/klientet_button"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:onClick="openClientsActivity"
+                            android:text="Klientet"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+
+                        <Button
+                            android:id="@+id/shpenzimetButton"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="Shpenzimet"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/raportet_button"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="Raportet"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+
+                        <Button
+                            android:id="@+id/targeti_button"
+                            android:layout_width="160dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:onClick="openTargetActivity"
+                            android:text="Targeti"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+
+                        <Button
+                            android:id="@+id/aksionet_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="Aksionet"
+                            android:textColor="#FFF"
+                            android:theme="@style/PrimaryFlatButton" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/mbyll_diten"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="Mbyll Arken Fiskale"
+                    android:textColor="#FFF"
+                    android:theme="@style/PrimaryFlatButton" />
+
+                <Button
+                    android:id="@+id/pregadit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_toRightOf="@+id/mbyll_diten"
+                    android:text="Pregadit Arken Fiskale"
+                    android:textColor="#FFF"
+                    android:theme="@style/PrimaryFlatButton" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="20dp"
+                android:text="Çkyqu"
+                android:textColor="#FFF"
+                android:theme="@style/PrimaryFlatButton" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/network_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="popUpNetwork"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:id="@+id/connectivity_textivew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:onClick="popUpServer"
+                    android:text="@string/fa_icon_linechart"
+                    android:textColor="#000"
+                    android:textSize="40sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/sync"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="25dp"
+                android:text="Update"
+                android:textColor="#FFF"
+                android:theme="@style/PrimaryFlatButton" />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/loader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80666666"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

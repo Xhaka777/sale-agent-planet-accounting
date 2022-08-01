@@ -1,0 +1,231 @@
+<html>
+<head>
+    <title> Kartela gjenerale e klientit </title>
+    <style media="print">
+			.table {
+				width: 100%;
+				max-width: 100%;
+				margin-bottom: 20px;
+			}
+			.table {
+				border-collapse: collapse;
+				text-align: left;
+				font-size: 11px;
+				}
+				.table-bordered {
+					border: 1px solid #ddd;
+				}
+			.table1>thead>tr>th {
+				font-weight: normal;
+				background: #b9c9fe;
+				border-top: 4px solid #aabcde;
+				border-bottom: 1px solid #fff;
+				color: #039;
+				font-size: 13px;
+				font-weight: normal;
+				padding: 0 8px;
+				}
+				.row {
+    margin-right: -5px;
+    margin-left: -5px;
+    margin-bottom: 10px; }
+			.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+    float: left;
+}
+.col-xs-12 {
+    width: 100%;
+}
+.col-xs-11 {
+    width: 91.66666667%;
+}
+.col-xs-10 {
+    width: 83.33333333%;
+}
+.col-xs-9 {
+    width: 75%;
+}
+.col-xs-8 {
+    width: 66.66666667%;
+}
+.col-xs-7 {
+    width: 58.33333333%;
+}
+.col-xs-6 {
+    width: 50%;
+}
+.col-xs-5 {
+    width: 41.66666667%;
+}
+.col-xs-4 {
+    width: 33.33333333%;
+}
+.col-xs-3 {
+    width: 25%;
+}
+.col-xs-2 {
+    width: 16.66666667%;
+}
+.col-xs-1 {
+    width: 8.33333333%;
+}
+	
+h1 {
+    margin: .67em 0;
+    font-size: 2em;
+	font-weight: 300;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0;
+    margin-top: 0;
+	font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+h4 small, .h4 small, h5 small, .h5 small, h6 small, .h6 small, h4 .small, .h4 .small, h5 .small, .h5 .small, h6 .small, .h6 .small {
+    font-size: 75%;
+}
+h4 {    font-size: 18px;}
+h5 {    font-size: 11px; font-weight:300;}
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
+    font-weight: normal;
+    line-height: 1;
+    color: #777;
+	}
+	.col-md-55, .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    position: relative;
+    min-height: 1px;
+    float: left;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+			h4{
+			    font-weight: 500;
+				line-height: 1.1;
+				color: inherit;
+			}
+			
+			.text-center { text-align:center; }
+			.text-right { text-align:right; }
+			.table > tbody > tr > td { font-size:12px;}
+.table1>thead>tr>th{ font-weight: bold; color: white !important; }
+.label_bottom_border {
+	border-bottom: 1px solid #e0e0e0;
+	padding-bottom: 5px;
+}
+.col-xs-1, .col-xs-3, .col-xs-5, .col-xs-12 {
+    padding: 0;
+}
+.logo_head {
+    max-height: 120px;
+}
+h3, .h3 {
+    font-size: 24px;
+}
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #fff;
+}
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+.table {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 11px;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    background-color: transparent;
+}
+
+ .table > tbody > tr > td { font-size:12px;}
+        .table1>thead>tr>th{ font-weight: bold; color: white !important; }
+
+.table th {
+            background-color: gray !important;
+            font-size: 12px !important;
+        }
+        
+        .table tr {
+            border-bottom: 1px solid #cccccc;
+            
+        }
+        
+        .table td, .table th  {
+            border-right: 1px solid #cccccc !important;
+        }
+		.number_total_fs {
+    font-weight: 900;
+}
+#print_footer { font-size:10px }
+
+    </style>
+</head>
+
+<body>
+<div style="max-width:1100px; padding:2px; margin: 0 auto; margin-bottom:40px;">
+    <div class="col-xs-6">
+        <h3> sellerName </h3>
+        <h4> Raporti : Kartela gjenerale e klientit </h4>
+    </div>
+
+    <div class="col-xs-6">
+        <div class="col-xs-12">
+            <div class="col-xs-6 text-right">Kodi :</div>
+            <div class="col-xs-6"> clientId </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-6 text-right">Klienti :</div>
+            <div class="col-xs-6"><b> clientName </b></div>
+            <div class="clearfix"></div>
+            <div class="col-xs-6 text-right">Adresa :</div>
+            <div class="col-xs-6"> clientAdress </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-6 text-right">Nr. Fiskal :</div>
+            <div class="col-xs-6"></div>
+            <div class="clearfix"> clientFiscalNumber </div>
+            <div class="col-xs-6 text-right"> Nr. Biznesit :</div>
+            <div class="col-xs-6"> clientBussinessNumber </div>
+        </div>
+    </div>
+    <table class="table table1 table-bordered" style="margin: 1px; margin-bottom: 30px;">
+        <thead>
+        <tr>
+            <th class="text-center"> Data</th>
+            <th class="text-center"> Dokumenti</th>
+            <th class="text-center"> Pershkrimi</th>
+            <th class="text-center"> Ambulatori</th>
+            <th class="text-center"> Valuta</th>
+            <th class="text-center"> Vlera</th>
+            <th class="text-center"> Bilanci</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        cardItems
+
+        <tr>
+            <td colspan="6"></td>
+            <td class="text-right number_total_fs" style="border-top:3px double black; ">
+            <td class="text-right number_total_fs" style="border-top:3px double black; ">
+                balance EUR
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="col-xs-12" id="print_footer">
+        <p><i> Gjeneruar me 05-02-2018 23:02:03 nga PlanetAccounting.org </i></p>
+    </div>
+</div>
+</body>
+</html>

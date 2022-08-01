@@ -1,0 +1,418 @@
+<html>
+<head>
+    <title> Fatura # 60 </title>
+    <style>
+		body {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.471;
+    font-family: "Cabin", sans-serif, Roboto, Arial, "Droid Sans", sans-serif;
+    min-width: 320px;
+}
+.row {
+    margin-right: -5px;
+    margin-left: -5px;
+    margin-bottom: 10px; }
+			.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+    float: left;
+}
+.col-xs-12 {
+    width: 100%;
+}
+.col-xs-11 {
+    width: 91.66666667%;
+}
+.col-xs-10 {
+    width: 83.33333333%;
+}
+.col-xs-9 {
+    width: 75%;
+}
+.col-xs-8 {
+    width: 66.66666667%;
+}
+.col-xs-7 {
+    width: 58.33333333%;
+}
+.col-xs-6 {
+    width: 50%;
+}
+.col-xs-5 {
+    width: 41.66666667%;
+}
+.col-xs-4 {
+    width: 33.33333333%;
+}
+.col-xs-3 {
+    width: 25%;
+}
+.col-xs-2 {
+    width: 16.66666667%;
+}
+.col-xs-1 {
+    width: 8.33333333%;
+}
+	
+h1 {
+    margin: .67em 0;
+    font-size: 2em;
+	font-weight: 300;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0;
+    margin-top: 0;
+	font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+h4 small, .h4 small, h5 small, .h5 small, h6 small, .h6 small, h4 .small, .h4 .small, h5 .small, .h5 .small, h6 .small, .h6 .small {
+    font-size: 75%;
+}
+h4 {    font-size: 18px;}
+h5 {    font-size: 11px; font-weight:300;}
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
+    font-weight: normal;
+    line-height: 1;
+    color: #777;
+	}
+	.col-md-55, .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    position: relative;
+    min-height: 1px;
+    float: left;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.table > tbody > tr > td { font-size:12px;}
+.table1>thead>tr>th{ font-weight: bold; color: white !important; }
+.label_bottom_border {
+	border-bottom: 1px solid #e0e0e0;
+	padding-bottom: 5px;
+}
+.col-xs-1, .col-xs-3, .col-xs-5, .col-xs-12 {
+    padding: 0;
+}
+.logo_head {
+    max-height: 120px;
+}
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #fff;
+}
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+#saler_div{border-right: 1px solid gainsboro; padding-right: 20px;}
+#invoice_div { margin: 0 auto; position: relative; padding-top: 0px; }
+.text-right { padding-right: 5px; text-align: right; }
+
+.table {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 11px;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    background-color: transparent;
+}
+
+ .table > tbody > tr > td { font-size:12px;}
+        .table1>thead>tr>th{ font-weight: bold; color: white !important; }
+
+.table th {
+            background-color: gray !important;
+            font-size: 12px !important;
+        }
+        
+        .table tr {
+            border-bottom: 1px solid #cccccc;
+            
+        }
+        
+        .table td, .table th  {
+            border-right: 1px solid #cccccc !important;
+        }
+.text-center { text-align : center; }
+#tbl_items {
+margin-top:30px; margin-bottom:20px;
+}
+#tbl_shumes {
+    font-size: 12px;
+}
+
+.handwrite {
+	padding-top:90px;
+}
+
+.no_invoice_hide { display: none;}
+
+    </style>
+</head>
+<body>
+<div id="invoice_div">
+    <div class="col-xs-5 "> companyLogo </div>
+    <div class="col-xs-2"> &nbsp;</div>
+    <div class="col-xs-5">
+        <h1 class="no_invoice_hide"> document_type : nrFatures </h1>
+        <h4>
+            <small> E dates :</small>
+            data
+        </h4>
+        <h4>
+            <small> Njesia Shitjes :</small>
+            njesiaShitjes &nbsp;
+        </h4>
+        <h4>
+            <small> Agjenti Shitjes :</small>
+            fullName &nbsp;
+        </h4>
+    </div>
+    <div class="col-xs-12">
+        <hr/>
+    </div>
+    <!-- Invoice -->
+    <div class="col-xs-6" id="saler_div" style="">
+        <div class="col-xs-7 no_invoice_hide">
+            <div class="row">
+                <div class="col-xs-2 text-right">
+                    <h5>
+                        <small> Shit&euml;si</small>
+                    </h5>
+                </div>
+                <div class="col-xs-9 label_bottom_border"><h4> sellerName </h4></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 text-right">
+                    <h5>
+                        <small> Adresa </small>
+                    </h5>
+                </div>
+                <div class="col-xs-9 label_bottom_border">
+                    <h5>
+                        sellerAdress <br/>
+                        sellerCity sellerZip <br/>
+                        sellerState </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    <h5>
+                        <small> Kontakt</small>
+                    </h5>
+                </div>
+                <div class="col-xs-9 label_bottom_border">
+                    <h5> sellerTel <br/> sellerEmail &nbsp; </h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-5 no_invoice_hide">
+            <div class="row">
+                <div class="col-xs-4 text-right">
+                    <h5>
+                        <small> Nr. Fiskal</small>
+                    </h5>
+                </div>
+                <div class="col-xs-8 label_bottom_border"><h5> sellerFiscal &nbsp; </h5></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 text-right">
+                    <h5>
+                        <small> Nr. Biznesit</small>
+                    </h5>
+                </div>
+                <div class="col-xs-8 label_bottom_border"><h5> sellerBussines &nbsp;</h5></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 text-right">
+                    <h5>
+                        <small> Nr. TVSH</small>
+                    </h5>
+                </div>
+                <div class="col-xs-8 label_bottom_border"><h5> sellerTvshNumber &nbsp; </h5></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 text-right">
+                    <h5>
+                        <small> Personi Kontaktues</small>
+                    </h5>
+                </div>
+                <div class="col-xs-8 label_bottom_border"><h5> sellerContactPerson &nbsp;</h5></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="col-xs-12">
+            <div class="col-xs-7">
+                <div class="row">
+                    <div class="col-xs-2 text-right">
+                        <h5>
+                            <small> Bler&euml;si</small>
+                        </h5>
+                    </div>
+                    <div class="col-xs-9 label_bottom_border"><h4> clientName &nbsp;</h4></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 text-right">
+                        <h5>
+                            <small> Njesia</small>
+                        </h5>
+                    </div>
+                    <div class="col-xs-9 label_bottom_border"><h5> stationName &nbsp; </h5></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 text-right">
+                        <h5>
+                            <small> Adresa</small>
+                        </h5>
+                    </div>
+                    <div class="col-xs-9 label_bottom_border">
+                        <h5><br/> clientAdress &nbsp; <br/></h5>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-xs-2 text-right">
+                        <h5>
+                            <small> Kontakt</small>
+                        </h5>
+                    </div>
+                    <div class="col-xs-9 label_bottom_border">
+                        <h5> clientContact &nbsp; </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-5">
+                <div class="row">
+                    <div class="col-xs-4 text-right ">
+                        <h5>
+                            <small> Nr. Fiskal</small>
+                        </h5>
+                    </div>
+                    <div class="col-xs-8 label_bottom_border"><h5> clientFiscalNumber &nbsp; </h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 text-right ">
+                        <h5>
+                            <small> Nr. Biznesit</small>
+                        </h5>
+                    </div>
+                    <div class="col-xs-8 label_bottom_border"><h5> clientBussinessNumber
+                        &nbsp; </h5></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 text-right ">
+                        <h5>
+                            <small> Nr. TVSH</small>
+                        </h5>
+                    </div>
+                    <div class="col-xs-8 label_bottom_border"><h5> clientVatNumber &nbsp; </h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 text-right ">
+                        <h5>
+                            <small> Personi Kontaktues</small>
+                        </h5>
+                    </div>
+                    <div class="col-xs-8 label_bottom_border"><h5> &nbsp; </h5></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <table id="tbl_items" class="table table1 table-striped">
+            <thead>
+            <tr>
+                <th style="width:30px;" class="font_white_bold text-center">#</th>
+                <th style="width:100px;" class="font_white_bold text-center">Kodi</th>
+                <th style="width:100px;" class="font_white_bold text-center"> Barkodi</th>
+                <th class="font_white_bold text-center"> Emertimi</th>
+                <th style="width:60px;" class="text-center font_white_bold">Njesia</th>
+                <th style="width:60px;" class="text-center font_white_bold">Sasia</th>
+                <th style="width:60px;" class="text-center font_white_bold">Sasia Cop</th>
+                <th style="width:50px;" class="text-center font_white_bold"> Cmimi <br> Baze</th>
+                <th style="width:50px;" class="font_white_bold"> Zbritje (%)</th>
+                <th style="width:50px;" class="font_white_bold"> Zbritje Extra (%)</th>
+                <th style="width:40px;" class="text-center font_white_bold"> TVSH (%)</th>
+                <th style="width:50px;" class="text-center font_white_bold"> C. me TVSH</th>
+                <th style="width:60px;" class="text-center font_white_bold"> Vl. me TVSH</th>
+            </tr>
+            </thead>
+            <tbody>
+            invoiceItems
+            </tbody>
+        </table>
+        <div class="col-md-5 col-xs-5">
+            <div class="col-xs-12"><h4>T&euml; dh&euml;nat p&euml;r pagese: </h4></div>
+            cashMoney
+        </div>
+
+        <div class="col-xs-3"></div>
+        <div class="col-xs-4">
+            <table class="tabel table1 table-bordered table-striped col-xs-12" id="tbl_shumes">
+                <tr>
+                    <td class="text-right"> Totali pa Zbritje</td>
+                    <td class="text-right"> valueWithoutDiscount EUR</td>
+                </tr>
+                <tr>
+                    <td class="text-right"> Vlera e Zbritur</td>
+                    <td class="text-right"> discountValue EUR</td>
+                </tr>
+                <tr>
+                    <td class="text-right"> Totali pa TVSH</td>
+                    <td class="text-right"> amountNoVat EUR</td>
+                </tr>
+                <tr>
+                    <td class="text-right"> TVSH</td>
+                    <td class="text-right"> amountOfVat EUR</td>
+                </tr>
+                <tr>
+
+                    <td class="text-right" style="padding:5px;"><b> Vlera Totale </b></td>
+                    <td class="text-right" style="padding:5px;"><b> totali EUR </b></td>
+                </tr>
+
+            </table>
+        </div>
+
+
+        <div class="clearFix">
+            <hr/>
+        </div>
+
+        <div class="col-xs-12"><br/><br/>
+            <hr/>
+        </div>
+        <div class="row padding_left_right handwrite">
+            <div class="col-xs-4 text-center" style="float:left;">
+                <div style="width:80%;float:center;border-top:1px solid black;" class="t-c">
+                    Faturoi
+                </div>
+            </div>
+
+
+            <div class="col-xs-4 text-center" style="float:right;">
+                <div style="width:80%;float:center;border-top:1px solid black;" class="t-c">Pranoi
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<div class="col-xs-12" id="print_footer" style="position: fixed; bottom: 0; right: 0;">
+    <p><i> Gjeneruar me data nga PlanetAccounting.org </i>
+        info@planetaccounting.org  044/049 908 400 </p>
+</div>
+</body>
+</html>

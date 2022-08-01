@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".settings.escpostsettngs.ESCSettingsActivity">
+
+    <RelativeLayout
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="19dp"
+            android:text="Esc Post Settings"
+            android:textColor="#000" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_layout"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" >
+
+        <LinearLayout
+            android:id="@+id/kodi_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="start|center"
+                android:text="Kodi"
+                android:textAllCaps="false"
+                android:textSize="17sp" />
+
+            <Switch
+                android:id="@+id/kodi_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:textAllCaps="true"
+                android:textColor="#b5b5b5"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/barcode_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="start|center"
+                android:text="Barkodi"
+                android:textAllCaps="false"
+                android:textSize="17sp" />
+
+            <Switch
+                android:id="@+id/barcode_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:textAllCaps="true"
+                android:textColor="#b5b5b5"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quantity_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="start|center"
+                android:text="Sasia Cope"
+                android:textAllCaps="false"
+                android:textSize="17sp" />
+
+            <Switch
+                android:id="@+id/quantity_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:textAllCaps="true"
+                android:textColor="#b5b5b5"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/discount_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="start|center"
+                android:text="Zbirtja"
+                android:textAllCaps="false"
+                android:textSize="17sp" />
+
+            <Switch
+                android:id="@+id/discount_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:textAllCaps="true"
+                android:textColor="#b5b5b5"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/discount_extra_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="start|center"
+                android:text="Zbirtja Extra"
+                android:textAllCaps="false"
+                android:textSize="17sp" />
+
+            <Switch
+                android:id="@+id/discount_extra_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:textAllCaps="true"
+                android:textColor="#b5b5b5"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
+</layout>

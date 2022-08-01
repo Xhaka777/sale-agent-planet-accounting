@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+<android.support.constraint.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp">
+
+    <Button
+        android:id="@+id/sync"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="6dp"
+        android:background="@android:color/transparent"
+        android:text="@string/update"
+
+        android:textColor="@color/colorLogoDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="8dp"
+        android:maxLines="1"
+        android:text=""
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sync"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="6dp"
+        android:text="ÇKYQU"
+        android:textColor="@color/colorLogoDark"
+
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toStartOf="@id/settings_button"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/settings_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="6dp"
+        android:text="ÇKYQU"
+        android:textColor="@color/colorLogoDark"
+        android:src="@drawable/ic_settings"
+
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--<Button-->
+        <!--android:id="@+id/saveButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="44dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginTop="6dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:fontFamily="@font/ubuntu_light"-->
+        <!--android:text="Save"-->
+        <!--android:textAlignment="viewEnd"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textColor="@color/cl_414042"-->
+        <!--android:textSize="16sp"-->
+        <!--android:visibility="gone"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E5E5E5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+</android.support.constraint.ConstraintLayout>
+</layout>

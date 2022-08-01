@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <!--#	SHIFRA	BARKODI	EMERTIMI	SASIA [A]	NJESIA	CMIMI [B]	ZBRITJA % [C]
+    ZBRITJA EXTRA % [D]	CMIMI PA TVSH  [E]	KODI (NORMA) [F]	CMIMI ME TVSH  [G]	VLERA PA TVSH  [H]	VLERA E TVSH-SË  [I]	VLERA ME TVSH  [J]	LLOGARIA	DEPO	PROJEKTI-->
+    <TextView
+        android:id="@+id/shifra_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="SHIFRA"/>
+    <TextView
+        android:id="@+id/barkodi_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="BARKODI"/>
+    <TextView
+        android:id="@+id/emertimi_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="EMERTIMI"/>
+    <TextView
+        android:id="@+id/sasia_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="SASIA [A]"/>
+    <TextView
+        android:id="@+id/njesia_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="NJESIA"/>
+    <TextView
+        android:id="@+id/cmimi_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="CMIMI [B]"/>
+    <TextView
+        android:id="@+id/zbritja_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="ZBRITJA % [C]"/>
+    <TextView
+        android:id="@+id/extra_zbritje_textview"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:text="ZBRITJA EXTRA % [D]"/>
+    <TextView
+        android:id="@+id/cmimi_pa_tvsh_textview"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CMIMI PA TVSH  [E]"/>
+    <TextView
+        android:id="@+id/kodi_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="KODI (NORMA) [F]"/>
+    <TextView
+        android:id="@+id/cmimi_me_tvsh_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="CMIMI ME TVSH  [G]"/>
+    <TextView
+        android:id="@+id/vlera_pa_tvsh_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="VLERA PA TVSH  [H]"/>
+    <TextView
+        android:id="@+id/vlera_e_tvsh_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="VLERA E TVSH-SË  [I]"/>
+
+</LinearLayout>

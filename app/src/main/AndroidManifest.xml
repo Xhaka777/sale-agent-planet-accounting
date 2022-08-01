@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.planetaccounting.saleAgent">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name=".Kontabiliteti"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".settings.escpostsettngs.ESCSettingsActivity"></activity>
+        <!-- Services -->
+        <service
+            android:name=".services.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--
+Set custom default icon. This is used when no icon is set for incoming notification messages.
+See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@android:color/white" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/message_notification_channel_id" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" /> <!--  -->
+        <activity android:name=".settings.SettingsActivity" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".stock.StockActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".clients.ClientsActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".clients.ClientsDetailActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".invoice.InvoiceActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".OrdersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".utils.DeviceActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".utils.ActivityPrint"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".invoice.InvoiceListActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".OrdersListActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".OrderListDetail"
+            android:screenOrientation="landscape" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="adbc8f9c6f4feebdbcedbf74e9b5832c47f20405" />
+
+        <activity
+            android:name=".DepozitaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inkasimi.InkasimPanel"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".kthemallin.ktheMallin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".transfere.transfereActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ngarkime.ngarkimeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".target.TargetActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".aksionet.ActionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".shpenzimet.ShpenzimetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".target.TotalTargetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".target.TargetCashActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".target.TargetBrandActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".target.TargetArticleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".invoice.InvoiceActivityOriginal"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".target.TargetSkuActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".raportet.RaportetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".raportet.ReportDetailActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".PazariDitorActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".aksionet.ActionDetailActivity" />
+        <activity android:name=".ngarkime.UploadDetailActivity" />
+        <activity android:name=".aksionet.ActionCollectionDetailActivity" />
+        <activity android:name=".transfere.CreateTransferActivity" />
+        <activity android:name=".transfere.DetailTransferActivity" />
+    </application>
+
+</manifest>

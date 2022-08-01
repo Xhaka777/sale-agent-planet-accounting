@@ -1,0 +1,519 @@
+<html>
+<head>
+    <!-- Bootstrap -->
+    <link href="/vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+
+    <!-- Custom styling plus plugins -->
+    <link href="/build/css/custom.css" rel="stylesheet">
+
+    <!-- Custom styling plus plugins -->
+    <link href="/build/css/print.css" rel="stylesheet">
+
+    <title> Fatura # 60 </title>
+</head>
+<body>
+<style>
+        .table > tbody > tr > .danger {
+            background-color: #f2dede !important;
+        }
+        @media print {
+                body{
+                    font-size: 11px;
+                }
+                .table > tbody > tr > td, .table > tbody > tr > th {
+                    font-size: 11px;
+                    padding:2px;
+                }
+
+                .table > tbody > tr > .danger {
+                    background-color: #f2dede !important;
+                }
+
+                .bg-danger {
+                    background-color: #f2dede !important;
+                }
+            }
+        
+
+
+</style>
+<div style=" max-width:1100px; padding:2px; margin: 0 auto; margin-bottom:40px;">
+
+
+    <style>
+    body { font-size: 11px; }
+    .col-xs-1,.col-xs-3,.col-xs-5,.col-xs-12 { padding: 0; }
+    .border_top { border-top: 1px solid black; }
+    .border_top_bot {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+    
+    .llA {
+        padding-left: 20px;
+    }
+    
+    .llS {
+        padding-left: 20px;
+    }
+    
+    .btn-group-xs>.btn, .btn-xs {
+        width: 15px;
+        height: 15px;
+        padding: 2px;
+    }
+    
+    .logo_head {
+        max-height: 100px;
+        max-width: 100%;
+    }
+    
+    .header_info h4, .header_info h5 {
+        margin-bottom: 0;
+    }
+
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+        font-size: 12px;
+    }
+    
+    
+    #tbl_artikujt td {
+        padding-left: 10px;
+    }
+    #tbl_artikujt td.text-right {
+        padding-right: 10px;
+    }
+  
+    @media print {
+        .table th {
+            background-color: gray !important;
+            font-size: 12px !important;
+        }
+        
+        .table tr {
+            border-bottom: 1px solid #cccccc;
+            
+        }
+        
+        .table td, .table th  {
+            border-right: 1px solid #cccccc !important;
+        }
+        
+    }
+    h1,h2,h3,h4,h5,h6 {
+        margin-bottom : 0;
+        margin-top: 0;
+    }
+    .table > tbody > tr > td { font-size:12px;}
+
+    </style>
+    <style type="text/css" media="print">
+    .table1>thead>tr>th { background:#e0e0e0; color: #000; }
+    .table > tbody > tr > td { font-size:12px;}
+
+    </style>
+    <div style="max-width: 1040px; margin: 0 auto; position: relative; padding-top: 0px;">
+        <div class="col-xs-12">
+
+            <style type="text/css" media="print">
+    @media print {
+        body {
+            font-size:12px;
+        }
+        h5{
+            font-size:11px;
+        }
+        .table > tbody > tr > td { font-size:12px;}
+        .table1>thead>tr>th{ font-weight: bold; color: white !important; }
+    }
+
+    
+
+            </style>
+            <style>
+    
+    .logo_head {
+        max-height: 120px;
+    }
+
+            </style>
+
+            <div class="row">
+
+                <div class="col-xs-5">
+
+                    <img src="/software/images/logos/company/5a297aa0d9592.png" class="logo_head"
+                         alt="Logo e Shitesit"/>
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-5" style="padding-left:20px;">
+
+                    <h1> FATUR&Euml; : 60 </h1>
+
+
+                    <h4>
+                        <small> E dates :</small>
+                        08-02-2018
+                    </h4>
+                    <h4>
+                        <small> Njesia Shitjes :</small>
+                        Kombi Horeka - A8 &nbsp;
+                    </h4>
+                    <h4>
+                        <small> Agjenti Shitjes :</small>
+                        Kujtim Imeri &nbsp;
+                    </h4>
+                </div>
+                <div class="col-xs-12">
+                    <hr>
+                </div>
+            </div>
+            <!-- Invoice -->
+            <div class="col-xs-6" style="border-right: 1px solid gainsboro; padding-right: 20px;">
+                <div class="col-xs-7">
+                    <div class="row">
+                        <div class="col-xs-2 text-right">
+                            <h5>
+                                <small> Shit&euml;si</small>
+                            </h5>
+                        </div>
+                        <div class="col-xs-9 label_bottom_border"><h4> Adriatik Group sh.p.k. </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">
+                            <h5>
+                                <small> Adresa</small>
+                            </h5>
+                        </div>
+                        <div class="col-xs-9 label_bottom_border">
+                            <h5>
+                                Kolovica e Re, Haxhi Zeka p.n. <br>
+                                Prishtinë 10000 <br>
+                                Kosova </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <h5>
+                                <small> Kontakt</small>
+                            </h5>
+                        </div>
+                        <div class="col-xs-9 label_bottom_border">
+                            <h5>049767382<br>jeton.hajdini@adriatikgroup.com &nbsp; </h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-5">
+                    <div class="row">
+                        <div class="col-xs-4 text-right">
+                            <h5>
+                                <small> Nr. Fiskal</small>
+                            </h5>
+                        </div>
+                        <div class="col-xs-8 label_bottom_border"><h5> 600915394 &nbsp; </h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 text-right">
+                            <h5>
+                                <small> Nr. Biznesit</small>
+                            </h5>
+                        </div>
+                        <div class="col-xs-8 label_bottom_border"><h5> 70920255 &nbsp;</h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 text-right">
+                            <h5>
+                                <small> Nr. TVSH</small>
+                            </h5>
+                        </div>
+                        <div class="col-xs-8 label_bottom_border"><h5> 330187072 &nbsp; </h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 text-right">
+                            <h5>
+                                <small> Personi Kontaktues</small>
+                            </h5>
+                        </div>
+                        <div class="col-xs-8 label_bottom_border"><h5> Jeton Hajdini &nbsp;</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="col-xs-12">
+                    <div class="col-xs-7">
+                        <div class="row">
+                            <div class="col-xs-2 text-right">
+                                <h5>
+                                    <small> Bler&euml;si</small>
+                                </h5>
+                            </div>
+                            <div class="col-xs-9 label_bottom_border"><h4> AMIGOS </h4></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2 text-right">
+                                <h5>
+                                    <small> Njesia</small>
+                                </h5>
+                            </div>
+                            <div class="col-xs-9 label_bottom_border"><h5> &nbsp; </h5></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2 text-right">
+                                <h5>
+                                    <small> Adresa</small>
+                                </h5>
+                            </div>
+                            <div class="col-xs-9 label_bottom_border">
+                                <h5><br>
+                                    PRISHTINE 10000 <br>
+                                </h5>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-xs-2 text-right">
+                                <h5>
+                                    <small> Kontakt</small>
+                                </h5>
+                            </div>
+                            <div class="col-xs-9 label_bottom_border">
+                                <h5> &nbsp; </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="row">
+                            <div class="col-xs-4 text-right ">
+                                <h5>
+                                    <small> Nr. Fiskal</small>
+                                </h5>
+                            </div>
+                            <div class="col-xs-8 label_bottom_border"><h5> &nbsp; </h5></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4 text-right ">
+                                <h5>
+                                    <small> Nr. Biznesit</small>
+                                </h5>
+                            </div>
+                            <div class="col-xs-8 label_bottom_border"><h5> &nbsp;</h5></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4 text-right ">
+                                <h5>
+                                    <small> Nr. TVSH</small>
+                                </h5>
+                            </div>
+                            <div class="col-xs-8 label_bottom_border"><h5> &nbsp; </h5></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4 text-right ">
+                                <h5>
+                                    <small> Personi Kontaktues</small>
+                                </h5>
+                            </div>
+                            <div class="col-xs-8 label_bottom_border"><h5> &nbsp; </h5></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <table class="table table1 table-striped" style="margin-top:30px; margin-bottom:20px;"
+                   id="tbl_artikujt">
+                <thead>
+                <tr>
+                    <th style="width:30px;" class="font_white_bold">#</th>
+                    <th style="width:100px;" class="font_white_bold">Kodi</th>
+                    <th style="width:100px;" class="font_white_bold"> Barkodi</th>
+                    <th class="font_white_bold"> Emertimi</th>
+                    <th style="width:60px;" class="text-right font_white_bold">Sasia</th>
+                    <th style="width:60px;" class="text-right font_white_bold">Njesia</th>
+                    <th style="width:50px;" class="text-right font_white_bold"> C. pa TVSH</th>
+                    <th style="width:50px;" class="font_white_bold"> Zbritje Extra (%)</th>
+                    <th style="width:40px;" class="text-center font_white_bold"> TVSH (%)</th>
+                    <th style="width:50px;" class="text-right font_white_bold"> C. me TVSH</th>
+                    <th style="width:60px;" class="text-right font_white_bold"> Vl. me TVSH</th>
+                </tr>
+                </thead>
+                <tbody>
+                    invoiceItems
+                </tbody>
+            </table>
+            <div class="col-md-5 col-xs-5">
+                <!-- <div style="width:24%;float:left;"> -->
+                <div class="col-xs-12"><h4>T&euml; dh&euml;nat p&euml;r pagese: </h4></div>
+                <div class="col-xs-12" style="font-size:10px;"><b> Banka Ekonomike :
+                    1401000000664823</b></div>
+
+            </div>
+            <div class="col-md-3 col-xs-3">
+
+            </div>
+            <div class="col-md-4 col-xs-4">
+                <!-- <div style="width:30%;float:right;"> -->
+                <style> #tbl_shumes {font-size: 12px;} </style>
+                <table class="tabel table1 table-bordered table-striped col-xs-12" id="tbl_shumes">
+                    <tr>
+                        <td class="text-right"> Totali pa Zbritje</td>
+                        <td class="text-right"> totalNoDiscount EUR</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right"> Zbritje (%)</td>
+                        <td class="text-right"> clientDiscount %</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right"> Vlera e Zbritur</td>
+                        <td class="text-right"> discountAmount EUR</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right"> Totali pa TVSH</td>
+                        <td class="text-right"> amountNoVat EUR</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right"> TVSH</td>
+                        <td class="text-right"> amountOfVat EUR</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right" style="padding:5px;"> Vlera Totale</td>
+                        <td class="text-right" style="padding:5px;"><b> totali EUR </b></td>
+                    </tr>
+
+                </table>
+            </div>
+
+
+            <div class="clearFix"><br></div>
+
+
+            <div class="row padding_left_right" style="padding-top:90px;">
+                <div style="width:33%;float:left;">
+                    <div style="width:80%;float:center;border-top:1px solid black;" class="t-c">
+                        Faturoi
+                    </div>
+                </div>
+
+
+                <div style="width:33%;float:right;">
+                    <div style="width:80%;float:center;border-top:1px solid black;" class="t-c">
+                        Pranoi
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="clearfix"></div>
+    </div>
+
+</div>
+
+<div class="col-xs-12" id="print_footer" style="position: fixed; bottom: 0; right: 0;">
+    <p><i> Gjeneruar me 04-02-2018 16:23:46 nga PlanetAccounting.org p&euml;r 0.1 sek. </i>
+        info@planetaccounting.org 044/049 908 400 </p>
+</div>
+
+</div>
+<div style="position: fixed; bottom: 0; right: 0;">
+    <div class="btn-group" id="print_buttons">
+        <button class="btn btn-default hidden-print" onclick="window.close();"><i
+                class="fa fa-times"></i> Mbylle
+        </button>
+        <button class="btn btn-default hidden-print" onclick="window.print();"><i
+                class="fa fa-print"></i> Print
+        </button>
+        <button class="btn btn-default hidden-print" data-toggle="modal" data-target="#modal_cog"><i
+                class="fa fa-filter"></i> Filtro
+        </button>
+    </div>
+</div>
+<!-- jQuery -->
+<script src="/vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/vendors/bootstrap/dist/js/bootstrap.js"></script>
+
+<script>
+
+</script>
+
+
+<script>
+    $(document).ready(function(){
+        // DROPDOWN ITEM
+        $('body').on('click','.dropdown_add_btn',function(){
+            var input_id = $(this).data('iid');
+            var value = $(this).data('val');
+            var name  = $(this).data('name');
+            $('#'+input_id).val(value);
+            $('#sp_'+input_id).text(name);
+        });
+        $('body').on('click','.dropdown_item',function(){
+            var id = $(this).data('id');
+            var t = $(this).text();
+            var ele = $(this).data('element');
+            $('#btn_'+ele).html(t);
+                $('#input_'+ele).val(id).trigger('change');
+            console.log(ele);
+        });
+        $('body').on('click','.dropdown_item_add',function(){
+            var ele = $(this).data('element');
+            var element_id = $(this).data('id');
+            var val = $('#input_add_item_'+element_id).val();
+            var data = {'v':val,'e':ele};
+            try {
+                $.ajax({type: 'POST', url: 'includes/shto_item_dropdown.php', data: data, dataType: 'json', encode: true})
+                 .done(function (data) {
+                    if (!data.success){
+                        if(data.errors.msg){
+                            alertMsg(data.title,data.errors.msg,'warning');
+                        }
+                    }else{
+                        alertMsg(data.title,data.msg,'success');
+                        $('#btn_'+element_id).html(val);
+                        $('#input_'+element_id).val(data.id);
+                        $('#input_add_item_'+element_id).val(''); 
+                        $("#ul_divider_"+element_id).before(' <li> <a href="#" class="dropdown_item dropdown_item_'+element_id+'" data-id="'+data.id+'" data-element="'+element_id+'" data-value="'+(val.toLowerCase())+'">'+val+'</a></li>');
+
+                     }
+                    console.log(data);
+                 })
+                 .fail(function (data) {
+                    console.log(data);
+                    alertMsg('','Fshije Kategorin e takses ! '+data.responseText,'danger');
+                 });
+            } catch (err) {
+                alert(err.message);
+            }
+        });
+        $('body').on('keyup','.serach_on_dropdown',function(){
+            var name = $(this).data('element');
+            var value_search = $(this).val();
+            value_search = value_search.toLowerCase();
+            if(value_search == ''){
+                $('.dropdown_item_'+name).show();
+            }else{
+                $('.dropdown_item_'+name).each(function(){
+                    var item_value = $(this).data('value');
+                    if(item_value.indexOf(value_search) >= 0 ){
+                        $(this).show();
+                    }else{
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

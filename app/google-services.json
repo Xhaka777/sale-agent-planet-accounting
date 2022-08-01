@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "190668245615",
+    "firebase_url": "https://sale-agent-android.firebaseio.com",
+    "project_id": "sale-agent-android",
+    "storage_bucket": "sale-agent-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190668245615:android:071fad354f75b0e1",
+        "android_client_info": {
+          "package_name": "org.planetaccounting.saleAgent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "190668245615-tjn0d1qdtbcdh7bst78d0er60lej9prs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.planetaccounting.saleAgent",
+            "certificate_hash": "a703a881b1b6107410d4bb47fed7e09d1621f421"
+          }
+        },
+        {
+          "client_id": "190668245615-jcahkqpv70i5rn18o2e8cnurj99dtl8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9nxfYvrFjWSHcpYvIpLWZ4xGWPgPSIxo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "190668245615-jcahkqpv70i5rn18o2e8cnurj99dtl8v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

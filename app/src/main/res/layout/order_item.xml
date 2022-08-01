@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--&lt;!&ndash;#	SHIFRA	BARKODI	EMERTIMI	SASIA [A]	NJESIA	CMIMI [B]	ZBRITJA % [C]-->
+        <!--ZBRITJA EXTRA % [D]	CMIMI PA TVSH  [E]	KODI (NORMA) [F]	CMIMI ME TVSH  [G]	VLERA PA TVSH  [H]	VLERA E TVSH-SË  [I]	VLERA ME TVSH  [J]	LLOGARIA	DEPO	PROJEKTI&ndash;&gt;-->
+        <!--<AutoCompleteTextView-->
+            <!--android:id="@+id/shifra_textview"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="SHIFRA"-->
+            <!--android:padding="10dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="15sp"-->
+            <!--/>-->
+
+        <!--<AutoCompleteTextView-->
+            <!--android:id="@+id/emertimi_textview"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:hint="EMERTIMI"-->
+            <!--android:padding="10dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="15sp"-->
+
+            <!--/>-->
+        <!--<AutoCompleteTextView-->
+            <!--android:id="@+id/njesia_textview"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="NJESIA"-->
+            <!--android:focusable="false"-->
+            <!--android:padding="10dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="15sp"-->
+            <!--/>-->
+
+        <!--<AutoCompleteTextView-->
+            <!--android:id="@+id/sasia_textview"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="SASIA"-->
+            <!--android:inputType="numberDecimal"-->
+            <!--android:padding="10dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="15sp"-->
+            <!--/>-->
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/remove_button"-->
+            <!--android:layout_width="35dp"-->
+            <!--android:layout_height="35dp"-->
+            <!--android:background="@android:drawable/ic_menu_close_clear_cancel"-->
+            <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+        <RelativeLayout
+            android:id="@+id/base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_white_radius_5"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="0.4"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Shifra"
+                            android:textColor="#b3414042"
+                            android:textSize="12sp"
+                            />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/shifra_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:textSize="15sp"
+                            android:background="@drawable/edit_field_corner"
+                            android:hint="Shifra"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="0.6"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Emri"
+                            android:textColor="#b3414042"
+                            android:textSize="12dp"
+                            />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/emertimi_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:textSize="15sp"
+                            android:background="@drawable/edit_field_corner"
+                            android:hint="Emri" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="4dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sasia"
+                            android:textColor="#b3414042"
+                            android:textSize="12sp"
+                            />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/sasia_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_field_corner"
+                            android:inputType="numberDecimal"
+
+                            android:hint="Sasia" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sasia.Depo"
+                            android:textColor="#b3414042"
+                            android:textSize="12sp"
+                            />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/sasia_depo_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_field_corner"
+                            android:inputType="numberDecimal"
+                            android:enabled="false"
+                            android:hint="Sasia.D" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="0.3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Njesia"
+                            android:textColor="#b3414042"
+                            android:textSize="12sp"
+                            />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/njesia_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_field_corner"
+                            android:textSize="15sp"
+                            android:hint="Njesia"
+                            android:focusable="false"
+                            />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+        <ImageButton
+            android:id="@+id/remove_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="-5dp"
+            android:layout_marginRight="-5dp"
+            android:background="@drawable/cancel_2_icon"
+            android:layout_alignRight="@id/base"
+            android:layout_alignParentTop="@+id/base"/>
+    </RelativeLayout>
+
+
+
+
+</layout>

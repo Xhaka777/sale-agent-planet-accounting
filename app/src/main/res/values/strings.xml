@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Sale Agent - Planet Accounting</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="ky_u">Kyçu</string>
+    <string name="icon_heart">&#xf004;</string>
+    <string name="server_solid">&#xf233;</string>
+
+    <string name="world_solid">&#xf0ac;</string>
+
+    <!-- categotryIcon -->
+
+    <string name="fatura_icon">&#xf298;</string>
+    <string name="Stoku_icon">&#xf1b3;</string>
+    <string name="Inkasim_icon">&#xf3d1;</string>
+    <string name="Depozitat_icon">&#xf19c;</string>
+    <string name="Raportet_icon">&#xf15c;</string>
+    <string name="Kthim_i_mallit_icon">&#xf064;</string>
+    <string name="Transferet">&#xf362;</string>
+    <string name="Klientet">&#xf0c0;</string>
+    <string name="Targeti">&#xf201;</string>
+    <string name="Porosit">&#xf274;</string>
+    <string name="Ngarkimet">&#xf4de;</string>
+    <string name="Shpenzimet">&#xf07a;</string>
+    <string name="Aksionet">&#xff295;</string>
+    <string name="update">UPDATE</string>
+    <string name="please_write_email_and_password">Ju lutem shkruani Email dhe Password</string>
+    <string name="password_or_email_is_wrong">Fjalekalimi ose Emaili eshte gabim</string>
+    <string name="please_connected_to_internet">Ju lutem kyquni ne internet!</string>
+    <string name="please_connected_to_intertnet_for_make_order">Ju lutem kyçuni në internet që të bëni porosi!</string>
+    <string name="please_connected_to_intertnet_for_make_sell">Ju lutem pregaditni aplikacionin për shitje</string>
+    <string name="device_hase_internet_connected">Paisja ka qasje ne Internet</string>
+    <string name="device_hase_not_internet_connected">Paisja nuk ka qasje ne Internet</string>
+    <string name="please_sync_invoice">Ju lutem sinkronizoni faturat!</string>
+    <string name="do_you_want_to_logout">A dëshironi të ç\'kyqeni</string>
+    <string name="no">JO</string>
+    <string name="yes">PO</string>
+
+
+    <string name="message_notification_channel_name">Transfer</string>
+
+    <string name="message_notification_channel_id" translatable="false">message_notification_channel_id</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="state">State</string>
+
+    <string name="action_disconnect">Disconnect</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_connect">Connect</string>
+    <string name="do_you_want_to_delete_this_article">A dëshironi të fshini artikullin</string>
+
+
+</resources>
