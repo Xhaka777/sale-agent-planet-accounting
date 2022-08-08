@@ -766,7 +766,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
         itemBinding.removeButton.setOnClickListener(view ->
         {
-            doYouWantToDeleteThisArticleDialog(itemBinding.emertimiTextview.getText().toString(),() -> {
+            doYouWantToDeleteThisArticleDialog(itemBinding.emertimiTextview.getText().toString(),itemBinding.sasiaTextview.getText().toString() ,() -> {
                 int pos = (int) itemBinding.getRoot().getTag();
                 if (stockItems.size() > 0) {
                     try {
@@ -865,10 +865,10 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         }
     }
 
-    private void doYouWantToDeleteThisArticleDialog(String name,DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener) {
+    private void doYouWantToDeleteThisArticleDialog(String name,String sasia,DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener) {
         android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(this);
         mBuilder.setTitle("");
-        String message = getString(R.string.do_you_want_to_delete_this_article)  +" "+ name;
+        String message = getString(R.string.do_you_want_to_delete_this_article)  + " " + name + " " + sasia;
         mBuilder.setMessage(message);
         // Setting Negative "NO" Button
         mBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
