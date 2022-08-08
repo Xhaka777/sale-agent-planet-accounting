@@ -1,6 +1,7 @@
 package org.planetaccounting.saleAgent.invoice;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintManager;
@@ -30,6 +31,7 @@ import com.google.gson.reflect.TypeToken;
 import org.planetaccounting.saleAgent.Kontabiliteti;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
+import org.planetaccounting.saleAgent.databinding.InvoiceListActivityBinding;
 import org.planetaccounting.saleAgent.escpostprint.EscPostPrintFragment;
 import org.planetaccounting.saleAgent.events.RePrintInvoiceEvent;
 import org.planetaccounting.saleAgent.model.clients.Client;
@@ -62,6 +64,9 @@ import rx.schedulers.Schedulers;
  */
 
 public class InvoiceListActivity extends AppCompatActivity {
+
+    private InvoiceListActivityBinding binding;
+
     @Inject
     RealmHelper realmHelper;
     @Inject
@@ -93,7 +98,7 @@ public class InvoiceListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.invoice_list_activity);
+        binding = DataBindingUtil.setContentView(this,R.layout.invoice_list_activity);
 
         from = getIntent().getStringExtra("from");
         if (from.equals("ret")) {
@@ -140,8 +145,11 @@ public class InvoiceListActivity extends AppCompatActivity {
                 shuma += Double.parseDouble(inv.get(i).getAmount_with_vat());
             }
         }
-        TextView shuma = findViewById(R.id.totali);
-        shuma.setText("Totali i faturuar me daten " + dDate + " eshte: " + this.shuma);
+//        TextView shuma = findViewById(R.id.totali);
+//        shuma.setText("Numri i faqes " + " eshte: " + this.shuma);
+//
+        binding.totali.setText(preferences.getCurrentPage() + " : " + realmHelper.getAutoIncrementIfForReturn());
+
         String invoices = realmHelper.getInvoicesString();
         Gson gson = new Gson();
         savedInvoices = (ArrayList<InvoicePost>) gson.fromJson(invoices,
@@ -179,6 +187,8 @@ public class InvoiceListActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     List<InvoicePost> savedInvoices;
 
