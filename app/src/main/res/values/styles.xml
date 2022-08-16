@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -13,4 +13,12 @@
         <item name="colorControlHighlight">@color/colorLogoLight</item>
 
     </style>
+
+<!--&lt;!&ndash;    SplashScreen &ndash;&gt;-->
+
+<!--    <style name="splashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">-->
+
+<!--        <item name="android:windowBackground">@drawable/splash_image</item>-->
+<!--        <item name="android:statusBarColor">@color/black</item>-->
+<!--    </style>-->
 </resources>

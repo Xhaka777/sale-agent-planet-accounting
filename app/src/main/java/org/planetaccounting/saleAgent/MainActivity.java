@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setTheme(R.style.AppTheme);
         AssetManager am = this.getApplicationContext().getAssets();
 
 
