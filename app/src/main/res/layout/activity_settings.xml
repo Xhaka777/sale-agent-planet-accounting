@@ -110,5 +110,26 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/about_Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/printer_Button">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="start|center"
+                android:text="About Page"
+                android:textAllCaps="false"
+                android:textSize="17sp"/>
+        </LinearLayout>
+
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -42,6 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
         binding.changeLanguageButton.setOnClickListener(view -> showTimeAlert());
         binding.termsPolicyButton.setOnClickListener(view -> startActivity(new Intent(BrowserSupportMethod.getBrowserIntent(termsAndPolicyUrl))));
         binding.printerButton.setOnClickListener(view -> startActivity(new Intent(this, ESCSettingsActivity.class)));
+        binding.aboutButton.setOnClickListener(view -> startActivity(new Intent(this, AboutPage.class)));
     }
 
     private void showTimeAlert() {
