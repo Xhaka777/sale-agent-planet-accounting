@@ -84,4 +84,14 @@
     <string name="vlera_totale">Total Value: 0</string>
     <string name="kupon_fiskal">Fiscal Coupon</string>
 
+    <!--    Pjesa per Stokun-->
+    <string name="lista_artikujt">List of Articles</string>
+    <string name="kerko">Search</string>
+    <string name="printo">Print</string>
+    <string name="foto">Photo</string>
+    <string name="shifra">Digit</string>
+    <string name="artikulli">Article</string>
+    <string name="sasia">Quantity</string>
+    <string name="vlera">Value</string>
+
 </resources>

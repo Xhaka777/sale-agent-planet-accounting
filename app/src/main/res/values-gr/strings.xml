@@ -83,4 +83,14 @@
     <string name="vlera_totale">Συνολική αξία: 0</string>
     <string name="kupon_fiskal">Δημοσιονομικό Κουπόνι</string>
 
+    <!--    Pjesa per Stokun-->
+    <string name="lista_artikujt">Κατάλογος άρθρων</string>
+    <string name="kerko">Αναζήτηση</string>
+    <string name="printo">Τυπώνω</string>
+    <string name="foto">φωτογραφία</string>
+    <string name="shifra">Ψηφίο</string>
+    <string name="artikulli">Αρθρο</string>
+    <string name="sasia">Ποσότητα</string>
+    <string name="vlera">αξία</string>
+
 </resources>

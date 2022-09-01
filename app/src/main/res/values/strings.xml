@@ -102,4 +102,15 @@
     <string name="vlera_totale">Vlera totale: 0</string>
     <string name="kupon_fiskal">KUPON FISKAL</string>
 
+    <!--    Pjesa per Stokun-->
+
+    <string name="lista_artikujt">Lista e Artikujve</string>
+    <string name="kerko">Kerko</string>
+    <string name="printo">Printo</string>
+    <string name="foto">Foto</string>
+    <string name="shifra">Shifra</string>
+    <string name="artikulli">Artikulli</string>
+    <string name="sasia">Sasia</string>
+    <string name="vlera">vlera</string>
+
 </resources>

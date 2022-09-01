@@ -87,4 +87,64 @@
     <string name="vlera_totale">Toplam değer: 0</string>
     <string name="kupon_fiskal">Mali Kupon</string>
 
+    <!--    Pjesa per Stokun-->
+    <string name="lista_artikujt">Makale Listesi</string>
+    <string name="kerko">Arama</string>
+    <string name="printo">Yazdır</string>
+    <string name="foto">Fotoğraf</string>
+    <string name="shifra">Hane</string>
+    <string name="artikulli">Madde</string>
+    <string name="sasia">Miktar</string>
+    <string name="vlera">Değer</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </resources>

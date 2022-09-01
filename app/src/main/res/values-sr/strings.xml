@@ -84,4 +84,14 @@
     <string name="vlera_totale">Укупна вредност: 0</string>
     <string name="kupon_fiskal">Фискални купон</string>
 
+    <!--    Pjesa per Stokun-->
+    <string name="lista_artikujt">Листа чланака</string>
+    <string name="kerko">Претрага</string>
+    <string name="printo">Принт</string>
+    <string name="foto">Пхото</string>
+    <string name="shifra">Цифра</string>
+    <string name="artikulli">Чланак</string>
+    <string name="sasia">Количина</string>
+    <string name="vlera">Валуе</string>
+
 </resources>
