@@ -59,15 +59,29 @@
     <string name="title_fatura">Invoice</string>
     <string name="title_stoku">Stock</string>
     <string name="title_inkasimi">Collection</string>
-    <string name="title_depozita">Depozits</string>
-    <string name="title_raportet">Raports</string>
+    <string name="title_depozita">Deposits</string>
+    <string name="title_raportet">Reports</string>
     <string name="title_kthimMalli">Return of Goods</string>
     <string name="title_transfere">Transfers</string>
-    <string name="title_klientet">Clinets</string>
+    <string name="title_klientet">Clients</string>
     <string name="title_target">Target</string>
     <string name="title_porositeInterne">Orders/Intern</string>
     <string name="title_ngarkimet">Upload</string>
     <string name="title_shpenzimet">Expenses</string>
     <string name="title_aksionet">Shares</string>
+
+    <!--    Pjesa per Invoice... -->
+    <string name="faturë">Invoice</string>
+    <string name="inv_fatura">The Invoice</string>
+    <string name="inv_porosia">The Order</string>
+    <string name="nr_fatures">Nr. of Invoice</string>
+    <string name="klienti">Client</string>
+    <string name="data">Data</string>
+    <string name="btn_shto">ADD</string>
+    <string name="vlera_pa_tvsh">Value without VAT: 0</string>
+    <string name="vlera_zbritur">Deducted Value: 0</string>
+    <string name="vlera_tvsh">The value of VAT: 0</string>
+    <string name="vlera_totale">Total Value: 0</string>
+    <string name="kupon_fiskal">Fiscal Coupon</string>
 
 </resources>

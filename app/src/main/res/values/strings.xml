@@ -74,18 +74,32 @@
     <string name="title_shpenzimet">Shpenzimet</string>
     <string name="title_aksionet">Aksionet</string>
 
-    <string-array name="main_titles">
-        <item>@string/title_fatura</item>
-        <item>@string/title_stoku</item>
-        <item>@string/title_depozita</item>
-        <item>@string/title_raportet</item>
-        <item>@string/title_kthimMalli</item>
-        <item>@string/title_transfere</item>
-        <item>@string/title_target</item>
-        <item>@string/title_porositeInterne</item>
-        <item>@string/title_ngarkimet</item>
-        <item>@string/title_shpenzimet</item>
-        <item>@string/title_aksionet</item>
-    </string-array>
+<!--    <string-array name="main_titles">-->
+<!--        <item>@string/title_fatura</item>-->
+<!--        <item>@string/title_stoku</item>-->
+<!--        <item>@string/title_depozita</item>-->
+<!--        <item>@string/title_raportet</item>-->
+<!--        <item>@string/title_kthimMalli</item>-->
+<!--        <item>@string/title_transfere</item>-->
+<!--        <item>@string/title_target</item>-->
+<!--        <item>@string/title_porositeInterne</item>-->
+<!--        <item>@string/title_ngarkimet</item>-->
+<!--        <item>@string/title_shpenzimet</item>-->
+<!--        <item>@string/title_aksionet</item>-->
+<!--    </string-array>-->
+
+<!--    Pjesa per Invoice... -->
+    <string name="faturë">Faturë</string>
+    <string name="inv_fatura">Fatura</string>
+    <string name="inv_porosia">Porosia</string>
+    <string name="nr_fatures">Nr. Fatures</string>
+    <string name="klienti">Klienti</string>
+    <string name="data">Data</string>
+    <string name="btn_shto">SHTO</string>
+    <string name="vlera_pa_tvsh">Vlera pa TVSH: 0</string>
+    <string name="vlera_zbritur">Vlera e zbritur: 0</string>
+    <string name="vlera_tvsh">Vlera e TVSH-së: 0</string>
+    <string name="vlera_totale">Vlera totale: 0</string>
+    <string name="kupon_fiskal">KUPON FISKAL</string>
 
 </resources>

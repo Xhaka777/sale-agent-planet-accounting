@@ -69,4 +69,18 @@
     <string name="title_shpenzimet">έξοδα</string>
     <string name="title_aksionet">μερίδια</string>
 
+    <!--    Pjesa per Invoice... -->
+    <string name="faturë">τιμολόγιο</string>
+    <string name="inv_fatura">τιμολόγιο</string>
+    <string name="inv_porosia">Σειρά</string>
+    <string name="nr_fatures">Nr. του Τιμολογίου</string>
+    <string name="klienti">Πελάτης</string>
+    <string name="data">Δεδομένα</string>
+    <string name="btn_shto">Προσθήκη</string>
+    <string name="vlera_pa_tvsh">Αξία χωρίς ΦΠΑ: 0</string>
+    <string name="vlera_zbritur">Αφαιρούμενη αξία: 0</string>
+    <string name="vlera_tvsh">Η αξία του ΦΠΑ: 0</string>
+    <string name="vlera_totale">Συνολική αξία: 0</string>
+    <string name="kupon_fiskal">Δημοσιονομικό Κουπόνι</string>
+
 </resources>

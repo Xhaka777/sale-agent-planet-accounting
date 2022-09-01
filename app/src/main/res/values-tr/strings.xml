@@ -72,4 +72,19 @@
     <string name="title_shpenzimet">Masraflar</string>
     <string name="title_aksionet">Hisseler</string>
 
+
+    <!--    Pjesa per Invoice... -->
+    <string name="faturë">Fatura</string>
+    <string name="inv_fatura">Fatura</string>
+    <string name="inv_porosia">Emir</string>
+    <string name="nr_fatures">No. fatura</string>
+    <string name="klienti">Müşteri</string>
+    <string name="data">Veri</string>
+    <string name="btn_shto">Ekle</string>
+    <string name="vlera_pa_tvsh">KDVsiz değer: 0</string>
+    <string name="vlera_zbritur">Indirimli değer: 0</string>
+    <string name="vlera_tvsh">KDV nin değeri: 0</string>
+    <string name="vlera_totale">Toplam değer: 0</string>
+    <string name="kupon_fiskal">Mali Kupon</string>
+
 </resources>

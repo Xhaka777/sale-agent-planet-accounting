@@ -70,4 +70,18 @@
     <string name="title_shpenzimet">Трошкови</string>
     <string name="title_aksionet">Дионице</string>
 
+    <!--    Pjesa per Invoice... -->
+    <string name="faturë">фактура</string>
+    <string name="inv_fatura">фактура</string>
+    <string name="inv_porosia">ред </string>
+    <string name="nr_fatures">фактуре</string>
+    <string name="klienti">Клијент</string>
+    <string name="data">података</string>
+    <string name="btn_shto">Додати</string>
+    <string name="vlera_pa_tvsh">Вредност без ПДВ-а: 0</string>
+    <string name="vlera_zbritur">Одузета вредност: 0</string>
+    <string name="vlera_tvsh">ПДВ вредност : 0</string>
+    <string name="vlera_totale">Укупна вредност: 0</string>
+    <string name="kupon_fiskal">Фискални купон</string>
+
 </resources>
