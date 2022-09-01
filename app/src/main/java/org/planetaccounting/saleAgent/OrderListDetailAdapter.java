@@ -10,6 +10,7 @@ import org.planetaccounting.saleAgent.databinding.OrderlistDetailListItemBinding
 import org.planetaccounting.saleAgent.model.OrderDetailItem;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by macb on 06/02/18.
@@ -35,14 +36,16 @@ public class OrderListDetailAdapter extends RecyclerView.Adapter<OrderListDetail
     @Override
     public void onBindViewHolder(OrderListDetailAdapter.ViewHolder holder, int position) {
         OrderlistDetailListItemBinding binding = holder.binding;
+        double vVlera = Double.parseDouble(String.valueOf(orderDetailItems.get(position).getAmount()));
+
         binding.shifra.setText(orderDetailItems.get(position).getNumber());
         binding.name.setText(orderDetailItems.get(position).getName());
         binding.sasia.setText(orderDetailItems.get(position).getQuantity());
         binding.barkod.setText(orderDetailItems.get(position).getBarcode());
         binding.njesia.setText(orderDetailItems.get(position).getUnit());
-        binding.cmimi.setText(orderDetailItems.get(position).getPrice()+"");
-        binding.vlera.setText(orderDetailItems.get(position).getAmount()+"");
-
+        binding.cmimi.setText(orderDetailItems.get(position).getPrice() + "");
+//        binding.vlera.setText(orderDetailItems.get(position).getAmount()+"");
+        binding.vlera.setText(""+cutTo2(vVlera));
     }
 
     @Override
@@ -53,7 +56,7 @@ public class OrderListDetailAdapter extends RecyclerView.Adapter<OrderListDetail
 
     public void setOrders(ArrayList<OrderDetailItem> orderDetailItems) {
         this.orderDetailItems = orderDetailItems;
-        System.out.println("items "+orderDetailItems.size());
+        System.out.println("items " + orderDetailItems.size());
         notifyDataSetChanged();
     }
 
@@ -65,5 +68,9 @@ public class OrderListDetailAdapter extends RecyclerView.Adapter<OrderListDetail
             this.binding = binding;
 
         }
+    }
+
+    public double cutTo2(double value) {
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
     }
 }

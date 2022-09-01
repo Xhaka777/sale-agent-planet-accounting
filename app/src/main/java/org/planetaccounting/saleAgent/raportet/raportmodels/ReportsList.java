@@ -24,6 +24,9 @@ public class ReportsList {
     @Expose
     public String amount;
 
+    @SerializedName("currentPage")
+    @Expose
+    public String currentPage;
 
     @SerializedName("type")
     @Expose

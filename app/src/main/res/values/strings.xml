@@ -3,6 +3,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="ky_u">Kyçu</string>
+    <string name="terms_policy">Terms  and Privacy Policy</string>
     <string name="icon_heart">&#xf004;</string>
     <string name="server_solid">&#xf233;</string>
 
@@ -50,5 +51,41 @@
     <string name="action_connect">Connect</string>
     <string name="do_you_want_to_delete_this_article">A dëshironi të fshini artikullin</string>
 
+
+<!--    Main part...-->
+    <string name="log_out">QKYQU</string>
+    <string name="njesia">Njesia</string>
+    <string name="pazari_ditor">Pazari ditor</string>
+    <string name="ambulatori">Ambulatori</string>
+    <string name="mbyll_arken">Mbyll Arken Fiskale</string>
+    <string name="pregadit_arken">Pregadit Arken Fiskale</string>
+
+    <string name="title_fatura">Fatura</string>
+    <string name="title_stoku">Stoku</string>
+    <string name="title_inkasimi">Inkasimi</string>
+    <string name="title_depozita">Depozitat</string>
+    <string name="title_raportet">Raportet</string>
+    <string name="title_kthimMalli">Kthim malli</string>
+    <string name="title_transfere">Transfere</string>
+    <string name="title_klientet">Klientet</string>
+    <string name="title_target">Targeti</string>
+    <string name="title_porositeInterne">Porositë/Interne</string>
+    <string name="title_ngarkimet">Ngarkime</string>
+    <string name="title_shpenzimet">Shpenzimet</string>
+    <string name="title_aksionet">Aksionet</string>
+
+    <string-array name="main_titles">
+        <item>@string/title_fatura</item>
+        <item>@string/title_stoku</item>
+        <item>@string/title_depozita</item>
+        <item>@string/title_raportet</item>
+        <item>@string/title_kthimMalli</item>
+        <item>@string/title_transfere</item>
+        <item>@string/title_target</item>
+        <item>@string/title_porositeInterne</item>
+        <item>@string/title_ngarkimet</item>
+        <item>@string/title_shpenzimet</item>
+        <item>@string/title_aksionet</item>
+    </string-array>
 
 </resources>

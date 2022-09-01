@@ -3,6 +3,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="ky_u">Kyçu</string>
+    <string name="terms_policy">Şartlar ve Gizlilik Politikası</string>
     <string name="icon_heart">&#xf004;</string>
     <string name="server_solid">&#xf233;</string>
 
@@ -25,12 +26,50 @@
     <string name="Aksionet">&#xff295;</string>
 
     <string name="update">GÜNCELLEŞTİRME</string>
-    <string name="please_connected_to_internet">Ju lutem kyquni ne internet!</string>
-    <string name="please_connected_to_intertnet_for_make_order">Ju lutem kyçuni në internet që të bëni porosi!</string>
-    <string name="please_connected_to_intertnet_for_make_sell">Ju lutem pregaditni aplikacionin për shitje</string>
-    <string name="device_hase_internet_connected">Paisja ka qasje ne Internet</string>
+    <string name="please_write_email_and_password">Lütfen E-posta ve Şifre giriniz</string>
+    <string name="password_or_email_is_wrong">Şifre veya E-posta yanlış</string>
+    <string name="please_connected_to_internet">lütfen internete bağlanın</string>
+    <string name="please_connected_to_intertnet_for_make_order">Lütfen sipariş vermek için çevrimiçi giriş yapın!</string>
+    <string name="please_connected_to_intertnet_for_make_sell">Lütfen başvuruyu satışa hazırlayın</string>
+    <string name="device_hase_internet_connected">Cihazın internete erişimi var</string>
+    <string name="device_hase_not_internet_connected">Cihazın internete erişimi yok</string>
+    <string name="please_sync_invoice">Lütfen faturalarınızı senkronize edin!</string>
     <string name="do_you_want_to_logout">A dëshironi të ç\'kyqeni</string>
-    <string name="do_you_want_to_delete_this_article">A dëshironi të fshini artikullin</string>
+    <string name="no">hayır</string>
+    <string name="yes">evet</string>
 
+    <string name="message_notification_channel_name">Aktar</string>
+
+    <string name="hello_blank_fragment">Merhaba boş parça</string>
+    <string name="state">durum</string>
+
+    <string name="action_disconnect">Disconneted</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_connect">Connect</string>
+
+    <string name="do_you_want_to_delete_this_article">Makaleyi silmek istiyor musunuz?</string>
+
+
+    <!--    Main part... -->
+    <string name="log_out">Çıkış Yap</string>
+    <string name="njesia">Birim</string>
+    <string name="pazari_ditor">Günlük Satış</string>
+    <string name="ambulatori">Ambulator</string>
+    <string name="mbyll_arken">Mali Nakit Kapatın</string>
+    <string name="pregadit_arken">Mali nakit hazırlayın</string>
+
+    <string name="title_fatura">Invoice</string>
+    <string name="title_stoku">Stoklamak</string>
+    <string name="title_inkasimi">Toplamak</string>
+    <string name="title_depozita">Mevduat</string>
+    <string name="title_raportet">Raporlar</string>
+    <string name="title_kthimMalli">Malların dönüşü</string>
+    <string name="title_transfere">Transferler</string>
+    <string name="title_klientet">Müşteriler</string>
+    <string name="title_target">Hedef</string>
+    <string name="title_porositeInterne">Emirler/Stajyer</string>
+    <string name="title_ngarkimet">Yüklemek</string>
+    <string name="title_shpenzimet">Masraflar</string>
+    <string name="title_aksionet">Hisseler</string>
 
 </resources>

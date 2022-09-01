@@ -33,11 +33,11 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="19dp"
-                    android:text="Sinkronizo"
-                    android:textColor="@android:color/white"
-                    android:padding="15dp"
-                    android:background="@drawable/button_rounder_corner"
-                    />
+                    android:background="@android:color/white" />
+<!--                    android:background="@drawable/button_rounder_corner"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:text="Sinkronizo"-->
+<!--                    android:textColor="@android:color/white" />-->
             </RelativeLayout>
 
             <View

@@ -29,7 +29,7 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:background="@drawable/planetlogo" />
+                    android:background="@mipmap/ic_launcher" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -69,8 +69,8 @@
 
                 <Button
                     android:id="@+id/login_button"
-                    android:layout_width="424dp"
-                    android:layout_height="34dp"
+                    android:layout_width="396dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/loginbutton"
                     android:text="@string/ky_u"
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="start|center"
-                android:text=" Terms  and Privacy Policy"
+                android:text="@string/terms_policy"
                 android:textAllCaps="false"
                 android:textColor="#00AFF0"
                 android:textSize="17sp" />
@@ -119,6 +119,18 @@
 
         </LinearLayout>
 
+
+        <ImageButton
+            android:id="@+id/button"
+            android:layout_width="28dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:drawableTop="@drawable/globe_1"
+            android:background="@drawable/globe_1"/>
 
     </RelativeLayout>
 </layout>

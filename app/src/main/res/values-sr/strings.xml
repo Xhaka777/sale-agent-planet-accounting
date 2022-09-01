@@ -3,6 +3,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="ky_u">Kyçu</string>
+    <string name="terms_policy">Услови и политика приватности</string>
     <string name="icon_heart">&#xf004;</string>
     <string name="server_solid">&#xf233;</string>
 
@@ -24,13 +25,49 @@
     <string name="Shpenzimet">&#xf07a;</string>
     <string name="Aksionet">&#xff295;</string>
 
-    <string name="update">GÜNCELLEŞTİRME</string>
-    <string name="please_connected_to_internet">Ju lutem kyquni ne internet!</string>
-    <string name="please_connected_to_intertnet_for_make_order">Ju lutem kyçuni në internet që të bëni porosi!</string>
-    <string name="please_connected_to_intertnet_for_make_sell">Ju lutem pregaditni aplikacionin për shitje</string>
-    <string name="device_hase_internet_connected">Paisja ka qasje ne Internet</string>
+    <string name="update">ажурирање</string>
+    <string name="please_write_email_and_password">Унесите адресу е-поште и лозинку</string>
+    <string name="password_or_email_is_wrong">Лозинка или имејл је погрешна</string>
+    <string name="please_connected_to_internet">Повежите се на Интернет!</string>
+    <string name="please_connected_to_intertnet_for_make_order">Молимо пријавите се на мрежи да бисте наручили!</string>
+    <string name="please_connected_to_intertnet_for_make_sell">Молимо припремите апликацију за продају</string>
+    <string name="device_hase_internet_connected">Уређај има приступ Интернету</string>
+    <string name="device_hase_not_internet_connected">Уређај нема приступ Интернету</string>
+    <string name="please_sync_invoice">Молимо вас да синхронизујете своје фактуре!</string>
     <string name="do_you_want_to_logout">A dëshironi të ç\'kyqeni</string>
-    <string name="do_you_want_to_delete_this_article">A dëshironi të fshini artikullin</string>
+    <string name="no">не</string>
+    <string name="yes">да</string>
 
+    <string name="message_notification_channel_name">Трансфер</string>
+
+    <string name="hello_blank_fragment">Здраво, празан фрагмент</string>
+    <string name="state">стање</string>
+
+    <string name="action_disconnect">Disconnected</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_connect">Connected</string>
+
+    <string name="do_you_want_to_delete_this_article">Да ли желите да избришете чланак?</string>
+
+    <!--    Main part... -->
+    <string name="log_out">Одјавити се</string>
+    <string name="njesia">ЈЕДИНИЦА</string>
+    <string name="pazari_ditor">Дневна продаја</string>
+    <string name="ambulatori">Ambulator</string>
+    <string name="mbyll_arken">Затворите фискалну готовину</string>
+    <string name="pregadit_arken">Припремите фискалну готовину</string>
+    <string name="title_fatura">Фактура</string>
+    <string name="title_stoku">акција</string>
+    <string name="title_inkasimi">Цоллецтион</string>
+    <string name="title_depozita">Депозити</string>
+    <string name="title_raportet">Извештаји</string>
+    <string name="title_kthimMalli">Поврат робе</string>
+    <string name="title_transfere">Трансфери</string>
+    <string name="title_klientet">Клијенти</string>
+    <string name="title_target">Таргет</string>
+    <string name="title_porositeInterne">Наређења/Интерн</string>
+    <string name="title_ngarkimet">Отпремити</string>
+    <string name="title_shpenzimet">Трошкови</string>
+    <string name="title_aksionet">Дионице</string>
 
 </resources>

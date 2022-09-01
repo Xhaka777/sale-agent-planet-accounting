@@ -1,29 +1,24 @@
 package org.planetaccounting.saleAgent;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.databinding.DataBindingUtil;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-
-import com.bumptech.glide.Glide;
 
 import org.planetaccounting.saleAgent.databinding.RecyclerviewMainActivityBinding;
 import org.planetaccounting.saleAgent.model.MainAdaperModel;
-import org.planetaccounting.saleAgent.model.role.Main;
 import org.planetaccounting.saleAgent.model.role.Role;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapter.ViewHolder> {
     private Context mContext;
     Listener listener;
 
-    private String[] title  = {"Fatura","Stoku","Inkasimi","Depozitat","Raportet","Kthim malli","Transfere","Klientet","Targeti","Porositë/Interne","Ngarkime","Shpenzimet","Aksionet",};
+
+    private int[] title  = {R.string.title_fatura,R.string.title_stoku,R.string.title_inkasimi,R.string.title_depozita,R.string.title_raportet,R.string.title_kthimMalli,R.string.title_transfere,R.string.title_klientet,R.string.title_target,R.string.title_porositeInterne,R.string.title_ngarkimet,R.string.title_shpenzimet,R.string.title_aksionet};
+//  private String[] main_title = res.getStringArray(R.array.main_titles);
     private int[] icon  = {R.drawable.ic_fatura,R.drawable.ic_stokut,R.drawable.ic_inkasimet,R.drawable.ic_bank,R.drawable.ic_raportet,R.drawable.ic_return,R.drawable.ic_transferet,R.drawable.ic_klientet,R.drawable.ic_targetet,R.drawable.ic_prosit,R.drawable.ic_ngarkesat,R.drawable.ic_shpenzim,R.drawable.ic_action};
 
     private ArrayList<MainAdaperModel> rols =  new ArrayList<>();
@@ -85,6 +80,6 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
     }
 
     interface Listener{
-        public void onClick(String title,int positon);
+        public void onClick(int title, int positon);
     }
 }

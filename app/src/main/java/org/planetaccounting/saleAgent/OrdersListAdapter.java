@@ -14,6 +14,7 @@ import org.planetaccounting.saleAgent.model.order.Order;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by macb on 06/02/18.
@@ -41,6 +42,7 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Vi
     @Override
     public void onBindViewHolder(OrdersListAdapter.ViewHolder holder, int position) {
         OrderListItemBinding binding = holder.binding;
+        double vValue = Double.parseDouble(orders.get(position).getAmount());
 
         String[] data = orders.get(position).getData().split(" ");
         binding.data.setText(data[0]+"\n"+data[1]);
@@ -48,7 +50,7 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Vi
         binding.wareHouse.setText(orders.get(position).getWarehouse());
         binding.client.setText(orders.get(position).getClient());
         binding.tipi.setText(orders.get(position).getType());
-        binding.vlera.setText(orders.get(position).getAmount());
+        binding.vlera.setText(""+cutTo2(vValue));
         binding.njesia.setText(orders.get(position).getClientStation());
 
         if (orders.get(position).getCancelAllowed() == 1 ){
@@ -97,5 +99,9 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Vi
 
     interface CancelOrder{
         void onCancelPressed(Order order);
+    }
+
+    public double cutTo2(double value){
+        return Double.parseDouble(String.format(Locale.ENGLISH,"%.2f",value));
     }
 }

@@ -41,7 +41,7 @@
         android:layout_height="44dp"
         android:layout_marginRight="6dp"
         android:layout_marginTop="6dp"
-        android:text="ÇKYQU"
+        android:text="@string/log_out"
         android:textColor="@color/colorLogoDark"
 
         android:background="@android:color/transparent"

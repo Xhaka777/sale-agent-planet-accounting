@@ -2,20 +2,20 @@ package org.planetaccounting.saleAgent.model;
 
 public class MainAdaperModel {
 
-    public String title;
+    public int title;
     public int icon;
 
 
-    public MainAdaperModel(String title, int icon) {
+    public MainAdaperModel(int title, int icon) {
         this.title = title;
         this.icon = icon;
     }
 
-    public String getTitle() {
+    public int getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(int title) {
         this.title = title;
     }
 
