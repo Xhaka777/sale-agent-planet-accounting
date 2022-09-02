@@ -27,7 +27,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:text="Transferet"
+                android:text="@string/transferet"
                 android:textColor="#000" />
 
             <View
@@ -68,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Transferet e kerkuara"
+                    android:text="@string/transferet_e_kerkuara"
                     android:textColor="#000"
                     android:textSize="20dp" />
 
@@ -85,7 +85,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Nr."
+                        android:text="@string/nr"
                         android:textColor="#000"
                         android:textSize="16dp" />
 
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Data"
+                        android:text="@string/data"
                         android:textColor="#000"
                         android:textSize="16dp" />
 
@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:gravity="center"
-                        android:text="Njesia"
+                        android:text="@string/njesia"
                         android:textColor="#000"
                         android:textSize="16dp" />
 
@@ -179,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Transferet e kerkuara nga une"
+                    android:text="@string/transferet_e_kerkuara_nga_une"
                     android:textColor="#000"
                     android:textSize="20dp" />
 
@@ -196,7 +196,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Nr."
+                        android:text="@string/nr"
                         android:textColor="#000"
                         android:textSize="16dp" />
 
@@ -211,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Data"
+                        android:text="@string/data"
                         android:textColor="#000"
                         android:textSize="16dp" />
 
@@ -227,7 +227,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:gravity="center"
-                        android:text="Njesia"
+                        android:text="@string/njesia"
                         android:textColor="#000"
                         android:textSize="16dp" />
 

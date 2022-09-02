@@ -29,9 +29,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Faturë"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:text="@string/faturë"
                 android:textColor="#000" />
 
 
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Data: "
+                    android:text="@string/data"
                     android:textColor="#000" />
 
                 <AutoCompleteTextView
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:gravity="center_vertical"
-                    android:hint="Data"
+                    android:hint="@string/data"
                     android:textSize="14sp"
                     android:textColor="#000" />
 
@@ -102,7 +102,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nr. Fatures: "
+                    android:text="@string/nr_fatures"
                     android:textColor="#000"/>
 
                 <AutoCompleteTextView
@@ -144,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#b3414042"
 
-                        android:text="Klienti:  " />
+                        android:text="@string/klienti" />
 
                     <AutoCompleteTextView
                         android:id="@+id/emri_klientit"
@@ -156,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_field_corner"
 
-                        android:hint="Klienti" />
+                        android:hint="@string/klienti" />
 
                     <TextView
                         android:id="@+id/njesia_textview"
@@ -164,7 +164,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#b3414042"
 
-                        android:text="Njesia:  " />
+                        android:text="@string/njesia" />
 
                     <AutoCompleteTextView
                         android:id="@+id/njersia_edittext"
@@ -174,7 +174,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
 
-                        android:hint="Njesia" />
+                        android:hint="@string/njesia" />
                 </LinearLayout>
 
                 <!--<ImageView-->
@@ -272,7 +272,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginLeft="8dp"
                     android:padding="15dp"
-                    android:text="SHTO"
+                    android:text="@string/btn_shto"
                     android:textColor="@android:color/white"
                     android:background="@drawable/button_rounder_corner_2"/>
 
@@ -300,7 +300,7 @@
                             android:id="@+id/vlera_pa_tvsh"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Vlera pa TVSH: 0" />
+                            android:text="@string/vlera_pa_tvsh" />
 
                         <!--<TextView-->
                             <!--android:id="@+id/vlera_e_zbritur"-->
@@ -312,13 +312,13 @@
                             android:id="@+id/vlera_e_tvsh"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Vlera e TVSH-së: 0" />
+                            android:text="@string/vlera_tvsh" />
 
                         <TextView
                             android:id="@+id/vlera_totale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Vlera totale: 0"
+                            android:text="@string/vlera_totale"
                             android:textColor="#000"
                             android:textSize="20dp"
                             android:textStyle="bold" />
@@ -342,7 +342,7 @@
                 android:textColor="@android:color/white"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="2dp"
-                android:text="Fature" />
+                android:text="@string/inv_fatura" />
 
         </LinearLayout>
     </LinearLayout>

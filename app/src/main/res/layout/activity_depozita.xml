@@ -21,9 +21,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Depozit"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/depozit"
                     android:textColor="#000" />
                 <View
                     android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Data :" />
+                        android:text="@string/data" />
 
                     <TextView
                         android:id="@+id/data"
@@ -71,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Bank :" />
+                        android:text="@string/bank" />
 
                     <Spinner
                         android:id="@+id/spinner2"
@@ -92,7 +92,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Reference Nr." />
+                        android:text="@string/nr_reference" />
 
                     <EditText
                         android:id="@+id/referenca"
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:hint="Numri References"
+                        android:hint="@string/reference_hint"
                         android:background="@drawable/edit_field_corner"
 
                         android:inputType="textPersonName" />
@@ -117,7 +117,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Branch :" />
+                        android:text="@string/branch" />
 
                     <EditText
                         android:id="@+id/branch"
@@ -125,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:hint="Branch"
+                        android:hint="@string/branch"
                         android:background="@drawable/edit_field_corner"
 
                         android:inputType="textPersonName" />
@@ -142,7 +142,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Shuma :" />
+                        android:text="@string/shuma" />
 
                     <EditText
                         android:id="@+id/shumaEdit"
@@ -151,7 +151,7 @@
                         android:layout_weight="1"
                         android:digits="0123456789."
                         android:ems="10"
-                        android:hint="Shuma"
+                        android:hint="@string/shuma"
                         android:background="@drawable/edit_field_corner"
 
                         android:inputType="numberDecimal" />
@@ -168,7 +168,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Komenti:" />
+                        android:text="@string/komenti" />
 
                     <EditText
                         android:id="@+id/komentEdit"
@@ -176,7 +176,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:hint="Koment"
+                        android:hint="@string/komenti"
                         android:background="@drawable/edit_field_corner"
 
                         android:inputType="textPersonName" />
@@ -190,7 +190,7 @@
                     android:onClick="depono"
                     android:background="@drawable/button_rounder_corner"
                     android:textColor="@android:color/white"
-                    android:text="Proceso" />
+                    android:text="@string/btn_proceso" />
 
             </LinearLayout>
         </LinearLayout>

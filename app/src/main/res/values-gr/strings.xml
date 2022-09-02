@@ -69,19 +69,21 @@
     <string name="title_shpenzimet">έξοδα</string>
     <string name="title_aksionet">μερίδια</string>
 
+
     <!--    Pjesa per Invoice... -->
     <string name="faturë">τιμολόγιο</string>
     <string name="inv_fatura">τιμολόγιο</string>
     <string name="inv_porosia">Σειρά</string>
     <string name="nr_fatures">Nr. του Τιμολογίου</string>
     <string name="klienti">Πελάτης</string>
-    <string name="data">Δεδομένα</string>
+    <string name="data">Δεδομένα </string>
     <string name="btn_shto">Προσθήκη</string>
     <string name="vlera_pa_tvsh">Αξία χωρίς ΦΠΑ: 0</string>
     <string name="vlera_zbritur">Αφαιρούμενη αξία: 0</string>
     <string name="vlera_tvsh">Η αξία του ΦΠΑ: 0</string>
     <string name="vlera_totale">Συνολική αξία: 0</string>
     <string name="kupon_fiskal">Δημοσιονομικό Κουπόνι</string>
+
 
     <!--    Pjesa per Stokun-->
     <string name="lista_artikujt">Κατάλογος άρθρων</string>
@@ -92,5 +94,67 @@
     <string name="artikulli">Αρθρο</string>
     <string name="sasia">Ποσότητα</string>
     <string name="vlera">αξία</string>
+
+
+    <!--    Pjesa per Inkasim-->
+    <string name="shuma">Ποσό</string>
+    <string name="komenti">Σχόλιο</string>
+    <string name="btn_inkaso">Εξαργύρωση</string>
+
+
+    <!--    Pjesa per Depozit-->
+    <string name="depozit">Κατάθεση</string>
+    <string name="bank">Τράπεζα </string>
+    <string name="nr_reference">Αρ. αναφοράς.</string>
+    <string name="reference_hint">Reference number</string>
+    <string name="branch">Κλαδί</string>
+    <string name="btn_proceso">διαδικασία</string>
+
+    <!--    Pjesa e  Raporteve -->
+
+    <string name="raportet">Αναφορές</string>
+    <string name="lista_faturave">Κατάλογος Τιμολογίων</string>
+    <string name="lista_porosive">Κατάλογος Παραγγελιών</string>
+    <string name="lista_inkasimeve">Κατάλογος Συλλογών</string>
+    <string name="lista_shpenzimeve">κατάλογος εξόδων</string>
+    <string name="lista_depozitave">κατάλογος καταθέσεων</string>
+    <string name="lista_ngarkimeve">λίστα μεταφορτώσεων</string>
+    <string name="l_kthimMalli">L.of επιστροφή των εμπορευμάτων</string>
+
+
+    <!-- Raport per faturat  -->
+
+    <string name="nr_fatura">Αριθμός τιμολογίου</string>
+    <string name="njesia_klientit">Μονάδα πελάτη</string>
+    <string name="ruajtur">σώθηκε</string>
+    <string name="numri_faqes">αριθμός σελίδας</string>
+
+    <string name="barcode">Barcode</string>
+    <string name="emri">Ονομα</string>
+    <string name="cmimi">Τιμή</string>
+
+    <string name="depo">Αποθήκη</string>
+    <string name="tipi">τύπος</string>
+    <string name="furnitori">προμηθευτής</string>
+    <string name="lloji">τύπος</string>
+
+    <!--  /////////////////   -->
+
+    <string name="shitje_me_fature">πώληση με τιμολόγιο</string>
+    <string name="shitje_me_kupon_fiskal">πώληση με φορολογικό κουπόνι</string>
+    <string name="depozitet">καταθέσεις</string>
+    <string name="cash">μετρητά</string>
+    <string name="inkasimet">συλλογές</string>
+    <string name="shpenzimet">έξοδα</string>
+    <string name="borxh">χρέος</string>
+    <string name="total">σύνολο</string>
+
+    <!--    Pjesa per transfere Transfere   -->
+
+    <string name="transferet">ΜΕΤΑΦΟΡΑ</string>
+    <string name="transferet_e_kerkuara">Transfers ζητείται</string>
+    <string name="nr">Οχι.</string>
+    <string name="transferet_e_kerkuara_nga_une">ΜΕΤΑΦΟΡΑ ζητείται από εμένα</string>
+
 
 </resources>

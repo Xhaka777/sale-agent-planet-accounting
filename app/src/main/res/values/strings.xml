@@ -94,7 +94,7 @@
     <string name="inv_porosia">Porosia</string>
     <string name="nr_fatures">Nr. Fatures</string>
     <string name="klienti">Klienti</string>
-    <string name="data">Data</string>
+    <string name="data">Data </string>
     <string name="btn_shto">SHTO</string>
     <string name="vlera_pa_tvsh">Vlera pa TVSH: 0</string>
     <string name="vlera_zbritur">Vlera e zbritur: 0</string>
@@ -111,6 +111,69 @@
     <string name="shifra">Shifra</string>
     <string name="artikulli">Artikulli</string>
     <string name="sasia">Sasia</string>
-    <string name="vlera">vlera</string>
+    <string name="vlera">Vlera</string>
+
+<!--    Pjesa per Inkasim-->
+
+    <string name="shuma">Shuma</string>
+    <string name="komenti">komenti</string>
+    <string name="btn_inkaso">Inkaso</string>
+
+<!--    Pjesa per Depozit-->
+
+    <string name="depozit">Depozit</string>
+    <string name="bank">Bank </string>
+    <string name="nr_reference">Refernce Nr.</string>
+    <string name="reference_hint">Numri References</string>
+    <string name="branch">Branch</string>
+    <string name="btn_proceso">Proceso</string>
+
+<!--    Pjesa e  Raporteve -->
+
+    <string name="raportet">Raportet</string>
+    <string name="lista_faturave">Lista e Faturave</string>
+    <string name="lista_porosive">Lista e Porosive</string>
+    <string name="lista_inkasimeve">Lista e Inkasimeve</string>
+    <string name="lista_shpenzimeve">Lista e Shpenzimeve</string>
+    <string name="lista_depozitave">Lista e Depozitave</string>
+    <string name="lista_ngarkimeve">Lista e Ngarkimeve</string>
+    <string name="l_kthimMalli">L.E Kthimit te Mallit</string>
+
+
+<!-- Raport per faturat  -->
+
+    <string name="nr_fatura">Lista e faturave</string>
+    <string name="njesia_klientit">Njesia e klientit</string>
+    <string name="ruajtur">Ruajtur</string>
+    <string name="numri_faqes">Numri i faqes</string>
+
+    <string name="barcode">Barkodi</string>
+    <string name="emri">Emri</string>
+    <string name="cmimi">Cmimi</string>
+
+    <string name="depo">Depo</string>
+    <string name="tipi">Tipi</string>
+    <string name="furnitori">Furnitori</string>
+    <string name="lloji">Lloji</string>
+
+    <string name="shitje_me_fature">Shitje me fature</string>
+    <string name="shitje_me_kupon_fiskal">Shitje me kupon fiskal</string>
+    <string name="depozitet">Depozitet</string>
+    <string name="cash">Kesh</string>
+    <string name="inkasimet">Inkasimet</string>
+    <string name="shpenzimet">Shpenzimet</string>
+    <string name="borxh">Borxh</string>
+    <string name="total">Total</string>
+
+<!--    Pjesa per transfere Transfere   -->
+
+    <string name="transferet">Transferet</string>
+    <string name="transferet_e_kerkuara">Transferet e kerkuara</string>
+    <string name="nr">Nr.</string>
+    <string name="transferet_e_kerkuara_nga_une">Transferet e kerkuara nga une</string>
+    <string name="krijo_transfer">Krijo nje transfer</string>
+    <string name="dergo_transfere">Dergo Transferin</string>
+
+
 
 </resources>

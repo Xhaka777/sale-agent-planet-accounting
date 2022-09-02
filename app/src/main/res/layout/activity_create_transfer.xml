@@ -23,9 +23,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Krijo nje trasfer"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:text="@string/krijo_transfer"
                 android:textColor="#000" />
 
             <LinearLayout
@@ -41,7 +41,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Data: "
+                    android:text="@string/data"
                     android:textColor="#000" />
 
                 <TextView
@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:hint="Data"
+                    android:hint="@string/data"
                     android:textColor="#000" />
             </LinearLayout>
 
@@ -139,7 +139,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Depo"
+                        android:text="@string/depo"
                         android:textColor="#b3414042"
                         />
 
@@ -149,7 +149,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/edit_field_corner"
-                        android:hint="Njesia" />
+                        android:hint="@string/njesia" />
                 </LinearLayout>
 
 
@@ -207,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:padding="15dp"
-                    android:text="SHTO"
+                    android:text="@string/btn_shto"
                     android:textColor="@android:color/white"
                     android:background="@drawable/button_rounder_corner_2"
                     />
@@ -225,7 +225,7 @@
                 android:id="@+id/create_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dergo Transferin"
+                android:text="@string/dergo_transfere"
                 android:padding="10dp"
                 android:textColor="@android:color/white"
                 android:background="@drawable/button_rounder_corner"

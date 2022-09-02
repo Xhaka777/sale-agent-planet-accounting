@@ -76,7 +76,7 @@
     <string name="inv_porosia">ред </string>
     <string name="nr_fatures">фактуре</string>
     <string name="klienti">Клијент</string>
-    <string name="data">података</string>
+    <string name="data">података </string>
     <string name="btn_shto">Додати</string>
     <string name="vlera_pa_tvsh">Вредност без ПДВ-а: 0</string>
     <string name="vlera_zbritur">Одузета вредност: 0</string>
@@ -93,5 +93,67 @@
     <string name="artikulli">Чланак</string>
     <string name="sasia">Количина</string>
     <string name="vlera">Валуе</string>
+
+
+    <!--    Pjesa per Inkasim-->
+
+    <string name="shuma">Износ</string>
+    <string name="komenti">Коментар</string>
+    <string name="btn_inkaso">Готовинско плаћање</string>
+
+    <!--    Pjesa per Depozit-->
+
+    <string name="depozit">Депозит</string>
+    <string name="bank">банка </string>
+    <string name="nr_reference">Референтни број.</string>
+    <string name="reference_hint">Reference number</string>
+    <string name="branch">Филијала</string>
+    <string name="btn_proceso">Процес</string>
+
+    <!--    Pjesa e  Raporteve -->
+
+    <string name="raportet">извештаји</string>
+    <string name="lista_faturave">списак фактура</string>
+    <string name="lista_porosive">списак налога</string>
+    <string name="lista_inkasimeve">списак збирки</string>
+    <string name="lista_shpenzimeve">списак трошкова</string>
+    <string name="lista_depozitave">списак депозита</string>
+    <string name="lista_ngarkimeve">листа отпремања</string>
+    <string name="l_kthimMalli">L.of враћање робе</string>
+
+
+    <!-- Raport per faturat  -->
+
+    <string name="nr_fatura">Број фактуре</string>
+    <string name="njesia_klientit">Јединица за клијенте</string>
+    <string name="ruajtur">сачувана</string>
+    <string name="numri_faqes">Број стране</string>
+
+    <string name="barcode">бар код</string>
+    <string name="emri">име</string>
+    <string name="cmimi">Цена</string>
+
+    <string name="depo">складиште</string>
+    <string name="tipi">тип</string>
+    <string name="furnitori">добављач</string>
+    <string name="lloji">тип</string>
+
+    <!--  /////////////////   -->
+
+    <string name="shitje_me_fature">Продаја са фактуром</string>
+    <string name="shitje_me_kupon_fiskal">Продаја са фискалним купоном</string>
+    <string name="depozitet">депозити</string>
+    <string name="cash">готовина</string>
+    <string name="inkasimet">збирке</string>
+    <string name="shpenzimet">трошкови</string>
+    <string name="borxh">депт</string>
+    <string name="total">укупно</string>
+
+    <!--    Pjesa per transfere Transfere   -->
+
+    <string name="transferet">трансфери</string>
+    <string name="transferet_e_kerkuara">тражени трансфери</string>
+    <string name="nr">Не.</string>
+    <string name="transferet_e_kerkuara_nga_une">трансфери тражени од мене</string>
 
 </resources>

@@ -79,7 +79,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#000"
-                android:text="Njesia"
+                android:text="@string/njesia"
                 />
 
             <TextView
@@ -111,16 +111,16 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#000"
-                    android:text="NR:"
+                    android:text="@string/nr"
                     />
 
-                <TextView
+                 <TextView
                     android:id="@+id/number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:textSize="16sp"
-                    android:text="NR"
+                    android:text="@string/nr"
                     />
             </LinearLayout>
 
@@ -139,7 +139,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#000"
-                    android:text="Data:"
+                    android:text="@string/data"
                     />
 
                 <TextView
@@ -148,7 +148,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:textSize="16sp"
-                    android:text="data"
+                    android:text="@string/data"
                     />
             </LinearLayout>
 
@@ -165,7 +165,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#000"
-                    android:text="Pershkrimi:"
+                    android:text="@string/pershkrimi"
                     />
 
                 <TextView
@@ -174,7 +174,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:textSize="16sp"
-                    android:text="pershkrimi"
+                    android:text="@string/pershkrimi"
                     />
             </LinearLayout>
             <View
@@ -198,7 +198,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#000"
-                    android:text="Nr."
+                    android:text="@string/nr"
                     android:layout_weight="1"
                     />
 
@@ -209,7 +209,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textStyle="bold"
                     android:textColor="#000"
                     android:layout_weight="1"
-                    android:text="Emri"
+                    android:text="@string/emri"
                     />
 
                 <TextView
@@ -219,7 +219,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textStyle="bold"
                     android:textColor="#000"
                     android:layout_weight="1"
-                    android:text="Njesia"
+                    android:text="@string/njesia"
                     />
 
                 <TextView
@@ -229,7 +229,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textStyle="bold"
                     android:textColor="#000"
                     android:layout_weight="1"
-                    android:text="Sasia"
+                    android:text="@string/sasia"
                     />
 
 

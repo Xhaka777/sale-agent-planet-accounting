@@ -79,7 +79,7 @@
     <string name="inv_porosia">Emir</string>
     <string name="nr_fatures">No. fatura</string>
     <string name="klienti">Müşteri</string>
-    <string name="data">Veri</string>
+    <string name="data">Veri </string>
     <string name="btn_shto">Ekle</string>
     <string name="vlera_pa_tvsh">KDVsiz değer: 0</string>
     <string name="vlera_zbritur">Indirimli değer: 0</string>
@@ -96,55 +96,68 @@
     <string name="artikulli">Madde</string>
     <string name="sasia">Miktar</string>
     <string name="vlera">Değer</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    <!--    Pjesa per Inkasim-->
+
+    <string name="shuma">Tutar</string>
+    <string name="komenti">Yorum</string>
+    <string name="btn_inkaso">Nakit</string>
+
+    <!--    Pjesa per Depozit-->
+
+    <string name="depozit">Depozito</string>
+    <string name="bank">Banka </string>
+    <string name="nr_reference">Referans numarası.</string>
+    <string name="reference_hint">Reference number</string>
+    <string name="branch">Dal</string>
+    <string name="btn_proceso">İşlem</string>
+
+    <!--    Pjesa e  Raporteve -->
+
+    <string name="raportet">Reports</string>
+    <string name="lista_faturave">fatura listesi</string>
+    <string name="lista_porosive">sipariş listesi</string>
+    <string name="lista_inkasimeve">koleksiyon listesi</string>
+    <string name="lista_shpenzimeve">gider listesi</string>
+    <string name="lista_depozitave">mevduat listesi</string>
+    <string name="lista_ngarkimeve">yükleme listesi</string>
+    <string name="l_kthimMalli">L.of malların dönüşü</string>
+
+    <!-- Raport per faturat  -->
+
+    <string name="nr_fatura">Fatura numarası</string>
+    <string name="njesia_klientit">Müşteri Birimi</string>
+    <string name="ruajtur">kaydedildi</string>
+    <string name="numri_faqes">sayfa numarası</string>
+
+    <string name="barcode">Barkod</string>
+    <string name="emri">isim</string>
+    <string name="cmimi">Fiyat</string>
+
+    <string name="depo">depo</string>
+    <string name="tipi">tip</string>
+    <string name="furnitori">Tedarikçi</string>
+    <string name="lloji">tip</string>
+
+    <!--  /////////////////   -->
+
+    <string name="shitje_me_fature">faturalı satış</string>
+    <string name="shitje_me_kupon_fiskal">mali kupon ile satış</string>
+    <string name="depozitet">mevduat</string>
+    <string name="cash">nakit</string>
+    <string name="inkasimet">koleksiyonlar</string>
+    <string name="shpenzimet">masraflar</string>
+    <string name="borxh">borç</string>
+    <string name="total">Toplam</string>
+
+
+    <!--    Pjesa per transfere Transfere   -->
+
+    <string name="transferet">Transferler</string>
+    <string name="transferet_e_kerkuara">Talep edilen transferler</string>
+    <string name="nr">No.</string>
+    <string name="transferet_e_kerkuara_nga_une">Benden istenen transferler</string>
+
+
+
 </resources>
