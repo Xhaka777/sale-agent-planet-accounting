@@ -48,7 +48,7 @@
     <string name="action_connect">Connect</string>
     <string name="do_you_want_to_delete_this_article">Do you want to delete the article?</string>
 
-<!--    Main part... -->
+    <!--    Main part... -->
     <string name="log_out">Log out</string>
     <string name="njesia">Unit</string>
     <string name="pazari_ditor">Daily Sale</string>
@@ -76,7 +76,7 @@
     <string name="inv_porosia">The Order</string>
     <string name="nr_fatures">Nr. of Invoice</string>
     <string name="klienti">Client</string>
-    <string name="data">Data</string>
+    <string name="data">Data </string>
     <string name="btn_shto">ADD</string>
     <string name="vlera_pa_tvsh">Value without VAT: 0</string>
     <string name="vlera_zbritur">Deducted Value: 0</string>
@@ -93,5 +93,139 @@
     <string name="artikulli">Article</string>
     <string name="sasia">Quantity</string>
     <string name="vlera">Value</string>
+
+
+    <!--    Pjesa per Inkasim-->
+
+    <string name="shuma">Amount</string>
+    <string name="komenti">Comment</string>
+    <string name="btn_inkaso">Cash In</string>
+
+    <!--    Pjesa per Depozit-->
+
+    <string name="depozit">Deposit</string>
+    <string name="bank">Bank </string>
+    <string name="nr_reference">Refernce No.</string>
+    <string name="reference_hint">Reference number</string>
+    <string name="branch">Branch</string>
+    <string name="btn_proceso">Process</string>
+
+
+    <!--    Pjesa e  Raporteve -->
+
+    <string name="raportet">Reports</string>
+    <string name="lista_faturave">List of Invoices</string>
+    <string name="lista_porosive">List of Orders</string>
+    <string name="lista_inkasimeve">List of Collections</string>
+    <string name="lista_shpenzimeve">List of Expenses</string>
+    <string name="lista_depozitave">List of Deposits</string>
+    <string name="lista_ngarkimeve">List of Uploads</string>
+    <string name="l_kthimMalli">L.of Return of Goods</string>
+
+
+    <!-- Raport per faturat  -->
+
+    <string name="nr_fatura">Invoice Number</string>
+    <string name="njesia_klientit">Client Unit</string>
+    <string name="ruajtur">Saved</string>
+    <string name="numri_faqes">Page number</string>
+
+    <!--  /////////////////   -->
+
+    <string name="barcode">Barcode</string>
+    <string name="emri">Name</string>
+    <string name="cmimi">Price</string>
+
+    <!--  /////////////////   -->
+
+    <string name="depo">Warehouse</string>
+    <string name="tipi">Type</string>
+    <string name="furnitori">Supplier</string>
+    <string name="lloji">Type</string>
+
+    <!--  /////////////////   -->
+
+    <string name="shitje_me_fature">Sale with invoice</string>
+    <string name="shitje_me_kupon_fiskal">Sale with Fiscal Coupon</string>
+    <string name="depozitet">Deposits</string>
+    <string name="cash">Cash</string>
+    <string name="inkasimet">Collections</string>
+    <string name="shpenzimet">Expenses</string>
+    <string name="borxh">Debt</string>
+    <string name="total">Total</string>
+
+    <!--    Pjesa per transfere Transfere   -->
+
+    <string name="transferet">Transfers</string>
+    <string name="transferet_e_kerkuara">Transfers requested</string>
+    <string name="nr">No.</string>
+    <string name="transferet_e_kerkuara_nga_une">Transfers requested from me</string>
+    <string name="krijo_transfer">Create a transfer</string>
+    <string name="dergo_transfere">Send the transfer</string>
+    <string name="pershkrimi">Description</string>
+
+
+    <!--    Pjesa per Klinetet  -->
+    <string name="numri_unik">No. Unique</string>
+    <string name="kontakt">Contact</string>
+    <string name="bilanci">Balance</string>
+    <string name="roli_klient">Role:Clienti</string>
+    <string name="lloji_kompania">Type: Company</string>
+    <string name="from">From</string>
+    <string name="to">to</string>
+    <string name="valuta">Currency</string>
+    <string name="printo_kartelen">Print the Card</string>
+    <string name="nr_tvsh">No. VAT:</string>
+    <string name="adresa">Address :</string>
+    <string name="qyteti">City :</string>
+    <string name="shteti">State :</string>
+    <string name="tel">Tel :</string>
+    <string name="fax">Fax :</string>
+    <string name="web">Web :</string>
+
+    <!--    Pjesa per Target...-->
+
+    <string name="targeti">Target</string>
+    <string name="muaji">Month: 01</string>
+    <string name="viti">Year: 2018</string>
+    <string name="targeti_inkasim">Target Collection</string>
+    <string name="realizimi">Realization</string>
+    <string name="perqindja">the percentage</string>
+    <string name="benefiti">Benefit</string>
+    <string name="targeti_total">Total target</string>
+    <string name="targeti_sku">SKU Target</string>
+    <string name="targeti_brende">Brand Target</string>
+    <string name="targeti_artikuj">Article Target</string>
+    <string name="targeti_per_artikuj">target for items</string>
+    <string name="emertimi">Name</string>
+    <string name="targeti_10">Target: 100000</string>
+    <string name="realizimi_10">Realization: 100000</string>
+    <string name="perqindje_10">Percentage: 100000</string>
+    <string name="perfitimi_10">Benefit: 100000</string>
+    <string name="brendi">Brand</string>
+    <string name="realizimi_ditor">daily realization</string>
+    <string name="perqindja_ditore">daily percentage</string>
+
+
+    <!--    Pjesa per ngarkime -->
+
+    <string name="nga_depo">From warehouse</string>
+    <string name="te_depo">To warehouse</string>
+    <string name="nga_puntori">From worker</string>
+    <string name="te_puntori">To worker</string>
+
+    <!--    Pjesa per shpenzimet -->
+
+    <string name="shpenzimi">Expense</string>
+
+    <!--    Pjesa e aksioneve -->
+
+    <string name="lista_aksioneve">List of Shares</string>
+    <string name="aksionet_me_produkte">Shares with Products</string>
+    <string name="aksionet_me_brend">Shares with Brand</string>
+    <string name="aksionet_me_kombinim">Shares with Combination</string>
+    <string name="aksionet_me_kategori">Shares by Category</string>
+    <string name="kategoria">Category</string>
+    <string name="kombinim">Combination</string>
 
 </resources>

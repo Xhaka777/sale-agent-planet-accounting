@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Shifra"
+                android:text="@string/shifra"
                 android:textColor="#000"
 
                 />
@@ -36,7 +36,7 @@
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
 
-                android:text="Barkod"
+                android:text="@string/barcode"
                 android:textColor="#000" />
 
             <ImageView
@@ -52,7 +52,7 @@
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
 
-                android:text="Emri"
+                android:text="@string/emri"
                 android:textColor="#000" />
 
             <ImageView
@@ -68,7 +68,7 @@
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
 
-                android:text="Njesia"
+                android:text="@string/njesia"
                 android:textColor="#000" />
 
             <ImageView
@@ -84,7 +84,7 @@
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
 
-                android:text="Sasia"
+                android:text="@string/sasia"
                 android:textColor="#000" />
 
             <ImageView

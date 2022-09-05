@@ -155,6 +155,72 @@
     <string name="transferet_e_kerkuara">Transfers ζητείται</string>
     <string name="nr">Οχι.</string>
     <string name="transferet_e_kerkuara_nga_une">ΜΕΤΑΦΟΡΑ ζητείται από εμένα</string>
+    <string name="krijo_transfer">δημιουργώ μεταφορά</string>
+    <string name="dergo_transfere">στείλτε τη μεταφορά</string>
+    <string name="pershkrimi">περιγραφή</string>
 
+    <!--    Pjesa per Klinetet  -->
+    <string name="numri_unik">όχι. μοναδικός</string>
+    <string name="kontakt">Επικοινωνία</string>
+    <string name="bilanci">ισορροπία</string>
+    <string name="roli_klient">ρόλος: πελάτης</string>
+    <string name="lloji_kompania">τύπος: Εταιρία</string>
+    <string name="from">από</string>
+    <string name="to">προς την</string>
+    <string name="valuta">νόμισμα</string>
+    <string name="printo_kartelen">εκτυπώστε την κάρτα</string>
+    <string name="nr_tvsh">αριθμός ΦΠΑ :</string>
+    <string name="adresa">διεύθυνση :</string>
+    <string name="qyteti">πόλη :</string>
+    <string name="shteti">κατάσταση :</string>
+    <string name="tel">Tel :</string>
+    <string name="fax">Fax :</string>
+    <string name="web">Web :</string>
+
+    <!--    Pjesa per Target...-->
+
+    <string name="targeti">στόχος</string>
+    <string name="muaji">μήνας: 01</string>
+    <string name="viti">έτος: 2018</string>
+    <string name="targeti_inkasim">συλλογή στόχων</string>
+    <string name="realizimi">πραγματοποίηση</string>
+    <string name="perqindja">το ποσοστό</string>
+    <string name="benefiti">όφελος</string>
+    <string name="targeti_total">συνολικός στόχος</string>
+    <string name="targeti_sku">στόχος sku</string>
+    <string name="targeti_brende">στόχος επωνυμίας</string>
+    <string name="targeti_artikuj">στόχος άρθρου</string>
+    <string name="targeti_per_artikuj">στόχος για αντικείμενα</string>
+    <string name="emertimi">Ονομα</string>
+    <string name="targeti_10">στόχος: 100000</string>
+    <string name="realizimi_10">πραγματοποίηση: 100000</string>
+    <string name="perqindje_10">το ποσοστό: 100000</string>
+    <string name="perfitimi_10">όφελος: 100000</string>
+    <string name="brendi">μάρκα</string>
+    <string name="realizimi_ditor">καθημερινή πραγματοποίηση</string>
+    <string name="perqindja_ditore">ημερήσιο ποσοστό</string>
+
+
+
+    <!--    Pjesa per ngarkime -->
+
+    <string name="nga_depo">από την αποθήκη</string>
+    <string name="te_depo">στην αποθήκη</string>
+    <string name="nga_puntori">από εργάτη</string>
+    <string name="te_puntori">στον εργάτη</string>
+
+    <!--    Pjesa per shpenzimet -->
+
+    <string name="shpenzimi">έξοδα</string>
+
+    <!--    Pjesa e aksioneve -->
+
+    <string name="lista_aksioneve">λίστα μετοχών</string>
+    <string name="aksionet_me_produkte">μετοχές με προϊόντα</string>
+    <string name="aksionet_me_brend">μετοχές με το εμπορικό σήμα</string>
+    <string name="aksionet_me_kombinim">μετοχές με συνδυασμό</string>
+    <string name="aksionet_me_kategori">μετοχές με κατηγορία</string>
+    <string name="kategoria">κατηγορία</string>
+    <string name="kombinim">συνδυασμός</string>
 
 </resources>

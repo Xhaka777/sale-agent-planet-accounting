@@ -16,9 +16,10 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="TARGETI TOTAL"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:text="@string/targeti_total"
+                android:textAllCaps="true"
                 android:textColor="#000" />
 
             <View
@@ -143,7 +144,8 @@
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Data"
+                        android:text="@string/data"
+                        android:textAllCaps="true"
                         android:textColor="#000"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -161,7 +163,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Realizimi Ditor"
+                        android:text="@string/realizimi_ditor"
                         android:textColor="#000"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -179,7 +181,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Perqindja Ditore"
+                        android:text="@string/perqindja_ditore"
                         android:textColor="#000"
                         android:textSize="16dp"
                         android:textStyle="bold" />

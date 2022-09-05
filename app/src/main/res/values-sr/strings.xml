@@ -155,5 +155,71 @@
     <string name="transferet_e_kerkuara">тражени трансфери</string>
     <string name="nr">Не.</string>
     <string name="transferet_e_kerkuara_nga_une">трансфери тражени од мене</string>
+    <string name="krijo_transfer">креирајте трансфер</string>
+    <string name="dergo_transfere">послати трансфер</string>
+    <string name="pershkrimi">Опис</string>
+
+    <!--    Pjesa per Klinetet  -->
+    <string name="numri_unik">не. јединствени</string>
+    <string name="kontakt">контакт</string>
+    <string name="bilanci">баланс</string>
+    <string name="roli_klient">улога: Клијент</string>
+    <string name="lloji_kompania">тип: Компанија</string>
+    <string name="from">из</string>
+    <string name="to">до</string>
+    <string name="valuta">Валута</string>
+    <string name="printo_kartelen">одштампајте картицу</string>
+    <string name="nr_tvsh">ПДВ број :</string>
+    <string name="adresa">адреса :</string>
+    <string name="qyteti">град :</string>
+    <string name="shteti">стање :</string>
+    <string name="tel">Tel :</string>
+    <string name="fax">Fax :</string>
+    <string name="web">Web :</string>
+
+    <!--    Pjesa per Target...-->
+
+    <string name="targeti">циљ</string>
+    <string name="muaji">месец дана: 01</string>
+    <string name="viti">године: 2018</string>
+    <string name="targeti_inkasim">циљно прикупљање</string>
+    <string name="realizimi">реализација</string>
+    <string name="perqindja">проценат</string>
+    <string name="benefiti">корист</string>
+    <string name="targeti_total">укупна мета</string>
+    <string name="targeti_sku">ску циљ</string>
+    <string name="targeti_brende">циљ бренда</string>
+    <string name="targeti_artikuj">циљ чланка</string>
+    <string name="targeti_per_artikuj">мета за ставке</string>
+    <string name="emertimi">име</string>
+    <string name="targeti_10">циљ: 100000</string>
+    <string name="realizimi_10">реализација: 100000</string>
+    <string name="perqindje_10">проценат: 100000</string>
+    <string name="perfitimi_10">корист: 100000</string>
+    <string name="brendi">Марка</string>
+    <string name="realizimi_ditor">дневна реализација</string>
+    <string name="perqindja_ditore">дневни проценат</string>
+
+    <!--    Pjesa per ngarkime -->
+
+    <string name="nga_depo">из магацина</string>
+    <string name="te_depo">до складишта</string>
+    <string name="nga_puntori">од радника</string>
+    <string name="te_puntori">раднику</string>
+
+    <!--    Pjesa per shpenzimet -->
+
+    <string name="shpenzimi">трошкови</string>
+
+    <!--    Pjesa e aksioneve -->
+
+    <string name="lista_aksioneve">списак акција</string>
+    <string name="aksionet_me_produkte">дели са производима</string>
+    <string name="aksionet_me_brend">дели са брендом</string>
+    <string name="aksionet_me_kombinim">дели са комбинацијом</string>
+    <string name="aksionet_me_kategori">дели са категоријом</string>
+    <string name="kategoria">категорија</string>
+    <string name="kombinim">комбинација</string>
+
 
 </resources>

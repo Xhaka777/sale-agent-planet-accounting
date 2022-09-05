@@ -52,7 +52,7 @@
     <string name="do_you_want_to_delete_this_article">A dëshironi të fshini artikullin</string>
 
 
-<!--    Main part...-->
+    <!--    Main part...-->
     <string name="log_out">QKYQU</string>
     <string name="njesia">Njesia</string>
     <string name="pazari_ditor">Pazari ditor</string>
@@ -74,21 +74,21 @@
     <string name="title_shpenzimet">Shpenzimet</string>
     <string name="title_aksionet">Aksionet</string>
 
-<!--    <string-array name="main_titles">-->
-<!--        <item>@string/title_fatura</item>-->
-<!--        <item>@string/title_stoku</item>-->
-<!--        <item>@string/title_depozita</item>-->
-<!--        <item>@string/title_raportet</item>-->
-<!--        <item>@string/title_kthimMalli</item>-->
-<!--        <item>@string/title_transfere</item>-->
-<!--        <item>@string/title_target</item>-->
-<!--        <item>@string/title_porositeInterne</item>-->
-<!--        <item>@string/title_ngarkimet</item>-->
-<!--        <item>@string/title_shpenzimet</item>-->
-<!--        <item>@string/title_aksionet</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="main_titles">-->
+    <!--        <item>@string/title_fatura</item>-->
+    <!--        <item>@string/title_stoku</item>-->
+    <!--        <item>@string/title_depozita</item>-->
+    <!--        <item>@string/title_raportet</item>-->
+    <!--        <item>@string/title_kthimMalli</item>-->
+    <!--        <item>@string/title_transfere</item>-->
+    <!--        <item>@string/title_target</item>-->
+    <!--        <item>@string/title_porositeInterne</item>-->
+    <!--        <item>@string/title_ngarkimet</item>-->
+    <!--        <item>@string/title_shpenzimet</item>-->
+    <!--        <item>@string/title_aksionet</item>-->
+    <!--    </string-array>-->
 
-<!--    Pjesa per Invoice... -->
+    <!--    Pjesa per Invoice... -->
     <string name="faturë">Faturë</string>
     <string name="inv_fatura">Fatura</string>
     <string name="inv_porosia">Porosia</string>
@@ -113,13 +113,13 @@
     <string name="sasia">Sasia</string>
     <string name="vlera">Vlera</string>
 
-<!--    Pjesa per Inkasim-->
+    <!--    Pjesa per Inkasim-->
 
     <string name="shuma">Shuma</string>
     <string name="komenti">komenti</string>
     <string name="btn_inkaso">Inkaso</string>
 
-<!--    Pjesa per Depozit-->
+    <!--    Pjesa per Depozit-->
 
     <string name="depozit">Depozit</string>
     <string name="bank">Bank </string>
@@ -128,7 +128,7 @@
     <string name="branch">Branch</string>
     <string name="btn_proceso">Proceso</string>
 
-<!--    Pjesa e  Raporteve -->
+    <!--    Pjesa e  Raporteve -->
 
     <string name="raportet">Raportet</string>
     <string name="lista_faturave">Lista e Faturave</string>
@@ -138,9 +138,10 @@
     <string name="lista_depozitave">Lista e Depozitave</string>
     <string name="lista_ngarkimeve">Lista e Ngarkimeve</string>
     <string name="l_kthimMalli">L.E Kthimit te Mallit</string>
+    <string name="lista_klienteve">Lista e Klienteve</string>
 
 
-<!-- Raport per faturat  -->
+    <!-- Raport per faturat  -->
 
     <string name="nr_fatura">Lista e faturave</string>
     <string name="njesia_klientit">Njesia e klientit</string>
@@ -165,7 +166,7 @@
     <string name="borxh">Borxh</string>
     <string name="total">Total</string>
 
-<!--    Pjesa per transfere Transfere   -->
+    <!--    Pjesa per transfere Transfere   -->
 
     <string name="transferet">Transferet</string>
     <string name="transferet_e_kerkuara">Transferet e kerkuara</string>
@@ -173,7 +174,70 @@
     <string name="transferet_e_kerkuara_nga_une">Transferet e kerkuara nga une</string>
     <string name="krijo_transfer">Krijo nje transfer</string>
     <string name="dergo_transfere">Dergo Transferin</string>
+    <string name="pershkrimi">Pershkrim</string>
+
+    <!--    Pjesa per Klinetet  -->
+    <string name="numri_unik">Nr. Unik</string>
+    <string name="kontakt">Kontakt</string>
+    <string name="bilanci">Bilanci</string>
+    <string name="roli_klient">Roli: Klienti</string>
+    <string name="lloji_kompania">Lloji: Kompania</string>
+    <string name="from">Nga</string>
+    <string name="to">Deri</string>
+    <string name="valuta">Valuta</string>
+    <string name="printo_kartelen">Printo Kartelen</string>
+    <string name="nr_tvsh">Nr. TVSH-së:</string>
+    <string name="adresa">Adresa :</string>
+    <string name="qyteti">Qyteti :</string>
+    <string name="shteti">Shteti :</string>
+    <string name="tel">Tel :</string>
+    <string name="fax">Fax :</string>
+    <string name="web">Web :</string>
+
+    <!--    Pjesa per Target...-->
+
+    <string name="targeti">Targeti</string>
+    <string name="muaji">Muaji: 01</string>
+    <string name="viti">Viti: 2018</string>
+    <string name="targeti_inkasim">Targeti Inkasim</string>
+    <string name="realizimi">Realizimi</string>
+    <string name="perqindja">Perqindja</string>
+    <string name="benefiti">Benefiti</string>
+    <string name="targeti_total">Targeti Total</string>
+    <string name="targeti_sku">Targeti SKU</string>
+    <string name="targeti_brende">Targeti Brende</string>
+    <string name="targeti_artikuj">Targeti Artikuj</string>
+    <string name="targeti_per_artikuj">TARGETI PER ARTIKUJ</string>
+    <string name="emertimi">Emertimi</string>
+    <string name="targeti_10">Targeti: 100000</string>
+    <string name="realizimi_10">Realizimi: 100000</string>
+    <string name="perqindje_10">Perqindja: 100000</string>
+    <string name="perfitimi_10">Perfitimi: 100000</string>
+    <string name="brendi">Brendi</string>
+    <string name="realizimi_ditor">Realizimi Ditor</string>
+    <string name="perqindja_ditore">Perqindja Ditore</string>
 
 
+    <!--    Pjesa per ngarkime -->
+
+    <string name="nga_depo">Nga depo</string>
+    <string name="te_depo">Te Depo</string>
+    <string name="nga_puntori">Nga puntori</string>
+    <string name="te_puntori">Te puntori</string>
+
+
+<!--    Pjesa per shpenzimet -->
+
+    <string name="shpenzimi">Shpenzim</string>
+
+<!--    Pjesa e aksioneve -->
+
+    <string name="lista_aksioneve">Lista e Aksioneve</string>
+    <string name="aksionet_me_produkte">Aksionet me produkte</string>
+    <string name="aksionet_me_brend">Aksionet me Brend</string>
+    <string name="aksionet_me_kombinim">Aksionet me kombinim</string>
+    <string name="aksionet_me_kategori">Aksionet me Kombinim</string>
+    <string name="kategoria">Kategoria</string>
+    <string name="kombinim">Kombinim</string>
 
 </resources>

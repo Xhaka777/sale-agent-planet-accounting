@@ -25,7 +25,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
-                android:text="Nr."
+                android:text="@string/nr"
                 android:textColor="#000"
 
                 />
@@ -47,7 +47,7 @@
                 android:layout_weight="1"
 
 
-                android:text="Data"
+                android:text="@string/data"
                 android:textColor="#000" />
 
             <ImageView
@@ -65,7 +65,7 @@
                 android:layout_weight="1"
 
 
-                android:text=" Nga depo"
+                android:text="@string/nga_depo"
                 android:textColor="#000" />
 
             <ImageView
@@ -83,7 +83,7 @@
                 android:layout_weight="1"
 
 
-                android:text="Te depo"
+                android:text="@string/te_depo"
                 android:textColor="#000" />
             <ImageView
                 android:layout_width="1dp"
@@ -100,7 +100,7 @@
                 android:layout_weight="1"
 
 
-                android:text="Nga puntori"
+                android:text="@string/nga_puntori"
                 android:textColor="#000" />
 
             <ImageView
@@ -118,7 +118,7 @@
                 android:layout_weight="1"
 
 
-                android:text="Te punori"
+                android:text="@string/te_puntori"
                 android:textColor="#000" />
             <ImageView
                 android:layout_width="1dp"
@@ -135,7 +135,7 @@
                 android:layout_weight="1"
 
 
-                android:text="Pershkrimi"
+                android:text="@string/pershkrimi"
                 android:textColor="#000" />
         </LinearLayout>
 

@@ -18,7 +18,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="Lisa e Aksioneve"
+                android:text="@string/lista_aksioneve"
                 android:textColor="#000" />
         </LinearLayout>
 
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Aksionet me produkte"
+                    android:text="@string/aksionet_me_produkte"
                     android:textColor="#000"
                     android:textSize="20dp" />
 
@@ -53,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Nr."
+                        android:text="@string/nr"
                         android:textColor="#000"
                         android:textSize="16dp" />
 
@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:gravity="center"
-                        android:text="Artikulli"
+                        android:text="@string/artikulli"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <ImageView
@@ -83,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Nga"
+                        android:text="@string/from"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <ImageView
@@ -96,7 +96,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Deri"
+                        android:text="@string/to"
                         android:textColor="#000"
                         android:textSize="16dp" />
                 </LinearLayout>
@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Aksionet me Brend"
+                    android:text="@string/aksionet_me_brend"
                     android:textColor="#000"
                     android:textSize="20dp" />
 
@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Nr."
+                        android:text="@string/nr"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <ImageView
@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:gravity="center"
-                        android:text="Brendi"
+                        android:text="@string/brendi"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <ImageView
@@ -153,7 +153,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Nga"
+                        android:text="@string/from"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <ImageView
@@ -164,7 +164,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Deri"
+                        android:text="@string/to"
                         android:textColor="#000"
                         android:textSize="16dp" />
                 </LinearLayout>
@@ -179,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Aksionet me Kategori"
+                    android:text="@string/aksionet_me_kategori"
                     android:textColor="#000"
                     android:textSize="20dp" />
 
@@ -195,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Nr."
+                        android:text="@string/nr"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <ImageView
@@ -207,7 +207,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:gravity="center"
-                        android:text="Kategoria"
+                        android:text="@string/kategoria"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <ImageView
@@ -220,7 +220,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Nga"
+                        android:text="@string/from"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <ImageView
@@ -231,7 +231,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Deri"
+                        android:text="@string/to"
                         android:textColor="#000"
                         android:textSize="16dp" />
                 </LinearLayout>
@@ -246,7 +246,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Aksionet me Kombinim"
+                    android:text="@string/aksionet_me_kombinim"
                     android:textColor="#000"
                     android:textSize="20dp" />
 
@@ -262,7 +262,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Nr."
+                        android:text="@string/nr"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <ImageView
@@ -274,7 +274,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:gravity="center"
-                        android:text="Kombinim"
+                        android:text="@string/kombinim"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <ImageView
@@ -288,7 +288,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Nga"
+                        android:text="@string/from"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <ImageView
@@ -299,7 +299,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Deri"
+                        android:text="@string/to"
                         android:textColor="#000"
                         android:textSize="16dp" />
                 </LinearLayout>

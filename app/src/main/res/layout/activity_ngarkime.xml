@@ -30,7 +30,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:text="Lista e Ngarkimeve"
+                        android:text="@string/lista_ngarkimeve"
                         android:textColor="#000" />
                 </LinearLayout>
 
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="Nr."
+                    android:text="@string/nr"
                     android:textColor="#000"
                     />
 
@@ -80,7 +80,7 @@
                     android:layout_marginRight="4dp"
                     android:layout_weight="1"
 
-                    android:text="Data"
+                    android:text="@string/data"
                     android:textColor="#000" />
 
                 <ImageView
@@ -96,7 +96,7 @@
                     android:layout_marginRight="4dp"
                     android:layout_weight="1"
 
-                    android:text="Nga depo"
+                    android:text="@string/nga_depo"
                     android:textColor="#000" />
 
                 <ImageView
@@ -112,7 +112,7 @@
                     android:layout_marginRight="4dp"
                     android:layout_weight="1"
 
-                    android:text="Te Depo"
+                    android:text="@string/te_depo"
                     android:textColor="#000" />
                 <ImageView
                     android:layout_width="1dp"
@@ -127,7 +127,7 @@
                     android:layout_marginRight="4dp"
                     android:layout_weight="1"
 
-                    android:text="Nga puntori"
+                    android:text="@string/nga_puntori"
                     android:textColor="#000" />
 
                 <ImageView
@@ -143,7 +143,7 @@
                     android:layout_weight="1"
 
                     android:layout_marginRight="4dp"
-                    android:text="Te puntori"
+                    android:text="@string/te_puntori"
                     android:textColor="#000" />
                 <ImageView
                     android:layout_width="1dp"
@@ -158,7 +158,7 @@
                     android:layout_weight="1"
 
                     android:layout_marginRight="4dp"
-                    android:text="Pershkrimi"
+                    android:text="@string/pershkrimi"
                     android:textColor="#000" />
 
 

@@ -157,7 +157,73 @@
     <string name="transferet_e_kerkuara">Talep edilen transferler</string>
     <string name="nr">No.</string>
     <string name="transferet_e_kerkuara_nga_une">Benden istenen transferler</string>
+    <string name="krijo_transfer">transfer oluştur</string>
+    <string name="dergo_transfere">transferi gönder</string>
+    <string name="pershkrimi">tanım</string>
+
+    <!--    Pjesa per Klinetet  -->
+    <string name="numri_unik">Hayır. Benzersiz</string>
+    <string name="kontakt">İletişim</string>
+    <string name="bilanci">Denge</string>
+    <string name="roli_klient">Rol: Müşteri</string>
+    <string name="lloji_kompania">Tip : Şirket</string>
+    <string name="from">itibaren</string>
+    <string name="to">ile</string>
+    <string name="valuta">para birimi</string>
+    <string name="printo_kartelen">baskı kartı</string>
+    <string name="nr_tvsh">hayır. KDV:</string>
+    <string name="adresa">adres :</string>
+    <string name="qyteti">Kent :</string>
+    <string name="shteti">durum :</string>
+    <string name="tel">Tel :</string>
+    <string name="fax">Fax :</string>
+    <string name="web">Web :</string>
 
 
+    <!--    Pjesa per Target...-->
+
+    <string name="targeti">Hedef</string>
+    <string name="muaji">ay: 01</string>
+    <string name="viti">yıl: 2018</string>
+    <string name="targeti_inkasim">hedef Koleksiyon</string>
+    <string name="realizimi">gerçekleşme</string>
+    <string name="perqindja">yüzde</string>
+    <string name="benefiti">fayda</string>
+    <string name="targeti_total">toplam hedef</string>
+    <string name="targeti_sku">sku hedefi</string>
+    <string name="targeti_brende">hedef marka</string>
+    <string name="targeti_artikuj">makale hedefi</string>
+    <string name="targeti_per_artikuj">öğeler için hedef</string>
+    <string name="emertimi">isim</string>
+    <string name="targeti_10">Hedef: 100000</string>
+    <string name="realizimi_10">Gerçekleşme: 100000</string>
+    <string name="perqindje_10">Yüzde: 100000</string>
+    <string name="perfitimi_10">Fayda: 100000</string>
+    <string name="brendi">Marka</string>
+    <string name="realizimi_ditor">günlük gerçekleşme</string>
+    <string name="perqindja_ditore">günlük yüzde</string>
+
+
+
+    <!--    Pjesa per ngarkime -->
+
+    <string name="nga_depo">depodan</string>
+    <string name="te_depo">depoya</string>
+    <string name="nga_puntori">işçiden</string>
+    <string name="te_puntori">işçiye</string>
+
+    <!--    Pjesa per shpenzimet -->
+
+    <string name="shpenzimi">masraflar</string>
+
+    <!--    Pjesa e aksioneve -->
+
+    <string name="lista_aksioneve">hisse listesi</string>
+    <string name="aksionet_me_produkte">Ürünlerle paylaşımlar</string>
+    <string name="aksionet_me_brend">Marka ile paylaşımlar</string>
+    <string name="aksionet_me_kombinim">Kombinasyonlu paylaşımlar</string>
+    <string name="aksionet_me_kategori">Kategoriye göre paylaşımlar</string>
+    <string name="kategoria">kategori</string>
+    <string name="kombinim">kombinasyon</string>
 
 </resources>
