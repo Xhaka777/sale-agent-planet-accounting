@@ -48,13 +48,12 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:text="@string/action_type"
                 android:textColor="#000"
-                android:text="ActionType"
-                />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/title_text"
@@ -63,7 +62,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
                 android:textSize="16sp"
-                android:text="ActionName"
+                android:text="@string/action_name"
                 />
             <View
                 android:layout_width="match_parent"
@@ -85,8 +84,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#000"
-                    android:text="Statusi:"
-                    />
+                    android:text="@string/statusi" />
 
                 <TextView
                     android:id="@+id/staus"
@@ -94,7 +92,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:textSize="16sp"
-                    android:text="Statusi"
+                    android:text="@string/statusi"
                     />
             </LinearLayout>
 
@@ -113,7 +111,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#000"
-                    android:text="Nga:"
+                    android:text="@string/from"
                     />
 
                 <TextView
@@ -122,7 +120,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:textSize="16sp"
-                    android:text="Nga"
+                    android:text="@string/from"
                     />
             </LinearLayout>
 
@@ -139,7 +137,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#000"
-                    android:text="Deri:"
+                    android:text="@string/to"
                     />
 
                 <TextView
@@ -148,7 +146,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:textSize="16sp"
-                    android:text="Deri"
+                    android:text="@string/to"
                     />
             </LinearLayout>
             <View
@@ -172,7 +170,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#000"
-                    android:text="Aksioni"
+                    android:text="@string/aksioni"
                     android:layout_weight="1"
                     />
 
@@ -183,7 +181,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textStyle="bold"
                     android:textColor="#000"
                     android:layout_weight="1"
-                    android:text="Shuma"
+                    android:text="@string/shuma"
                     />
 
                 <TextView
@@ -193,7 +191,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:textStyle="bold"
                     android:textColor="#000"
                     android:layout_weight="1"
-                    android:text="Zbritja%"
+                    android:text="@string/zbritja"
                     />
 
 

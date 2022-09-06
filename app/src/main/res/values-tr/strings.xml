@@ -227,5 +227,11 @@
     <string name="kategoria">kategori</string>
     <string name="kombinim">kombinasyon</string>
     <string name="lista_klienteve">Müşteri listesi</string>
+    <string name="aksioni">Eylem </string>
+    <string name="action_type">Eylem Türü</string>
+    <string name="action_name">Eylem Adı</string>
+    <string name="statusi">Durum </string>
+    <string name="zbritja">Indirim %</string>
+    <string name="aktiv">aktif</string>
 
 </resources>

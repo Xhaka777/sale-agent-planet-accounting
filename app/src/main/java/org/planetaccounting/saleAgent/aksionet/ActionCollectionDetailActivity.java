@@ -54,10 +54,10 @@ public class ActionCollectionDetailActivity extends AppCompatActivity {
         stockItems = realmHelper.getStockItems();
 
 
-        binding.barTitle.setText("Aksionet me Kombinim");
-        binding.title.setText("Kombinim");
+        binding.barTitle.setText(R.string.aksionet_me_kombinim);
+        binding.title.setText(R.string.kombinim);
         binding.titleText.setText(actionCollectionItem.getId());
-        binding.staus.setText("Aktiv");
+        binding.staus.setText(R.string.aktiv);
 
         binding.nga.setText(actionCollectionItem.getFrom());
         binding.deri.setText(actionCollectionItem.getTo());

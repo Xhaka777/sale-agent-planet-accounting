@@ -222,6 +222,12 @@
     <string name="kategoria">категорија</string>
     <string name="kombinim">комбинација</string>
     <string name="lista_klienteve">Листа клијената</string>
+    <string name="aksioni">поступак </string>
+    <string name="action_type">тип акције</string>
+    <string name="action_name">назив радње</string>
+    <string name="statusi">статус </string>
+    <string name="zbritja">попуст %</string>
+    <string name="aktiv">активни</string>
 
 
 </resources>

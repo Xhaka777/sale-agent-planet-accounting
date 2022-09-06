@@ -202,7 +202,6 @@
     <string name="perqindja_ditore">ημερήσιο ποσοστό</string>
 
 
-
     <!--    Pjesa per ngarkime -->
 
     <string name="nga_depo">από την αποθήκη</string>
@@ -225,5 +224,11 @@
     <string name="kombinim">συνδυασμός</string>
     <string name="device_hase_not_internet_connected">η συσκευή δεν έχει πρόσβαση στο διαδίκτυο</string>
     <string name="lista_klienteve">Λίστα πελατών</string>
+    <string name="aksioni">δράση </string>
+    <string name="action_type">τύπος δράσης</string>
+    <string name="action_name">όνομα δράσης</string>
+    <string name="statusi">κατάσταση </string>
+    <string name="zbritja">έκπτωση %</string>
+    <string name="aktiv">ενεργός</string>
 
 </resources>

@@ -236,8 +236,14 @@
     <string name="aksionet_me_produkte">Aksionet me produkte</string>
     <string name="aksionet_me_brend">Aksionet me Brend</string>
     <string name="aksionet_me_kombinim">Aksionet me kombinim</string>
-    <string name="aksionet_me_kategori">Aksionet me Kombinim</string>
+    <string name="aksionet_me_kategori">Aksionet me kategori</string>
     <string name="kategoria">Kategoria</string>
     <string name="kombinim">Kombinim</string>
+    <string name="aksioni">Aksioni</string>
+    <string name="action_type">Action Type</string>
+    <string name="action_name">Action Name</string>
+    <string name="statusi">Statusi </string>
+    <string name="zbritja">Zbritja %</string>
+    <string name="aktiv">Aktiv</string>
 
 </resources>

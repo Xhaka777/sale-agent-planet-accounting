@@ -227,5 +227,11 @@
     <string name="aksionet_me_kategori">Shares by Category</string>
     <string name="kategoria">Category</string>
     <string name="kombinim">Combination</string>
+    <string name="aksioni">Action </string>
+    <string name="action_type">Action Type</string>
+    <string name="action_name">Action Name</string>
+    <string name="statusi">Status </string>
+    <string name="zbritja">Discount %</string>
+    <string name="aktiv">Active</string>
 
 </resources>
