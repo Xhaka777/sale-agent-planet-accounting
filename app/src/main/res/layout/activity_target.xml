@@ -15,9 +15,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="TARGETI"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:text="@string/targeti"
                 android:textColor="#000" />
 
 
@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="Muaji: 01"
+                    android:text="@string/muaji"
                     android:textColor="#000"
                     android:textSize="16dp" />
 
@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="Viti: 2018"
+                    android:text="@string/viti"
                     android:textColor="#000" />
             </LinearLayout>
 
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Targeti Inkasim"
+                        android:text="@string/targeti_inkasim"
                         android:textColor="#000"
                         android:textSize="19dp"
                         android:textStyle="bold"
@@ -96,7 +96,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Targeti"
+                        android:text="@string/targeti"
                         android:textColor="#666"
                         android:textSize="16dp" />
 
@@ -108,7 +108,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Realizimi"
+                        android:text="@string/realizimi"
                         android:textColor="#666"
                         android:textSize="16dp" />
 
@@ -120,7 +120,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Perqindja"
+                        android:text="@string/perqindja"
                         android:textColor="#666"
                         android:textSize="16dp" />
 
@@ -132,7 +132,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Benefiti"
+                        android:text="@string/benefiti"
                         android:textColor="#666"
                         android:textSize="16dp" />
                 </LinearLayout>
@@ -141,7 +141,7 @@
                     android:id="@+id/total_target"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="32dp"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
@@ -151,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Targeti Total"
+                        android:text="@string/targeti_total"
                         android:textColor="#000"
                         android:textSize="19dp"
                         android:textStyle="bold" />
@@ -218,7 +218,7 @@
                     android:id="@+id/sku"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="32dp"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
@@ -228,7 +228,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Targeti SKU"
+                        android:text="@string/targeti_sku"
                         android:textColor="#000"
                         android:textSize="19dp"
                         android:textStyle="bold" />
@@ -295,7 +295,7 @@
                     android:id="@+id/brende_target"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="32dp"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
@@ -305,7 +305,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Targeti Brende"
+                        android:text="@string/targeti_brende"
                         android:textColor="#000"
                         android:textSize="19dp"
                         android:textStyle="bold" />
@@ -382,7 +382,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Targeti Artikuj"
+                        android:text="@string/targeti_artikuj"
                         android:textColor="#000"
                         android:textSize="19dp"
                         android:textStyle="bold" />
@@ -459,7 +459,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Targeti Inkasim"
+                        android:text="@string/targeti_inkasim"
                         android:textColor="#000"
                         android:textSize="19dp"
                         android:textStyle="bold" />

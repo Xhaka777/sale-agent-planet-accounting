@@ -232,15 +232,15 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         currentLanguage = getIntent().getStringExtra(currentLang);
 
         //bottom sheet design
-        ImageButton showBottomSheet = (ImageButton) findViewById(R.id.button);
-
-        showBottomSheet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetFragment fragment = new BottomSheetFragment();
-                fragment.show(getSupportFragmentManager(), TAG);
-            }
-        });
+//        ImageButton showBottomSheet = (ImageButton) findViewById(R.id.button);
+//
+//        showBottomSheet.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                BottomSheetFragment fragment = new BottomSheetFragment();
+//                fragment.show(getSupportFragmentManager(), TAG);
+//            }
+//        });
 
 
 

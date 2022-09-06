@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:text="Lisa e Artikujve"
+                    android:text="@string/lista_artikujt"
                     android:textColor="#000" />
                 <TextView
                     android:id="@+id/nga"
@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:text="Nga"
+                    android:text="@string/from"
                     android:textColor="#000" />
                 <TextView
                     android:id="@+id/deri"
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:text="Deri"
+                    android:text="@string/to"
                     android:textColor="#000" />
 
                 <Button
@@ -60,7 +60,7 @@
                     android:background="@drawable/button_rounder_corner"
                     android:textColor="@android:color/white"
                     android:padding="5dp"
-                    android:text="Printo Kartelen" />
+                    android:text="@string/printo_kartelen" />
 
             </LinearLayout>
 
@@ -104,14 +104,14 @@
                         android:id="@+id/roli_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Roli: Klient"
+                        android:text="@string/roli_klient"
                         android:textColor="#000" />
 
                     <TextView
                         android:id="@+id/lloji_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lloji: Kompani"
+                        android:text="@string/lloji_kompania"
                         android:textColor="#000" />
                 </LinearLayout>
 
@@ -247,15 +247,34 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="DATA"
-                    android:textColor="#000" />
+                    android:text="@string/data"
+                    android:textColor="#000"
+                    android:textAllCaps="true"/>
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:gravity="center"
-                    android:text="PERSHKRIMI"
+                    android:text="@string/pershkrimi"
+                    android:textColor="#000"
+                    android:textAllCaps="true"/>
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/lloji"
+                    android:textColor="#000"
+                    android:textAllCaps="true"/>
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/valuta"
                     android:textColor="#000" />
 
                 <TextView
@@ -263,32 +282,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="LLOJI"
-                    android:textColor="#000" />
+                    android:text="@string/vlera"
+                    android:textColor="#000"
+                    android:textAllCaps="true"/>
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="VALUTA"
-                    android:textColor="#000" />
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="VLERA"
-                    android:textColor="#000" />
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="BILANCI"
-                    android:textColor="#000" />
+                    android:text="@string/bilanci"
+                    android:textColor="#000"
+                    android:textAllCaps="true"/>
             </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"

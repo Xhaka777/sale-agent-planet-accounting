@@ -35,17 +35,17 @@
         app:layout_constraintStart_toEndOf="@+id/sync"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/button"
-        android:layout_width="28dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/globe_1"
-        android:drawableTop="@drawable/globe_1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/logout_button"
-        app:layout_constraintStart_toEndOf="@+id/titleBar" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/button"-->
+<!--        android:layout_width="28dp"-->
+<!--        android:layout_height="25dp"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:background="@drawable/globe_1"-->
+<!--        android:drawableTop="@drawable/globe_1"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/logout_button"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/titleBar" />-->
 
 
     <Button

@@ -32,8 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="DATA"
-            android:textColor="#000" />
+            android:text="@string/data"
+            android:textColor="#000"
+            android:textAllCaps="true"/>
 
         <TextView
             android:id="@+id/desc"
@@ -41,8 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:gravity="center"
-            android:text="PERSHKRIMI"
-            android:textColor="#000" />
+            android:text="@string/pershkrimi"
+            android:textColor="#000"
+            android:textAllCaps="true"/>
 
         <TextView
             android:id="@+id/type"
@@ -50,8 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="LLOJI"
-            android:textColor="#000" />
+            android:text="@string/lloji"
+            android:textColor="#000"
+            android:textAllCaps="true"/>
         <TextView
             android:id="@+id/afati_pageses"
             android:layout_width="100dp"
@@ -67,16 +70,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="VLERA"
-            android:textColor="#000" />
+            android:text="@string/vlera"
+            android:textColor="#000"
+            android:textAllCaps="true"/>
         <TextView
             android:id="@+id/balance"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="BILANCI"
-            android:textColor="#000" />
+            android:text="@string/bilanci"
+            android:textColor="#000"
+            android:textAllCaps="true"/>
     </LinearLayout>
 
         <View

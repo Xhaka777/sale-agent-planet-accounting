@@ -22,6 +22,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                 android:layout_height="50dp"
                 android:background="@android:color/white"
                 android:gravity="center_vertical">
+
                 <TextView
                     android:id="@+id/title_textivew"
                     android:layout_width="wrap_content"

@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="SHIFRA"
+                android:text="@string/shifra"
                 android:layout_marginRight="2dp"
                 android:textSize="12dp"
 
@@ -52,7 +52,7 @@
                 android:textSize="12dp"
 
                 android:layout_marginRight="2dp"
-                android:text="ARTIKULLI"
+                android:text="@string/artikulli"
                 android:textColor="#000" />
             <ImageView
                 android:layout_width="1dp"
@@ -67,7 +67,7 @@
                 android:gravity="center"
                 android:textSize="12dp"
 
-                android:text="NJESIA"
+                android:text="@string/njesia"
                 android:textColor="#000" />
             <ImageView
                 android:layout_width="1dp"
@@ -83,7 +83,7 @@
                 android:gravity="center"
                 android:textSize="12dp"
 
-                android:text="SASIA"
+                android:text="@string/sasia"
                 android:textColor="#000" />
             <ImageView
                 android:layout_width="1dp"
@@ -100,7 +100,7 @@
                 android:gravity="center"
                 android:textSize="12dp"
 
-                android:text="VLERA"
+                android:text="@string/vlera"
                 android:textColor="#000" />
         </LinearLayout>
 
