@@ -1,12 +1,17 @@
 package org.planetaccounting.saleAgent.raportet;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,11 +19,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.planetaccounting.saleAgent.Kontabiliteti;
+import org.planetaccounting.saleAgent.MainActivity;
+import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.RaportDetailActivityBinding;
 import org.planetaccounting.saleAgent.depozita.DepositPost;
 import org.planetaccounting.saleAgent.depozita.DepositPostObject;
+import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.inkasimi.InkasimPost;
 import org.planetaccounting.saleAgent.inkasimi.InkasimiDetail;
 import org.planetaccounting.saleAgent.invoice.InvoiceListAdapter;
@@ -69,6 +77,10 @@ public class ReportDetailActivity extends Activity {
     int currentPage = 0;
     private boolean isLoading = false;
 
+    Locale myLocale ;
+    String currentLanguage = "sq", currentLang;
+    public static final String TAG = "bottom_sheet";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,40 +97,40 @@ public class ReportDetailActivity extends Activity {
             adapter.setVendorPosts(vendorPosts);
             getVendorRepors();
             binding.recycler.setAdapter(adapter);
-            binding.title.setText("Shpenzimet");
-            binding.col1.setText("Data");
-            binding.col2.setText("Furnitori");
-            binding.col3.setText("Lloji");
-            binding.col4.setText("Nr. Fatures");
-            binding.col5.setText("Shuma");
-            binding.col6.setText("Komenti");
+            binding.title.setText(R.string.shpenzimet);
+            binding.col1.setText(R.string.data);
+            binding.col2.setText(R.string.furnitori);
+            binding.col3.setText(R.string.lloji);
+            binding.col4.setText(R.string.nr_fatures);
+            binding.col5.setText(R.string.shuma);
+            binding.col6.setText(R.string.komenti);
         } else if (type == 1) {
             inkasimiDetails.addAll(realmHelper.getInkasimi());
             adapter.setInkasimiDetails(inkasimiDetails);
             getPaymentRepors();
             binding.recycler.setAdapter(adapter);
 
-            binding.title.setText("Inkasimet");
-            binding.col1.setText("Data");
-            binding.col2.setText("Klienti");
-            binding.col3.setText("Njesia");
+            binding.title.setText(R.string.inkasimet);
+            binding.col1.setText(R.string.data);
+            binding.col2.setText(R.string.klienti);
+            binding.col3.setText(R.string.njesia);
             binding.col4.setVisibility(View.GONE);
-            binding.col5.setText("Shuma");
-            binding.col6.setText("Komenti");
+            binding.col5.setText(R.string.shuma);
+            binding.col6.setText(R.string.komenti);
         } else if (type == 2) {
             depositPosts.addAll(realmHelper.getDepozitat());
             adapter.setDepositPosts(depositPosts);
             getDepositRepors();
             binding.recycler.setAdapter(adapter);
 
-            binding.title.setText("Depozitat");
+            binding.title.setText(R.string.depozitet);
 
-            binding.col1.setText("Data");
-            binding.col2.setText("Banka");
-            binding.col3.setText("Dega");
+            binding.col1.setText(R.string.data);
+            binding.col2.setText(R.string.bank);
+            binding.col3.setText(R.string.depo);
             binding.col4.setVisibility(View.GONE);
-            binding.col5.setText("Shuma");
-            binding.col6.setText("Komenti");
+            binding.col5.setText(R.string.shuma);
+            binding.col6.setText(R.string.komenti);
         }
         binding.sync.setOnClickListener(view -> {
             System.out.println("click " + type);
@@ -184,7 +196,45 @@ public class ReportDetailActivity extends Activity {
                 return isLoading;
             }
         });
+
+        currentLanguage = getIntent().getStringExtra(currentLang);
     }
+
+
+    //methods to change the languages
+
+    public void setLocale(String localeName){
+        if(!localeName.equals(currentLang)){
+            Context context = LocaleHelper.setLocale(this, localeName);
+            //Resources resources = context.getResources();
+            myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        }else{
+            Toast.makeText(ReportDetailActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+//    public void onBackPressed(){
+//        Intent intent = new Intent(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_HOME);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+//        finish();
+//        System.exit(0);
+//    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+
 
 
     private void syncShpenzimet() {

@@ -1,8 +1,13 @@
 package org.planetaccounting.saleAgent;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +22,7 @@ import android.widget.Toast;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.depozita.DepositPost;
 import org.planetaccounting.saleAgent.depozita.DepositPostObject;
+import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.BankAccount;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
 import org.planetaccounting.saleAgent.utils.Preferences;
@@ -27,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -61,10 +68,16 @@ public class DepozitaActivity extends AppCompatActivity implements DatePickerDia
     Date cDate;
     RelativeLayout loader;
 
+    Locale myLocale;
+    String currentLanguage = "sq", currentLang;
+    public static final String TAG = "bottom_sheet";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_depozita);
+
         Kontabiliteti.getKontabilitetiComponent().inject(this);
         cDate = new Date();
         fDate = new SimpleDateFormat("dd-MM-yyyy").format(cDate);
@@ -116,9 +129,49 @@ public class DepozitaActivity extends AppCompatActivity implements DatePickerDia
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
         datePickerDialog = new DatePickerDialog(
-                DepozitaActivity.this, this, year , month, day);
+                DepozitaActivity.this, this, year, month, day);
         datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+
+
+        currentLanguage = getIntent().getStringExtra(currentLang);
+
+    }
+
+
+    //methods to change the languages
+
+    public void setLocale(String localeName){
+        if(!localeName.equals(currentLang)){
+            Context context = LocaleHelper.setLocale(this, localeName);
+            //Resources resources = context.getResources();
+            myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        }else{
+            Toast.makeText(DepozitaActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+//    public void onBackPressed(){
+//        Intent intent = new Intent(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_HOME);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+//        finish();
+//        System.exit(0);
+//    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+
 
     public void depono(View v) {
         if (bankId == null || bankId.equals("")) {
@@ -166,8 +219,8 @@ public class DepozitaActivity extends AppCompatActivity implements DatePickerDia
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        System.out.println("date "+ i+ " "+ i1 +" "+ i2);
-        fDate = i2+"-"+(i1+1)+"-"+i;
+        System.out.println("date " + i + " " + i1 + " " + i2);
+        fDate = i2 + "-" + (i1 + 1) + "-" + i;
         data.setText(fDate);
     }
 }

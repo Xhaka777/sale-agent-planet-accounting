@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="4dp"
-                android:text="Lista e Artikujve"
+                android:text="@string/lista_artikujt"
                 android:textColor="#000" />
 
             <EditText
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_weight="1"
-                android:hint="Kerko"
+                android:hint="@string/kerko"
                 android:textColor="#000"
                 android:drawableLeft="@android:drawable/ic_menu_search"
                 />
@@ -50,7 +50,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="2dp"
                 android:padding="10dp"
-                android:text="Printo"
+                android:text="@string/printo"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:background="@drawable/button_rounder_corner_2"/>
@@ -82,7 +82,7 @@
                 android:layout_weight="1"
 
                 android:gravity="center"
-                android:text="Foto"
+                android:text="@string/foto"
                 android:textColor="#000" />
 
             <TextView
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="SHIFRA"
+                android:text="@string/shifra"
                 android:textColor="#000" />
 
             <TextView
@@ -98,14 +98,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="ARTIKULLI"
+                android:text="@string/artikulli"
                 android:textColor="#000" />
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="NJESIA"
+                android:text="@string/njesia"
                 android:textColor="#000" />
 
             <TextView
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="SASIA"
+                android:text="@string/sasia"
                 android:textColor="#000" />
 
             <TextView
@@ -122,7 +122,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_marginRight="10dp"
-                android:text="VLERA"
+                android:text="Vlera"
                 android:textColor="#000" />
         </LinearLayout>
         <ImageView

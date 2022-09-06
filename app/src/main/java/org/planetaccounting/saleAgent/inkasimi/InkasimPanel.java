@@ -1,9 +1,14 @@
 package org.planetaccounting.saleAgent.inkasimi;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,9 +22,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.planetaccounting.saleAgent.Kontabiliteti;
+import org.planetaccounting.saleAgent.MainActivity;
+import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.clients.ClientsListAdapter;
+import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.clients.Client;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
@@ -30,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -67,6 +76,9 @@ public class InkasimPanel extends AppCompatActivity {
     @Inject
     Preferences preferences;
 
+    Locale myLocale;
+    String currentLanguage = "sq", currentLang;
+    public static final String TAG = "bottom_sheet";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,7 +125,46 @@ public class InkasimPanel extends AppCompatActivity {
         dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cDate);
 
         new Handler().postDelayed(() -> ClientList.showDropDown(), 500);
+
+        currentLanguage = getIntent().getStringExtra(currentLang);
+
     }
+
+
+    //methods to change the languages
+
+    public void setLocale(String localeName){
+        if(!localeName.equals(currentLang)){
+            Context context = LocaleHelper.setLocale(this, localeName);
+            //Resources resources = context.getResources();
+            myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        }else{
+            Toast.makeText(InkasimPanel.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+//    public void onBackPressed(){
+//        Intent intent = new Intent(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_HOME);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+//        finish();
+//        System.exit(0);
+//    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+
 
     public void njesia(String[] njesiaS) {
         adapterNjesia = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, njesiaS);

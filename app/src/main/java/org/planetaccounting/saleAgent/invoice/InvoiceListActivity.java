@@ -1,6 +1,9 @@
 package org.planetaccounting.saleAgent.invoice;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
@@ -29,11 +33,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.planetaccounting.saleAgent.Kontabiliteti;
+import org.planetaccounting.saleAgent.MainActivity;
+import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.InvoiceListActivityBinding;
 import org.planetaccounting.saleAgent.escpostprint.EscPostPrintFragment;
 import org.planetaccounting.saleAgent.events.RePrintInvoiceEvent;
+import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.clients.Client;
 import org.planetaccounting.saleAgent.model.invoice.InvoicePost;
 import org.planetaccounting.saleAgent.model.invoice.InvoicePostObject;
@@ -53,6 +60,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -91,6 +99,9 @@ public class InvoiceListActivity extends AppCompatActivity {
     int currentPage = 0;
     private boolean isLoading = false;
 
+    Locale myLocale;
+    String currentLanguage = "sq", currentLang;
+    public static final String TAG = "bottom_sheet";
 
     String from; // 0->Invoice 1->Return
 
@@ -103,7 +114,7 @@ public class InvoiceListActivity extends AppCompatActivity {
         from = getIntent().getStringExtra("from");
         if (from.equals("ret")) {
             TextView titleBar = (TextView) findViewById(R.id.title_bar);
-            titleBar.setText("Lista e kthimi te mallit");
+            titleBar.setText(R.string.l_kthimMalli);
         }
 
         ((Kontabiliteti) getApplication()).getKontabilitetiComponent().inject(this);
@@ -186,8 +197,44 @@ public class InvoiceListActivity extends AppCompatActivity {
             }
         });
 
+        currentLanguage = getIntent().getStringExtra(currentLang);
+
     }
 
+
+    //methods to change the languages
+
+    public void setLocale(String localeName){
+        if(!localeName.equals(currentLang)){
+            Context context = LocaleHelper.setLocale(this, localeName);
+            //Resources resources = context.getResources();
+            myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        }else{
+            Toast.makeText(InvoiceListActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+//    public void onBackPressed(){
+//        Intent intent = new Intent(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_HOME);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+//        finish();
+//        System.exit(0);
+//    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
 
 
     List<InvoicePost> savedInvoices;

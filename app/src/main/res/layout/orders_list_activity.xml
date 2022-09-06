@@ -28,7 +28,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:text="Lista e Porosive"
+                        android:text="@string/lista_porosive"
                         android:textColor="#000" />
                 </LinearLayout>
 
@@ -77,7 +77,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
 
-                    android:text="Data"
+                    android:text="@string/data"
                     android:textColor="#000" />
 
                 <ImageView
@@ -93,7 +93,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
 
-                    android:text="Depo"
+                    android:text="@string/depo"
                     android:textColor="#000" />
 
                 <ImageView
@@ -109,7 +109,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
 
-                    android:text="Klienti"
+                    android:text="@string/klienti"
                     android:textColor="#000" />
                 <ImageView
                     android:layout_width="1dp"
@@ -124,7 +124,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
 
-                    android:text="Njesia"
+                    android:text="@string/njesia"
                     android:textColor="#000" />
 
                 <ImageView
@@ -140,7 +140,7 @@
                     android:layout_weight="1"
 
                     android:layout_marginRight="10dp"
-                    android:text="Tipi"
+                    android:text="@string/tipi"
                     android:textColor="#000" />
                 <ImageView
                     android:layout_width="1dp"
@@ -155,7 +155,7 @@
                     android:layout_weight="1"
 
                     android:layout_marginRight="10dp"
-                    android:text="Vlera"
+                    android:text="@string/vlera"
                     android:textColor="#000" />
 
                 <TextView

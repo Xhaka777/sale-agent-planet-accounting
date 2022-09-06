@@ -23,6 +23,10 @@ public class ClientCardAdapter extends RecyclerView.Adapter<ClientCardAdapter.Vi
     private Context ctx;
     double balance = 0.0;
 
+//    Locale myLocale;
+//    String currentLanguage = "sq", currentLang;
+//    public static final String TAG = "bottom_sheet";
+
     @Override
     public ClientCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ctx = parent.getContext();
@@ -39,14 +43,13 @@ public class ClientCardAdapter extends RecyclerView.Adapter<ClientCardAdapter.Vi
         binding.desc.setText(cardItems.get(position).getDescription());
         binding.type.setText(cardItems.get(position).getType());
         binding.afatiPageses.setText(cardItems.get(position).getPaymentDate());
-        binding.value.setText(""+cardItems.get(position).getAmount());
-        try{
+        binding.value.setText("" + cardItems.get(position).getAmount());
+        try {
             balance += cardItems.get(position).getAmount();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
-        binding.balance.setText(""+cutTo2(balance));
-
+        binding.balance.setText("" + cutTo2(balance));
     }
 
     @Override
@@ -68,7 +71,8 @@ public class ClientCardAdapter extends RecyclerView.Adapter<ClientCardAdapter.Vi
 
         }
     }
+
     public double cutTo2(double value) {
-        return Double.parseDouble(String.format(Locale.ENGLISH,"%.2f", value));
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
     }
 }

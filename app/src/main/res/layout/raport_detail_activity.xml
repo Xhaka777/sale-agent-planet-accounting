@@ -23,7 +23,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="19dp"
-                    android:text="RAPORTET"
+                    android:text="@string/raportet"
+                    android:textAllCaps="true"
                     android:textColor="#000" />
 
                 <Button

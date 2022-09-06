@@ -1,6 +1,10 @@
 package org.planetaccounting.saleAgent.target;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -10,10 +14,12 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.components.Legend;
@@ -33,11 +39,14 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 
 import org.planetaccounting.saleAgent.Kontabiliteti;
+import org.planetaccounting.saleAgent.MainActivity;
+import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.SaleDayLayoutDemoBinding;
 import org.planetaccounting.saleAgent.databinding.TotalSaleTargetActivityBinding;
 import org.planetaccounting.saleAgent.databinding.TotalSaleTargetActivityDemoBinding;
+import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.target.BaseTargetPost;
 import org.planetaccounting.saleAgent.model.target.TotalSaleTarget;
 import org.planetaccounting.saleAgent.utils.Preferences;
@@ -45,6 +54,7 @@ import org.planetaccounting.saleAgent.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -65,6 +75,10 @@ public class TargetCashActivity extends Activity implements OnChartValueSelected
 
     private Typeface tf;
 
+    Locale myLocale;
+    String currentLanguage = "sq", currentLang;
+    public static final String TAG = "bottom_sheet";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,8 +88,46 @@ public class TargetCashActivity extends Activity implements OnChartValueSelected
         getBaseTarget();
         setChart();
         setChartTwo();
-        binding.title.setText("Target Inkasim");
+        binding.title.setText(R.string.targeti_inkasim);
+
+        currentLanguage = getIntent().getStringExtra(currentLang);
     }
+
+
+    //methods to change the languages
+
+    public void setLocale(String localeName){
+        if(!localeName.equals(currentLang)){
+            Context context = LocaleHelper.setLocale(this, localeName);
+            //Resources resources = context.getResources();
+            myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        }else{
+            Toast.makeText(TargetCashActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onBackPressed(){
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+        System.exit(0);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+
 
     private void getBaseTarget() {
         String month = String.valueOf((Calendar.getInstance().get(Calendar.MONTH) + 1));

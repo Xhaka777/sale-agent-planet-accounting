@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="19dp"
-                android:text="RAPORTET"
+                android:text="@string/raportet"
                 android:textColor="#000" />
 
             <View
@@ -49,7 +49,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="Lista E Faturave"
+                    android:text="@string/lista_faturave"
                     android:textColor="#FFF"
 
                     android:background="@drawable/button_rounder_corner"
@@ -61,7 +61,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="Lista e Porosive"
+                    android:text="@string/lista_porosive"
                     android:textColor="#FFF"
                     android:background="@drawable/button_rounder_corner"
                     android:visibility="visible" />
@@ -72,7 +72,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="Lista e inkasimeve"
+                    android:text="@string/lista_inkasimeve"
                     android:textColor="#FFF"
                     android:background="@drawable/button_rounder_corner"
 
@@ -84,7 +84,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="Pazari ditor"
+                    android:text="@string/pazari_ditor"
                     android:textColor="#FFF"
                     android:background="@drawable/button_rounder_corner"
 
@@ -106,7 +106,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="Lista E shpenzimeve"
+                    android:text="@string/lista_shpenzimeve"
                     android:textColor="#FFF"
                     android:background="@drawable/button_rounder_corner"
 
@@ -118,7 +118,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="Lista e depozitave"
+                    android:text="@string/lista_depozitave"
                     android:textColor="#FFF"
                     android:background="@drawable/button_rounder_corner"
                     android:visibility="visible" />
@@ -129,7 +129,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="L. e kthimit te mallit"
+                    android:text="@string/l_kthimMalli"
                     android:textColor="#FFF"
                     android:background="@drawable/button_rounder_corner"
                     android:visibility="visible" />

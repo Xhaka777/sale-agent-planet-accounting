@@ -15,9 +15,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Pazari Ditor"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:text="@string/pazari_ditor"
                 android:textColor="#000" />
 
             <LinearLayout
@@ -33,7 +33,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Data: "
+                    android:text="@string/data"
                     android:textColor="#000" />
 
                 <TextView
@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:hint="Data"
+                    android:hint= "@string/data"
                     android:textColor="#000" />
             </LinearLayout>
 
@@ -74,7 +74,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Data"
+                android:text="@string/data"
                 android:textColor="#000"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -92,7 +92,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Shitje me fature"
+                android:text="@string/shitje_me_fature"
                 android:textColor="#000"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -110,7 +110,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Shitje me kupon fiskal"
+                android:text="@string/shitje_me_kupon_fiskal"
                 android:textColor="#000"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -128,7 +128,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Depozitet"
+                android:text="@string/depozitet"
                 android:textColor="#000"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -147,7 +147,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Kesh"
+                android:text="@string/cash"
                 android:textColor="#000"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -165,7 +165,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Inkasimet"
+                android:text="@string/inkasimet"
                 android:textColor="#000"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -189,7 +189,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Shpenzimet"
+                android:text="@string/shpenzimet"
                 android:textColor="#000"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -207,7 +207,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Borxh"
+                android:text="@string/borxh"
                 android:textColor="#000"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -224,7 +224,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Total"
+                android:text="@string/total"
                 android:textColor="#000"
                 android:textSize="16dp"
                 android:textStyle="bold" />

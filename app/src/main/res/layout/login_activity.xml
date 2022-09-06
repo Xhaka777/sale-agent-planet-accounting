@@ -129,8 +129,8 @@
             android:layout_marginLeft="250dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:drawableTop="@drawable/globe_1"
-            android:background="@drawable/globe_1"/>
+            android:background="@drawable/globe_1"
+            android:drawableTop="@drawable/globe_1" />
 
     </RelativeLayout>
 </layout>

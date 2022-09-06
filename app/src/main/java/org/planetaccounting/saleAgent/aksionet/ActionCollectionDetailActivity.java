@@ -1,16 +1,27 @@
 package org.planetaccounting.saleAgent.aksionet;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.widget.Toast;
 
 import org.planetaccounting.saleAgent.Kontabiliteti;
+import org.planetaccounting.saleAgent.MainActivity;
+import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.databinding.ActivityActionCollectionDetailBinding;
 import org.planetaccounting.saleAgent.databinding.CollectionDetailHolderBinding;
+import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.stock.Item;
 import org.planetaccounting.saleAgent.model.stock.SubItem;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -27,6 +38,9 @@ public class ActionCollectionDetailActivity extends AppCompatActivity {
     private ActionCollectionItem actionCollectionItem;
     RealmResults<Item> stockItems;
 
+    Locale myLocale;
+    String currentLanguage = "sq", currentLang;
+    public static final String TAG = "bottom_sheet";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +80,45 @@ public class ActionCollectionDetailActivity extends AppCompatActivity {
 
         }
 
+        currentLanguage = getIntent().getStringExtra(currentLang);
 
     }
+
+
+    //methods to change the languages
+
+    public void setLocale(String localeName){
+        if(!localeName.equals(currentLang)){
+            Context context = LocaleHelper.setLocale(this, localeName);
+            //Resources resources = context.getResources();
+            myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        }else{
+            Toast.makeText(ActionCollectionDetailActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+//
+//    public void onBackPressed(){
+//        Intent intent = new Intent(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_HOME);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+//        finish();
+//        System.exit(0);
+//    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+
 
     private SubItem getArtcleById(String article_id) {
         for (int i = 0; i < stockItems.size(); i++) {

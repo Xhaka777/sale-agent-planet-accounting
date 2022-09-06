@@ -39,6 +39,7 @@
     <string name="yes">evet</string>
 
     <string name="message_notification_channel_name">Aktar</string>
+    <string name="message_notification_channel_id" translatable="false">message_notification_channel_id</string>
 
     <string name="hello_blank_fragment">Merhaba boş parça</string>
     <string name="state">durum</string>
@@ -225,5 +226,6 @@
     <string name="aksionet_me_kategori">Kategoriye göre paylaşımlar</string>
     <string name="kategoria">kategori</string>
     <string name="kombinim">kombinasyon</string>
+    <string name="lista_klienteve">Müşteri listesi</string>
 
 </resources>

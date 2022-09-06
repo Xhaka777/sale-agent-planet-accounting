@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:text="Lisa e Faturave"
+                    android:text="@string/lista_faturave"
                     android:textColor="#000"
                     android:textColorHint="#000" />
 
@@ -97,7 +97,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
-                    android:text="Numri Fatures"
+                    android:text="@string/nr_fatura"
                     android:textColor="#000"
                     android:textSize="16dp"
                     android:textStyle="bold"/>
@@ -114,7 +114,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Klienti"
+                    android:text="@string/klienti"
                     android:textColor="#000"
                     android:textStyle="bold"
                     android:textSize="16dp" />
@@ -131,7 +131,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Njesia e klientit"
+                    android:text="@string/njesia_klientit"
                     android:textColor="#000"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -148,7 +148,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
-                    android:text="Data"
+                    android:text="@string/data"
                     android:textColor="#000"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -165,7 +165,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
-                    android:text="Vlera"
+                    android:text="@string/vlera"
                     android:textColor="#000"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -183,7 +183,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
-                    android:text="Ruajtur"
+                    android:text="@string/ruajtur"
                     android:textColor="#000"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -213,9 +213,16 @@
             android:gravity="center">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/numri_faqes"
+                android:textColor="#000" />
+
+            <TextView
                 android:id="@+id/totali"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#000" />
         </LinearLayout>
 
         <RelativeLayout

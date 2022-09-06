@@ -29,7 +29,6 @@ public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.
 
     private List<Client> clients = new ArrayList<>();
     private Context ctx;
-    private double bilanci = 0.0;
 
     @Override
     public ClientsListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -43,26 +42,15 @@ public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ClientsListItemBinding binding = holder.binding;
-
         Client client = clients.get(position);
-//        double pBilanci = Double.parseDouble(clients.get(position).getBalance());
-//          double pValue = String.valueOf(cutTo3(clients.get(position).getBalance()));
-//        binding.bilanciTextview.setText(""+cutTo3(Double.parseDouble(clients.get(position).getBalance())));
-
-//        double roundBilanci = (double) Math.round(bilanci * 100) /100 ;
-
-//        binding.numberTextview.setText(clients.get(position).getNumber());
-//        binding.emriTextview.setText(clients.get(position).getName());
-//        binding.kontaktTextview.setText(clients.get(position).getPhone());
-//        binding.bilanciTextview.setText(clients.get(position).getBalance());
-//        binding.bilanciTextview.setText("" + cutTo2(Double.parseDouble(clients.get(position).getBalance())));
+        double vBilance = Double.parseDouble(client.getBalance());
 
         binding.numberTextview.setText(client.getNumber());
         binding.emriTextview.setText(client.getName());
         binding.kontaktTextview.setText(client.getPhone());
-        binding.bilanciTextview.setText(client.getBalance());
+        binding.bilanciTextview.setText(""+cutTo2(vBilance));
 
-        Glide.with(ctx).load("http://" + clients.get(position).getLogo()).into(binding.image);
+        Glide.with(ctx).load("http://" + clients.get(position).getLogo()).into(binding.imageClient);
         if (clients.get(position).getPhone() != null) {
             if (clients.get(position).getPhone().length() > 0) {
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="fa_icon_areachart">&#xf1fe;</string>
-    <string name="fa_icon_piechart">&#xf200;</string>
-    <string name="fa_icon_linechart">&#xf201;</string>
+    <string name="fa_icon_areachart" translatable="false">&#xf1fe;</string>
+    <string name="fa_icon_piechart" translatable="false">&#xf200;</string>
+    <string name="fa_icon_linechart" translatable="false">&#xf201;</string>
 </resources>

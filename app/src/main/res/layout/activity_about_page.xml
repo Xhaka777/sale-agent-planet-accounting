@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".settings.AboutPage"
+        android:background="#EAEAEA">
+
+        <RelativeLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#EAEAEA"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/aboutTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="19dp"
+                android:text="About us"
+                android:textColor="#000" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/aboutImg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_layout"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_layout">
+
+            <ImageView
+                android:id="@+id/cLogoImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="100dp"
+                android:src="@mipmap/ic_launcher"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="82dp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/aboutContact"
+            android:layout_width="378dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/aboutImg">
+
+            <LinearLayout
+                android:id="@+id/aboutNumri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/phoneComp"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:gravity="start|center"
+                    android:text="Numri : +383 44 226 940"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:background="#EAEAEA"/>
+<!--                    android:drawableStart="@drawable/ic_baseline_local_phone_24"-->
+<!--                    android:drawableLeft="@drawable/ic_baseline_local_phone_24" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aboutSale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/saleComp"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="#EAEAEA"
+                    android:drawablePadding="5dp"
+                    android:gravity="start|center"
+                    android:text="Sales : sale@planetaccounting.org"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"/>
+<!--                    android:drawableStart="@drawable/ic_baseline_point_of_sale_24"-->
+<!--                    android:drawableLeft="@drawable/ic_baseline_point_of_sale_24" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aboutHelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/helpComp"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="#EAEAEA"
+                    android:drawablePadding="5dp"
+                    android:gravity="start|center"
+                    android:text="Help : support@planetaccounting.org"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"/>
+<!--                    android:drawableStart="@drawable/ic_baseline_message_24"-->
+<!--                    android:drawableLeft="@drawable/ic_baseline_message_24" />-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/aboutMedia"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="76dp"-->
+<!--            android:layout_marginRight="16dp"-->
+<!--            android:layout_marginTop="2dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/aboutContact">-->
+
+<!--            <ImageButton-->
+<!--                android:layout_width="43dp"-->
+<!--                android:layout_height="36dp"-->
+<!--                android:background="@drawable/facebook"-->
+<!--                android:onClick="facebook"-->
+<!--                tools:layout_editor_absoluteX="674dp"-->
+<!--                tools:layout_editor_absoluteY="103dp"/>-->
+
+<!--            <ImageButton-->
+<!--                android:layout_width="43dp"-->
+<!--                android:layout_height="26dp"-->
+<!--                android:background="@drawable/youtube__1_"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginRight="5dp"-->
+<!--                android:onClick="youtube"-->
+<!--                android:scaleType="fitStart"-->
+<!--                tools:layout_editor_absoluteX="216dp"-->
+<!--                tools:layout_editor_absoluteY="103dp" />-->
+
+<!--            <ImageButton-->
+<!--                android:layout_width="43dp"-->
+<!--                android:layout_height="33dp"-->
+<!--                android:background="@drawable/instagram"-->
+<!--                android:layout_marginTop="2dp"-->
+<!--                android:onClick="instagram"-->
+<!--                tools:layout_editor_absoluteX="445dp"-->
+<!--                tools:layout_editor_absoluteY="103dp" />-->
+
+<!--            <ImageButton-->
+<!--                android:layout_width="93dp"-->
+<!--                android:layout_height="67dp"-->
+<!--                android:background="@drawable/linkedin"-->
+<!--                android:layout_marginTop="2dp"-->
+<!--                android:onClick="linkedin"-->
+<!--                tools:layout_editor_absoluteX="32dp"-->
+<!--                tools:layout_editor_absoluteY="103dp" />-->
+
+<!--        </LinearLayout>-->
+
+        <LinearLayout
+            android:id="@+id/media_icons"
+            android:layout_width="292dp"
+            android:layout_height="39dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="50dp"
+            android:orientation="horizontal"
+
+            android:weightSum="4"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/aboutContact">
+
+            <RelativeLayout
+                android:id="@+id/first_icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/yt_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="51dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/youtube"
+                    android:onClick="youtube"
+                    android:scaleType="fitEnd"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/second_icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/fb_icon"
+                    android:layout_width="68dp"
+                    android:layout_height="51dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="1dp"
+                    android:src="@drawable/fb"
+                    android:onClick="facebook"
+                    android:scaleType="centerCrop"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/third_icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/ig_icon"
+                    android:layout_width="68dp"
+                    android:layout_height="51dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="0dp"
+                    android:src="@drawable/ig"
+                    android:onClick="instagram"
+                    android:scaleType="centerCrop"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/four_icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/lk_icon"
+                    android:layout_width="68dp"
+                    android:layout_height="51dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="0dp"
+                    android:src="@drawable/lk"
+                    android:onClick="linkedin"
+                    android:scaleType="centerCrop"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

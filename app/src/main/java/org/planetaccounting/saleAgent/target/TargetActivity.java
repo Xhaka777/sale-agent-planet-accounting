@@ -2,11 +2,15 @@ package org.planetaccounting.saleAgent.target;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,9 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.planetaccounting.saleAgent.Kontabiliteti;
+import org.planetaccounting.saleAgent.MainActivity;
+import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.ActivityTargetBinding;
+import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.target.BaseTargetData;
 import org.planetaccounting.saleAgent.model.target.BaseTargetPost;
 import org.planetaccounting.saleAgent.model.target.BaseTargetResponse;
@@ -24,6 +31,7 @@ import org.planetaccounting.saleAgent.utils.Preferences;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.inject.Inject;
@@ -42,6 +50,10 @@ public class TargetActivity extends AppCompatActivity {
     Preferences preferences;
     ActivityTargetBinding binding;
 
+    Locale myLocale;
+    String currentLanguage = "sq", currentLang;
+    public static final String TAG = "bottom_sheet";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +67,51 @@ public class TargetActivity extends AppCompatActivity {
         binding.brendeTarget.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), TargetBrandActivity.class)));
         binding.artikuj.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), TargetArticleActivity.class)));
         binding.sku.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), TargetSkuActivity.class)));
-        binding.muajiTextview.setText("Muaji: " + types[Integer.parseInt(MONTH) - 1]);
-        binding.vitiTextview.setText("Viti: " + YEAR);
+        binding.muajiTextview.setText(String.valueOf(R.string.muaji) + types[Integer.parseInt(MONTH) - 1]);
+        binding.vitiTextview.setText(R.string.viti + YEAR);
         binding.muajiTextview.setOnClickListener(view -> monthdialog());
         binding.vitiTextview.setOnClickListener(view -> yearDialog());
         getBaseTarget();
+
+        currentLanguage = getIntent().getStringExtra(currentLang);
     }
+
+
+    //methods to change the languages
+
+    public void setLocale(String localeName){
+        if(!localeName.equals(currentLang)){
+            Context context = LocaleHelper.setLocale(this, localeName);
+            //Resources resources = context.getResources();
+            myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        }else{
+            Toast.makeText(TargetActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onBackPressed(){
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+        System.exit(0);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+
+
 
     public static String MONTH;
     public static String YEAR;

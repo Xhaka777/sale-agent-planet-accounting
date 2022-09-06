@@ -53,37 +53,37 @@ public class SettingsActivity extends AppCompatActivity {
 //        builder.setTitle("Choose a color...");
 
         // Initializing an array of colors
-        final String[] languages = new String[]{
-                "EN",
-                "SHQ",
-                "GR",
-                "TR"
-                ,"SR"
-        };
+//        final String[] languages = new String[]{
+//                "EN",
+//                "SHQ",
+//                "GR",
+//                "TR"
+//                ,"SR"
+//        };
 
         // Set the list of items for alert dialog
-        builder.setItems(languages, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            switch (which){
-                case 0:
-                    changeLanguage("en");
-                    break;
-                case 1:
-                    changeLanguage("shq");
-                    break;
-                case 2:
-                    changeLanguage("gr");
-                    break;
-                case 3:
-                    changeLanguage("tr");
-                    break;
-                case 4:
-                    changeLanguage("sr");
-                    break;
-            }
-            }
-        });
+//        builder.setItems(languages, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//            switch (which){
+//                case 0:
+//                    changeLanguage("en");
+//                    break;
+//                case 1:
+//                    changeLanguage("shq");
+//                    break;
+//                case 2:
+//                    changeLanguage("gr");
+//                    break;
+//                case 3:
+//                    changeLanguage("tr");
+//                    break;
+//                case 4:
+//                    changeLanguage("sr");
+//                    break;
+//            }
+//            }
+//        });
 
         builder.setCancelable(true);
         builder.setOnCancelListener(new DialogInterface.OnCancelListener() {

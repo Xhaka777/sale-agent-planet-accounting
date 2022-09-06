@@ -1,6 +1,10 @@
 package org.planetaccounting.saleAgent;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +27,7 @@ import android.widget.Toast;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.OrderItemBinding;
 import org.planetaccounting.saleAgent.databinding.OrderLayoutBinding;
+import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.InvoiceItem;
 import org.planetaccounting.saleAgent.model.Varehouse;
 import org.planetaccounting.saleAgent.model.VarehouseReponse;
@@ -39,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -70,6 +77,12 @@ public class OrdersActivity extends AppCompatActivity {
     int checked = 0;
     List<Varehouse> varehouses = new ArrayList<>();
     String stationID = "2";
+    int pozitaeArtikullit = 0;
+
+    Locale myLocale ;
+    String currentLanguage = "sq",currentLang;
+    public static final String TAG = "bottom_sheet";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,7 +110,7 @@ public class OrdersActivity extends AppCompatActivity {
             }
         };
 
-                binding.dataLinar.setOnClickListener(v -> getdata() );
+        binding.dataLinar.setOnClickListener(v -> getdata());
         binding.emriKlientit.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, realmHelper.getClientsNames()));
 
@@ -153,10 +166,10 @@ public class OrdersActivity extends AppCompatActivity {
         binding.clientSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     binding.clientLinar.setVisibility(View.VISIBLE);
                     binding.stationLinar.setVisibility(View.VISIBLE);
-                    }else {
+                } else {
                     binding.clientLinar.setVisibility(View.GONE);
                     binding.stationLinar.setVisibility(View.GONE);
                     binding.emriKlientit.getText().clear();
@@ -177,10 +190,50 @@ public class OrdersActivity extends AppCompatActivity {
                 binding.depoEdittext.requestFocus();
             }
         }, 500);
+
+
+        currentLanguage = getIntent().getStringExtra(currentLang);
+
     }
 
+
+    //methods to change the languages
+
+    public void setLocale(String localeName){
+        if(!localeName.equals(currentLang)){
+            Context context = LocaleHelper.setLocale(this, localeName);
+            //Resources resources = context.getResources();
+            myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        }else{
+            Toast.makeText(OrdersActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+//    public void onBackPressed(){
+//        Intent intent = new Intent(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_HOME);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+//        finish();
+//        System.exit(0);
+//    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+
+
     //        this part is for to show DropDown when clicked editText for secound time and more ...
-    private void shopDropDownList(){
+    private void shopDropDownList() {
         binding.depoEdittext.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -206,11 +259,9 @@ public class OrdersActivity extends AppCompatActivity {
         });
 
 
-
-
     }
 
-    private void getdata(){
+    private void getdata() {
 
         new DatePickerDialog(this, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -222,7 +273,7 @@ public class OrdersActivity extends AppCompatActivity {
             try {
                 sasia = Double.parseDouble(stockItems.get(i).getSasia());
             } catch (Exception e) {
-                sasia =  Double.parseDouble(stockItems.get(i).getSasia());
+                sasia = Double.parseDouble(stockItems.get(i).getSasia());
             }
             if (sasia == 0) {
                 return false;
@@ -277,12 +328,69 @@ public class OrdersActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (itemBinding.sasiaTextview.getText().length() == 0) {
-                    invoiceItem[0].setSasia("0");
-                } else {
-                    invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString());
+//                if (itemBinding.sasiaTextview.getText().length() == 0) {
+//                    invoiceItem[0].setSasia("0");
+//                } else {
+//                    invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString());
+////                    invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText(preferences.getSasia()));
+//                }
+//Pjesa e pare per error ne sasin...
+                try {
+                    if (itemBinding.sasiaTextview.getText().length() <= 0) {
+                        invoiceItem[0].setSasia("0");
+                        Toast.makeText(OrdersActivity.this, "Sheno sasin", Toast.LENGTH_SHORT).show();
+                    } else {
+                        invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString() + "");
+                        //Item row index
+                        pozitaeArtikullit = (int) itemBinding.getRoot().getTag();
+                        //String Quantity
+                        String str_quantity = itemBinding.sasiaTextview.getText().toString();
+                        double sasia = 0;
+                        if (str_quantity.length() > 0) {
+                            sasia = Double.parseDouble(str_quantity);
+                        } else if (str_quantity.length() == 0) {
+                            invoiceItem[0].setSasia("0");
+                        }
+                        //Item Relacion
+                        double relacion = (int) invoiceItem[0].getItems().get(invoiceItem[0].getSelectedPosition()).getRelacion();
+                        //Quantity available on warehouse
+                        double quantity_base_on_warehouse = Double.parseDouble(invoiceItem[0].getQuantity());
+
+                    }
+                    fillInvoiceItemData(itemBinding, invoiceItem[0]);
+                } catch (Exception e) {
+                    Toast.makeText(OrdersActivity.this, "Nuk keni sasi te mjaftueshme ne depo", Toast.LENGTH_SHORT).show();
                 }
-                fillInvoiceItemData(itemBinding, invoiceItem[0]);
+                //Pjesa e dyte ne errorin e sasis
+//
+//                double sasia = 0;
+//                if (itemBinding.sasiaTextview.getText().length() > 0) {
+//                    sasia = Double.parseDouble(itemBinding.sasiaTextview.getText().toString());
+//                }
+//                double availableQuantity = 0;
+//                availableQuantity = Double.parseDouble(invoiceItem[0].getQuantity()) / invoiceItem[0].getItems().get(invoiceItem[0].getSelectedPosition()).getRelacion();
+//
+//                if (sasia <= availableQuantity && sasia > 0f) {
+//                    if (itemBinding.sasiaTextview.getText().length() == 0) {
+//                        invoiceItem[0].setSasia("0");
+//                    } else {
+//                        invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString());
+//                        if (invoiceItem[0].isAction() && sasia >= invoiceItem[0].getMinQuantityForDiscount()) {
+//                            invoiceItem[0].setDiscount(invoiceItem[0].getBaseDiscount());
+//                            double totalDiscount = Double.parseDouble(invoiceItem[0].getDiscount()) + Double.parseDouble(invoiceItem[0].getExtraDiscount());
+//                            invoiceItem[0].setDiscount(invoiceItem[0].getBaseDiscount());
+//                        } else {
+//                            invoiceItem[0].setDiscount(invoiceItem[0].getBaseDiscount());
+//                        }
+//                    }
+//                    fillInvoiceItemData(itemBinding, invoiceItem[0]);
+//                } else {
+//                    invoiceItem[0].setSasia("0");
+//                    if (!itemBinding.sasiaTextview.getText().toString().equals("0") && !itemBinding.sasiaTextview.getText().toString().equals("") && !itemBinding.sasiaTextview.getText().toString().isEmpty()) {
+//                        Toast.makeText(getApplicationContext(), "Nuk keni stok te mjaftueshem", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
             }
 
             @Override
@@ -290,7 +398,95 @@ public class OrdersActivity extends AppCompatActivity {
 
             }
         });
+
+//        itemBinding.sasiaTextview.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View view, boolean b) {
+//                if (!b) {
+//                    binding.loader.setVisibility(View.VISIBLE);
+//
+//                    String stockItemId = invoiceItem[0].getItems().get(invoiceItem[0].getSelectedPosition()).getId();
+//                    double sasia1 = Double.parseDouble(itemBinding.sasiaTextview.getText().toString());
+//
+//
+//                    CheckQuantity checkQuantity = new CheckQuantity(preferences.getUserId(), preferences.getToken(), sasia1 + "", preferences.getStationId(), dDate, stockItemId);
+//
+//                    if (sasia1 > 0f) {
+//                        apiService.checkQuantity(checkQuantity).subscribeOn(Schedulers.io())
+//                                .observeOn(AndroidSchedulers.mainThread())
+//                                .subscribe(invoiceUploadResponse -> {
+//                                    binding.loader.setVisibility(View.GONE);
+//
+//                                    if (!invoiceUploadResponse.getSuccess()) {
+//                                        Toast.makeText(getApplicationContext(), invoiceUploadResponse.getError().getText(), Toast.LENGTH_SHORT).show();
+//
+//                                    } else {
+//                                        double sasia = Double.parseDouble(itemBinding.sasiaTextview.getText().toString());
+//
+//                                        if (itemBinding.sasiaTextview.getText().length() > 0) {
+//                                            sasia = Double.parseDouble(itemBinding.sasiaTextview.getText().toString());
+//                                        }
+//                                        double availableQuantity = 0;
+//
+//                                        if (itemBinding.sasiaTextview.getText().length() == 0) {
+//                                            invoiceItem[0].setSasia("0");
+//                                        } else {
+//                                            invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString());
+//                                            if (invoiceItem[0].isAction() && sasia >= invoiceItem[0].getMinQuantityForDiscount()) {
+//                                                invoiceItem[0].setDiscount(invoiceItem[0].getBaseDiscount());
+//                                                double totalDiscount = Double.parseDouble(invoiceItem[0].getDiscount()) +
+//                                                        Double.parseDouble(invoiceItem[0].getExtraDiscount());
+//                                                invoiceItem[0].setDiscount(String.valueOf(totalDiscount));
+//                                            } else {
+//                                                invoiceItem[0].setDiscount(invoiceItem[0].getBaseDiscount());
+//                                            }
+//                                        }
+//                                        fillInvoiceItemData(itemBinding, invoiceItem[0]);
+//                                    }
+//                                    binding.loader.setVisibility(View.GONE);
+//
+//                                }, new Action1<Throwable>() {
+//                                    @Override
+//                                    public void call(Throwable throwable) {
+//                                        binding.loader.setVisibility(View.GONE);
+//
+//                                        throwable.printStackTrace();
+//                                    }
+//                                });
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Jipeni sasin", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                double sasia = 0;
+//                if (itemBinding.sasiaTextview.getText().length() > 0) {
+//                    sasia = Double.parseDouble(itemBinding.sasiaTextview.getText().toString());
+//                }
+//                double availableQuantity = 0;
+//                availableQuantity = Double.parseDouble(invoiceItem[0].getQuantity()) / invoiceItem[0].getItems().get(invoiceItem[0].getSelectedPosition()).getRelacion();
+//
+//                if (sasia <= availableQuantity && sasia > 0f) {
+//                    if (itemBinding.sasiaTextview.getText().length() == 0) {
+//                        invoiceItem[0].setSasia("0");
+//                    } else {
+//                        invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString());
+//                        if (invoiceItem[0].isAction() && sasia >= invoiceItem[0].getMinQuantityForDiscount()) {
+//                            invoiceItem[0].setDiscount(invoiceItem[0].getBaseDiscount());
+//                            double totalDiscount = Double.parseDouble(invoiceItem[0].getDiscount())
+//                                    + Double.parseDouble(invoiceItem[0].getExtraDiscount());
+//                        } else {
+//                            invoiceItem[0].setDiscount(invoiceItem[0].getBaseDiscount());
+//                        }
+//                    }
+//                    fillInvoiceItemData(itemBinding, invoiceItem[0]);
+//                } else {
+//                    invoiceItem[0].setSasia("0");
+//                    itemBinding.sasiaTextview.setText("0");
+//                }
+//            }
+//        });
+
         itemBinding.removeButton.setOnClickListener(view ->
+
         {
             int pos = (int) itemBinding.getRoot().getTag();
             if (stockItems.size() > 0) {
@@ -302,28 +498,30 @@ public class OrdersActivity extends AppCompatActivity {
             }
             binding.invoiceItemHolder.removeView(itemBinding.getRoot());
         });
-        itemBinding.getRoot().setTag(binding.invoiceItemHolder.getChildCount());
+        itemBinding.getRoot().
+
+                setTag(binding.invoiceItemHolder.getChildCount());
         binding.invoiceItemHolder.addView(itemBinding.getRoot());
     }
 
-    private void checkedQuantity(){
+    private void checkedQuantity() {
         binding.loader.setVisibility(View.VISIBLE);
-        if (stockItems.size()>0){
-            InvoiceItem stock = stockItems.get(stockItems.size()-1);
-            String  stockItemId = stockItems.get(stockItems.size()-1).getItems().get(stockItems.get(stockItems.size()-1).getSelectedPosition()).getId();
-            CheckQuantity checkQuantity = new CheckQuantity(preferences.getUserId(),preferences.getToken(),stock.getSasia(),stationID,dDate,stockItemId);
+        if (stockItems.size() > 0) {
+            InvoiceItem stock = stockItems.get(stockItems.size() - 1);
+            String stockItemId = stockItems.get(stockItems.size() - 1).getItems().get(stockItems.get(stockItems.size() - 1).getSelectedPosition()).getId();
+            CheckQuantity checkQuantity = new CheckQuantity(preferences.getUserId(), preferences.getToken(), stock.getSasia(), stationID, dDate, stockItemId);
             apiService.checkQuantity(checkQuantity).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(invoiceUploadResponse -> {
 
                         final int childCount = binding.invoiceItemHolder.getChildCount();
-                            ViewGroup v =  (ViewGroup) binding.invoiceItemHolder.getChildAt(childCount - 1);
+                        ViewGroup v = (ViewGroup) binding.invoiceItemHolder.getChildAt(childCount - 1);
 
                         ViewGroup v2 = (ViewGroup) v.getChildAt(0);
-                        ViewGroup v3  =(ViewGroup) v2.getChildAt(0);
-                        ViewGroup v4  =(ViewGroup) v3.getChildAt(1);
-                        ViewGroup v5  =(ViewGroup) v4.getChildAt(1);
-                        View v6  = v5.getChildAt(1);
+                        ViewGroup v3 = (ViewGroup) v2.getChildAt(0);
+                        ViewGroup v4 = (ViewGroup) v3.getChildAt(1);
+                        ViewGroup v5 = (ViewGroup) v4.getChildAt(1);
+                        View v6 = v5.getChildAt(1);
 
 
                         AutoCompleteTextView sasia_depo = (AutoCompleteTextView) v6;
@@ -337,13 +535,13 @@ public class OrdersActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Artikulli është në stok!", Toast.LENGTH_SHORT).show();
                         }
                         binding.loader.setVisibility(View.GONE);
-                        }, new Action1<Throwable>() {
+                    }, new Action1<Throwable>() {
                         @Override
                         public void call(Throwable throwable) {
                             throwable.printStackTrace();
                         }
                     });
-        }else {
+        } else {
             binding.loader.setVisibility(View.GONE);
             addOrderItem();
 
@@ -401,9 +599,9 @@ public class OrdersActivity extends AppCompatActivity {
         }
         String partie_id = "";
         String partie_station = "";
-        if (client!=null){
+        if (client != null) {
             partie_id = client.getId();
-            if (stationPos !=null){
+            if (stationPos != null) {
                 partie_station = client.getStations().get(stationPos).getId();
 
             }
@@ -443,12 +641,12 @@ public class OrdersActivity extends AppCompatActivity {
                     public void call(VarehouseReponse varehouseReponse) {
                         varehouses = varehouseReponse.getStations();
 
-                        if (preferences.getDefaultWarehouse().isEmpty() || preferences.getDefaultWarehouse().equals("")){
+                        if (preferences.getDefaultWarehouse().isEmpty() || preferences.getDefaultWarehouse().equals("")) {
                             stationID = varehouses.get(0).getId();
-                            } else  {
+                        } else {
                             stationID = preferences.getDefaultWarehouse();
                             for (int i = 0; i < varehouses.size(); i++) {
-                                if (varehouses.get(i).getId().equals(stationID)){
+                                if (varehouses.get(i).getId().equals(stationID)) {
                                     binding.depoEdittext.setText(varehouses.get(i).getName());
                                 }
                             }

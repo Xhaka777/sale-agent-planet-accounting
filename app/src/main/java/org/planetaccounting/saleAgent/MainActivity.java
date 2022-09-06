@@ -1,18 +1,21 @@
 package org.planetaccounting.saleAgent;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -26,6 +29,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,21 +43,18 @@ import org.planetaccounting.saleAgent.aksionet.ActionActivity;
 import org.planetaccounting.saleAgent.aksionet.ActionPost;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.clients.ClientsActivity;
-import org.planetaccounting.saleAgent.companyimage.GetImages;
-import org.planetaccounting.saleAgent.companyimage.ImageStorage;
 import org.planetaccounting.saleAgent.databinding.ActivityMainBinding;
 import org.planetaccounting.saleAgent.db.DatabaseOperations;
 import org.planetaccounting.saleAgent.depozita.DepositPost;
 import org.planetaccounting.saleAgent.depozita.DepositPostObject;
+import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.inkasimi.InkasimPanel;
 import org.planetaccounting.saleAgent.inkasimi.InkasimPost;
 import org.planetaccounting.saleAgent.inkasimi.InkasimiDetail;
 import org.planetaccounting.saleAgent.invoice.InvoiceActivityOriginal;
-import org.planetaccounting.saleAgent.invoice.InvoiceListActivity;
 import org.planetaccounting.saleAgent.kthemallin.ReturnPostObject;
 import org.planetaccounting.saleAgent.kthemallin.ktheMallin;
 import org.planetaccounting.saleAgent.login.LoginActivity;
-import org.planetaccounting.saleAgent.model.CompanyInfo;
 import org.planetaccounting.saleAgent.model.Error;
 import org.planetaccounting.saleAgent.model.ErrorPost;
 import org.planetaccounting.saleAgent.model.NotificationPost;
@@ -64,7 +65,6 @@ import org.planetaccounting.saleAgent.model.stock.StockPost;
 import org.planetaccounting.saleAgent.ngarkime.ngarkimeActivity;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
 import org.planetaccounting.saleAgent.raportet.RaportetActivity;
-import org.planetaccounting.saleAgent.raportet.ReportDetailActivity;
 import org.planetaccounting.saleAgent.settings.SettingsActivity;
 import org.planetaccounting.saleAgent.shpenzimet.ShpenzimetActivity;
 import org.planetaccounting.saleAgent.stock.StockActivity;
@@ -96,15 +96,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 
 import javax.inject.Inject;
 
-import io.realm.RealmList;
 import io.realm.RealmResults;
-import okhttp3.ResponseBody;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 import static org.planetaccounting.saleAgent.invoice.InvoiceActivity.ACTION;
@@ -123,6 +119,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
     RealmHelper realmHelper;
 
     List<InvoicePost> unSyncedList = new ArrayList<>();
+
+    Locale myLocale;
+    String currentLanguage = "sq", currentLang;
+    public static final String TAG = "bottom_sheet";
 
 
     public static boolean isConnected = false;
@@ -146,7 +146,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme);
         AssetManager am = this.getApplicationContext().getAssets();
-
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/fa-solid-900.ttf");
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -230,6 +229,21 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         Ambulantori.setText(preferences.getFullName() + "");
 
 
+        currentLanguage = getIntent().getStringExtra(currentLang);
+
+        //bottom sheet design
+        ImageButton showBottomSheet = (ImageButton) findViewById(R.id.button);
+
+        showBottomSheet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetFragment fragment = new BottomSheetFragment();
+                fragment.show(getSupportFragmentManager(), TAG);
+            }
+        });
+
+
+
         new AsyncTask<Boolean, Boolean, Boolean>() {
 
             @Override
@@ -276,6 +290,43 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
 //        }
         sync();
     }
+
+
+    //methods to change the languages
+
+    public void setLocale(String localeName){
+        if(!localeName.equals(currentLang)){
+            Context context = LocaleHelper.setLocale(this, localeName);
+            //Resources resources = context.getResources();
+            myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        }else{
+            Toast.makeText(MainActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+//    public void onBackPressed(){
+//        Intent intent = new Intent(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_HOME);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+//        finish();
+//        System.exit(0);
+//    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+
+
 
     String fDate;
 
@@ -1124,45 +1175,45 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    public void onClick(String title, int positon) {
+    public void onClick(int title, int positon) {
         switch (title){
-            case "Fatura":openInvoiceActivity();
+            case R.string.title_fatura:openInvoiceActivity();
             break;
 
-            case "Stoku":openStockActivity();
+            case R.string.title_stoku:openStockActivity();
                 break;
 
-            case "Inkasimi":InkasimiPanel();
+            case R.string.title_inkasimi:InkasimiPanel();
                 break;
 
-            case "Depozitat":openDepozit();
+            case R.string.title_depozita:openDepozit();
                 break;
 
-            case "Raportet":openRaportActivity();
+            case R.string.title_raportet:openRaportActivity();
                 break;
 
-            case "Kthim malli":openKtheMallinActivity();
+            case R.string.title_kthimMalli:openKtheMallinActivity();
                 break;
 
-            case "Transfere":openTransferOrder();
+            case R.string.title_transfere:openTransferOrder();
                 break;
 
-            case "Klientet":openClientsActivity();
+            case R.string.title_klientet:openClientsActivity();
                 break;
 
-            case "Targeti":openTargetActivity();
+            case R.string.title_target:openTargetActivity();
                 break;
 
-            case "Porositë/Interne":openOrderActivity();
+            case R.string.title_porositeInterne:openOrderActivity();
                 break;
 
-            case "Ngarkime":openNgarkimeOrder();
+            case R.string.title_ngarkimet:openNgarkimeOrder();
                 break;
 
-            case "Shpenzimet":openShpenzimetActivity();
+            case R.string.title_shpenzimet:openShpenzimetActivity();
                 break;
 
-            case "Aksionet":openAksionetActivity();
+            case R.string.title_aksionet:openAksionetActivity();
                 break;
 
 

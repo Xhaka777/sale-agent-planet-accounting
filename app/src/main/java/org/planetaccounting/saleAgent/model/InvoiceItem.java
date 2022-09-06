@@ -81,7 +81,9 @@ public class InvoiceItem implements Parcelable {
         this.relacion = item.getRelacion();
         this.selectedUnit = item.getSelectedUnit();
         this.items = item.getItems();
+        this.sasia = item.getSasia();
         }
+
    public double getPriceWithvat() {
         return priceWithvat;
     }

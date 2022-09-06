@@ -16,8 +16,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="19dp"
-                android:text="TARGETI SKU"
-                android:textColor="#000" />
+                android:text="@string/targeti_sku"
+                android:textColor="#000"
+                android:textAllCaps="true"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -56,7 +57,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Lloji"
+                        android:text="@string/lloji"
                         android:textColor="#000" />
 
                     <ImageView
@@ -70,7 +71,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="3"
                         android:gravity="center"
-                        android:text="Emertimi"
+                        android:text="@string/emertimi"
                         android:textColor="#000" />
 
                     <ImageView
@@ -90,7 +91,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Targeti"
+                        android:text="@string/targeti"
                         android:textColor="#000" />
 
                     <ImageView
@@ -104,7 +105,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Realizimi"
+                        android:text="@string/realizimi"
                         android:textColor="#000" />
 
                     <ImageView
@@ -118,7 +119,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Perqindja"
+                        android:text="@string/perqindja"
                         android:textColor="#000" />
 
                     <ImageView
@@ -132,7 +133,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Benefiti"
+                        android:text="@string/benefiti"
                         android:textColor="#000" />
                 </LinearLayout>
 

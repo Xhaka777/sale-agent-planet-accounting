@@ -2,6 +2,9 @@ package org.planetaccounting.saleAgent.kthemallin;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Handler;
@@ -12,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,12 +26,15 @@ import android.widget.Toast;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.planetaccounting.saleAgent.Kontabiliteti;
+import org.planetaccounting.saleAgent.MainActivity;
+import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.aksionet.ActionData;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.ActivityKtheMallinBinding;
 import org.planetaccounting.saleAgent.databinding.ReturnItemsBinding;
 import org.planetaccounting.saleAgent.events.FinishInvoiceActivity;
+import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.invoice.InvoiceActivity;
 import org.planetaccounting.saleAgent.invoice.InvoiceActivityOriginal;
 import org.planetaccounting.saleAgent.model.InvoiceItem;
@@ -101,6 +108,10 @@ public class ktheMallin extends AppCompatActivity {
 
     private InvoiceRole invoiceRole;
 
+    Locale myLocale;
+    String currentLanguage = "sq", currentLang;
+    public static final String TAG = "bottom_sheet";
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +168,6 @@ public class ktheMallin extends AppCompatActivity {
         });
 
 
-
         binding.shtoTextview.setOnClickListener(view -> {
             if (client != null) {
 
@@ -197,8 +207,45 @@ public class ktheMallin extends AppCompatActivity {
             }
         };
 
+//        currentLanguage = getIntent().getStringExtra(currentLang);
 
     }
+
+
+    //methods to change the languages
+
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
+            Context context = LocaleHelper.setLocale(this, localeName);
+            //Resources resources = context.getResources();
+            myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(getApplicationContext(), ktheMallin.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        } else {
+            Toast.makeText(ktheMallin.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+//    public void onBackPressed() {
+//        Intent intent = new Intent(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_HOME);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+//        finish();
+//        System.exit(0);
+//    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+
 
     //        this part is for to show DropDown when clicked editText for secound time and more ...
     private void shopDropDownList() {
@@ -301,7 +348,7 @@ public class ktheMallin extends AppCompatActivity {
                 calculateVleraPaTvsh();
                 calculateVleraETVSH();
 
-                    }
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -336,8 +383,8 @@ public class ktheMallin extends AppCompatActivity {
         itemBinding.njesiaTextview.setText(invoiceItem.getSelectedUnit());
 
         List<Double> amontAndPrice = calculateValueOfItem(invoiceItem);
-        itemBinding.vlera.setText("" + String.format(Locale.ENGLISH,"%.3f", new BigDecimal(amontAndPrice.get(0))));
-        itemBinding.cmimiTvsh.setText("" + String.format(Locale.ENGLISH,"%.3f", new BigDecimal(amontAndPrice.get(1))));
+        itemBinding.vlera.setText("" + String.format(Locale.ENGLISH, "%.3f", new BigDecimal(amontAndPrice.get(0))));
+        itemBinding.cmimiTvsh.setText("" + String.format(Locale.ENGLISH, "%.3f", new BigDecimal(amontAndPrice.get(1))));
         itemBinding.basePrice.setText(invoiceItem.getBasePrice() + "");
     }
 
@@ -389,13 +436,13 @@ public class ktheMallin extends AppCompatActivity {
 
     private List<Double> calculateValueOfItem(InvoiceItem invoiceItem) {
         double amount_with_vat = 0.000;
-        BigDecimal priceSale =BigDecimal.valueOf(amount_with_vat);
+        BigDecimal priceSale = BigDecimal.valueOf(amount_with_vat);
         try {
             // Quantity
             BigDecimal quantity = new BigDecimal(invoiceItem.getSasia());
 
             // Price Sale (with VAT) untouchable
-             priceSale = new BigDecimal(invoiceItem.getChildList().get(invoiceItem.getSelectedPosition()).getPriceVatSale());
+            priceSale = new BigDecimal(invoiceItem.getChildList().get(invoiceItem.getSelectedPosition()).getPriceVatSale());
 
 
             // VAT Rate
@@ -482,9 +529,6 @@ public class ktheMallin extends AppCompatActivity {
             invoiceItem.setCmimiNeArk(priceSale.doubleValue());
 
 
-
-
-
         } catch (Exception e) {
             System.out.println(" Error :" + e.getMessage());
 
@@ -497,7 +541,7 @@ public class ktheMallin extends AppCompatActivity {
 
         finalValues.add(amount_with_vat);
         finalValues.add(priceSale.doubleValue());
-        return  finalValues;
+        return finalValues;
     }
 
     public void calculateVleraPaTvsh() {
@@ -508,7 +552,6 @@ public class ktheMallin extends AppCompatActivity {
         this.vleraPaTvsh = String.valueOf(cutTo2(vleraPaTvsh));
         binding.vleraPaTvsh.setText("Vlera pa TVSH: " + cutTo2(vleraPaTvsh));
     }
-
 
 
     public void calculateVleraETVSH() {
@@ -530,11 +573,11 @@ public class ktheMallin extends AppCompatActivity {
     }
 
     public double cutTo5(double value) {
-        return Double.parseDouble(String.format(Locale.ENGLISH,"%.5f", value));
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.5f", value));
     }
 
     public double cutTo2(double value) {
-        return Double.parseDouble(String.format(Locale.ENGLISH,"%.2f", value));
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -577,7 +620,7 @@ public class ktheMallin extends AppCompatActivity {
             InvoiceItemPost invoiceItemPost = new InvoiceItemPost();
             invoiceItemPost.setId(stockItems.get(i).getId());
 
-            invoiceItemPost.setAmount_no_vat(String.valueOf( stockItems.get(i).getVleraPaTvsh()));
+            invoiceItemPost.setAmount_no_vat(String.valueOf(stockItems.get(i).getVleraPaTvsh()));
             invoiceItemPost.setNo_order(String.valueOf(i));
             invoiceItemPost.setNo(stockItems.get(i).selectedItemCode);
             invoiceItemPost.setId_item_group(stockItems.get(i).getId());

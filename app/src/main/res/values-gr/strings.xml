@@ -38,6 +38,7 @@
     <string name="yes">Ναί</string>
 
     <string name="message_notification_channel_name">ΜΕΤΑΦΟΡΑ</string>
+    <string name="message_notification_channel_id" translatable="false">message_notification_channel_id</string>
 
     <string name="hello_blank_fragment">Γεια σου κενό κομμάτι</string>
     <string name="state">κατάσταση</string>
@@ -222,5 +223,7 @@
     <string name="aksionet_me_kategori">μετοχές με κατηγορία</string>
     <string name="kategoria">κατηγορία</string>
     <string name="kombinim">συνδυασμός</string>
+    <string name="device_hase_not_internet_connected">η συσκευή δεν έχει πρόσβαση στο διαδίκτυο</string>
+    <string name="lista_klienteve">Λίστα πελατών</string>
 
 </resources>

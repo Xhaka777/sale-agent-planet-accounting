@@ -1,142 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--<LinearLayout-->
-        <!--android:id="@+id/content"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:orientation="horizontal">-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/content"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:orientation="horizontal">-->
 
-        <!--&lt;!&ndash;#	SHIFRA	BARKODI	EMERTIMI	SASIA [A]	NJESIA	CMIMI [B]	ZBRITJA % [C]-->
-        <!--ZBRITJA EXTRA % [D]	CMIMI PA TVSH  [E]	KODI (NORMA) [F]	CMIMI ME TVSH  [G]	VLERA PA TVSH  [H]	VLERA E TVSH-SË  [I]	VLERA ME TVSH  [J]	LLOGARIA	DEPO	PROJEKTI&ndash;&gt;-->
-        <!--<AutoCompleteTextView-->
-            <!--android:id="@+id/shifra_textview"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="SHIFRA"-->
-            <!--android:padding="5dp"-->
-            <!--android:paddingTop="5dp"-->
-            <!--android:textColor="#000"-->
-            <!--android:textSize="15sp"-->
-            <!--/>-->
+<!--        &lt;!&ndash;#	SHIFRA	BARKODI	EMERTIMI	SASIA [A]	NJESIA	CMIMI [B]	ZBRITJA % [C]-->
+<!--        ZBRITJA EXTRA % [D]	CMIMI PA TVSH  [E]	KODI (NORMA) [F]	CMIMI ME TVSH  [G]	VLERA PA TVSH  [H]	VLERA E TVSH-SË  [I]	VLERA ME TVSH  [J]	LLOGARIA	DEPO	PROJEKTI&ndash;&gt;-->
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/shifra_textview"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="SHIFRA"-->
+<!--            android:padding="5dp"-->
+<!--            android:paddingTop="5dp"-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="15sp"-->
+<!--            />-->
 
-        <!--<AutoCompleteTextView-->
-            <!--android:id="@+id/emertimi_textview"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:hint="EMERTIMI"-->
-            <!--android:padding="5dp"-->
-            <!--android:paddingTop="5dp"-->
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/emertimi_textview"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:hint="EMERTIMI"-->
+<!--            android:padding="5dp"-->
+<!--            android:paddingTop="5dp"-->
 
-            <!--android:textColor="#000"-->
-            <!--android:textSize="15sp"-->
-            <!--/>-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="15sp"-->
+<!--            />-->
 
-        <!--<AutoCompleteTextView-->
-            <!--android:id="@+id/njesia_textview"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:focusable="false"-->
-            <!--android:hint="NJESIA"-->
-            <!--android:paddingTop="5dp"-->
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/njesia_textview"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:focusable="false"-->
+<!--            android:hint="NJESIA"-->
+<!--            android:paddingTop="5dp"-->
 
-            <!--android:padding="5dp"-->
-            <!--android:textColor="#000"-->
-            <!--android:textSize="15sp"-->
-            <!--/>-->
+<!--            android:padding="5dp"-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="15sp"-->
+<!--            />-->
 
-        <!--<AutoCompleteTextView-->
-            <!--android:id="@+id/sasia_textview"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="SASIA"-->
-            <!--android:paddingTop="5dp"-->
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/sasia_textview"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="SASIA"-->
+<!--            android:paddingTop="5dp"-->
 
-            <!--android:inputType="numberDecimal"-->
-            <!--android:padding="5dp"-->
-            <!--android:textColor="#000"-->
-            <!--android:textSize="15sp"-->
-            <!--/>-->
+<!--            android:inputType="numberDecimal"-->
+<!--            android:padding="5dp"-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="15sp"-->
+<!--            />-->
 
-        <!--<AutoCompleteTextView-->
-            <!--android:id="@+id/base_price"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:enabled="false"-->
-            <!--android:hint="CMIMI .B"-->
-            <!--android:paddingTop="5dp"-->
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/base_price"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:enabled="false"-->
+<!--            android:hint="CMIMI .B"-->
+<!--            android:paddingTop="5dp"-->
 
-            <!--android:padding="5dp"-->
-            <!--android:textColor="#000"-->
-            <!--android:textSize="15sp"-->
-            <!--/>-->
+<!--            android:padding="5dp"-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="15sp"-->
+<!--            />-->
 
-        <!--<AutoCompleteTextView-->
-            <!--android:id="@+id/zbritja_textview"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:enabled="true"-->
-            <!--android:hint="ZBRITJE%"-->
-            <!--android:paddingTop="5dp"-->
-            <!--android:inputType="numberDecimal"-->
-            <!--android:padding="5dp"-->
-            <!--android:textColor="#000"-->
-            <!--android:textSize="15sp"-->
-            <!--/>-->
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/zbritja_textview"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:enabled="true"-->
+<!--            android:hint="ZBRITJE%"-->
+<!--            android:paddingTop="5dp"-->
+<!--            android:inputType="numberDecimal"-->
+<!--            android:padding="5dp"-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="15sp"-->
+<!--            />-->
 
-        <!--<AutoCompleteTextView-->
-            <!--android:id="@+id/cmimi_tvsh"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:enabled="false"-->
-            <!--android:hint="CMIMI"-->
-            <!--android:paddingTop="5dp"-->
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/cmimi_tvsh"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:enabled="false"-->
+<!--            android:hint="CMIMI"-->
+<!--            android:paddingTop="5dp"-->
 
-            <!--android:padding="5dp"-->
-            <!--android:textColor="#000"-->
-            <!--android:textSize="15sp"-->
-            <!--/>-->
+<!--            android:padding="5dp"-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="15sp"-->
+<!--            />-->
 
 
-        <!--<AutoCompleteTextView-->
-            <!--android:id="@+id/vlera"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:enabled="false"-->
-            <!--android:hint="VLERA"-->
-            <!--android:paddingTop="5dp"-->
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/vlera"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:enabled="false"-->
+<!--            android:hint="VLERA"-->
+<!--            android:paddingTop="5dp"-->
 
-            <!--android:padding="5dp"-->
-            <!--android:textColor="#000"-->
-            <!--android:textSize="15sp"-->
-            <!--/>-->
+<!--            android:padding="5dp"-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="15sp"-->
+<!--            />-->
 
-        <!--<ImageButton-->
-            <!--android:id="@+id/remove_button"-->
-            <!--android:layout_width="35dp"-->
-            <!--android:layout_height="35dp"-->
-            <!--android:background="@android:drawable/ic_menu_close_clear_cancel"-->
-            <!--/>-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/remove_button"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:background="@android:drawable/ic_menu_close_clear_cancel"-->
+<!--            />-->
 
-        <!--<Button-->
-            <!--android:id="@+id/add_button"-->
-            <!--android:layout_width="40dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:text="+"-->
-            <!--android:visibility="gone"-->
-            <!--android:textSize="20dp" />-->
+<!--        <Button-->
+<!--            android:id="@+id/add_button"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:text="+"-->
+<!--            android:visibility="gone"-->
+<!--            android:textSize="20dp" />-->
 
-        <!--<Button-->
-            <!--android:id="@+id/sub_button"-->
-            <!--android:layout_width="40dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:text="-"-->
-            <!--android:textSize="20dp"-->
-            <!--android:visibility="gone"/>-->
+<!--        <Button-->
+<!--            android:id="@+id/sub_button"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:text="-"-->
+<!--            android:textSize="20dp"-->
+<!--            android:visibility="gone"/>-->
 
-    <!--</LinearLayout>-->
+<!--    </LinearLayout>-->
 
     <RelativeLayout
         android:layout_width="match_parent"

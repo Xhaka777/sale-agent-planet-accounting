@@ -17,7 +17,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="Lisa e Klientve"
+                android:text="@string/lista_klienteve"
                 android:textColor="#000" />
 
             <EditText
@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/ic_menu_search"
-                android:hint="Kerko"
+                android:hint="@string/kerko"
                 android:textColor="#000" />
         </LinearLayout>
 
@@ -47,82 +47,14 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="Foto"
+                android:text="@string/foto"
                 android:textColor="#000"
                 android:textSize="16dp"
-                android:textStyle="bold"/>
-
-            <ImageView
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#000"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text="#"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="16dp"/>
-
-            <ImageView
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#000"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:text="Nr. Unik"
-                android:textColor="#000"
-                android:textSize="16dp"
-                android:textStyle="bold"/>
-
-            <ImageView
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#000"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text="EMRI"
-                android:textColor="#000"
-                android:textSize="16dp"
-                android:textStyle="bold"/>
-
-            <ImageView
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#000"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:text="KONTAKT"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="16dp"/>
+                android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="1dp"
@@ -132,15 +64,85 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="BILANCI"
+                android:text="#"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#000" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/numri_unik"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#000" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/emri"
+                android:textAllCaps="true"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#000" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/kontakt"
                 android:textColor="#000"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                />
+                android:textAllCaps="true"/>
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#000" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/bilanci"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textAllCaps="true"/>
 
         </LinearLayout>
 
