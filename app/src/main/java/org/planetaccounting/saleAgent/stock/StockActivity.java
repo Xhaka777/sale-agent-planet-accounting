@@ -129,7 +129,7 @@ public class StockActivity extends Activity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(StockActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(StockActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 

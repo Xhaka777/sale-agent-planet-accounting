@@ -19,6 +19,7 @@ import com.datecs.fiscalprinter.FiscalResponse;
 import com.datecs.fiscalprinter.kos.FMP10KOS;
 import org.planetaccounting.saleAgent.Kontabiliteti;
 import org.planetaccounting.saleAgent.MainActivity;
+import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.invoice.InvoiceActivity;
 import org.planetaccounting.saleAgent.model.InvoiceItem;
 import org.planetaccounting.saleAgent.model.stock.Item;
@@ -80,7 +81,7 @@ public class ActivityPrint extends Activity {
                 enableBluetooth();
             }
         } else {
-            Toast.makeText(this, "Paisja nuk ka bluetooth", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.paisja_nuk_ka_bluetooth, Toast.LENGTH_SHORT).show();
             finish();
             return;
         }

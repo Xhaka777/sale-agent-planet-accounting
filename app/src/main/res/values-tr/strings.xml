@@ -234,4 +234,45 @@
     <string name="zbritja">Indirim %</string>
     <string name="aktiv">aktif</string>
 
+
+    <!--    Pjesa per TOASTs   -->
+
+    <string name="language_already_selected">Dil zaten seçili</string>
+    <string name="depozita_u_krye_me_sukses">Depozito başarıyla yapıldı</string>
+    <string name="inkasimi_u_ruajt">Koleksiyon kaydedildi</string>
+    <string name="nuk_ka_te_dhena">Veri yok</string>
+    <string name="nje_ose_me_shume_artikuj_kan_sasine_zero">Bir veya daha fazla öğenin miktarı sıfır</string>
+    <string name="shtoni_se_paku_nje_artikull">En az bir öğe ekleyin!</string>
+    <string name="sheno_sasin">miktarı girin</string>
+    <string name="nuk_keni_sasi_te_mjaftueshme_ne_depo">Depoda yeterli stoğunuz yok</string>
+    <string name="artikulli_eshte_ne_stok">Ürün stokta!</string>
+    <string name="porosia_u_krye_me_sukses">Sipariş başarıyla tamamlandı!</string>
+    <string name="order_was_canceled">sipariş iptal edildi</string>
+    <string name="connection_failed">Bağlantı başarısız</string>
+    <string name="inkasimi_u_krye_me_sukses">Koleksiyon başarıyla tamamlandı</string>
+    <string name="inkasimi_nuk_u_ruajt_me_sukses">Ödeme sunucuya kaydedilmedi!</string>
+    <string name="nuk_stok_te_mjaftueshem">TYeterli stok yok</string>
+    <string name="jipeni_sasin">miktarı ver</string>
+    <string name="zbritja_maksimale">Müşteri indirimi:  </string>
+    <string name="fatura_esht_ruajtur_dhe_sinkronizuar">Fatura kaydedilir ve senkronize edilir!</string>
+    <string name="fatura_esht_ruajtur_por_nuk_esht_sinkronizuar">Fatura kaydedilir ancak senkronize edilmez!</string>
+    <string name="diqka_shkoj_gabim">Birşeyler yanlış gidiyor!</string>
+    <string name="duhet_te_inkasohet_se_paku">En azından toplanmalı</string>
+    <string name="kthim_mallit_esht_ruajtur_dhe_sinkronizuar">Malların iadesi kaydedilir ve senkronize edilir</string>
+    <string name="kthim_mallit_esht_ruajtur_por_nuk_esht_sinkronizuar">Malların iadesi kaydedilir ancak senkronize edilmez</string>
+    <string name="shpenzimi_nuk_u_ruajt_ne_server">Masraf sunucuya kaydedilmedi!</string>
+    <string name="shpenzimi_u_ruajt_me_sukses_ne_server">Masraf başarıyla sunucuya kaydedildi!</string>
+    <string name="nuk_keni_targete_per_kete_muaj">Bu ay için bir hedefiniz yok!</string>
+    <string name="transferi_u_dergua_per_shqyrtim">Aktarım incelenmek üzere gönderildi</string>
+    <string name="pershkrim_i_transferit">Transferin Açıklaması</string>
+    <string name="shkruaj_nje_pershkrim_opcionale">bir açıklama yazın (isteğe bağlı)</string>
+    <string name="paisja_nuk_ka_bluetooth">Cihazda bluetooth yok</string>
+    <string name="ju_lutem_zgjedhni_klientin">Lütfen ürün eklemeden önce bir müşteri seçin</string>
+    <string name="ju_lutem_zgjidhni_nje_banke">Lütfen bir banka seçin</string>
+    <string name="ju_lutem_jepni_vleren_e_paguar">Lütfen ödenen değeri girin</string>
+    <string name="ju_lutem_kyçuni_ne_internet_që_të_shikoni_porositë">Siparişleri görüntülemek için lütfen giriş yapın!</string>
+    <string name="ju_lutem_plotesoni_te_gjitha_fushat">lütfen bütün boşlukları doldurun</string>
+    <string name="zbritja_maksimale_eshte">Maksimum indirim :</string>
+
+
 </resources>

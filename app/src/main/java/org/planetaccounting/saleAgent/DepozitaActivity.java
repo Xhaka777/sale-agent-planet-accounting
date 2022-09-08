@@ -154,7 +154,7 @@ public class DepozitaActivity extends AppCompatActivity implements DatePickerDia
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(DepozitaActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DepozitaActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -175,7 +175,7 @@ public class DepozitaActivity extends AppCompatActivity implements DatePickerDia
 
     public void depono(View v) {
         if (bankId == null || bankId.equals("")) {
-            Toast.makeText(getApplicationContext(), "Ju lutemi zgjidhni një bankë", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.ju_lutem_zgjidhni_nje_banke, Toast.LENGTH_SHORT).show();
             return;
         }
         String Shuma = shuma.getText().toString();
@@ -196,18 +196,18 @@ public class DepozitaActivity extends AppCompatActivity implements DatePickerDia
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(responseBody -> {
                     if (responseBody.getSuccess()) {
-                        Toast.makeText(getApplicationContext(), "Depozita u krye me sukses", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.depozita_u_krye_me_sukses, Toast.LENGTH_SHORT).show();
                         depositDetailPost.setSynced(true);
                     } else {
                         depositDetailPost.setSynced(false);
-                        Toast.makeText(getApplicationContext(), "Inkasimi u ruajt", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.inkasimi_u_ruajt, Toast.LENGTH_SHORT).show();
                     }
                     depositDetailPost.setId(realmHelper.getAutoIncrementIfForDepozit());
                     realmHelper.saveDepozita(depositDetailPost);
                     finish();
                 }, throwable -> {
                     depositDetailPost.setSynced(false);
-                    Toast.makeText(getApplicationContext(), "Inkasimi u ruajt", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),  R.string.inkasimi_u_ruajt, Toast.LENGTH_SHORT).show();
                     depositDetailPost.setId(realmHelper.getAutoIncrementIfForDepozit());
                     realmHelper.saveDepozita(depositDetailPost);
                     finish();

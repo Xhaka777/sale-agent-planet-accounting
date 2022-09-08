@@ -217,7 +217,7 @@ public class ReportDetailActivity extends Activity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(ReportDetailActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ReportDetailActivity.this, R.string.language_already_selected , Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -256,7 +256,7 @@ public class ReportDetailActivity extends Activity {
                     }
                     showLoader();
                 }, throwable -> {
-                    Toast.makeText(ReportDetailActivity.this, "Shpenzimi nuk u rujat ne server!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ReportDetailActivity.this, R.string.shpenzimi_nuk_u_ruajt_ne_server, Toast.LENGTH_SHORT).show();
                     hideLoader();
                 });
     }
@@ -282,7 +282,7 @@ public class ReportDetailActivity extends Activity {
                     hideLoader();
                 }, throwable -> {
                     hideLoader();
-                    Toast.makeText(this, "Inkasimi nuk u rujat ne server!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.inkasimi_nuk_u_ruajt_me_sukses, Toast.LENGTH_SHORT).show();
                 });
     }
 

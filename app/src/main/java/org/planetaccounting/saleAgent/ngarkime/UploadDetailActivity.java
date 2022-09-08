@@ -83,7 +83,7 @@ public class UploadDetailActivity extends AppCompatActivity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(UploadDetailActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UploadDetailActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -111,7 +111,7 @@ public class UploadDetailActivity extends AppCompatActivity {
                         this.uploadsDetailItems = uploadDetailResponse.getData();
                         adapter.setOrders(uploadsDetailItems);
                     } else {
-                        Toast.makeText(this, "Nuk ka te dhena", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.nuk_ka_te_dhena, Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }, Throwable::printStackTrace);

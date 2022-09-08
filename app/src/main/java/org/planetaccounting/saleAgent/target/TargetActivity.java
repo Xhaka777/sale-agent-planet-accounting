@@ -93,7 +93,7 @@ public class TargetActivity extends AppCompatActivity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(TargetActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TargetActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -141,7 +141,7 @@ public class TargetActivity extends AppCompatActivity {
                     binding.holder.setVisibility(View.VISIBLE);
                     binding.loader.setVisibility(View.GONE);
                 }, throwable -> {
-                    Toast.makeText(getApplicationContext(), "Nuk keni targete per kete muaj!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.nuk_keni_targete_per_kete_muaj, Toast.LENGTH_SHORT).show();
                     binding.holder.setVisibility(View.VISIBLE);
                     binding.loader.setVisibility(View.GONE);
                     throwable.printStackTrace();

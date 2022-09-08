@@ -35,6 +35,8 @@ public class Preferences {
     public static String LOCK_FATURA = "lock_fatura";
     public static String EMPLOY_NUMBER = "emp_num";
     public static String LAST_CHECK= "last_check";
+    public static String CURRENT_PAGE = "current_page";
+    public static String SASIA = "sasia";
 
     public static String KODE_SETTINGS = "KODE_SETTINGS";
     public static String BARCODE_SETTINGS = "BARCODE_SETTINGS";
@@ -84,7 +86,7 @@ public class Preferences {
     }
 
     public String getLanguage() {
-        return userPreferences.getString(LANGUAGE, "en");
+        return userPreferences.getString(LANGUAGE, "sq");
     }
 
 
@@ -158,6 +160,14 @@ public class Preferences {
         return last + 1;
     }
 
+    public String getCurrentPage(){
+        return preferences.getString(CURRENT_PAGE, "");
+    }
+
+    public String getSasia(){
+        return preferences.getString(SASIA, "");
+    }
+
     public void saveFisclNumber(String fiscalNumber) {
         userPreferences.edit().putString(FISCAL_NUMBER, fiscalNumber).commit();
     }
@@ -182,6 +192,7 @@ public class Preferences {
         int last = preferences.getInt(LAST_INVOICE_RETURN_NUMBER, 0);
         return last + 1;
     }
+
 
     public String getStationId() {
         return userPreferences.getString(STATION_INVOICE_ID, "");
@@ -209,6 +220,7 @@ public class Preferences {
     public boolean isFaturaLocked() {
         return preferences.getBoolean(LOCK_FATURA, false);
     }
+
 
 
     // For settings

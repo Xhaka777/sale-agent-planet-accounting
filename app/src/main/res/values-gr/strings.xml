@@ -231,4 +231,44 @@
     <string name="zbritja">έκπτωση %</string>
     <string name="aktiv">ενεργός</string>
 
+
+    <!--    Pjesa per TOASTs   -->
+
+    <string name="language_already_selected">Η γλώσσα έχει ήδη επιλεγεί</string>
+    <string name="depozita_u_krye_me_sukses">Η κατάθεση έγινε με επιτυχία</string>
+    <string name="inkasimi_u_ruajt">Η συλλογή σώθηκε</string>
+    <string name="nuk_ka_te_dhena">Δεν υπάρχουν δεδομένα</string>
+    <string name="nje_ose_me_shume_artikuj_kan_sasine_zero">Ένα ή περισσότερα είδη έχουν μηδενική ποσότητα</string>
+    <string name="shtoni_se_paku_nje_artikull">Προσθέστε τουλάχιστον ένα στοιχείο!</string>
+    <string name="sheno_sasin">Εισαγάγετε την ποσότητα</string>
+    <string name="nuk_keni_sasi_te_mjaftueshme_ne_depo">Δεν έχετε αρκετό απόθεμα στην αποθήκη</string>
+    <string name="artikulli_eshte_ne_stok">Το προϊόν είναι σε απόθεμα!</string>
+    <string name="porosia_u_krye_me_sukses">Η παραγγελία ολοκληρώθηκε με επιτυχία!</string>
+    <string name="order_was_canceled">Η παραγγελία ακυρώθηκε</string>
+    <string name="connection_failed">Αποτυχημένη σύνδεση</string>
+    <string name="inkasimi_u_krye_me_sukses">Η συλλογή ολοκληρώθηκε με επιτυχία</string>
+    <string name="inkasimi_nuk_u_ruajt_me_sukses">Η πληρωμή δεν αποθηκεύτηκε στον διακομιστή!</string>
+    <string name="nuk_stok_te_mjaftueshem">Δεν υπάρχει αρκετό απόθεμα</string>
+    <string name="jipeni_sasin">Δώστε την ποσότητα</string>
+    <string name="zbritja_maksimale">Έκπτωση πελάτη:  </string>
+    <string name="fatura_esht_ruajtur_dhe_sinkronizuar">Το τιμολόγιο αποθηκεύεται και συγχρονίζεται!</string>
+    <string name="fatura_esht_ruajtur_por_nuk_esht_sinkronizuar">το τιμολόγιο αποθηκεύεται αλλά δεν συγχρονίζεται!</string>
+    <string name="diqka_shkoj_gabim">Κάτι πάει στραβά!</string>
+    <string name="duhet_te_inkasohet_se_paku">Θα πρέπει να συλλέγεται τουλάχιστον</string>
+    <string name="kthim_mallit_esht_ruajtur_dhe_sinkronizuar">Η επιστροφή των εμπορευμάτων αποθηκεύεται και συγχρονίζεται</string>
+    <string name="kthim_mallit_esht_ruajtur_por_nuk_esht_sinkronizuar">Η επιστροφή των αγαθών αποθηκεύεται αλλά δεν συγχρονίζεται</string>
+    <string name="shpenzimi_nuk_u_ruajt_ne_server">Η δαπάνη δεν αποθηκεύτηκε στον διακομιστή!</string>
+    <string name="shpenzimi_u_ruajt_me_sukses_ne_server">Η δαπάνη αποθηκεύτηκε με επιτυχία στον διακομιστή!</string>
+    <string name="nuk_keni_targete_per_kete_muaj">Δεν έχετε στόχο για αυτόν τον μήνα!</string>
+    <string name="transferi_u_dergua_per_shqyrtim">Η μεταφορά στάλθηκε για έλεγχο</string>
+    <string name="pershkrim_i_transferit">Περιγραφή της Μεταβίβασης</string>
+    <string name="shkruaj_nje_pershkrim_opcionale">γράψτε μια περιγραφή (προαιρετικό)</string>
+    <string name="paisja_nuk_ka_bluetooth">Η συσκευή δεν διαθέτει bluetooth</string>
+    <string name="ju_lutem_zgjedhni_klientin">Επιλέξτε έναν πελάτη πριν προσθέσετε στοιχεία</string>
+    <string name="ju_lutem_zgjidhni_nje_banke">Επιλέξτε τράπεζα</string>
+    <string name="ju_lutem_jepni_vleren_e_paguar">Εισαγάγετε την καταβληθείσα αξία</string>
+    <string name="ju_lutem_kyçuni_ne_internet_që_të_shikoni_porositë">Παρακαλούμε συνδεθείτε για να δείτε τις παραγγελίες!</string>
+    <string name="ju_lutem_plotesoni_te_gjitha_fushat">Παρακαλώ συμπληρώστε όλα τα πεδία</string>
+    <string name="zbritja_maksimale_eshte">Η μέγιστη έκπτωση είναι :</string>
+
 </resources>

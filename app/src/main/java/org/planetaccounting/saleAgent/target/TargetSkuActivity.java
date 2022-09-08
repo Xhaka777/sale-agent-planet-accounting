@@ -102,7 +102,7 @@ public class TargetSkuActivity extends Activity implements OnChartValueSelectedL
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(TargetSkuActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TargetSkuActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 

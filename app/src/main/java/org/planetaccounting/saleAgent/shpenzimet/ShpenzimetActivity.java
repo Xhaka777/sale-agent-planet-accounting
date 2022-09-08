@@ -86,7 +86,7 @@ public class ShpenzimetActivity extends AppCompatActivity implements DatePickerD
             if (salerPos < 1000 && binding.shumaEditText.getText().length() > 0) {
                 postVendor();
             } else {
-                Toast.makeText(getApplicationContext(), "Ju lutem plotesoni te gjitha fushat", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.ju_lutem_plotesoni_te_gjitha_fushat, Toast.LENGTH_SHORT).show();
             }
         });
         binding.furnitoriEdittext.setOnItemClickListener((adapterView, view, i, l) -> salerPos = i);
@@ -124,7 +124,7 @@ public class ShpenzimetActivity extends AppCompatActivity implements DatePickerD
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(ShpenzimetActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShpenzimetActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -153,10 +153,10 @@ public class ShpenzimetActivity extends AppCompatActivity implements DatePickerD
                 .subscribe(response -> {
                     System.out.println("post " + response.getSuccess());
                     if (response.getSuccess()) {
-                        Toast.makeText(this, "Shpenzimi u ruajt me sukses ne server!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.shpenzimi_u_ruajt_me_sukses_ne_server, Toast.LENGTH_SHORT).show();
                         vendorPosts.get(0).setSynced(true);
                     } else {
-                        Toast.makeText(this, "Shpenzimi nuk u rujat ne server!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.shpenzimi_nuk_u_ruajt_ne_server, Toast.LENGTH_SHORT).show();
                         vendorPosts.get(0).setSynced(false);
                     }
                     vendorPosts.get(0).setFurnitori(vendorSalers.get(salerPos).getName());
@@ -166,7 +166,7 @@ public class ShpenzimetActivity extends AppCompatActivity implements DatePickerD
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        Toast.makeText(ShpenzimetActivity.this, "Shpenzimi nuk u rujat ne server!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShpenzimetActivity.this, R.string.shpenzimi_nuk_u_ruajt_ne_server, Toast.LENGTH_SHORT).show();
                         vendorPosts.get(0).setSynced(false);
                         vendorPosts.get(0).setId(realmHelper.getAutoIncrementIfForVendor());
                         realmHelper.saveVendor(vendorPosts.get(0));

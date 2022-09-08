@@ -89,7 +89,7 @@ public class ngarkimeActivity extends AppCompatActivity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(ngarkimeActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ngarkimeActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 

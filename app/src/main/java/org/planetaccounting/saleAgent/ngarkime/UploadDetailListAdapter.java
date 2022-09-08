@@ -10,6 +10,7 @@ import org.planetaccounting.saleAgent.databinding.UploadDetailListItemBinding;
 import org.planetaccounting.saleAgent.model.ngarkimet.UploadsDetailItem;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class UploadDetailListAdapter extends RecyclerView.Adapter<UploadDetailListAdapter.ViewHolder> {
 
@@ -31,9 +32,11 @@ public class UploadDetailListAdapter extends RecyclerView.Adapter<UploadDetailLi
     @Override
     public void onBindViewHolder(UploadDetailListAdapter.ViewHolder holder, int position) {
         UploadDetailListItemBinding binding = holder.binding;
+
         binding.shifra.setText(uploadsDetailItems.get(position).getNumber());
         binding.name.setText(uploadsDetailItems.get(position).getName());
-        binding.sasia.setText(uploadsDetailItems.get(position).getQuantity());
+//      binding.sasia.setText(uploadsDetailItems.get(position).getQuantity());
+        binding.sasia.setText("" + cutTo2(Double.parseDouble(uploadsDetailItems.get(position).getQuantity())));
         binding.barkod.setText(uploadsDetailItems.get(position).getBarcode());
         binding.njesia.setText(uploadsDetailItems.get(position).getUnit());
         }
@@ -56,5 +59,10 @@ public class UploadDetailListAdapter extends RecyclerView.Adapter<UploadDetailLi
             super(binding.getRoot());
             this.binding = binding;
             }
+    }
+
+    public double cutTo2(double value){
+
+        return Double.parseDouble(String.format(Locale.ENGLISH,"%.2f",value));
     }
 }

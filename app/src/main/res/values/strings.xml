@@ -51,7 +51,6 @@
     <string name="action_connect">Connect</string>
     <string name="do_you_want_to_delete_this_article">A dëshironi të fshini artikullin</string>
 
-
     <!--    Main part...-->
     <string name="log_out">QKYQU</string>
     <string name="njesia">Njesia</string>
@@ -245,5 +244,47 @@
     <string name="statusi">Statusi </string>
     <string name="zbritja">Zbritja %</string>
     <string name="aktiv">Aktiv</string>
+
+
+<!--    Pjesa per TOASTs   -->
+
+    <string name="language_already_selected">Gjuha është tashmë e zgjedhur</string>
+    <string name="ju_lutem_zgjidhni_nje_banke">Ju lutemi zgjidhni një bankë</string>
+    <string name="depozita_u_krye_me_sukses">Depozita u krye me sukses</string>
+    <string name="inkasimi_u_ruajt">Inkasimi u ruajt</string>
+    <string name="nuk_ka_te_dhena">Nuk ka te dhena</string>
+    <string name="nje_ose_me_shume_artikuj_kan_sasine_zero">Një ose më shum artikuj kan sasine zero</string>
+    <string name="shtoni_se_paku_nje_artikull">Shtoni së paku një artikull!</string>
+    <string name="sheno_sasin">Sheno sasin</string>
+    <string name="nuk_keni_sasi_te_mjaftueshme_ne_depo">Nuk keni sasi te mjaftueshem ne depo</string>
+    <string name="artikulli_eshte_ne_stok">Artikulli është në stok!</string>
+    <string name="porosia_u_krye_me_sukses">Porosia u krye me sukses!</string>
+    <string name="order_was_canceled">Order was canceled</string>
+    <string name="connection_failed">Connection failed</string>
+    <string name="inkasimi_u_krye_me_sukses">Inkasimi u krye me sukses</string>
+    <string name="inkasimi_nuk_u_ruajt_me_sukses">Inkasimi nuk u rujat ne server!</string>
+    <string name="ju_lutem_zgjedhni_klientin">Ju lutem zgjedhni klientin para se ti shtoni artikujt</string>
+    <string name="nuk_stok_te_mjaftueshem">Nuk ka stok te mjaftueshem</string>
+    <string name="jipeni_sasin">Jipeni sasin</string>
+    <string name="zbritja_maksimale">Zbritja e klientit:  </string>
+    <string name="fatura_esht_ruajtur_dhe_sinkronizuar">Fatura esht ruajtur dhe sinkronizuar!</string>
+    <string name="fatura_esht_ruajtur_por_nuk_esht_sinkronizuar">Fatura esht ruajtur por nuk esht sinkronizuar!</string>
+    <string name="diqka_shkoj_gabim">Diqka shkoj gabim!</string>
+    <string name="duhet_te_inkasohet_se_paku">Duhet te inkasohet se paku</string>
+    <string name="ju_lutem_jepni_vleren_e_paguar">Ju lutem jepni vleren e paguar</string>
+    <string name="kthim_mallit_esht_ruajtur_dhe_sinkronizuar">Kthimi i mallit esht ruajtur dhe sinkronizuar</string>
+    <string name="kthim_mallit_esht_ruajtur_por_nuk_esht_sinkronizuar">Kthimi i mallit esht ruajtur por nuk esht i sinkronizuar</string>
+    <string name="ju_lutem_kyçuni_ne_internet_që_të_shikoni_porositë"> Ju lutem kyçuni në internet që të shikoni porositë!</string>
+    <string name="shpenzimi_nuk_u_ruajt_ne_server">Shpenzimi nuk u ruajt ne server!</string>
+    <string name="shpenzimi_u_ruajt_me_sukses_ne_server">Shpenzimi u ruajt me sukses ne server!</string>
+    <string name="ju_lutem_plotesoni_te_gjitha_fushat">Ju lutem plotesoni te gjitha fushat</string>
+    <string name="nuk_keni_targete_per_kete_muaj">Nuk keni target per kete muaj!</string>
+    <string name="transferi_u_dergua_per_shqyrtim">Transferi u dergua per shqyrtim</string>
+    <string name="pershkrim_i_transferit">Pershkrim i Transferit</string>
+    <string name="shkruaj_nje_pershkrim_opcionale">shkruaj nje pershkrim(Opcionale)</string>
+    <string name="paisja_nuk_ka_bluetooth">Paisja nuk ka bluetooth</string>
+    <string name="ju_lutem_zgjedhni_produktin">Ju lutem zgjedhni produktin</string>
+    <string name="zbritja_maksimale_eshte">Zbritja maksimale eshte :</string>
+
 
 </resources>

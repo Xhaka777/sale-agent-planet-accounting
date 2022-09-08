@@ -110,7 +110,7 @@ public class TargetCashActivity extends Activity implements OnChartValueSelected
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(TargetCashActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TargetCashActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 

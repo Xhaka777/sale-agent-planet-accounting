@@ -88,7 +88,7 @@ public class RaportetActivity extends Activity {
             Intent i = new Intent(getApplicationContext(), OrdersListActivity.class);
             startActivity(i);
         } else {
-            Toast.makeText(getApplicationContext(), "Ju lutem kyçuni në internet që të shikoni porositë!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.ju_lutem_kyçuni_ne_internet_që_të_shikoni_porositë, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -115,7 +115,7 @@ public class RaportetActivity extends Activity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(RaportetActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RaportetActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 

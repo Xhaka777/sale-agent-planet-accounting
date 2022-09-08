@@ -234,4 +234,46 @@
     <string name="zbritja">Discount %</string>
     <string name="aktiv">Active</string>
 
+
+
+    <!--    Pjesa per TOASTs   -->
+
+    <string name="language_already_selected">Language already selected</string>
+    <string name="depozita_u_krye_me_sukses">The deposit was made successfully</string>
+    <string name="inkasimi_u_ruajt">The collection was saved</string>
+    <string name="nuk_ka_te_dhena">There is no data</string>
+    <string name="nje_ose_me_shume_artikuj_kan_sasine_zero">One or more items have zero quantity</string>
+    <string name="shtoni_se_paku_nje_artikull">Add at least one item!</string>
+    <string name="sheno_sasin">Enter the quantity</string>
+    <string name="nuk_keni_sasi_te_mjaftueshme_ne_depo">You do not have enough stock in the warehouse</string>
+    <string name="artikulli_eshte_ne_stok">Item is in stock!</string>
+    <string name="porosia_u_krye_me_sukses">Order completed successfully!</string>
+    <string name="order_was_canceled">Order was canceled</string>
+    <string name="connection_failed">Connection failed</string>
+    <string name="inkasimi_u_krye_me_sukses">Collection was completed successfully</string>
+    <string name="inkasimi_nuk_u_ruajt_me_sukses">The payment was not saved on the server!</string>
+    <string name="nuk_stok_te_mjaftueshem">There is not enough stock</string>
+    <string name="jipeni_sasin">Give the quantity</string>
+    <string name="zbritja_maksimale">Customer discount:  </string>
+    <string name="fatura_esht_ruajtur_dhe_sinkronizuar">The invoice is saved and synchronized!</string>
+    <string name="fatura_esht_ruajtur_por_nuk_esht_sinkronizuar">The invoice is saved but not synchronized!</string>
+    <string name="diqka_shkoj_gabim">Something goes wrong!</string>
+    <string name="duhet_te_inkasohet_se_paku">It should be collected at least</string>
+    <string name="kthim_mallit_esht_ruajtur_dhe_sinkronizuar">The return of goods is saved and synchronized</string>
+    <string name="kthim_mallit_esht_ruajtur_por_nuk_esht_sinkronizuar">The return of goods is saved but not synchronized</string>
+    <string name="shpenzimi_nuk_u_ruajt_ne_server">The expense was not saved on the server!</string>
+    <string name="shpenzimi_u_ruajt_me_sukses_ne_server">The expense was successfully saved to the server!</string>
+    <string name="nuk_keni_targete_per_kete_muaj">You do not have a target for this month!</string>
+    <string name="transferi_u_dergua_per_shqyrtim">The transfer was sent for review</string>
+    <string name="pershkrim_i_transferit">Description of the Transfer</string>
+    <string name="shkruaj_nje_pershkrim_opcionale">write a description (optional)</string>
+    <string name="paisja_nuk_ka_bluetooth">The device does not have bluetooth</string>
+    <string name="ju_lutem_zgjedhni_klientin">Please select a customer before adding items</string>
+    <string name="ju_lutem_zgjidhni_nje_banke">Please select a bank</string>
+    <string name="ju_lutem_jepni_vleren_e_paguar">Please enter the value paid</string>
+    <string name="ju_lutem_kyçuni_ne_internet_që_të_shikoni_porositë">Please login to view orders!</string>
+    <string name="ju_lutem_plotesoni_te_gjitha_fushat">Please fill in all fields</string>
+    <string name="zbritja_maksimale_eshte">The maximum discount is :</string>
+
+
 </resources>

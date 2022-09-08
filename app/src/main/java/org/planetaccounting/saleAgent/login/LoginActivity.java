@@ -143,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(LoginActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 

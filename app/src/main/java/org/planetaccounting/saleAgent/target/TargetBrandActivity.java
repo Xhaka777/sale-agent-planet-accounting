@@ -122,7 +122,7 @@ public class TargetBrandActivity extends Activity implements OnChartValueSelecte
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(TargetBrandActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TargetBrandActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 

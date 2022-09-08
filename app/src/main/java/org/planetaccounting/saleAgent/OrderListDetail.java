@@ -62,7 +62,7 @@ public class OrderListDetail extends Activity {
                         this.orderDetailItems = ordersResponse.getData().getItems();
                         adapter.setOrders(orderDetailItems);
                     } else  {
-                        Toast.makeText(this,"Nuk ka te dhena",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,R.string.nuk_ka_te_dhena,Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }, Throwable::printStackTrace);

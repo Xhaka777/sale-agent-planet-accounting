@@ -95,7 +95,7 @@ class EscPostPrintFragment : Fragment() {
             }
 
             override fun onFailure() {
-                Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.connection_failed, Toast.LENGTH_SHORT).show()
             }
 
             override fun onDisconnected() {

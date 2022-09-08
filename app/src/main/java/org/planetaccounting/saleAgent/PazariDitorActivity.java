@@ -116,7 +116,7 @@ public class PazariDitorActivity extends Activity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(PazariDitorActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PazariDitorActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 

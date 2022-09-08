@@ -86,7 +86,7 @@ public class OrdersListActivity extends Activity implements OrdersListAdapter.Ca
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText( OrdersListActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText( OrdersListActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -150,7 +150,7 @@ public class OrdersListActivity extends Activity implements OrdersListAdapter.Ca
                 .subscribe(ordersResponse -> {
                     hideLoader();
                     if (ordersResponse.getSuccess()) {
-                        Toast.makeText(this,"Order was canceled",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,R.string.order_was_canceled,Toast.LENGTH_SHORT).show();
                         getOrders();
 
                     } else  {

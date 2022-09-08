@@ -14,6 +14,7 @@ import org.planetaccounting.saleAgent.events.OpenOrderDetailEvent;
 import org.planetaccounting.saleAgent.model.ngarkimet.Uploads;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class NgarkimeListAdapter extends RecyclerView.Adapter<NgarkimeListAdapter.ViewHolder> {
 
@@ -24,12 +25,14 @@ public class NgarkimeListAdapter extends RecyclerView.Adapter<NgarkimeListAdapte
         this.uploads = uploads;
     }
 
+
     @Override
     public NgarkimeListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ctx = parent.getContext();
         UploadListItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(ctx),
                 R.layout.upload_list_item, parent, false);
         return new NgarkimeListAdapter.ViewHolder(binding);
+
     }
 
     @Override

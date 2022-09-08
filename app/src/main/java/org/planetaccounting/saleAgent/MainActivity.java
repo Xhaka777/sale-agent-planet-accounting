@@ -12,6 +12,7 @@ import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -43,6 +44,8 @@ import org.planetaccounting.saleAgent.aksionet.ActionActivity;
 import org.planetaccounting.saleAgent.aksionet.ActionPost;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.clients.ClientsActivity;
+import org.planetaccounting.saleAgent.companyimage.GetImages;
+import org.planetaccounting.saleAgent.companyimage.ImageStorage;
 import org.planetaccounting.saleAgent.databinding.ActivityMainBinding;
 import org.planetaccounting.saleAgent.db.DatabaseOperations;
 import org.planetaccounting.saleAgent.depozita.DepositPost;
@@ -55,6 +58,7 @@ import org.planetaccounting.saleAgent.invoice.InvoiceActivityOriginal;
 import org.planetaccounting.saleAgent.kthemallin.ReturnPostObject;
 import org.planetaccounting.saleAgent.kthemallin.ktheMallin;
 import org.planetaccounting.saleAgent.login.LoginActivity;
+import org.planetaccounting.saleAgent.model.CompanyInfo;
 import org.planetaccounting.saleAgent.model.Error;
 import org.planetaccounting.saleAgent.model.ErrorPost;
 import org.planetaccounting.saleAgent.model.NotificationPost;
@@ -199,29 +203,31 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
 
         cLogo = (ImageView) findViewById(R.id.cLogoImg);
 
-//        String LogoLinku = realmHelper.getCompanyInfo().getLogo()+"";
-//        if(LogoLinku.length()  < 59){
-//
-//        }else{
-//            String PjesaF1 = LogoLinku.substring(0,48);
-//            String PjesaF0 = "logos/";
-//            String PjesaF2 = LogoLinku.substring(48,56);
-//            String PjesaF3 = LogoLinku.substring(58,LogoLinku.length());
-//            System.out.println(PjesaF1 + PjesaF0 + PjesaF2 +  PjesaF3+ "");
-//            logoName =  preferences.getUserId()+"";
-//            if(ImageStorage.checkifImageExists(logoName)){
-////        if(ImageStorage.checkifImageExists(logoName)){
-//                // Debugging
-//                File file = ImageStorage.getImage("/"+logoName+".jpg");
-//                String path = file.getAbsolutePath();
-//                if (path != null){
-//                    bitmap = BitmapFactory.decodeFile(path);
-//                    cLogo.setImageBitmap(bitmap);
-//                }
-//            } else {
-//                new GetImages(PjesaF1 + PjesaF0 + PjesaF2 +PjesaF3 + "", cLogo, logoName).execute() ;
-//            }
-//        }
+        /* ---------------------------------------------------------------------------------------  */
+
+        String LogoLinku = realmHelper.getCompanyInfo().getLogo()+"";
+        if(LogoLinku.length()  < 59){
+
+        }else{
+            String PjesaF1 = LogoLinku.substring(0,48);
+            String PjesaF0 = "logos/";
+            String PjesaF2 = LogoLinku.substring(48,56);
+            String PjesaF3 = LogoLinku.substring(58,LogoLinku.length());
+            System.out.println(PjesaF1 + PjesaF0 + PjesaF2 +  PjesaF3+ "");
+            logoName =  preferences.getUserId()+"";
+            if(ImageStorage.checkifImageExists(logoName)){
+                // Debugging
+                File file = ImageStorage.getImage("/"+logoName+".jpg");
+                String path = file.getAbsolutePath();
+                if (path != null){
+                    bitmap = BitmapFactory.decodeFile(path);
+                    cLogo.setImageBitmap(bitmap);
+                }
+            } else {
+                new GetImages(PjesaF1 + PjesaF0 + PjesaF2 +PjesaF3 + "", cLogo, logoName).execute() ;
+            }
+        }
+/* ---------------------------------------------------------------------------------------  */
 
         Njesia = (TextView) findViewById(R.id.textView3);
         Ambulantori = (TextView) findViewById(R.id.textView4);
@@ -280,14 +286,14 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         Date cDate = new Date();
         dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cDate);
         fDate = new SimpleDateFormat("dd-MM-yyyy").format(cDate);
-//        try {
-//            CompanyInfo companyInfo = realmHelper.getCompanyInfo();
-//            Glide.with(getApplicationContext()).load(companyInfo.getLogo()).into(binding.cLogoImg);
-//            saveCompanyPic(companyInfo.getLogo());
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            CompanyInfo companyInfo = realmHelper.getCompanyInfo();
+            Glide.with(getApplicationContext()).load(companyInfo.getLogo()).into(binding.cLogoImg);
+            saveCompanyPic(companyInfo.getLogo());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         sync();
     }
 
@@ -308,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(MainActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -676,12 +682,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(clientsResponse -> {
-//                            Glide.with(getApplicationContext()).load(clientsResponse.getCompanyInfo().getLogo()).into(binding.cLogoImg);
+                            Glide.with(getApplicationContext()).load(clientsResponse.getCompanyInfo().getLogo()).into(binding.cLogoImg);
                             realmHelper.saveCompanyInfo(clientsResponse.getCompanyInfo());
                             try {
                                 saveCompanyPic(clientsResponse.getCompanyInfo().getLogo());
                             } catch (Exception e) {
                                 e.printStackTrace();
+                                System.out.println("Nuk po vjen fotoja per logo....");
                             }
                         },
                         throwable -> hideLoader());

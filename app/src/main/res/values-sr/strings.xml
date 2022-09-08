@@ -230,4 +230,45 @@
     <string name="aktiv">активни</string>
 
 
+    <!--    Pjesa per TOASTs   -->
+
+    <string name="language_already_selected">Језик је већ изабран</string>
+    <string name="depozita_u_krye_me_sukses">Депозит је успешно извршен</string>
+    <string name="inkasimi_u_ruajt">Збирка је сачувана</string>
+    <string name="nuk_ka_te_dhena">Нема података</string>
+    <string name="nje_ose_me_shume_artikuj_kan_sasine_zero">Једна или више ставки имају нулту количину</string>
+    <string name="shtoni_se_paku_nje_artikull">Додајте најмање једну ставку!</string>
+    <string name="sheno_sasin">Унесите количину</string>
+    <string name="nuk_keni_sasi_te_mjaftueshme_ne_depo">Немате довољно залиха у магацину</string>
+    <string name="artikulli_eshte_ne_stok">Артикал је на лагеру!</string>
+    <string name="porosia_u_krye_me_sukses">Поруџбина је успешно завршена!</string>
+    <string name="order_was_canceled">Наруџбина је отказана</string>
+    <string name="connection_failed">Веза није успостављена</string>
+    <string name="inkasimi_u_krye_me_sukses">Сакупљање је успешно завршено</string>
+    <string name="inkasimi_nuk_u_ruajt_me_sukses">Уплата није сачувана на серверу!</string>
+    <string name="nuk_stok_te_mjaftueshem">Нема довољно залиха</string>
+    <string name="jipeni_sasin">Дајте количину</string>
+    <string name="zbritja_maksimale">Попуст за купце:  </string>
+    <string name="fatura_esht_ruajtur_dhe_sinkronizuar">Рачун је сачуван и синхронизован!</string>
+    <string name="fatura_esht_ruajtur_por_nuk_esht_sinkronizuar">Фактура је сачувана али није синхронизована!</string>
+    <string name="diqka_shkoj_gabim">Нешто крене наопако!</string>
+    <string name="duhet_te_inkasohet_se_paku">Требало би да се прикупи најмање</string>
+    <string name="kthim_mallit_esht_ruajtur_dhe_sinkronizuar">TПоврат робе се чува и синхронизује</string>
+    <string name="kthim_mallit_esht_ruajtur_por_nuk_esht_sinkronizuar">Поврат робе се чува али није синхронизован</string>
+    <string name="shpenzimi_nuk_u_ruajt_ne_server">Трошак није сачуван на серверу!</string>
+    <string name="shpenzimi_u_ruajt_me_sukses_ne_server">Трошак је успешно сачуван на серверу!</string>
+    <string name="nuk_keni_targete_per_kete_muaj">Немате циљ за овај месец!</string>
+    <string name="transferi_u_dergua_per_shqyrtim">Трансфер је послат на преглед</string>
+    <string name="pershkrim_i_transferit">Опис преноса</string>
+    <string name="shkruaj_nje_pershkrim_opcionale">напишите опис (опционо)</string>
+    <string name="paisja_nuk_ka_bluetooth">Уређај нема блуетоотх</string>
+    <string name="ju_lutem_zgjedhni_klientin">Молимо изаберите купца пре него што додате ставке</string>
+    <string name="ju_lutem_zgjidhni_nje_banke">Изаберите банку</string>
+    <string name="ju_lutem_jepni_vleren_e_paguar">Унесите уплаћену вредност</string>
+    <string name="ju_lutem_kyçuni_ne_internet_që_të_shikoni_porositë">Молимо пријавите се да бисте видели поруџбине!</string>
+    <string name="ju_lutem_plotesoni_te_gjitha_fushat">Молимо Вас да попуните сва поља</string>
+    <string name="zbritja_maksimale_eshte">Максимални попуст је :</string>
+
+
+
 </resources>

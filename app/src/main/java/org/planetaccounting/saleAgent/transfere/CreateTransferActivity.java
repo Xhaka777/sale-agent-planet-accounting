@@ -117,7 +117,7 @@ public class CreateTransferActivity extends AppCompatActivity {
             if (stockItems.size() > 0) {
                 descriptionDialog();
                     } else {
-                Toast.makeText(getApplicationContext(), "Shtoni së paku një artikull!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.shtoni_se_paku_nje_artikull, Toast.LENGTH_SHORT).show();
             }
         } );
         binding.dataLinar.setOnClickListener(v -> getdata() );
@@ -163,7 +163,7 @@ public class CreateTransferActivity extends AppCompatActivity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(CreateTransferActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateTransferActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -320,7 +320,7 @@ public class CreateTransferActivity extends AppCompatActivity {
                     if (!transferCreateResposnse.getSuccess()) {
                         Toast.makeText(getApplicationContext(), transferCreateResposnse.getError().getText(), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Transferi u dergua per shqyrtim!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.transferi_u_dergua_per_shqyrtim, Toast.LENGTH_SHORT).show();
                         finish();
                     }
                     binding.loader.setVisibility(View.GONE);
@@ -348,20 +348,20 @@ public class CreateTransferActivity extends AppCompatActivity {
             AlertDialog alert = alt_bld.create();
             alert.show();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Ju lutem zgjedhni produktin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.ju_lutem_zgjedhni_produktin, Toast.LENGTH_SHORT).show();
         }
     }
 
     public void descriptionDialog() {
 
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        builder.setTitle("Pershkrimi i Transferit");
+        builder.setTitle(R.string.pershkrim_i_transferit);
 
 // Set up the input
         final EditText input = new EditText(this);
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE);
-        input.setHint("shkruaj nje pershkrim(Opcionale)");
+        input.setHint(R.string.shkruaj_nje_pershkrim_opcionale);
         builder.setView(input);
 
 // Set up the buttons

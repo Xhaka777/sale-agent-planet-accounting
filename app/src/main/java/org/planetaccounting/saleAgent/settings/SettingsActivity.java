@@ -38,16 +38,16 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_settings);
         ((Kontabiliteti) getApplication()).getKontabilitetiComponent().inject(this);
-        binding.languageTxt.setText(preferences.getLanguage());
-        binding.changeLanguageButton.setOnClickListener(view -> showTimeAlert());
+//        binding.languageTxt.setText(preferences.getLanguage());
+//        binding.changeLanguageButton.setOnClickListener(view -> showTimeAlert());
         binding.termsPolicyButton.setOnClickListener(view -> startActivity(new Intent(BrowserSupportMethod.getBrowserIntent(termsAndPolicyUrl))));
         binding.printerButton.setOnClickListener(view -> startActivity(new Intent(this, ESCSettingsActivity.class)));
         binding.aboutButton.setOnClickListener(view -> startActivity(new Intent(this, AboutPage.class)));
     }
 
-    private void showTimeAlert() {
-        // Build an AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+//    private void showTimeAlert() {
+//        // Build an AlertDialog
+//        AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
 
 //        // Set a title for alert dialog
 //        builder.setTitle("Choose a color...");
@@ -85,24 +85,24 @@ public class SettingsActivity extends AppCompatActivity {
 //            }
 //        });
 
-        builder.setCancelable(true);
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialogInterface) {
-                dialogInterface.dismiss();
-            }
-        });
+//        builder.setCancelable(true);
+//        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//            @Override
+//            public void onCancel(DialogInterface dialogInterface) {
+//                dialogInterface.dismiss();
+//            }
+//        });
+//
+//        AlertDialog dialog = builder.create();
+//        // Display the alert dialog on interface
+//        dialog.show();
+//    }
 
-        AlertDialog dialog = builder.create();
-        // Display the alert dialog on interface
-        dialog.show();
-    }
-
-    void changeLanguage(String language){
-        localeManager.setNewLanguage(language);
-        Intent newLanguage = new Intent(SettingsActivity.this, MainActivity.class);
-        newLanguage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(newLanguage);
-        finish();
-    }
+//    void changeLanguage(String language){
+//        localeManager.setNewLanguage(language);
+//        Intent newLanguage = new Intent(SettingsActivity.this, MainActivity.class);
+//        newLanguage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(newLanguage);
+//        finish();
+//    }
 }

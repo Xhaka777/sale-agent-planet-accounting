@@ -127,7 +127,7 @@ public class ClientsDetailActivity extends Activity implements DatePickerDialog.
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(ClientsDetailActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ClientsDetailActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 

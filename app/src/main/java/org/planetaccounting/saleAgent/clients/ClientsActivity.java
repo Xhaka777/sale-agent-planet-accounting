@@ -17,6 +17,7 @@ import android.widget.Toast;
 import org.planetaccounting.saleAgent.Kontabiliteti;
 import org.planetaccounting.saleAgent.MainActivity;
 import org.planetaccounting.saleAgent.OrdersActivity;
+import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.ClientsActivityLayoutBinding;
 import org.planetaccounting.saleAgent.events.OpenClientsCardEvent;
@@ -120,7 +121,7 @@ public class ClientsActivity extends Activity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(ClientsActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ClientsActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 //

@@ -145,10 +145,10 @@ public class OrdersActivity extends AppCompatActivity {
                 if (checkSasia()) {
                     createOrder();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Një ose më shum artikuj kan sasine zero", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.nje_ose_me_shume_artikuj_kan_sasine_zero, Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "Shtoni së paku një artikull!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.shtoni_se_paku_nje_artikull, Toast.LENGTH_SHORT).show();
             }
         });
         binding.depoEdittext.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -213,7 +213,7 @@ public class OrdersActivity extends AppCompatActivity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(OrdersActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(OrdersActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -338,7 +338,7 @@ public class OrdersActivity extends AppCompatActivity {
                 try {
                     if (itemBinding.sasiaTextview.getText().length() <= 0) {
                         invoiceItem[0].setSasia("0");
-                        Toast.makeText(OrdersActivity.this, "Sheno sasin", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrdersActivity.this, R.string.sheno_sasin, Toast.LENGTH_SHORT).show();
                     } else {
                         invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString() + "");
                         //Item row index
@@ -359,7 +359,7 @@ public class OrdersActivity extends AppCompatActivity {
                     }
                     fillInvoiceItemData(itemBinding, invoiceItem[0]);
                 } catch (Exception e) {
-                    Toast.makeText(OrdersActivity.this, "Nuk keni sasi te mjaftueshme ne depo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OrdersActivity.this, R.string.nuk_keni_sasi_te_mjaftueshme_ne_depo, Toast.LENGTH_SHORT).show();
                 }
                 //Pjesa e dyte ne errorin e sasis
 //
@@ -532,7 +532,7 @@ public class OrdersActivity extends AppCompatActivity {
 
                         } else {
                             addOrderItem();
-                            Toast.makeText(getApplicationContext(), "Artikulli është në stok!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.artikulli_eshte_ne_stok, Toast.LENGTH_SHORT).show();
                         }
                         binding.loader.setVisibility(View.GONE);
                     }, new Action1<Throwable>() {
@@ -581,7 +581,7 @@ public class OrdersActivity extends AppCompatActivity {
             AlertDialog alert = alt_bld.create();
             alert.show();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Ju lutem zgjedhni produktin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.ju_lutem_zgjedhni_produktin, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -620,7 +620,7 @@ public class OrdersActivity extends AppCompatActivity {
                     if (!invoiceUploadResponse.getSuccess()) {
                         Toast.makeText(getApplicationContext(), invoiceUploadResponse.getError().getText(), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Porosia u krye me sukses!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.porosia_u_krye_me_sukses, Toast.LENGTH_SHORT).show();
                         finish();
                     }
                     binding.loader.setVisibility(View.GONE);
