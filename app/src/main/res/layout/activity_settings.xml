@@ -15,6 +15,7 @@
             android:layout_height="50dp"
             android:background="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -25,39 +26,42 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="19dp"
                 android:text="Settings"
-                android:textColor="#000" />
+                android:textColor="#757575"
+                android:textSize="19sp"
+                android:textStyle="bold"/>
         </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/change_language_Button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_layout"
+            android:layout_height="1dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            >
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/about_Button"
+            android:background="#BCBABA">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:gravity="start|center"
-                android:text="Ndryshoni gjuhën"
-                android:textAllCaps="false"
-                android:textSize="17sp" />
+            <!--            <TextView-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="50dp"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:background="@android:color/white"-->
+            <!--                android:gravity="start|center"-->
+            <!--                android:text="Ndryshoni gjuhën"-->
+            <!--                android:textAllCaps="false"-->
+            <!--                android:textSize="17sp" />-->
 
-            <TextView
-                android:id="@+id/language_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:text="EN"
-                android:textAllCaps="true"
-                android:textColor="#b5b5b5"
-                android:textSize="17sp" />
+            <!--            <TextView-->
+            <!--                android:id="@+id/language_txt"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:background="@android:color/white"-->
+            <!--                android:text="EN"-->
+            <!--                android:textAllCaps="true"-->
+            <!--                android:textColor="#b5b5b5"-->
+            <!--                android:textSize="17sp" />-->
 
         </LinearLayout>
 
@@ -66,6 +70,7 @@
             android:id="@+id/terms_policy_Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/change_language_Button"
@@ -73,15 +78,7 @@
             android:layout_marginRight="16dp"
             >
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:gravity="start|center"
-                android:text="Terms  and Privacy Policy"
-                android:textAllCaps="false"
-                android:textSize="17sp" />
+
 
 
         </LinearLayout>
@@ -90,24 +87,39 @@
             android:id="@+id/printer_Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/change_language_Button"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_layout">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@android:color/white"
+                android:layout_marginLeft="5dp"
                 android:gravity="start|center"
                 android:text="80mm Printer Settings"
                 android:textAllCaps="false"
                 android:textSize="17sp" />
 
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mid_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/printer_Button">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#BCBABA" />
         </LinearLayout>
 
         <LinearLayout
@@ -120,16 +132,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/printer_Button">
 
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@android:color/white"
+                android:layout_marginLeft="5dp"
                 android:gravity="start|center"
                 android:text="About Page"
                 android:textAllCaps="false"
-                android:textSize="17sp"/>
+                android:textSize="17sp"
+                android:textStyle="normal"/>
+
         </LinearLayout>
+
 
     </android.support.constraint.ConstraintLayout>
 </layout>
