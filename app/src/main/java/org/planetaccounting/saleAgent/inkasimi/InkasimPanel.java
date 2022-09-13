@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.planetaccounting.saleAgent.Kontabiliteti;
@@ -57,6 +58,7 @@ public class InkasimPanel extends AppCompatActivity {
     String fDate;
     String dDate;
     private String[] listaemrav;
+
     private String[] listaStationev;
     public ArrayAdapter<String> adapter;
     public ArrayAdapter<String> adapterNjesia;
@@ -68,6 +70,8 @@ public class InkasimPanel extends AppCompatActivity {
     public EditText Comment;
     ProgressBar progressBar;
     Button inkaso;
+
+
 
     @Inject
     RealmHelper realmHelper;
@@ -90,7 +94,7 @@ public class InkasimPanel extends AppCompatActivity {
         Tokeni = extras.getString("token");
         user_id = extras.getString("user_id");
         Clientet = realmHelper.getClients();
-        listaemrav = realmHelper.getClientsNames();
+        listaemrav = realmHelper.getClientsBalance();
 
         ClientList = (AutoCompleteTextView) findViewById(R.id.spinner);
         StationList = (AutoCompleteTextView) findViewById(R.id.Spinner2);
@@ -147,7 +151,7 @@ public class InkasimPanel extends AppCompatActivity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(InkasimPanel.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(InkasimPanel.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -173,7 +177,7 @@ public class InkasimPanel extends AppCompatActivity {
 
     public void Inkasimi(View v) {
         // nese Suksess
-        klienti = realmHelper.getClientFromName(ClientList.getText().toString().split(" nrf:")[0]);//TODO: fix client name search in db with id
+        klienti = realmHelper.getClientFromName(ClientList.getText().toString().split("nfr:")[0]);//TODO: fix client name search in db with id
         String emriKlientit = klienti.getName();
         try {
             station_id = realmHelper.getClientStationIdFromName(emriKlientit, StationList.getText().toString());
@@ -204,12 +208,12 @@ public class InkasimPanel extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(responseBody -> {
                     if (responseBody.getSuccess()) {
-                        Toast.makeText(getApplicationContext(), "Inkasimi u krye me sukses", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.inkasimi_u_krye_me_sukses, Toast.LENGTH_SHORT).show();
                         inkasimiDetail.setSynced(true);
                         getClients();
                     } else {
                         inkasimiDetail.setSynced(false);
-                        Toast.makeText(this, "Inkasimi nuk u rujat ne server!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.inkasimi_nuk_u_ruajt_me_sukses, Toast.LENGTH_SHORT).show();
                     }
                     inkasimiDetail.setSynced(true);
                     inkasimiDetail.setId(realmHelper.getAutoIncrementIfForInkasim());
@@ -217,7 +221,7 @@ public class InkasimPanel extends AppCompatActivity {
                     finish();
                 }, throwable -> {
                     inkasimiDetail.setSynced(false);
-                    Toast.makeText(this, "Inkasimi nuk u rujat ne server!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.inkasimi_nuk_u_ruajt_me_sukses, Toast.LENGTH_SHORT).show();
                     inkasimiDetail.setId(realmHelper.getAutoIncrementIfForInkasim());
                     realmHelper.saveInkasimi(inkasimiDetail);
                     finish();

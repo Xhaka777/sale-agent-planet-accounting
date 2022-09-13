@@ -39,7 +39,9 @@ import org.planetaccounting.saleAgent.vendors.VendorType;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -135,7 +137,6 @@ public class RealmHelper {
         return itemNames;
     }
 
-    //Cope
     public String[] getStockItemsCodes() {
         RealmResults<Item> items = realm.where(Item.class).findAll();
         String[] itemNames = new String[items.size()];
@@ -352,14 +353,23 @@ public class RealmHelper {
     public String[] getClientsNames() {
         RealmResults<Client> clients = realm.where(Client.class).findAll();
         String[] clientNames = new String[clients.size()];
-        String[] finalClientName = new String[clients.size()];
         for (int i = 0; i < clients.size(); i++) {
-            clientNames[i] = clients.get(i).getName() + " nrf:" + clients.get(i).getNumberFiscal() + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + clients.get(i).getBalance();
-//            finalClientName[clients.size()] = clientNames[i].getName();
-//            finalClientName = clientNames[clients.get(i).getName()];
+            clientNames[i] = clients.get(i).getName()+" nrf:"+ clients.get(i).getNumberFiscal();
         }
         return clientNames;
     }
+
+    public String[] getClientsBalance() {
+        RealmResults<Client> clients = realm.where(Client.class).findAll();
+        String[] clientNames = new String[clients.size()];
+        for (int i = 0; i < clients.size(); i++) {
+
+            clientNames[i] = clients.get(i).getName() + " nrf:\t" + clients.get(i).getNumberFiscal() + "\t\t\t\t\t\t" + cutTo2(Double.parseDouble(clients.get(i).getBalance())) + "\t\t\t";
+        }
+        return clientNames;
+    }
+
+
 
 //    public void saveArticleActionItems(List<ActionArticleItems> articleItems) {
 //        realm = Realm.getDefaultInstance();
@@ -395,6 +405,7 @@ public class RealmHelper {
         System.out.println("client name 11" + name);
         return realm.where(Client.class).equalTo("name", name).findAll().get(0);
     }
+
 
     public int getAutoIncrementIfForInvoice() {
         Number currentIdNum = realm.where(InvoicePost.class).equalTo("type", "inv").max("id");
@@ -576,4 +587,7 @@ public class RealmHelper {
                 });
     }
 
+    public double cutTo2(double value) {
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
+    }
 }
