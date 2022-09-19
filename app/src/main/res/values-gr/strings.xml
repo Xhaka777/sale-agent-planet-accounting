@@ -46,7 +46,7 @@
     <string name="action_disconnect">Disconnected</string>
     <string name="action_settings">Settings</string>
     <string name="action_connect">Connect</string>
-    <string name="do_you_want_to_delete_this_article">Θέλετε να διαγράψετε το άρθρο</string>
+    <string name="do_you_want_to_delete_this_article">Θέλετε να διαγράψετε το άρθρο?</string>
 
     <!--    Main part... -->
     <string name="log_out">Αποσύνδεση</string>
