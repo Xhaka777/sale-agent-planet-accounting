@@ -2,6 +2,7 @@ package org.planetaccounting.saleAgent;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -79,8 +80,8 @@ public class OrdersActivity extends AppCompatActivity {
     String stationID = "2";
     int pozitaeArtikullit = 0;
 
-    Locale myLocale ;
-    String currentLanguage = "sq",currentLang;
+    Locale myLocale;
+    String currentLanguage = "sq", currentLang;
     public static final String TAG = "bottom_sheet";
 
 
@@ -199,8 +200,8 @@ public class OrdersActivity extends AppCompatActivity {
 
     //methods to change the languages
 
-    public void setLocale(String localeName){
-        if(!localeName.equals(currentLang)){
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
             Context context = LocaleHelper.setLocale(this, localeName);
             //Resources resources = context.getResources();
             myLocale = new Locale(localeName);
@@ -212,7 +213,7 @@ public class OrdersActivity extends AppCompatActivity {
             Intent refresh = new Intent(this, MainActivity.class);
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
-        }else{
+        } else {
             Toast.makeText(OrdersActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
@@ -488,19 +489,20 @@ public class OrdersActivity extends AppCompatActivity {
         itemBinding.removeButton.setOnClickListener(view ->
 
         {
-            int pos = (int) itemBinding.getRoot().getTag();
-            if (stockItems.size() > 0) {
-                try {
-                    stockItems.remove(pos);
-                } catch (Exception e) {
+            doYouWantToDeleteThisArticleDialog(itemBinding.emertimiTextview.getText().toString(), itemBinding.sasiaTextview.getText().toString(), () -> {
 
+                int pos = (int) itemBinding.getRoot().getTag();
+                if (stockItems.size() > 0) {
+                    try {
+                        stockItems.remove(pos);
+                    } catch (Exception e) {
+
+                    }
                 }
-            }
-            binding.invoiceItemHolder.removeView(itemBinding.getRoot());
+                binding.invoiceItemHolder.removeView(itemBinding.getRoot());
+            });
         });
-        itemBinding.getRoot().
-
-                setTag(binding.invoiceItemHolder.getChildCount());
+        itemBinding.getRoot().setTag(binding.invoiceItemHolder.getChildCount());
         binding.invoiceItemHolder.addView(itemBinding.getRoot());
     }
 
@@ -585,6 +587,28 @@ public class OrdersActivity extends AppCompatActivity {
         }
     }
 
+    private void doYouWantToDeleteThisArticleDialog(String name, String sasia, DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener) {
+        android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(this);
+        mBuilder.setTitle("");
+        String message = R.string.do_you_want_to_delete_this_article + " " + name + " me sasi " + sasia;
+        mBuilder.setMessage(message);
+        mBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        mBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doYouWantToDeleteThisArticleListener.Yes();
+                dialog.cancel();
+            }
+        });
+        mBuilder.show();
+    }
+
     private void createOrder() {
         binding.loader.setVisibility(View.VISIBLE);
         List<OrderItemPost> orderItemPosts = new ArrayList<>();
@@ -666,5 +690,9 @@ public class OrdersActivity extends AppCompatActivity {
                         throwable.printStackTrace();
                     }
                 });
+    }
+
+    interface DoYouWantToDeleteThisArticleListener {
+        void Yes();
     }
 }

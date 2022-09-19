@@ -2,6 +2,7 @@ package org.planetaccounting.saleAgent.kthemallin;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -164,7 +165,7 @@ public class ktheMallin extends AppCompatActivity {
                 binding.njersiaEdittext.setText("--");
                 binding.njersiaEdittext.setEnabled(false);
             }
-            binding.zbritjaKlientit.setText("Zbritja e klientit: " + client.getDiscount() + " %");
+            binding.zbritjaKlientit.setText(R.string.zbritja_maksimale + client.getDiscount() + " %");
         });
 
 
@@ -174,7 +175,7 @@ public class ktheMallin extends AppCompatActivity {
                 addInvoiceItem();
 
             } else {
-                Toast.makeText(getApplicationContext(), "Ju lutem zgjedhni klientin para se ti shtoni artikujt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.ju_lutem_zgjedhni_klientin, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -183,7 +184,7 @@ public class ktheMallin extends AppCompatActivity {
                 returnItems();
 
             } else {
-                Toast.makeText(getApplicationContext(), "Shtoni së paku një artikull!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.shtoni_se_paku_nje_artikull, Toast.LENGTH_SHORT).show();
             }
         });
         printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
@@ -228,7 +229,7 @@ public class ktheMallin extends AppCompatActivity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         } else {
-            Toast.makeText(ktheMallin.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ktheMallin.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -267,8 +268,7 @@ public class ktheMallin extends AppCompatActivity {
 
     }
 
-    private void setRole() {
-
+    private void  setRole() {
 
     }
 
@@ -359,19 +359,23 @@ public class ktheMallin extends AppCompatActivity {
 
         itemBinding.removeButton.setOnClickListener(view ->
         {
-            int pos = (int) itemBinding.getRoot().getTag();
-            if (stockItems.size() > 0) {
-                try {
-                    stockItems.remove(pos);
-                } catch (Exception e) {
+            doYouWantToDeleteThisArticleDialog(itemBinding.emertimiTextview.getText().toString(), itemBinding.sasiaTextview.getText().toString(), ()->{
 
+                int pos = (int) itemBinding.getRoot().getTag();
+                if (stockItems.size() > 0) {
+                    try {
+                        stockItems.remove(pos);
+                    } catch (Exception e) {
+
+                    }
                 }
-            }
-            binding.invoiceItemHolder.removeView(itemBinding.getRoot());
-            calculateTotal();
-            calculateVleraPaTvsh();
-            calculateVleraETVSH();
+                binding.invoiceItemHolder.removeView(itemBinding.getRoot());
+                calculateTotal();
+                calculateVleraPaTvsh();
+                calculateVleraETVSH();
+            });
         });
+
         itemBinding.getRoot().setTag(binding.invoiceItemHolder.getChildCount());
         binding.invoiceItemHolder.addView(itemBinding.getRoot());
     }
@@ -430,8 +434,30 @@ public class ktheMallin extends AppCompatActivity {
             AlertDialog alert = alt_bld.create();
             alert.show();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Ju lutem zgjedhni produktin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.ju_lutem_zgjedhni_produktin, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void doYouWantToDeleteThisArticleDialog(String name, String sasia, DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener){
+        android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(this);
+        mBuilder.setTitle("");
+        String message = getString(R.string.do_you_want_to_delete_this_article) + " " + name + " me sasi " + sasia  ;
+        mBuilder.setMessage(message);
+        mBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        mBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doYouWantToDeleteThisArticleListener.Yes();
+                dialog.cancel();
+            }
+        });
+        mBuilder.show();
     }
 
     private List<Double> calculateValueOfItem(InvoiceItem invoiceItem) {
@@ -663,17 +689,17 @@ public class ktheMallin extends AppCompatActivity {
                 .subscribe(responseBody -> {
                     if (responseBody.getSuccess()) {
                         invoicePost.setSynced(true);
-                        Toast.makeText(getApplicationContext(), "Kthimi i mallit eshte ruajtur dhe sinkronizuar!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.kthim_mallit_esht_ruajtur_dhe_sinkronizuar, Toast.LENGTH_SHORT).show();
                     } else {
                         invoicePost.setSynced(false);
-                        Toast.makeText(getApplicationContext(), "Kthimi i mallit eshte ruajtur por nuk eshte sinkronizuar!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.kthim_mallit_esht_ruajtur_por_nuk_esht_sinkronizuar, Toast.LENGTH_SHORT).show();
                     }
                     realmHelper.returnInvoice(invoicePost);
                 }, throwable -> {
                     throwable.printStackTrace();
                     invoicePost.setSynced(false);
                     realmHelper.returnInvoice(invoicePost);
-                    Toast.makeText(getApplicationContext(), "Kthimi i mallit eshte ruajtur por nuk eshte sinkronizuar!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),  R.string.kthim_mallit_esht_ruajtur_por_nuk_esht_sinkronizuar, Toast.LENGTH_SHORT).show();
                 });
 
 
@@ -714,6 +740,10 @@ public class ktheMallin extends AppCompatActivity {
 
     private void hideLoader() {
         binding.loader.setVisibility(View.GONE);
+    }
+
+    interface DoYouWantToDeleteThisArticleListener{
+        void Yes();
     }
 
 }
