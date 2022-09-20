@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.graphics.Paint;
 import android.os.Build;
@@ -19,6 +21,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -34,9 +37,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.planetaccounting.saleAgent.Kontabiliteti;
+import org.planetaccounting.saleAgent.MainActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.aksionet.ActionArticleItems;
 import org.planetaccounting.saleAgent.aksionet.ActionBrandItem;
@@ -49,6 +54,7 @@ import org.planetaccounting.saleAgent.databinding.InvoiceActivityBinding;
 import org.planetaccounting.saleAgent.databinding.InvoiceItemBinding;
 import org.planetaccounting.saleAgent.escpostprint.EscPostPrintFragment;
 import org.planetaccounting.saleAgent.events.FinishInvoiceActivity;
+import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.InvoiceItem;
 import org.planetaccounting.saleAgent.model.clients.Client;
 import org.planetaccounting.saleAgent.model.invoice.InvoiceItemPost;
@@ -72,7 +78,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
 import javax.inject.Inject;
+
 import io.realm.RealmList;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -86,11 +94,10 @@ import static org.planetaccounting.saleAgent.utils.ActivityPrint.FISCAL_NUMBER;
  */
 
 
-
 public class InvoiceActivityOriginal extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
-    public enum InvoiceState{
-        FATUR,POROSI
+    public enum InvoiceState {
+        FATUR, POROSI
     }
 
     public static final String ACTION_PRINT = "action_print";
@@ -117,7 +124,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     private DatePickerDialog.OnDateSetListener dateSh;
     private Calendar calendar;
 
-    private java.util.Timer timer ;
+    private java.util.Timer timer;
 
     int pageWidth = 595;
     int pageHeight = 842;
@@ -126,18 +133,28 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     String vleraZbritur = "0";
     String vleraETvsh = "0";
     String totaliFatures = "0";
+    String sasiaTotale = "0";
     private PrintManager printManager;
     ActionData actionData;
-    private InvoiceState  invoiceState = InvoiceState.FATUR;
+    private InvoiceState invoiceState = InvoiceState.FATUR;
     String stationID = "2";
 
     PlanetLocationManager planetLocationManager;
 
     private InvoiceRole invoiceRole;
 
-    String[] stocksName ;
+    String[] stocksName;
+    String[] stocksQuantity;
 
     boolean isPrint = true;
+
+    Locale myLocale;
+    String currentLanguage = "sq", currentLang;
+    public static final String TAG = "bottom_sheet";
+
+    int count = 0;
+    int countNoName = 0;
+    int countSasia = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -151,6 +168,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         checkIfHaveData();
 
         getStocksName();
+        getStocksQuantity();
 
         invoiceRole = realmHelper.getRole().getInvoice();
 
@@ -166,7 +184,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
         shopDropDownList();
 
-        setRole();
+//        setRole();
 
         planetLocationManager = new PlanetLocationManager(this);
 
@@ -176,7 +194,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
         // Client Change
         binding.emriKlientit.setOnItemClickListener((adapterView, view, i, l) -> {
-            System.out.println("client name "+ binding.emriKlientit.getText().toString().substring(0, binding.emriKlientit.getText().toString().indexOf(" nrf:")));
+            System.out.println("client name " + binding.emriKlientit.getText().toString().substring(0, binding.emriKlientit.getText().toString().indexOf(" nrf:")));
             client = realmHelper.getClientFromName(binding.emriKlientit.getText().toString().substring(0, binding.emriKlientit.getText().toString().indexOf(" nrf:")));
             if (realmHelper.getClientStations(client.getName()).length > 0) {
                 binding.njersiaEdittext.setAdapter(new ArrayAdapter<String>(this,
@@ -204,13 +222,13 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         // Add item on form
         binding.shtoTextview.setOnClickListener(view -> {
             if (client != null) {
-                if (invoiceState == InvoiceState.POROSI){
+                if (invoiceState == InvoiceState.POROSI) {
                     checkedQuantity();
                 } else {
                     addInvoiceItem();
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "Ju lutem zgjedhni klientin para se ti shtoni artikujt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.ju_lutem_zgjedhni_klientin, Toast.LENGTH_SHORT).show();
             }
         });
         // Print Invoice
@@ -220,10 +238,10 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 if (checkSasia()) {
                     showCashDialog();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Një ose më shum artikuj kan sasine zero", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.nje_ose_me_shume_artikuj_kan_sasine_zero, Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "Shtoni së paku një artikull!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.shtoni_se_paku_nje_artikull, Toast.LENGTH_SHORT).show();
             }
         });
         printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
@@ -235,10 +253,10 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 if (checkSasia()) {
                     showCashDialog();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Një ose më shum artikuj kan sasine zero", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.nje_ose_me_shume_artikuj_kan_sasine_zero, Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "Shtoni së paku një artikull!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.shtoni_se_paku_nje_artikull, Toast.LENGTH_SHORT).show();
             }
         });
         // Send Order
@@ -249,12 +267,12 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 if (checkSasia()) {
                     showBillDialog();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Një ose më shum artikuj kan sasine zero", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.nje_ose_me_shume_artikuj_kan_sasine_zero, Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "Shtoni së paku një artikull!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.shtoni_se_paku_nje_artikull, Toast.LENGTH_SHORT).show();
             }
-            }  );
+        });
         new Handler().postDelayed(() -> {
 
             binding.emriKlientit.showDropDown();
@@ -271,15 +289,38 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 calendar.set(Calendar.MONTH, monthOfYear);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                String  f = new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime());
+                String f = new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime());
                 shDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(calendar.getTime());
                 binding.dataShip.setText(f);
             }
         };
     }
 
-    private void setRole(){
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
+            Context context = LocaleHelper.setLocale(this, localeName);
 
+            myLocale = new Locale(localeName);
+            Resources resources = context.getResources();
+            DisplayMetrics dm = resources.getDisplayMetrics();
+            Configuration conf = resources.getConfiguration();
+            conf.locale = myLocale;
+            resources.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        } else {
+            Toast.makeText(this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+
+    private void setRole() {
+//
 //        if (invoiceRole.getForm().getDate().getShow()==0){
 //            binding.dateContent.setVisibility(View.GONE);
 //        }
@@ -309,7 +350,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
     }
 
-    private void setArticleRole(InvoiceItemBinding itemBinding){
+    private void setArticleRole(InvoiceItemBinding itemBinding) {
 //        if (invoiceRole.getForm().getArticle().getShow()==0){
 //            itemBinding.emertimiTextview.setVisibility(View.GONE);
 //        }
@@ -331,12 +372,21 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 //        }
     }
 
-    private void getStocksName(){
+    private void getStocksName() {
         if (invoiceState == InvoiceState.FATUR) {
             stocksName = realmHelper.getStockItemsName(true);
             stocksName = removeNullElements(stocksName);
-        } else  {
+        } else {
             stocksName = realmHelper.getStockItemsName();
+        }
+    }
+
+    private void getStocksQuantity() {
+        if (invoiceState == InvoiceState.FATUR) {
+            stocksQuantity = realmHelper.getStockItemsQuantity(true);
+            stocksQuantity = removeNullElements(stocksQuantity);
+        } else {
+            stocksQuantity = realmHelper.getStockItemsQuantity();
         }
     }
 
@@ -349,9 +399,9 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     }
 
     // Form Mode | Invoce, Order
-    private void checkIfHaveData(){
+    private void checkIfHaveData() {
 
-        switch (preferences.getLastCheck()){
+        switch (preferences.getLastCheck()) {
             case 0:
                 invoiceState = InvoiceState.FATUR;
                 binding.faturRadio.setChecked(true);
@@ -373,21 +423,21 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
                 break;
 
-                default:
-                    preferences.saveLastCheck(-1);
-                    break;
-                    }
+            default:
+                preferences.saveLastCheck(-1);
+                break;
+        }
     }
 
 
-    private void updateProductQuantity(){
-        if (timer!=null){
+    private void updateProductQuantity() {
+        if (timer != null) {
             timer.cancel();
         }
     }
 
     // Show Date Picker
-    private void getdata(){
+    private void getdata() {
         new DatePickerDialog(this, dateSh, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
@@ -401,14 +451,14 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
             for (int i = 0; i < stockItems.size(); i++) {
 
-                if (sameItem.isEmpty()){
+                if (sameItem.isEmpty()) {
 
                     final InvoiceItem[] invoiceItemt = new InvoiceItem[1];
-                    invoiceItemt[0]  = new InvoiceItem(stockItems.get(i));
+                    invoiceItemt[0] = new InvoiceItem(stockItems.get(i));
                     invoiceItemt[0].setSasia(stockItems.get(i).getSasia());
                     sameItem.add(invoiceItemt[0]);
 
-                } else  {
+                } else {
 
                     boolean isSame = false;
                     for (int j = 0; j < sameItem.size(); j++) {
@@ -418,7 +468,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
                         if (samename.equals(stockname)) {
                             final InvoiceItem[] invoiceItemt = new InvoiceItem[1];
-                            invoiceItemt[0]  = new InvoiceItem(sameItem.get(j));
+                            invoiceItemt[0] = new InvoiceItem(sameItem.get(j));
                             double sasia = Double.parseDouble(stockItems.get(i).getSasia()) + Double.parseDouble(sameItem.get(j).getSasia());
                             invoiceItemt[0].setSasia(String.valueOf(sasia));
                             sameItem.set(j, invoiceItemt[0]);
@@ -426,9 +476,9 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                         }
                     }
 
-                    if (!isSame){
+                    if (!isSame) {
                         final InvoiceItem[] invoiceItemt = new InvoiceItem[1];
-                        invoiceItemt[0]  = new InvoiceItem(stockItems.get(i));
+                        invoiceItemt[0] = new InvoiceItem(stockItems.get(i));
                         invoiceItemt[0].setSasia(stockItems.get(i).getSasia());
                         sameItem.add(invoiceItemt[0]);
                     }
@@ -438,13 +488,13 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
             for (int i = 0; i < sameItem.size(); i++) {
                 final InvoiceItem[] invoiceItemt = new InvoiceItem[1];
-                invoiceItemt[0] =  new InvoiceItem(sameItem.get(i));
+                invoiceItemt[0] = new InvoiceItem(sameItem.get(i));
                 double sasia = Double.parseDouble(sameItem.get(i).getSasia());
                 double availableQuantity = 0;
                 availableQuantity = Double.parseDouble(invoiceItemt[0].getQuantity()) / invoiceItemt[0].getItems().get(invoiceItemt[0].getSelectedPosition()).getRelacion();
 
                 if (!(sasia <= availableQuantity && sasia > 0f)) {
-                    Toast.makeText(getApplicationContext(), sameItem.get(i).getName() + " Nuk ka stok te mjaftueshem ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), sameItem.get(i).getName() + R.string.nuk_stok_te_mjaftueshem, Toast.LENGTH_SHORT).show();
                     return false;
                 }
             }
@@ -484,6 +534,16 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             invoiceItem[0].setSasia("0");
             int pos = (int) itemBinding.getRoot().getTag();
             findCodeAndPosition(invoiceItem[0]);
+
+            //Pjesa per artikujt e zgjedhur (mu count pasi me selektojm emrin e artikullit)
+            count++;
+            countNoName++;
+
+            binding.artikujTeZgjedhur.setText("Nr. i artikujve te zgjedhur : " + (count));
+
+
+//            binding.artikujtSasiaTotale.setText("Sasia totale : " );
+
 
             // Action with Collection
             if (invoiceItem[0].getType().equalsIgnoreCase("action")) {
@@ -544,7 +604,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 calculcation_form();
 
             }
-            });
+        });
         itemBinding.njesiaTextview.setOnClickListener(view -> dialog(invoiceItem[0], itemBinding));
 
         itemBinding.sasiaTextview.addTextChangedListener(new TextWatcher() {
@@ -557,51 +617,53 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
-                if ( invoiceState == InvoiceState.FATUR) {
+                if (invoiceState == InvoiceState.FATUR) {
 
-                        double sasia = 0;
-                        if (itemBinding.sasiaTextview.getText().length() > 0) {
-                            sasia = Double.parseDouble(itemBinding.sasiaTextview.getText().toString());
-                        }
-                        double availableQuantity = 0;
-                         availableQuantity = Double.parseDouble(invoiceItem[0].getQuantity()) / invoiceItem[0].getItems().get(invoiceItem[0].getSelectedPosition()).getRelacion();
-
-                        if (sasia <= availableQuantity && sasia > 0f) {
-                            if (itemBinding.sasiaTextview.getText().length() == 0) {
-                                invoiceItem[0].setSasia("0");
-                            } else {
-                                invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString());
-                                if (invoiceItem[0].isAction() && sasia >= invoiceItem[0].getMinQuantityForDiscount()) {
-                                    invoiceItem[0].setDiscount(invoiceItem[0].getBaseDiscount());
-                                    double totalDiscount = Double.parseDouble(invoiceItem[0].getDiscount())
-                                            + Double.parseDouble(invoiceItem[0].getExtraDiscount());
-                                    invoiceItem[0].setDiscount(String.valueOf(totalDiscount));
-                                } else {
-                                    invoiceItem[0].setDiscount(invoiceItem[0].getBaseDiscount());
-                                }
-                            }
-                            checkIfArticleIsInAction(invoiceItem[0]);
-                            fillInvoiceItemData(itemBinding, invoiceItem[0]);
-                            calculcation_form();
-
-                            calculateTotal();
-                            calculateVleraPaTvsh();
-                            calculateVleraEZbritur();
-                            calculateVleraETVSH();
-                        }else {
-                            invoiceItem[0].setSasia("0");
-                            if (!itemBinding.sasiaTextview.getText().toString().equals("0") && !itemBinding.sasiaTextview.getText().toString().equals("") && !itemBinding.sasiaTextview.getText().toString().isEmpty()){
-                                Toast.makeText(getApplicationContext(),"Nuk keni stok te mjaftueshem ", Toast.LENGTH_SHORT).show();
-                                }
-                        }
+                    double sasia = 0;
+                    if (itemBinding.sasiaTextview.getText().length() > 0) {
+                        sasia = Double.parseDouble(itemBinding.sasiaTextview.getText().toString());
 
                     }
+                    double availableQuantity = 0;
+                    availableQuantity = Double.parseDouble(invoiceItem[0].getQuantity()) / invoiceItem[0].getItems().get(invoiceItem[0].getSelectedPosition()).getRelacion();
+
+                    if (sasia <= availableQuantity && sasia > 0f) {
+                        if (itemBinding.sasiaTextview.getText().length() == 0) {
+                            invoiceItem[0].setSasia("0");
+                        } else {
+                            invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString());
+                            if (invoiceItem[0].isAction() && sasia >= invoiceItem[0].getMinQuantityForDiscount()) {
+                                invoiceItem[0].setDiscount(invoiceItem[0].getBaseDiscount());
+                                double totalDiscount = Double.parseDouble(invoiceItem[0].getDiscount())
+                                        + Double.parseDouble(invoiceItem[0].getExtraDiscount());
+                                invoiceItem[0].setDiscount(String.valueOf(totalDiscount));
+                            } else {
+                                invoiceItem[0].setDiscount(invoiceItem[0].getBaseDiscount());
+                            }
+                        }
+                        checkIfArticleIsInAction(invoiceItem[0]);
+                        fillInvoiceItemData(itemBinding, invoiceItem[0]);
+                        calculcation_form();
+
+                        calculateSasiaTotale();
+                        calculateArtikujtTotal();
+                        calculateTotal();
+                        calculateVleraPaTvsh();
+                        calculateVleraEZbritur();
+                        calculateVleraETVSH();
+                    } else {
+                        invoiceItem[0].setSasia("0");
+                        if (!itemBinding.sasiaTextview.getText().toString().equals("0") && !itemBinding.sasiaTextview.getText().toString().equals("") && !itemBinding.sasiaTextview.getText().toString().isEmpty()) {
+                            Toast.makeText(getApplicationContext(), R.string.nuk_stok_te_mjaftueshem, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                }
 
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
 
 
             }
@@ -611,18 +673,18 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
 
-                if (!hasFocus){
+                if (!hasFocus) {
                     if (invoiceState == InvoiceState.POROSI) {
 
                         binding.loader.setVisibility(View.VISIBLE);
 
-                        String  stockItemId = invoiceItem[0].getItems().get(invoiceItem[0].getSelectedPosition()).getId();
-                        double  sasia1 = Double.parseDouble(itemBinding.sasiaTextview.getText().toString());
+                        String stockItemId = invoiceItem[0].getItems().get(invoiceItem[0].getSelectedPosition()).getId();
+                        double sasia1 = Double.parseDouble(itemBinding.sasiaTextview.getText().toString());
 
 
-                        CheckQuantity checkQuantity = new CheckQuantity(preferences.getUserId(),preferences.getToken(),sasia1 + "",preferences.getStationId(),dDate,stockItemId);
+                        CheckQuantity checkQuantity = new CheckQuantity(preferences.getUserId(), preferences.getToken(), sasia1 + "", preferences.getStationId(), dDate, stockItemId);
 
-                        if (sasia1>0f){
+                        if (sasia1 > 0f) {
                             apiService.checkQuantity(checkQuantity).subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe(invoiceUploadResponse -> {
@@ -633,7 +695,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
                                         } else {
 
-                                            double  sasia = Double.parseDouble(itemBinding.sasiaTextview.getText().toString());
+                                            double sasia = Double.parseDouble(itemBinding.sasiaTextview.getText().toString());
 
 
                                             if (itemBinding.sasiaTextview.getText().length() > 0) {
@@ -657,7 +719,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                                             checkIfArticleIsInAction(invoiceItem[0]);
                                             fillInvoiceItemData(itemBinding, invoiceItem[0]);
 
-                                           calculcation_form();
+                                            calculcation_form();
 
                                         }
                                         binding.loader.setVisibility(View.GONE);
@@ -670,13 +732,13 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                                         }
                                     });
 
-                        }else {
-                            Toast.makeText(getApplicationContext(), "Jipeni sasin", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), R.string.jipeni_sasin, Toast.LENGTH_SHORT).show();
                         }
 
                     }
 
-                    if ( invoiceState == InvoiceState.FATUR) {
+                    if (invoiceState == InvoiceState.FATUR) {
 
                         double sasia = 0;
                         if (itemBinding.sasiaTextview.getText().length() > 0) {
@@ -703,11 +765,13 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                             fillInvoiceItemData(itemBinding, invoiceItem[0]);
                             calculcation_form();
 
+                            calculateSasiaTotale();
+                            calculateArtikujtTotal();
                             calculateTotal();
                             calculateVleraPaTvsh();
                             calculateVleraEZbritur();
                             calculateVleraETVSH();
-                        }else {
+                        } else {
                             invoiceItem[0].setSasia("0");
                             itemBinding.sasiaTextview.setText("0");
                         }
@@ -722,12 +786,12 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
 
-                if (!hasFocus){
-                    if (itemBinding.zbritjaTextview.getText().toString().trim().isEmpty()){
+                if (!hasFocus) {
+                    if (itemBinding.zbritjaTextview.getText().toString().trim().isEmpty()) {
                         itemBinding.zbritjaTextview.setText("0");
-                        invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString(),true);
+                        invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString(), true);
 
-                        }
+                    }
                 }
 
             }
@@ -748,15 +812,15 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             public void afterTextChanged(Editable editable) {
 
 
-                if(!itemBinding.zbritjaTextview.getText().toString().replace("%","").isEmpty()) {
+                if (!itemBinding.zbritjaTextview.getText().toString().replace("%", "").isEmpty()) {
                     float zbritja = Float.parseFloat(itemBinding.zbritjaTextview.getText().toString().replace("%", ""));
                     float discount = Float.parseFloat(invoiceItem[0].getMaxDiscound());
                     if (zbritja > discount) {
-                        fillInvoiceItemData(itemBinding,invoiceItem[0]);
-                        Toast.makeText(getApplicationContext(),"Zbritja maksimale eshte: "+invoiceItem[0].getDiscount(),Toast.LENGTH_SHORT).show();
+                        fillInvoiceItemData(itemBinding, invoiceItem[0]);
+                        Toast.makeText(getApplicationContext(), R.string.zbritja_maksimale_eshte + invoiceItem[0].getDiscount(), Toast.LENGTH_SHORT).show();
                     }
                     if ((zbritja <= discount) && !(zbritja < 0)) {
-                        invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString(),true);
+                        invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString(), true);
                     }
 
 
@@ -766,7 +830,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
         itemBinding.removeButton.setOnClickListener(view ->
         {
-            doYouWantToDeleteThisArticleDialog(itemBinding.emertimiTextview.getText().toString(),itemBinding.sasiaTextview.getText().toString() ,() -> {
+            doYouWantToDeleteThisArticleDialog(itemBinding.emertimiTextview.getText().toString(), itemBinding.sasiaTextview.getText().toString(), () -> {
                 int pos = (int) itemBinding.getRoot().getTag();
                 if (stockItems.size() > 0) {
                     try {
@@ -777,13 +841,15 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 }
                 binding.invoiceItemHolder.removeView(itemBinding.getRoot());
                 calculcation_form();
+                calculateSasiaTotale();
+                calculateArtikujtTotal();
                 calculateTotal();
                 calculateVleraPaTvsh();
                 calculateVleraEZbritur();
                 calculateVleraETVSH();
 
             });
-    });
+        });
         itemBinding.getRoot().setTag(binding.invoiceItemHolder.getChildCount());
         binding.invoiceItemHolder.addView(itemBinding.getRoot());
     }
@@ -794,9 +860,9 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         itemBinding.njesiaTextview.setText(invoiceItem.getSelectedUnit());
         itemBinding.zbritjaTextview.setText(invoiceItem.getDiscount());
         List<Double> amontAndPrice = calculateValueOfItem(invoiceItem);
-        itemBinding.vlera.setText("" + String.format(Locale.ENGLISH,"%.3f", new BigDecimal(amontAndPrice.get(0))));
-        itemBinding.cmimiTvsh.setText("" + String.format(Locale.ENGLISH,"%.3f", new BigDecimal(amontAndPrice.get(1))));
-        itemBinding.basePrice.setText(invoiceItem.getBasePrice() +"");
+        itemBinding.vlera.setText("" + String.format(Locale.ENGLISH, "%.3f", new BigDecimal(amontAndPrice.get(0))));
+        itemBinding.cmimiTvsh.setText("" + String.format(Locale.ENGLISH, "%.3f", new BigDecimal(amontAndPrice.get(1))));
+        itemBinding.basePrice.setText(invoiceItem.getBasePrice() + "");
     }
 
     private void findCodeAndPosition(InvoiceItem invoiceItem) {
@@ -808,7 +874,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 invoiceItem.setSelectedItemCode(invoiceItem.getItems().get(i).getNumber());
                 invoiceItem.setSelectedUnit(invoiceItem.getItems().get(i).getUnit());
                 invoiceItem.setSelectedPosition(checked);
-                System.out.println("sasia11 "+ String.valueOf(invoiceItem.getItems().get(i).getRelacion()));
+                System.out.println("sasia11 " + String.valueOf(invoiceItem.getItems().get(i).getRelacion()));
                 invoiceItem.setRelacion(String.valueOf(invoiceItem.getItems().get(i).getRelacion()));
                 invoiceItem.setBaseDiscount(invoiceItem.getItems().get(i).getDiscount());
                 invoiceItem.setBarcode(invoiceItem.getItems().get(i).getBarcode());
@@ -819,7 +885,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     }
 
     //        this part is for to show DropDown when clicked editText for secound time and more ...
-    private void shopDropDownList(){
+    private void shopDropDownList() {
         binding.emriKlientit.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -854,21 +920,22 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 fillInvoiceItemData(binding, invoiceItem);
                 calculcation_form();
 
-                cheakQuantityForInvoice(invoiceItem,binding);
+                cheakQuantityForInvoice(invoiceItem, binding);
 
                 dialog.dismiss();
             });
             AlertDialog alert = alt_bld.create();
             alert.show();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Ju lutem zgjedhni produktin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.ju_lutem_zgjedhni_produktin, Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void doYouWantToDeleteThisArticleDialog(String name,String sasia,DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener) {
+    private void doYouWantToDeleteThisArticleDialog(String name, String sasia, DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener) {
+        InvoiceItemBinding itemBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.invoice_item, binding.invoiceItemHolder, false);
         android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(this);
         mBuilder.setTitle("");
-        String message = getString(R.string.do_you_want_to_delete_this_article)  + " " + name + " " + sasia;
+        String message = getString(R.string.do_you_want_to_delete_this_article) + " " + name + " me sasi " + sasia;
         mBuilder.setMessage(message);
         // Setting Negative "NO" Button
         mBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -880,18 +947,26 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
         mBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+
+                //Kur te selektojm Po mu discount numri i artikujve te zgjedhur...
+                count++;
+//               count--;
+//               binding.artikujTeZgjedhur.setText("Nr. i artikujve te zgjedhur : " + count);
+
+
                 // Write your code here to invoke NO event
                 doYouWantToDeleteThisArticleListener.Yes();
                 dialog.cancel();
+
             }
         });
         // Showing Alert Message
         mBuilder.show();
     }
 
-    private void cheakQuantityForInvoice(InvoiceItem invoiceItem, InvoiceItemBinding itemBinding){
+    private void cheakQuantityForInvoice(InvoiceItem invoiceItem, InvoiceItemBinding itemBinding) {
 
-        if ( invoiceState == InvoiceState.FATUR) {
+        if (invoiceState == InvoiceState.FATUR) {
 
             double sasia = 0;
             if (itemBinding.sasiaTextview.getText().length() > 0) {
@@ -922,10 +997,10 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 calculateVleraPaTvsh();
                 calculateVleraEZbritur();
                 calculateVleraETVSH();
-            }else {
+            } else {
                 invoiceItem.setSasia("0");
-                if (!itemBinding.sasiaTextview.getText().toString().equals("0")){
-                    Toast.makeText(getApplicationContext(),"Nuk keni stok te mjaftueshem ", Toast.LENGTH_SHORT).show();
+                if (!itemBinding.sasiaTextview.getText().toString().equals("0")) {
+                    Toast.makeText(getApplicationContext(), R.string.nuk_stok_te_mjaftueshem, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -960,15 +1035,15 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
     private List<Double> calculateValueOfItem(InvoiceItem invoiceItem) {
         double amount_with_vat = 0.000;
-        BigDecimal priceSale =BigDecimal.valueOf(amount_with_vat);
-        BigDecimal price_vat_real_sale =BigDecimal.valueOf(amount_with_vat);
+        BigDecimal priceSale = BigDecimal.valueOf(amount_with_vat);
+        BigDecimal price_vat_real_sale = BigDecimal.valueOf(amount_with_vat);
 
         try {
             // Quantity
             BigDecimal quantity = new BigDecimal(invoiceItem.getSasia());
 
             // Price Sale (with VAT) untouchable
-             priceSale = new BigDecimal(invoiceItem.getChildList().get(invoiceItem.getSelectedPosition()).getPriceVatSale());
+            priceSale = new BigDecimal(invoiceItem.getChildList().get(invoiceItem.getSelectedPosition()).getPriceVatSale());
 
             // VAT Rate
             double vat_rate = 0;
@@ -997,9 +1072,9 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             // Price no VAT
             invoiceItem.setVleraPaTvsh(price_base.doubleValue());
             boolean role_price_base_vat_show = true;
-            if(role_price_base_vat_show == true){
+            if (role_price_base_vat_show == true) {
                 invoiceItem.setBasePrice(priceSale.doubleValue());
-            }else{
+            } else {
                 invoiceItem.setBasePrice(price_base.doubleValue());
             }
 
@@ -1073,8 +1148,8 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
         finalValues.add(amount_with_vat);
         finalValues.add(price_vat_real_sale.doubleValue());
-        return  finalValues;
-        }
+        return finalValues;
+    }
 
     private double calculateTvsh(InvoiceItem invoiceItem) {
         double priceSale = Double.parseDouble(invoiceItem.getChildList().get(invoiceItem.getSelectedPosition()).getPriceSale());
@@ -1089,13 +1164,12 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
 
     public double cutTo5(double value) {
-        return Double.parseDouble(String.format(Locale.ENGLISH,"%.5f", value));
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.5f", value));
     }
 
     public double cutTo2(double value) {
-        return Double.parseDouble(String.format(Locale.ENGLISH,"%.2f", value));
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
     }
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -1127,7 +1201,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         invoicePost.setAmount_of_vat(vleraETvsh);
         invoicePost.setAmount_discount(vleraZbritur);
         invoicePost.setAmount_payed(cash);//vlera qe e jep kesh
-        invoicePost.setLocation(planetLocationManager.getLatitude() +","+planetLocationManager.getLongitude());
+        invoicePost.setLocation(planetLocationManager.getLatitude() + "," + planetLocationManager.getLongitude());
         invoicePost.setAmount_with_vat(totaliFatures);
         invoicePost.setId_saler(preferences.getUserId());
         //is bill 0 = fature, 1 = kupon
@@ -1152,7 +1226,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             System.out.println("zbritja " + stockItems.get(i).getDiscount());
             invoiceItemPost.setDiscount(stockItems.get(i).getDiscount());
             invoiceItemPost.setVat_id(stockItems.get(i).getItems().get(stockItems.get(i).getSelectedPosition()).getVatCodeSale());
-            invoiceItemPost.setPrice_base(stockItems.get(i).getBasePrice()+"");
+            invoiceItemPost.setPrice_base(stockItems.get(i).getBasePrice() + "");
             invoiceItemPost.setPrice_vat(String.valueOf(stockItems.get(i).getPriceWithvat()));
             invoiceItemPost.setAmount_of_discount(String.valueOf(stockItems.get(i).getVleraEZbritur()));
             invoiceItemPost.setVat_rate(stockItems.get(i).getItems().get(stockItems.get(i).getSelectedPosition()).getVatRate());
@@ -1172,15 +1246,15 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         invoicePostObject.setUser_id(preferences.getUserId());
         invoicePostObject.setInvoices(invoicePosts);
 
-        if (isPrint){
+        if (isPrint) {
             InvoicePrintUtil util = new InvoicePrintUtil(invoicePost, binding.web, this, client, printManager);
-        } else  {
+        } else {
             binding.fragment.setVisibility(View.VISIBLE);
-            for (Fragment fragment:getSupportFragmentManager().getFragments()
-                 ) {
-                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            for (Fragment fragment : getSupportFragmentManager().getFragments()
+            ) {
+                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
             }
-            addFragment(R.id.fragment, EscPostPrintFragment.Companion.newInstace(invoicePost,preferences,realmHelper,client,cash));
+            addFragment(R.id.fragment, EscPostPrintFragment.Companion.newInstace(invoicePost, preferences, realmHelper, client, cash));
         }
 
         apiService.postFaturat(invoicePostObject)
@@ -1189,17 +1263,17 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 .subscribe(responseBody -> {
                     if (responseBody.getSuccess()) {
                         invoicePost.setSynced(true);
-                        Toast.makeText(getApplicationContext(), "Fatura eshte ruajtur dhe sinkronizuar!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.fatura_esht_ruajtur_dhe_sinkronizuar, Toast.LENGTH_SHORT).show();
                     } else {
                         invoicePost.setSynced(false);
-                        Toast.makeText(getApplicationContext(), "Fatura eshte ruajtur por nuk eshte sinkronizuar!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.fatura_esht_ruajtur_por_nuk_esht_sinkronizuar, Toast.LENGTH_SHORT).show();
                     }
                     realmHelper.saveInvoices(invoicePost);
                 }, throwable -> {
                     throwable.printStackTrace();
                     invoicePost.setSynced(false);
                     realmHelper.saveInvoices(invoicePost);
-                    Toast.makeText(getApplicationContext(), "Fatura eshte ruajtur por nuk eshte sinkronizuar!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.fatura_esht_ruajtur_por_nuk_esht_sinkronizuar, Toast.LENGTH_SHORT).show();
                 });
 
 
@@ -1230,7 +1304,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         invoicePost.setAmount_of_vat(vleraETvsh);
         invoicePost.setAmount_discount(vleraZbritur);
         invoicePost.setAmount_payed(cash);//vlera qe e jep kesh
-        invoicePost.setLocation(planetLocationManager.getLatitude() +","+planetLocationManager.getLongitude());
+        invoicePost.setLocation(planetLocationManager.getLatitude() + "," + planetLocationManager.getLongitude());
         invoicePost.setAmount_with_vat(totaliFatures);
         invoicePost.setId_saler(preferences.getUserId());
         //is bill 0 = fature, 1 = kupon
@@ -1248,7 +1322,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             invoiceItemPost.setQuantity(stockItems.get(i).getSasia());
             invoiceItemPost.setUnit(stockItems.get(i).getSelectedUnit());
 
-            invoiceItemPost.setPrice_base(stockItems.get(i).getBasePrice()+"");
+            invoiceItemPost.setPrice_base(stockItems.get(i).getBasePrice() + "");
             System.out.println("zbritja " + stockItems.get(i).getDiscount());
             invoiceItemPost.setDiscount(stockItems.get(i).getDiscount());
             invoiceItemPost.setVat_id(stockItems.get(i).getItems().get(stockItems.get(i).getSelectedPosition()).getVatCodeSale());
@@ -1271,12 +1345,11 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 .subscribe(responseBody -> {
 
 
-
-                    if(responseBody.getSuccess()) {
-                        Toast.makeText(getApplicationContext(), "Porosia u krye me sukses!", Toast.LENGTH_SHORT).show();
+                    if (responseBody.getSuccess()) {
+                        Toast.makeText(getApplicationContext(), R.string.porosia_u_krye_me_sukses, Toast.LENGTH_SHORT).show();
                         finish();
 
-                    }else {
+                    } else {
                         Toast.makeText(getApplicationContext(), responseBody.getError().getText(), Toast.LENGTH_SHORT).show();
 
                     }
@@ -1284,7 +1357,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 }, throwable -> {
                     throwable.printStackTrace();
 
-                    Toast.makeText(getApplicationContext(), "Diqka shkoj gabim", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.diqka_shkoj_gabim, Toast.LENGTH_SHORT).show();
                 });
 
 
@@ -1323,7 +1396,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             if (InvoiceActivity.isBill.equalsIgnoreCase("1")) {
                 openPrintingActivity();
             } else {
-               showPrintDialog();
+                showPrintDialog();
 //            binding.web.setVisibility(View.VISIBLE);
 //            binding.web.bringToFront();
             }
@@ -1335,7 +1408,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             cash = keshEditText.getText().toString();
             double csh = Double.parseDouble(cash);
             if ((totali - csh) > Double.parseDouble(client.getLimitBalance())) {
-                Toast.makeText(getApplicationContext(), "Duhet te inkasohet se paku " + (totali - Double.parseDouble(client.getLimitBalance())), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), (String.valueOf(R.string.duhet_te_inkasohet_se_paku)) + (totali - Double.parseDouble(client.getLimitBalance())), Toast.LENGTH_SHORT).show();
             } else if (keshEditText.getText().length() > 0) {
                 cash = keshEditText.getText().toString();
                 if (totali == csh) {
@@ -1347,10 +1420,10 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                     openPrintingActivity();
                 } else {
                     alertDialog.dismiss();
-                   showPrintDialog();
+                    showPrintDialog();
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "Ju lutem jepni vleren e paguar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.ju_lutem_jepni_vleren_e_paguar, Toast.LENGTH_SHORT).show();
             }
         });
         alertDialog.show();
@@ -1371,7 +1444,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         keshButton.setText("Fature");
         pritjeButton.setText("Kupon Fiskal");
 
-    AlertDialog    alertDialog = dialogBuilder.create();
+        AlertDialog alertDialog = dialogBuilder.create();
 
         keshButton.setOnClickListener(view -> {
 
@@ -1405,7 +1478,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         LinearLayout buttonHolder = (LinearLayout) dialogView.findViewById(R.id.button_holder);
 
 
-        AlertDialog    alertDialog = dialogBuilder.create();
+        AlertDialog alertDialog = dialogBuilder.create();
 
         print.setOnClickListener(view -> {
             createPostItem(true);
@@ -1445,7 +1518,6 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     }
 
 
-
     private void addActionViews(ArrayList<InvoiceItem> items, int count) {
 
         final InvoiceItem invoiceItem = items.get(0);
@@ -1464,7 +1536,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
             final InvoiceItem[] im = new InvoiceItem[1];
 
-            im[0] =  items.get(h);
+            im[0] = items.get(h);
             im[0].setQuantity(stock.getQuantity());
             stockItems.add(items.get(h));
             ActionInvItemBinding itemBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.action_inv_item, binding.invoiceItemHolder, false);
@@ -1479,7 +1551,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             itemBinding.njesiaTextview.setText(item[0].getUnit());
             itemBinding.sasiaTextview.setText("" + sasia);
             itemBinding.zbritjaTextview.setText(item[0].getDiscount());
-            itemBinding.basePrice.setText(invoiceItem.getBasePrice() +"");
+            itemBinding.basePrice.setText(invoiceItem.getBasePrice() + "");
 
 
             if (h == invoiceItem.getItems().size() - 1) {
@@ -1552,14 +1624,14 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     }
 
 
-    private void checkedQuantity(){
+    private void checkedQuantity() {
         binding.loader.setVisibility(View.VISIBLE);
-        if (stockItems.size()>0){
-            InvoiceItem stock = stockItems.get(stockItems.size()-1);
-            String  stockItemId = stockItems.get(stockItems.size()-1).getItems().get(stockItems.get(stockItems.size()-1).getSelectedPosition()).getId();
+        if (stockItems.size() > 0) {
+            InvoiceItem stock = stockItems.get(stockItems.size() - 1);
+            String stockItemId = stockItems.get(stockItems.size() - 1).getItems().get(stockItems.get(stockItems.size() - 1).getSelectedPosition()).getId();
 
-            CheckQuantity checkQuantity = new CheckQuantity(preferences.getUserId(),preferences.getToken(),stock.getSasia(),preferences.getStationId(),dDate,stockItemId);
-            Log.e("endritiQoke",checkQuantity.toString());
+            CheckQuantity checkQuantity = new CheckQuantity(preferences.getUserId(), preferences.getToken(), stock.getSasia(), preferences.getStationId(), dDate, stockItemId);
+            Log.e("endritiQoke", checkQuantity.toString());
 
             apiService.checkQuantity(checkQuantity).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -1569,7 +1641,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
                         } else {
                             addInvoiceItem();
-                            Toast.makeText(getApplicationContext(), "Artikulli është në stok!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.artikulli_eshte_ne_stok, Toast.LENGTH_SHORT).show();
                         }
                         binding.loader.setVisibility(View.GONE);
                     }, new Action1<Throwable>() {
@@ -1579,7 +1651,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                             throwable.printStackTrace();
                         }
                     });
-        }else {
+        } else {
             binding.loader.setVisibility(View.GONE);
             addInvoiceItem();
 
@@ -1587,16 +1659,18 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     }
 
     // Loading Icon
-        // Show Loading Icon
-        private void showLoader() {
-            binding.loader.setVisibility(View.VISIBLE);
-            binding.loader.bringToFront();
-            binding.loader.setOnClickListener(view -> {        });
-        }
-        // Hide Loading Icon
-        private void hideLoader() {
-            binding.loader.setVisibility(View.GONE);
-        }
+    // Show Loading Icon
+    private void showLoader() {
+        binding.loader.setVisibility(View.VISIBLE);
+        binding.loader.bringToFront();
+        binding.loader.setOnClickListener(view -> {
+        });
+    }
+
+    // Hide Loading Icon
+    private void hideLoader() {
+        binding.loader.setVisibility(View.GONE);
+    }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -1606,9 +1680,9 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 preferences.saveLastCheck(0);
 
                 finish();
-                overridePendingTransition( 0, 0);
+                overridePendingTransition(0, 0);
                 startActivity(getIntent());
-                overridePendingTransition( 0, 0);
+                overridePendingTransition(0, 0);
 
 
                 break;
@@ -1617,9 +1691,9 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 preferences.saveLastCheck(1);
 
                 finish();
-                overridePendingTransition( 0, 0);
+                overridePendingTransition(0, 0);
                 startActivity(getIntent());
-                overridePendingTransition( 0, 0);
+                overridePendingTransition(0, 0);
 
                 break;
 
@@ -1629,40 +1703,40 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     }
 
 
-    private void calculcation_form(){
+    private void calculcation_form() {
         showLoader();
 
 
         // Init
 
-        for (InvoiceItem stock:stockItems) {
-            if(!stock.getType().equals("action")){
+        for (InvoiceItem stock : stockItems) {
+            if (!stock.getType().equals("action")) {
                 stock.setAction(false);
-                }
+            }
         }
         // Action with Amount and Count - Step Action
         allActions();
 
-        for (InvoiceItem stock:stockItems) {
-            if(!stock.getType().equals("action")){
+        for (InvoiceItem stock : stockItems) {
+            if (!stock.getType().equals("action")) {
 
                 final int childCount = binding.invoiceItemHolder.getChildCount();
                 for (int i = 0; i < childCount; i++) {
-                    ViewGroup v =  (ViewGroup) binding.invoiceItemHolder.getChildAt(i);
+                    ViewGroup v = (ViewGroup) binding.invoiceItemHolder.getChildAt(i);
 
                     final int childCount2 = v.getChildCount();
 
                     for (int j = 0; j < childCount2; j++) {
                         View v2 = v.getChildAt(j);
 
-                        if (v2.getId() == R.id.emertimi_textview){
+                        if (v2.getId() == R.id.emertimi_textview) {
                             AutoCompleteTextView emertimi = (AutoCompleteTextView) v2;
-                            if (emertimi.getText().toString().equals(stock.getName())){
+                            if (emertimi.getText().toString().equals(stock.getName())) {
                                 for (int k = 0; k < childCount2; k++) {
                                     View v3 = v.getChildAt(k);
                                     List<Double> amontAndPrice = calculateValueOfItem(stock);
 
-                                    switch (v3.getId()){
+                                    switch (v3.getId()) {
                                         case R.id.zbritja_textview:
                                             AutoCompleteTextView zbirjta = (AutoCompleteTextView) v3;
                                             zbirjta.setText(stock.getDiscount());
@@ -1670,29 +1744,29 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
                                         case R.id.base_price:
                                             AutoCompleteTextView base = (AutoCompleteTextView) v3;
-                                            base.setText(stock.getBasePrice() +"");
+                                            base.setText(stock.getBasePrice() + "");
                                             break;
 
                                         case R.id.cmimi_tvsh:
                                             AutoCompleteTextView cmimitvsh = (AutoCompleteTextView) v3;
 
-                                            cmimitvsh.setText("" +  String.format(Locale.ENGLISH,"%.3f",new BigDecimal(amontAndPrice.get(1))));
+                                            cmimitvsh.setText("" + String.format(Locale.ENGLISH, "%.3f", new BigDecimal(amontAndPrice.get(1))));
                                             break;
 
                                         case R.id.vlera:
                                             AutoCompleteTextView vlera = (AutoCompleteTextView) v3;
-                                            vlera.setText("" + String.format(Locale.ENGLISH,"%.3f",new BigDecimal(amontAndPrice.get(0))));
+                                            vlera.setText("" + String.format(Locale.ENGLISH, "%.3f", new BigDecimal(amontAndPrice.get(0))));
                                             break;
 
                                     }
-                                    }
+                                }
 
-                           }
+                            }
                         }
                     }
 
 
-                    }
+                }
 
             }
 
@@ -1749,13 +1823,13 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         }
         //check brand action
         for (int i = 0; i < actionData.getArticleBrandItem().size(); i++) {
-            if (actionData.getArticleBrandItem().get(i).getType().equals("specific")){
+            if (actionData.getArticleBrandItem().get(i).getType().equals("specific")) {
                 boolean clientCat = actionData.getArticleBrandItem().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleBrandItem().get(i).getClientCategory().equalsIgnoreCase("0");
                 boolean has_brand = invoiceItem.getBrand().equalsIgnoreCase(actionData.getArticleBrandItem().get(i).getBrandId());
-                boolean checkUnit = checkUnitForAction(invoiceItem,actionData.getArticleBrandItem().get(i).getUnit());
+                boolean checkUnit = checkUnitForAction(invoiceItem, actionData.getArticleBrandItem().get(i).getUnit());
 
 
-                if (has_brand && clientCat && checkUnit){
+                if (has_brand && clientCat && checkUnit) {
                     invoiceItem.setAction(true);
                     invoiceItem.setMinQuantityForDiscount(actionData.getArticleBrandItem().get(i).getQuantity());
 //                    invoiceItem.setExtraDiscount(actionData.getArticleBrandItem().get(i).getDiscount());
@@ -1770,7 +1844,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             if (actionData.getArticleCategoryItem().get(i).getType().equals("specific")) {
                 boolean clientCat = actionData.getArticleCategoryItem().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                 boolean has_item_category = invoiceItem.getCategory().equalsIgnoreCase(actionData.getArticleCategoryItem().get(i).getCategoryId());
-                boolean checkUnit = checkUnitForAction(invoiceItem,actionData.getArticleCategoryItem().get(i).getUnit());
+                boolean checkUnit = checkUnitForAction(invoiceItem, actionData.getArticleCategoryItem().get(i).getUnit());
 
                 if (has_item_category && clientCat && checkUnit) {
                     invoiceItem.setAction(true);
@@ -1818,17 +1892,18 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
     }
 
-    public String[] removeNullElements(String[] firstArray){
+    public String[] removeNullElements(String[] firstArray) {
         ArrayList<String> list = new ArrayList<String>();
         for (String s : firstArray)
             if (s != null) {
-                if (!s.equals("")){
+                if (!s.equals("")) {
                     list.add(s);
+                }
             }
-        }
 
         return firstArray = list.toArray(new String[list.size()]);
     }
+
     public void allActions() {
 
         ArticleActionWithAmount();
@@ -1839,19 +1914,19 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
         CategoryActionWithAmount();
         CategoryActionWithQuantity();
-        }
+    }
 
-    public void brandActionWithAmount(){
+    public void brandActionWithAmount() {
 
         //check brand with amount
         for (int i = 0; i < actionData.getArticleBrandItem().size(); i++) {
             if (actionData.getArticleBrandItem().get(i).getType().equals("amount")) {
-                ActionBrandItem brend  = actionData.getArticleBrandItem().get(i);
+                ActionBrandItem brend = actionData.getArticleBrandItem().get(i);
                 float amount = 0;
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleBrandItem().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getBrand().equalsIgnoreCase(actionData.getArticleBrandItem().get(i).getBrandId())
-                            && clientCat && !stockItems.get(j).isAction() ) {
+                            && clientCat && !stockItems.get(j).isAction()) {
                         amount += stockItems.get(j).getVleraTotale();
                     }
                 }
@@ -1859,23 +1934,22 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 // Steps
                 float discount = 0;
 
-                for (ActionSteps steps :brend.getSteps()) {
-                    float from  = Float.parseFloat(steps.from);
-                    float to  = Float.parseFloat(steps.to);
-                    if (( from <= amount) && ( amount <= to ) ){
+                for (ActionSteps steps : brend.getSteps()) {
+                    float from = Float.parseFloat(steps.from);
+                    float to = Float.parseFloat(steps.to);
+                    if ((from <= amount) && (amount <= to)) {
 
-                        if ((discount<Float.parseFloat(steps.discount))){
+                        if ((discount < Float.parseFloat(steps.discount))) {
                             discount = Float.parseFloat(steps.discount);
                         }
                     }
                 }
 
 
-
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleBrandItem().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getBrand().equalsIgnoreCase(actionData.getArticleBrandItem().get(i).getBrandId())
-                            && clientCat && !stockItems.get(j).isAction() ) {
+                            && clientCat && !stockItems.get(j).isAction()) {
 
                         stockItems.get(j).setAction(true);
                         stockItems.get(j).setDiscount(String.valueOf(discount));
@@ -1886,18 +1960,18 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
     }
 
-    public void brandActionWithQuantity(){
+    public void brandActionWithQuantity() {
 
         //check brand with amount
         for (int i = 0; i < actionData.getArticleBrandItem().size(); i++) {
             if (actionData.getArticleBrandItem().get(i).getType().equals("quantity")) {
-                ActionBrandItem brend  = actionData.getArticleBrandItem().get(i);
+                ActionBrandItem brend = actionData.getArticleBrandItem().get(i);
                 float amount = 0;
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleBrandItem().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getBrand().equalsIgnoreCase(actionData.getArticleBrandItem().get(i).getBrandId())
-                            && clientCat && !stockItems.get(j).isAction() ) {
-                        amount ++;
+                            && clientCat && !stockItems.get(j).isAction()) {
+                        amount++;
                     }
                 }
 
@@ -1905,12 +1979,12 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 // Steps
                 float discount = 0;
 
-                for (ActionSteps steps :brend.getSteps()) {
-                    float from  = Float.parseFloat(steps.from);
-                    float to  = Float.parseFloat(steps.to);
-                    if (( from <= amount) && ( amount <= to ) ){
+                for (ActionSteps steps : brend.getSteps()) {
+                    float from = Float.parseFloat(steps.from);
+                    float to = Float.parseFloat(steps.to);
+                    if ((from <= amount) && (amount <= to)) {
 
-                        if ((discount<Float.parseFloat(steps.discount))){
+                        if ((discount < Float.parseFloat(steps.discount))) {
                             discount = Float.parseFloat(steps.discount);
                         }
                     }
@@ -1919,7 +1993,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleBrandItem().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getBrand().equalsIgnoreCase(actionData.getArticleBrandItem().get(i).getBrandId())
-                            && clientCat && !stockItems.get(j).isAction() ) {
+                            && clientCat && !stockItems.get(j).isAction()) {
 
                         stockItems.get(j).setAction(true);
                         stockItems.get(j).setDiscount(String.valueOf(discount));
@@ -1930,17 +2004,17 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
     }
 
-    public void ArticleActionWithAmount(){
+    public void ArticleActionWithAmount() {
 
         //check brand with amount
         for (int i = 0; i < actionData.getArticleItems().size(); i++) {
             if (actionData.getArticleItems().get(i).getType().equals("amount")) {
-                ActionArticleItems article  = actionData.getArticleItems().get(i);
+                ActionArticleItems article = actionData.getArticleItems().get(i);
                 float amount = 0;
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getId().equalsIgnoreCase(actionData.getArticleItems().get(i).getItem_id())
-                            && clientCat && !stockItems.get(j).isAction() ) {
+                            && clientCat && !stockItems.get(j).isAction()) {
                         amount += stockItems.get(j).getVleraTotale();
                     }
                 }
@@ -1948,23 +2022,22 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 // Steps
                 float discount = 0;
 
-                for (ActionSteps steps :article.getSteps()) {
-                    float from  = Float.parseFloat(steps.from);
-                    float to  = Float.parseFloat(steps.to);
-                    if (( from <= amount) && ( amount <= to ) ){
+                for (ActionSteps steps : article.getSteps()) {
+                    float from = Float.parseFloat(steps.from);
+                    float to = Float.parseFloat(steps.to);
+                    if ((from <= amount) && (amount <= to)) {
 
-                        if ((discount<Float.parseFloat(steps.discount))){
+                        if ((discount < Float.parseFloat(steps.discount))) {
                             discount = Float.parseFloat(steps.discount);
                         }
                     }
                 }
 
 
-
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getId().equalsIgnoreCase(actionData.getArticleItems().get(i).getItem_id())
-                            && clientCat && !stockItems.get(j).isAction() ) {
+                            && clientCat && !stockItems.get(j).isAction()) {
                         stockItems.get(j).setAction(true);
                         stockItems.get(j).setDiscount(String.valueOf(discount));
                     }
@@ -1974,30 +2047,30 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
     }
 
-    public void ArticleActionWithQuantity(){
+    public void ArticleActionWithQuantity() {
 
         //check brand with amount
         for (int i = 0; i < actionData.getArticleItems().size(); i++) {
             if (actionData.getArticleItems().get(i).getType().equals("quantity")) {
-                ActionArticleItems article  = actionData.getArticleItems().get(i);
+                ActionArticleItems article = actionData.getArticleItems().get(i);
                 float amount = 0;
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getId().equalsIgnoreCase(actionData.getArticleItems().get(i).getItem_id())
-                            && clientCat && !stockItems.get(j).isAction() ) {
-                        amount ++;
+                            && clientCat && !stockItems.get(j).isAction()) {
+                        amount++;
                     }
                 }
 
                 // Steps
                 float discount = 0;
 
-                for (ActionSteps steps :article.getSteps()) {
-                    float from  = Float.parseFloat(steps.from);
-                    float to  = Float.parseFloat(steps.to);
-                    if (( from <= amount) && ( amount <= to ) ){
+                for (ActionSteps steps : article.getSteps()) {
+                    float from = Float.parseFloat(steps.from);
+                    float to = Float.parseFloat(steps.to);
+                    if ((from <= amount) && (amount <= to)) {
 
-                        if ((discount<Float.parseFloat(steps.discount))){
+                        if ((discount < Float.parseFloat(steps.discount))) {
                             discount = Float.parseFloat(steps.discount);
                         }
                     }
@@ -2006,7 +2079,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getId().equalsIgnoreCase(actionData.getArticleItems().get(i).getItem_id())
-                            && clientCat && !stockItems.get(j).isAction() ) {
+                            && clientCat && !stockItems.get(j).isAction()) {
                         stockItems.get(j).setAction(true);
                         stockItems.get(j).setDiscount(String.valueOf(discount));
                     }
@@ -2016,17 +2089,17 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
     }
 
-    public void CategoryActionWithAmount(){
+    public void CategoryActionWithAmount() {
 
         //check category with amount
         for (int i = 0; i < actionData.getArticleCategoryItem().size(); i++) {
             if (actionData.getArticleCategoryItem().get(i).getType().equals("amount")) {
-                ActionCategoryItem category  = actionData.getArticleCategoryItem().get(i);
+                ActionCategoryItem category = actionData.getArticleCategoryItem().get(i);
                 float amount = 0;
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleCategoryItem().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getCategory().equalsIgnoreCase(actionData.getArticleCategoryItem().get(i).getCategoryId())
-                            && clientCat && !stockItems.get(j).isAction() ) {
+                            && clientCat && !stockItems.get(j).isAction()) {
                         amount += stockItems.get(j).getVleraTotale();
                     }
                 }
@@ -2034,12 +2107,12 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 // Steps
                 float discount = 0;
 
-                for (ActionSteps steps :category.getSteps()) {
-                    float from  = Float.parseFloat(steps.from);
-                    float to  = Float.parseFloat(steps.to);
-                    if (( from <= amount) && ( amount <= to ) ){
+                for (ActionSteps steps : category.getSteps()) {
+                    float from = Float.parseFloat(steps.from);
+                    float to = Float.parseFloat(steps.to);
+                    if ((from <= amount) && (amount <= to)) {
 
-                        if ((discount<Float.parseFloat(steps.discount))){
+                        if ((discount < Float.parseFloat(steps.discount))) {
                             discount = Float.parseFloat(steps.discount);
                         }
                     }
@@ -2049,7 +2122,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleCategoryItem().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getCategory().equalsIgnoreCase(actionData.getArticleCategoryItem().get(i).getCategoryId())
-                            && clientCat && !stockItems.get(j).isAction() ) {
+                            && clientCat && !stockItems.get(j).isAction()) {
                         stockItems.get(j).setAction(true);
                         stockItems.get(j).setDiscount(String.valueOf(discount));
                     }
@@ -2059,30 +2132,30 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
     }
 
-    public void CategoryActionWithQuantity(){
+    public void CategoryActionWithQuantity() {
 
         //check category with amount
         for (int i = 0; i < actionData.getArticleCategoryItem().size(); i++) {
             if (actionData.getArticleCategoryItem().get(i).getType().equals("quantity")) {
-                ActionCategoryItem category  = actionData.getArticleCategoryItem().get(i);
+                ActionCategoryItem category = actionData.getArticleCategoryItem().get(i);
                 float amount = 0;
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleCategoryItem().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getCategory().equalsIgnoreCase(actionData.getArticleCategoryItem().get(i).getCategoryId())
-                            && clientCat && !stockItems.get(j).isAction() ) {
-                        amount ++;
+                            && clientCat && !stockItems.get(j).isAction()) {
+                        amount++;
                     }
                 }
 
                 // Steps
                 float discount = 0;
 
-                for (ActionSteps steps :category.getSteps()) {
-                    float from  = Float.parseFloat(steps.from);
-                    float to  = Float.parseFloat(steps.to);
-                    if (( from <= amount) && ( amount <= to ) ){
+                for (ActionSteps steps : category.getSteps()) {
+                    float from = Float.parseFloat(steps.from);
+                    float to = Float.parseFloat(steps.to);
+                    if ((from <= amount) && (amount <= to)) {
 
-                        if ((discount<Float.parseFloat(steps.discount))){
+                        if ((discount < Float.parseFloat(steps.discount))) {
                             discount = Float.parseFloat(steps.discount);
                         }
                     }
@@ -2092,7 +2165,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 for (int j = 0; j < stockItems.size(); j++) {
                     boolean clientCat = actionData.getArticleCategoryItem().get(i).getClientCategory().equalsIgnoreCase(client.getClientCategory()) || actionData.getArticleItems().get(i).getClientCategory().equalsIgnoreCase("0");
                     if (stockItems.get(j).getCategory().equalsIgnoreCase(actionData.getArticleCategoryItem().get(i).getCategoryId())
-                            && clientCat && !stockItems.get(j).isAction() ) {
+                            && clientCat && !stockItems.get(j).isAction()) {
                         stockItems.get(j).setAction(true);
                         stockItems.get(j).setDiscount(String.valueOf(discount));
                     }
@@ -2100,6 +2173,24 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             }
         }
 
+    }
+
+    public void calculateArtikujtTotal() {
+        double artTotal = 0;
+        for (int i=0;i<stockItems.size();i++){
+            artTotal+= Double.parseDouble(stockItems.get(i).getSelectedItemCode());
+        }
+        this.sasiaTotale = String.valueOf(cutTo2(artTotal));
+        binding.artikujTeZgjedhur.setText("nr. i artikujve te zgjedhur : " + cutTo2(artTotal));
+    }
+
+    public void calculateSasiaTotale() {
+        double quaTotal = 0;
+        for (int i = 0; i < stockItems.size(); i++) {
+            quaTotal += Double.parseDouble(stockItems.get(i).getSasia());
+        }
+        this.sasiaTotale = String.valueOf(cutTo2(quaTotal));
+        binding.artikujtSasiaTotale.setText("Vlera Totale: " + cutTo2(quaTotal));
     }
 
     public void calculateTotal() {
@@ -2110,6 +2201,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         this.totaliFatures = String.valueOf(cutTo2(total));
         binding.vleraTotale.setText("Vlera Totale: " + cutTo2(total));
     }
+
     public void calculateVleraPaTvsh() {
         double vleraPaTvsh = 0;
         for (int i = 0; i < stockItems.size(); i++) {
@@ -2118,6 +2210,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         this.vleraPaTvsh = String.valueOf(cutTo2(vleraPaTvsh));
         binding.vleraPaTvsh.setText("Vlera pa TVSH: " + cutTo2(vleraPaTvsh));
     }
+
     public void calculateVleraEZbritur() {
         double vleraEZbritur = 0;
         for (int i = 0; i < stockItems.size(); i++) {
@@ -2126,6 +2219,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         this.vleraZbritur = String.valueOf(cutTo2(vleraEZbritur));
         binding.vleraEZbritur.setText("Vlera e zbritur: " + cutTo2(vleraEZbritur));
     }
+
     public void calculateVleraETVSH() {
         double vleraETvsh = 0;
         for (int i = 0; i < stockItems.size(); i++) {

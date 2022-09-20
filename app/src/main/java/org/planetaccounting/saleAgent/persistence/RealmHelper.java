@@ -124,6 +124,15 @@ public class RealmHelper {
         return itemNames;
     }
 
+    public String[] getStockItemsQuantity(){
+        RealmResults<Item> items = realm.where(Item.class).findAll();
+        String[] itemQuantities = new String[items.size()];
+        for (int i = 0; i < items.size(); i++){
+            itemQuantities[i] = items.get(i).getQuantity();
+        }
+        return itemQuantities;
+    }
+
     public String[] getStockItemsName(boolean isInvoice) {
         RealmResults<Item> items = realm.where(Item.class).findAll();
         String[] itemNames = new String[items.size()];
@@ -135,6 +144,19 @@ public class RealmHelper {
             }
         }
         return itemNames;
+    }
+
+    public String [] getStockItemsQuantity(boolean isInvoice) {
+        RealmResults<Item> items = realm.where(Item.class).findAll();
+        String [] itemQuantity = new String[items.size()];
+        int count = 0;
+        for(int i  = 0; i < items.size(); i++){
+            if(Double.parseDouble(items.get(i).getQuantity()) > 0){
+                itemQuantity[count] = items.get(i).getQuantity();
+                count++;
+            }
+        }
+        return itemQuantity;
     }
 
     public String[] getStockItemsCodes() {
@@ -257,6 +279,10 @@ public class RealmHelper {
 
     public Item getItemsByName(String name) {
         return realm.where(Item.class).equalTo("name", name).findAll().get(0);
+    }
+
+    public Item getItemsByQuantity(String quantity) {
+        return realm.where(Item.class).equalTo("quantity", quantity).findAll().get(0);
     }
 
     public RealmResults<Item> getItemsByType(String type) {
