@@ -134,6 +134,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     String vleraETvsh = "0";
     String totaliFatures = "0";
     String sasiaTotale = "0";
+    String nrArtikujtTotal = "0";
     private PrintManager printManager;
     ActionData actionData;
     private InvoiceState invoiceState = InvoiceState.FATUR;
@@ -2178,9 +2179,16 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     public void calculateArtikujtTotal() {
         double artTotal = 0;
         for (int i=0;i<stockItems.size();i++){
-            artTotal+= Double.parseDouble(stockItems.get(i).getSelectedItemCode());
+
+            String cap = stockItems.get(i).getName().trim();
+
+            if(cap.length() > 0){
+                artTotal++;
+            }
+
+//            artTotal+= Double.parseDouble(stockItems.get(i).getSelectedItemCode());
         }
-        this.sasiaTotale = String.valueOf(cutTo2(artTotal));
+        this.nrArtikujtTotal = String.valueOf(cutTo2(artTotal));
         binding.artikujTeZgjedhur.setText("nr. i artikujve te zgjedhur : " + cutTo2(artTotal));
     }
 
