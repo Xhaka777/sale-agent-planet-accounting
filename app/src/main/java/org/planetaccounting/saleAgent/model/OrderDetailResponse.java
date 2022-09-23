@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import org.planetaccounting.saleAgent.model.stock.OrderDetailData;
 
 import java.lang.*;
+import java.util.ArrayList;
 
 /**
  * Created by macb on 06/02/18.
@@ -20,7 +21,7 @@ public class OrderDetailResponse {
     public Error error;
     @SerializedName("data")
     @Expose
-    public OrderDetailData data;
+    public ArrayList<OrderDetailItem> data;
 
     public Boolean getSuccess() {
         return success;
@@ -30,7 +31,7 @@ public class OrderDetailResponse {
         return error;
     }
 
-    public OrderDetailData getData() {
+    public ArrayList<OrderDetailItem> getData() {
         return data;
     }
 }

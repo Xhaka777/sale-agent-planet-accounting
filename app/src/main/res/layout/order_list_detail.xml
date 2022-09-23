@@ -4,9 +4,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@android:color/white"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/title"
@@ -29,11 +28,12 @@
                     android:textColor="#000" />
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#E5E5E5"
-               />
+                android:background="#E5E5E5" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -42,33 +42,33 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:background="#f0f0f0"
-                >
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:id="@+id/shifra"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+
                     android:text="@string/shifra"
                     android:textColor="#000" />
-
 
 
                 <ImageView
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#000"/>
+                    android:background="#000" />
 
                 <TextView
                     android:id="@+id/barkod"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
                     android:layout_weight="1"
 
                     android:text="@string/barcode"
@@ -77,14 +77,14 @@
                 <ImageView
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#000"/>
+                    android:background="#000" />
 
                 <TextView
                     android:id="@+id/name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
                     android:layout_weight="1"
 
                     android:text="@string/emri"
@@ -93,29 +93,30 @@
                 <ImageView
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#000"/>
+                    android:background="#000" />
 
                 <TextView
                     android:id="@+id/njesia"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
                     android:layout_weight="1"
 
                     android:text="@string/njesia"
                     android:textColor="#000" />
+
                 <ImageView
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#000"/>
+                    android:background="#000" />
 
                 <TextView
                     android:id="@+id/sasia"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
                     android:layout_weight="1"
 
                     android:text="@string/sasia"
@@ -124,37 +125,38 @@
                 <ImageView
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#000"/>
+                    android:background="#000" />
 
                 <TextView
                     android:id="@+id/cmimi"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
 
-                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
                     android:text="@string/cmimi"
                     android:textColor="#000" />
+
                 <ImageView
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#000"/>
+                    android:background="#000" />
 
                 <TextView
                     android:id="@+id/vlera"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
 
-                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
                     android:text="@string/vlera"
                     android:textColor="#000" />
 
 
-
             </LinearLayout>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -168,7 +170,8 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/title"
             android:background="#fff"
-            android:paddingBottom="40dp" />
+            android:paddingBottom="40dp"
+            android:layout_marginTop="5dp"/>
 
     </RelativeLayout>
 </layout>

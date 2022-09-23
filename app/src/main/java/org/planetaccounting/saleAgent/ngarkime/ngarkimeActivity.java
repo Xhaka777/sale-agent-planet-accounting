@@ -93,14 +93,6 @@ public class ngarkimeActivity extends AppCompatActivity {
         }
     }
 
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -134,8 +126,10 @@ public class ngarkimeActivity extends AppCompatActivity {
     @Subscribe
     public void onEvent(OpenOrderDetailEvent event){
         Intent i = new Intent(getApplicationContext(), UploadDetailActivity.class);
-        String transfer_id  = event.getOrderId();
-        i.putExtra("id", transfer_id );
+        i.putExtra("id",event.getOrderId());
+        i.putExtra("type",event.getOrderType());
+//        String transfer_id  = event.getOrderId();
+//        i.putExtra("id", transfer_id );
         startActivity(i);
     }
 

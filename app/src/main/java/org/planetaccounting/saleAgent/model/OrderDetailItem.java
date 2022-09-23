@@ -24,22 +24,15 @@ public class OrderDetailItem {
     @SerializedName("quantity")
     @Expose
     public String quantity;
-
     @SerializedName("price")
     @Expose
     public float price;
-
-
     @SerializedName("barcode")
     @Expose
     public String barcode;
-
-
     @SerializedName("amount")
     @Expose
     public float amount;
-
-
 
 
 

@@ -37,14 +37,15 @@ public class OrderListDetailAdapter extends RecyclerView.Adapter<OrderListDetail
     public void onBindViewHolder(OrderListDetailAdapter.ViewHolder holder, int position) {
         OrderlistDetailListItemBinding binding = holder.binding;
         double vVlera = Double.parseDouble(String.valueOf(orderDetailItems.get(position).getAmount()));
+        double vSasia = Double.parseDouble(String.valueOf(orderDetailItems.get(position).getQuantity()));
+        double vCmimi = Double.parseDouble(String.valueOf(orderDetailItems.get(position).getPrice()));
 
         binding.shifra.setText(orderDetailItems.get(position).getNumber());
         binding.name.setText(orderDetailItems.get(position).getName());
-        binding.sasia.setText(orderDetailItems.get(position).getQuantity());
+        binding.sasia.setText(""+cutTo2(vSasia));
         binding.barkod.setText(orderDetailItems.get(position).getBarcode());
         binding.njesia.setText(orderDetailItems.get(position).getUnit());
-        binding.cmimi.setText(orderDetailItems.get(position).getPrice() + "");
-//        binding.vlera.setText(orderDetailItems.get(position).getAmount()+"");
+        binding.cmimi.setText(""+cutTo2(vCmimi));
         binding.vlera.setText(""+cutTo2(vVlera));
     }
 
@@ -56,7 +57,7 @@ public class OrderListDetailAdapter extends RecyclerView.Adapter<OrderListDetail
 
     public void setOrders(ArrayList<OrderDetailItem> orderDetailItems) {
         this.orderDetailItems = orderDetailItems;
-        System.out.println("items " + orderDetailItems.size());
+        System.out.println("items " +orderDetailItems.size());
         notifyDataSetChanged();
     }
 

@@ -58,6 +58,7 @@ public class OrdersListActivity extends Activity implements OrdersListAdapter.Ca
         super.onCreate(savedInstanceState);
         binding  = DataBindingUtil.setContentView(this, R.layout.orders_list_activity);
         Kontabiliteti.getKontabilitetiComponent().inject(this);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         binding.invoiceList.setLayoutManager(mLayoutManager);
         adapter = new OrdersListAdapter(orders);

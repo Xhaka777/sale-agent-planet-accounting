@@ -52,10 +52,12 @@ public class OrderListDetail extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = DataBindingUtil.setContentView(this, R.layout.order_list_detail);
         orderId = getIntent().getStringExtra("id");
         orderType = getIntent().getStringExtra("type");
         Kontabiliteti.getKontabilitetiComponent().inject(this);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         binding.invoiceList.setLayoutManager(mLayoutManager);
         adapter = new OrderListDetailAdapter(orderDetailItems);
@@ -93,9 +95,8 @@ public class OrderListDetail extends Activity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(ordersResponse -> {
-                    if (ordersResponse.getData().getItems() != null) {
-                        binding.titleTextivew.setText("Porosia nr:" + ordersResponse.getData().getNoOrder());
-                        this.orderDetailItems = ordersResponse.getData().getItems();
+                    if (ordersResponse.getData() != null) {
+                        this.orderDetailItems = ordersResponse.getData();
                         adapter.setOrders(orderDetailItems);
                     } else  {
                         Toast.makeText(this,R.string.nuk_ka_te_dhena,Toast.LENGTH_SHORT).show();
