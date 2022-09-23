@@ -32,6 +32,7 @@ import org.planetaccounting.saleAgent.model.NotificationPost;
 import org.planetaccounting.saleAgent.model.Token;
 import org.planetaccounting.saleAgent.model.login.LoginData;
 import org.planetaccounting.saleAgent.model.login.LoginPost;
+import org.planetaccounting.saleAgent.model.role.TableStock;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
 import org.planetaccounting.saleAgent.utils.BrowserSupportMethod;
@@ -246,6 +247,7 @@ public class LoginActivity extends AppCompatActivity {
     private String getPassword() {
         return binding.passwordEdittext.getText().toString();
     }
+
     private void startMainActivity(){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);

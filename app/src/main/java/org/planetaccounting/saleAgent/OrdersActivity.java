@@ -590,7 +590,7 @@ public class OrdersActivity extends AppCompatActivity {
     private void doYouWantToDeleteThisArticleDialog(String name, String sasia, DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener) {
         android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(this);
         mBuilder.setTitle("");
-        String message = R.string.do_you_want_to_delete_this_article + " " + name + " me sasi " + sasia;
+        String message = getString(R.string.do_you_want_to_delete_this_article) + " " + name + " me sasi " + sasia;
         mBuilder.setMessage(message);
         mBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             @Override

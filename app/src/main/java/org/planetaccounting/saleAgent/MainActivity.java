@@ -204,29 +204,29 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         cLogo = (ImageView) findViewById(R.id.cLogoImg);
 
         /* ---------------------------------------------------------------------------------------  */
-
-        String LogoLinku = realmHelper.getCompanyInfo().getLogo()+"";
-        if(LogoLinku.length()  < 59){
-
-        }else{
-            String PjesaF1 = LogoLinku.substring(0,48);
-            String PjesaF0 = "logos/";
-            String PjesaF2 = LogoLinku.substring(48,56);
-            String PjesaF3 = LogoLinku.substring(58,LogoLinku.length());
-            System.out.println(PjesaF1 + PjesaF0 + PjesaF2 +  PjesaF3+ "");
-            logoName =  preferences.getUserId()+"";
-            if(ImageStorage.checkifImageExists(logoName)){
-                // Debugging
-                File file = ImageStorage.getImage("/"+logoName+".jpg");
-                String path = file.getAbsolutePath();
-                if (path != null){
-                    bitmap = BitmapFactory.decodeFile(path);
-                    cLogo.setImageBitmap(bitmap);
-                }
-            } else {
-                new GetImages(PjesaF1 + PjesaF0 + PjesaF2 +PjesaF3 + "", cLogo, logoName).execute() ;
-            }
-        }
+//
+//        String LogoLinku = realmHelper.getCompanyInfo().getLogo()+"";
+//        if(LogoLinku.length()  < 59){
+//
+//        }else{
+//            String PjesaF1 = LogoLinku.substring(0,48);
+//            String PjesaF0 = "logos/";
+//            String PjesaF2 = LogoLinku.substring(48,56);
+//            String PjesaF3 = LogoLinku.substring(58,LogoLinku.length());
+//            System.out.println(PjesaF1 + PjesaF0 + PjesaF2 +  PjesaF3+ "");
+//            logoName =  preferences.getUserId()+"";
+//            if(ImageStorage.checkifImageExists(logoName)){
+//                // Debugging
+//                File file = ImageStorage.getImage("/"+logoName+".jpg");
+//                String path = file.getAbsolutePath();
+//                if (path != null){
+//                    bitmap = BitmapFactory.decodeFile(path);
+//                    cLogo.setImageBitmap(bitmap);
+//                }
+//            } else {
+//                new GetImages(PjesaF1 + PjesaF0 + PjesaF2 +PjesaF3 + "", cLogo, logoName).execute() ;
+//            }
+//        }
 /* ---------------------------------------------------------------------------------------  */
 
         Njesia = (TextView) findViewById(R.id.textView3);
@@ -517,8 +517,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
     public void popUpNetwork(View v) {
         if (isConnected) {
             // paisja ka internet thirr upload Faturat.
-            ConnectivityManager manager =
-                    (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = manager.getActiveNetworkInfo();
             isConnected = false;
             if (networkInfo != null && networkInfo.isConnected()) {
@@ -531,8 +530,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
             Toast.makeText(getApplicationContext(), R.string.device_hase_internet_connected, Toast.LENGTH_SHORT).show();
 //                    uploadInvoices();
         } else {
-            ConnectivityManager manager =
-                    (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = manager.getActiveNetworkInfo();
             isConnected = false;
             binding.networkIndicator.setTextColor(Color.parseColor("#a2a2a2"));

@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.planetaccounting.saleAgent.raportet.raportmodels.ReportsList;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -102,8 +104,8 @@ public class Client extends RealmObject implements Parcelable {
     public String getName() {
         return name;
     }
-//
-    public String getUnique_number() {return unique_number; }
+
+    public String getUnique_number() { return unique_number; }
 
     public String getBalance() {
         return balance;
@@ -245,6 +247,15 @@ public class Client extends RealmObject implements Parcelable {
         in.readList(this.stations, Station.class.getClassLoader());
     }
 
+//    public void setClientFromReports(ReportsList reports){
+//
+//        this.logo = reports.logo;
+//        this.number = reports.docNumber;
+//        this.name = reports.partieName;
+//        this.c
+//        this.unique_number = unique_number;
+//    }
+
     public static final Creator<Client> CREATOR = new Creator<Client>() {
         @Override
         public Client createFromParcel(Parcel source) {
@@ -256,4 +267,5 @@ public class Client extends RealmObject implements Parcelable {
             return new Client[size];
         }
     };
+
 }

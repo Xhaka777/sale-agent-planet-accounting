@@ -15,7 +15,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by planetaccounting on 12/08/16.
  */
 public class ServiceFactory {
-    public static final String BASE_URL = "https://www.planetaccounting.org/";
+
+      public static final String BASE_URL = "http://devplanetaccounting.org/";
 
     public static <T> T createRetrofitService(final Class<T> clazz, final String endPoint) {
         Gson gson = new GsonBuilder()

@@ -47,10 +47,11 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
         InvoiceListItemBinding binding = holder.binding;
         double pVlera = Double.parseDouble(invoices.get(position).getAmount_with_vat());
         binding.companyNameTextview.setText(invoices.get(position).getPartie_name());
+        binding.companyUnitTextview.setText(invoices.get(position).getPartie_station_name());
         binding.data.setText(invoices.get(position).getInvoice_date());
         binding.invoiceNr.setText(invoices.get(position).getNo_invoice());
         binding.vlera.setText(""+cutTo2(pVlera));
-//        binding.vlera.setText(invoices.get(position).getAmount_with_vat());
+
         if (invoices.get(position).getSynced()) {
             binding.syncedIndicator.setImageResource(R.drawable.ic_green);
 

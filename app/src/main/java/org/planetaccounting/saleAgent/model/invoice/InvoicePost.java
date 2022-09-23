@@ -41,6 +41,8 @@ public class InvoicePost extends RealmObject {
     String is_bill;
     String location;
     String total_without_discount;
+    String current_page;
+
     RealmList<InvoiceItemPost> items = new RealmList<>();
     boolean synced = false;
     String relacioni;
@@ -163,6 +165,8 @@ public class InvoicePost extends RealmObject {
     public void setData_ship(String data_ship) {
         this.data_ship = data_ship;
     }
+
+    public void setCurrent_page(String current_page) { this.current_page = current_page; }
 
     public RealmList<InvoiceItemPost> getItems() {
         return items;
@@ -300,12 +304,15 @@ public class InvoicePost extends RealmObject {
         this.device_serial_number = device_serial_number;
     }
 
+    public String getCurrent_page() { return current_page; }
+
     public void setInvoiceFromReports(ReportsList reports){
         this.id = reports.id;
         this.no_invoice = reports.docNumber;
         this.amount_with_vat = reports.amount;
         this.partie_name = reports.partieName;
         this.invoice_date = reports.date;
+        this.current_page = reports.currentPage;
         this.synced = true;
         this.isFromServer =  true;
     }
@@ -325,6 +332,7 @@ public class InvoicePost extends RealmObject {
                 ", sale_station_id='" + sale_station_id + '\'' +
                 ", sale_station_name='" + sale_station_name + '\'' +
                 ", invoice_date='" + invoice_date + '\'' +
+                ", currentPage='" + current_page + '\'' +
                 ", discount='" + discount + '\'' +
                 ", is_payed='" + is_payed + '\'' +
                 ", amount_no_vat='" + amount_no_vat + '\'' +

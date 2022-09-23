@@ -218,7 +218,7 @@ public class InvoiceListActivity extends AppCompatActivity {
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
         }else{
-            Toast.makeText(InvoiceListActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(InvoiceListActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -276,7 +276,7 @@ public class InvoiceListActivity extends AppCompatActivity {
                         }
                     }, throwable -> {
                         loader.setVisibility(View.GONE);
-                        Toast.makeText(getApplicationContext(), "Faturat nuk u sinkronizuan!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.fatura_esht_ruajtur_por_nuk_esht_sinkronizuar, Toast.LENGTH_SHORT).show();
                     });
         }
     }

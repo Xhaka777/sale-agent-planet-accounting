@@ -24,6 +24,7 @@ import org.planetaccounting.saleAgent.ngarkime.ngarkimeActivity;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
 import org.planetaccounting.saleAgent.raportet.ReportDetailActivity;
 import org.planetaccounting.saleAgent.services.MyFirebaseMessagingService;
+import org.planetaccounting.saleAgent.settings.AboutPage;
 import org.planetaccounting.saleAgent.settings.SettingsActivity;
 import org.planetaccounting.saleAgent.settings.escpostsettngs.ESCSettingsActivity;
 import org.planetaccounting.saleAgent.shpenzimet.ShpenzimetActivity;
@@ -99,6 +100,7 @@ public interface KontabilitetiComponent {
     void inject(ActionDetailActivity activity);
     void inject(SettingsActivity activity);
     void inject(ESCSettingsActivity activity);
+    void inject(AboutPage activity);
     void inject(MyFirebaseMessagingService service);
 
 }

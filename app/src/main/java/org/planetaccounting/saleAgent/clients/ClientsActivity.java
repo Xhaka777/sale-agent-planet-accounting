@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
@@ -14,15 +16,23 @@ import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
+import java.util.*;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
+
 import org.planetaccounting.saleAgent.Kontabiliteti;
 import org.planetaccounting.saleAgent.MainActivity;
 import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.ClientsActivityLayoutBinding;
+import org.planetaccounting.saleAgent.databinding.ClientsListItemBinding;
+import org.planetaccounting.saleAgent.databinding.InvoiceItemBinding;
 import org.planetaccounting.saleAgent.events.OpenClientsCardEvent;
 import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.clients.Client;
+import org.planetaccounting.saleAgent.model.clients.ClientsResponse;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
 import org.planetaccounting.saleAgent.utils.Preferences;
@@ -30,6 +40,14 @@ import org.planetaccounting.saleAgent.utils.Preferences;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -37,6 +55,7 @@ import javax.inject.Inject;
 
 import io.realm.RealmResults;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -56,6 +75,11 @@ public class ClientsActivity extends Activity {
 
     RealmResults<Client> clients;
     ArrayList<Client> searchResults = new ArrayList<>();
+
+    private Context ctx;
+    ClientsListAdapter clientsListAdapter;
+    List<Client> clientsList = new ArrayList<>();
+    String stationID = "2";
 
     Locale myLocale;
     String currentLanguage = "sq", currentLang;
@@ -99,16 +123,18 @@ public class ClientsActivity extends Activity {
             }
         });
 
-//        getClients();
+        getClients();
 
         currentLanguage = getIntent().getStringExtra(currentLang);
+
+
     }
 
 
     //methods to change the languages
 
-    public void setLocale(String localeName){
-        if(!localeName.equals(currentLang)){
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
             Context context = LocaleHelper.setLocale(this, localeName);
             //Resources resources = context.getResources();
             myLocale = new Locale(localeName);
@@ -120,7 +146,7 @@ public class ClientsActivity extends Activity {
             Intent refresh = new Intent(this, MainActivity.class);
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
-        }else{
+        } else {
             Toast.makeText(ClientsActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
@@ -159,15 +185,16 @@ public class ClientsActivity extends Activity {
         startActivity(i);
 
     }
-//
-//    private void getClients() {
-//        apiService.getClients(new StockPost(preferences.getToken(), preferences.getUserId()))
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(clientsResponse -> {
-//                            adapter.setClients(clientsResponse.getClients());
-//                            realmHelper.saveClients(clientsResponse.getClients());
-//                },
-//                Throwable::printStackTrace);
-//    }
+
+    private void getClients() {
+        apiService.getClients(new StockPost(preferences.getToken(), preferences.getUserId()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(clientsResponse -> {
+                            adapter.setClients(clientsResponse.getClients());
+                            realmHelper.saveClients(clientsResponse.getClients());
+                        },
+                        Throwable::printStackTrace);
+    }
+
 }
