@@ -21,10 +21,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,10 +38,12 @@ import com.google.gson.reflect.TypeToken;
 
 import org.planetaccounting.saleAgent.Kontabiliteti;
 import org.planetaccounting.saleAgent.MainActivity;
-import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
+import org.planetaccounting.saleAgent.bottomsheetreport.BottomSheetReport;
+import org.planetaccounting.saleAgent.databinding.ActivityBottomSheetReportBinding;
 import org.planetaccounting.saleAgent.databinding.InvoiceListActivityBinding;
+import org.planetaccounting.saleAgent.databinding.InvoiceListItemBinding;
 import org.planetaccounting.saleAgent.escpostprint.EscPostPrintFragment;
 import org.planetaccounting.saleAgent.events.RePrintInvoiceEvent;
 import org.planetaccounting.saleAgent.helper.LocaleHelper;
@@ -74,6 +80,9 @@ import rx.schedulers.Schedulers;
 public class InvoiceListActivity extends AppCompatActivity {
 
     private InvoiceListActivityBinding binding;
+    private InvoiceListItemBinding bindingAdapter;
+//    private InvoiceListAdapterBinding
+//    private ActivityBottomSheetReportBinding bindingReport;
 
     @Inject
     RealmHelper realmHelper;
@@ -95,6 +104,8 @@ public class InvoiceListActivity extends AppCompatActivity {
     RelativeLayout loader;
     FrameLayout fragment;
 
+    TextView nr_fatures;
+
     int totalPage = 0;
     int currentPage = 0;
     private boolean isLoading = false;
@@ -105,11 +116,25 @@ public class InvoiceListActivity extends AppCompatActivity {
 
     String from; // 0->Invoice 1->Return
 
+    Button myButton;
+    View myView;
+    boolean isUp;
+    ArrayList<InvoicePost> invoicePostReports;
+    ListView listView;
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.invoice_list_activity);
+
+        myView = findViewById(R.id.my_view);
+        myButton = findViewById(R.id.congif_btn);
+
+        //set the layout per config as invisible
+        myView.setVisibility(View.INVISIBLE);
+        myButton.setText("Konfiguro");
+        isUp = false;
 
         from = getIntent().getStringExtra("from");
         if (from.equals("ret")) {
@@ -122,6 +147,19 @@ public class InvoiceListActivity extends AppCompatActivity {
         Date cDate = new Date();
         dDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
 
+
+//        ImageButton showbottomSheet = (ImageButton) findViewById(R.id.congif_btn);
+//
+//        showbottomSheet.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                BottomSheetFReport fReport = new BottomSheetFReport();
+//                BottomSheetReport report = new BottomSheetReport();
+//                report.show(getSupportFragmentManager(), TAG);
+//            }
+//        });
+
+
         recyclerView = (RecyclerView) findViewById(R.id.invoice_list);
         webView = (WebView) findViewById(R.id.web);
         loader = findViewById(R.id.loader);
@@ -129,6 +167,8 @@ public class InvoiceListActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+//        binding.invoiceNr.setVisibility(View.VISIBLE);
 
         if (from.equals("inv")) {
 
@@ -222,14 +262,67 @@ public class InvoiceListActivity extends AppCompatActivity {
         }
     }
 
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
+    //slide the view from below itself to the current position
+    public void slideUp(View view){
+
+        view.setVisibility(View.VISIBLE);
+        TranslateAnimation animate = new TranslateAnimation(
+                0,0,view.getHeight(),0);
+        animate.setDuration(500);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+    }
+
+    //slide th view from its current position to below itself
+    public void slideDown(View view){
+        TranslateAnimation animate = new TranslateAnimation(
+                0,0,0,view.getHeight());
+        animate.setDuration(500);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+    }
+
+    public void onSlideViewButtonclick(View view){
+
+//        InvoiceListItemBinding bindingAdapterr = new InvoiceListItemBinding();
+
+
+        if(isUp){
+            slideDown(myView);
+            myButton.setText("Konfig");
+            binding.printSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                        binding.invoiceNr.setVisibility(View.VISIBLE);
+//                        bindingAdapterr.invoiceNr.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        binding.invoiceNr.setVisibility(View.GONE);
+//                        bindingAdapter.invoiceNr.setVisibility(View.GONE);
+                    }
+                }
+            });
+
+            binding.clientSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                        binding.client.setVisibility(View.VISIBLE);
+//                        bindingAdapter.companyNameTextview.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        binding.client.setVisibility(View.GONE);
+//                        bindingAdapter.companyNameTextview.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }else{
+            slideUp(myView);
+            myButton.setText("Config");
+        }
+        isUp = !isUp;
+    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -333,6 +426,8 @@ public class InvoiceListActivity extends AppCompatActivity {
                 });
 
     }
+
+
 
     private void getOrderReports() {
 
@@ -605,5 +700,7 @@ public class InvoiceListActivity extends AppCompatActivity {
         }
 
     }
+
+
 
 }
