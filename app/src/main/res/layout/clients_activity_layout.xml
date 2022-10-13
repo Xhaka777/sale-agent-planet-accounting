@@ -20,13 +20,32 @@
                 android:text="@string/lista_klienteve"
                 android:textColor="#000" />
 
+            <!--            <SearchView-->
+            <!--                android:layout_width=""-->
+            <!--                android:layout_height=""-->
+
             <EditText
                 android:id="@+id/search_edittext"
+                android:imeOptions="flagNoFullscreen"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
+                android:layout_weight="1"
                 android:drawableLeft="@android:drawable/ic_menu_search"
                 android:hint="@string/kerko"
                 android:textColor="#000" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/button_rounder_corner_2"
+                android:padding="10dp"
+                android:text="Config"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
         <ImageView
@@ -121,10 +140,10 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/kontakt"
+                android:textAllCaps="true"
                 android:textColor="#000"
                 android:textSize="16dp"
-                android:textStyle="bold"
-                android:textAllCaps="true"/>
+                android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="1dp"
@@ -139,10 +158,10 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/bilanci"
+                android:textAllCaps="true"
                 android:textColor="#000"
                 android:textSize="16dp"
-                android:textStyle="bold"
-                android:textAllCaps="true"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
