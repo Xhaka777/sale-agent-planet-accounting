@@ -18,5 +18,10 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="planetPurple">#664097</color>
+    <color name="planetPurple2">#936AC6</color>
+    <color name="darkGrey_1">#333333</color>
+    <color name="lightGrey_1">#E5E5E5</color>
+
 
 </resources>
