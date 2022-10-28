@@ -1,6 +1,7 @@
 package org.planetaccounting.saleAgent.clients;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -10,12 +11,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +32,9 @@ import org.planetaccounting.saleAgent.MainActivity;
 import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
+import org.planetaccounting.saleAgent.clients.infos.FragmentAdapter;
+import org.planetaccounting.saleAgent.databinding.ClientLocationLayoutBinding;
+import org.planetaccounting.saleAgent.databinding.ClientUnitItemBinding;
 import org.planetaccounting.saleAgent.databinding.ClientsActivityLayoutBinding;
 import org.planetaccounting.saleAgent.databinding.ClientsListItemBinding;
 import org.planetaccounting.saleAgent.databinding.InvoiceItemBinding;
@@ -62,74 +71,77 @@ import rx.schedulers.Schedulers;
  * Created by planetaccounting on 13/12/17.
  */
 
-public class ClientsActivity extends Activity {
+public class ClientsActivity extends AppCompatActivity {
 
     ClientsActivityLayoutBinding binding;
+    ClientLocationLayoutBinding bindingLocation;
+
     @Inject
     ApiService apiService;
     @Inject
     Preferences preferences;
     @Inject
     RealmHelper realmHelper;
-    ClientsListAdapter adapter;
 
     RealmResults<Client> clients;
     ArrayList<Client> searchResults = new ArrayList<>();
 
     private Context ctx;
-    ClientsListAdapter clientsListAdapter;
-    List<Client> clientsList = new ArrayList<>();
     String stationID = "2";
+
+    private DatePickerDialog.OnDateSetListener dateSh;
+    private Calendar calendar;
+    private java.util.Timer timer;
+
+    String fDate;
+    String dDate;
+    String shDate;
+
 
     Locale myLocale;
     String currentLanguage = "sq", currentLang;
     public static final String TAG = "bottom_sheet";
 
+    TabLayout tabLayout ;
+    ViewPager viewPager;
+    FragmentAdapter viewPagerAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, org.planetaccounting.saleAgent.R.layout.clients_activity_layout);
+        binding = DataBindingUtil.setContentView(this, R.layout.clients_activity_layout);
         Kontabiliteti.getKontabilitetiComponent().inject(this);
         clients = realmHelper.getClients();
 
-        adapter = new ClientsListAdapter();
-        binding.articleRecyler.setAdapter(adapter);
-        binding.articleRecyler.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setClients(clients);
-        binding.searchEdittext.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        //pjesa per paraqitjen e dates aktuale kur krijojme kliente...
+        Date cDate = new Date();
+        calendar = Calendar.getInstance();
 
-            }
+        fDate = new SimpleDateFormat("dd-MM-yyyy").format(cDate);
+        dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cDate);
+//        binding.numriKlientit.setText(preferences.);
+//        binding.dataEdittext.setText(fDate);
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                searchResults.clear();
-                for (int j = 0; j < clients.size(); j++) {
-                    if (clients.get(j).getName().toLowerCase().startsWith(charSequence.toString().toLowerCase())) {
-                        searchResults.add(clients.get(j));
-                    }
-                }
-                if (charSequence.length() > 0) {
-                    adapter.setClients(searchResults);
-                } else {
-                    adapter.setClients(clients);
-                }
-            }
+//        ViewPager viewPager = findViewById(R.id.viewpager);
+//        FragmentAdapter fragmentadapter=new FragmentAdapter(getSupportFragmentManager());
+//        viewPager.setAdapter(fragmentadapter);
+//
+//        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
+//        tabLayout.setupWithViewPager(viewPager);
 
-            @Override
-            public void afterTextChanged(Editable editable) {
 
-            }
-        });
+        viewPager = findViewById(R.id.viewpager);
+        tabLayout = findViewById(R.id.sliding_tabs);
 
-        getClients();
+        viewPagerAdapter = new FragmentAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
 
-        currentLanguage = getIntent().getStringExtra(currentLang);
+        //connect TabLayout with ViewPager
+        tabLayout.setupWithViewPager(viewPager);
+
 
 
     }
-
 
     //methods to change the languages
 
@@ -150,15 +162,6 @@ public class ClientsActivity extends Activity {
             Toast.makeText(ClientsActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
-//
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -186,15 +189,15 @@ public class ClientsActivity extends Activity {
 
     }
 
-    private void getClients() {
-        apiService.getClients(new StockPost(preferences.getToken(), preferences.getUserId()))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(clientsResponse -> {
-                            adapter.setClients(clientsResponse.getClients());
-                            realmHelper.saveClients(clientsResponse.getClients());
-                        },
-                        Throwable::printStackTrace);
-    }
+//    private void getClients() {
+//        apiService.getClients(new StockPost(preferences.getToken(), preferences.getUserId()))
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(clientsResponse -> {
+//                            adapter.setClients(clientsResponse.getClients());
+//                            realmHelper.saveClients(clientsResponse.getClients());
+//                        },
+//                        Throwable::printStackTrace);
+//    }
 
 }

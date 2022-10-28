@@ -105,10 +105,16 @@ public class Client extends RealmObject implements Parcelable {
         return name;
     }
 
-    public String getUnique_number() { return unique_number; }
+    public String getUnique_number() {
+        return unique_number;
+    }
 
     public String getBalance() {
         return balance;
+    }
+
+    public void setBalance(String balance){
+        this.balance = balance;
     }
 
     public String getLogo() {
@@ -121,6 +127,10 @@ public class Client extends RealmObject implements Parcelable {
 
     public String getNumberBusniess() {
         return numberBusniess;
+    }
+
+    public void setNumberBusniess(String numberBusniess){
+        this.numberBusniess = numberBusniess;
     }
 
     public String getNumberVat() {
@@ -163,6 +173,13 @@ public class Client extends RealmObject implements Parcelable {
         return stations;
     }
 
+    public void setStations(RealmList<Station> stations) {
+        this.stations = stations;
+    }
+
+    public void setStations() {
+    }
+
     public String getDiscount() {
         return discount;
     }
@@ -184,6 +201,18 @@ public class Client extends RealmObject implements Parcelable {
     }
 
     public Client() {
+    }
+
+    public Client(Client client){
+        this.id = client.id;
+        this.isCompany = client.isCompany;
+        this.name = client.name;
+        this.unique_number = client.unique_number;
+        this.balance = client.balance;
+        this.logo = client.logo;
+        this.numberFiscal = client.numberFiscal;
+        this.numberBusniess = client.numberBusniess;
+        this.stations = client.stations;
     }
 
 

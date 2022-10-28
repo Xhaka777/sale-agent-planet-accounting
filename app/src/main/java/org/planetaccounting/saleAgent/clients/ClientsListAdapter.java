@@ -6,10 +6,13 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
@@ -21,6 +24,7 @@ import org.planetaccounting.saleAgent.model.clients.Client;
 
 import org.greenrobot.eventbus.EventBus;
 import org.planetaccounting.saleAgent.model.clients.ClientsResponse;
+import org.planetaccounting.saleAgent.model.invoice.InvoicePost;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
 import org.planetaccounting.saleAgent.utils.Preferences;
@@ -36,6 +40,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.logging.LogRecord;
 
 import javax.inject.Inject;
 
@@ -47,11 +53,12 @@ import rx.schedulers.Schedulers;
  * Created by macb on 13/12/17.
  */
 
-public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.ViewHolder> {
+public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.ViewHolder> implements Filterable {
 
     private List<Client> clients = new ArrayList<>();
+    private List<Client> clientFull = new ArrayList<>();
     private Context ctx;
-
+    private LayoutInflater mInflater;
 
     @Override
     public ClientsListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -59,6 +66,17 @@ public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.
         ClientsListItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(ctx),
                 org.planetaccounting.saleAgent.R.layout.clients_list_item, parent, false);
         return new ClientsListAdapter.ViewHolder(binding);
+    }
+
+    ClientsListAdapter(List<Client> clients){
+        this.clients = clients;
+        clientFull = new ArrayList<>(clients);
+    }
+
+    public ClientsListAdapter(Context context, @NonNull List<Client> clientList){
+        this.clients = clientList;
+        mInflater = LayoutInflater.from(context);
+        ctx = context;
     }
 
     @Override
@@ -106,7 +124,44 @@ public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.
         notifyDataSetChanged();
     }
 
-static class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Client> filteredList = new ArrayList<>();
+
+            if(constraint == null || constraint.length() == 0){
+                filteredList.addAll(clientFull);
+            }else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for(Client client : clientFull){
+                    if(client.getName().toLowerCase().contains(filterPattern)){
+                        filteredList.add(client);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return  results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            clients.clear();
+            clients.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
     private ClientsListItemBinding binding;
 
     ViewHolder(ClientsListItemBinding binding) {
