@@ -76,12 +76,14 @@ public class ShpenzimetActivity extends AppCompatActivity implements DatePickerD
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
+
+        shopDropDownList();
+
         datePickerDialog = new DatePickerDialog(
                 ShpenzimetActivity.this, this, year , month, day);
         datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         binding.data.setOnClickListener(view -> datePickerDialog.show());
 
-        shopDropDownList();
         binding.buttonInkaso.setOnClickListener(view -> {
             if (salerPos < 1000 && binding.shumaEditText.getText().length() > 0) {
                 postVendor();
@@ -128,15 +130,6 @@ public class ShpenzimetActivity extends AppCompatActivity implements DatePickerD
         }
     }
 
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LocaleHelper.onAttach(newBase));
@@ -166,7 +159,8 @@ public class ShpenzimetActivity extends AppCompatActivity implements DatePickerD
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        Toast.makeText(ShpenzimetActivity.this, R.string.shpenzimi_nuk_u_ruajt_ne_server, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(ShpenzimetActivity.this, R.string.shpenzimi_nuk_u_ruajt_ne_server, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShpenzimetActivity.this, "shpenzimi borxh nuk u rujt kerka", Toast.LENGTH_SHORT).show();
                         vendorPosts.get(0).setSynced(false);
                         vendorPosts.get(0).setId(realmHelper.getAutoIncrementIfForVendor());
                         realmHelper.saveVendor(vendorPosts.get(0));

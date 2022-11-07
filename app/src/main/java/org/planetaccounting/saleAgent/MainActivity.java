@@ -189,8 +189,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         binding.main.sync.setOnClickListener(view -> sync());
         binding.loader.setOnClickListener(view -> {
         });
-        binding.main.settingsButton.setOnClickListener(view -> {   Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(i);});
+        binding.main.settingsButton.setOnClickListener(view -> {
+            Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(i);
+        });
         //Kontrollerat e internetit
         binding.connectivityTextivew.setTypeface(typeface);
         binding.networkIndicator.setTypeface(typeface);
@@ -227,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
 //                new GetImages(PjesaF1 + PjesaF0 + PjesaF2 +PjesaF3 + "", cLogo, logoName).execute() ;
 //            }
 //        }
-/* ---------------------------------------------------------------------------------------  */
+        /* ---------------------------------------------------------------------------------------  */
 
         Njesia = (TextView) findViewById(R.id.textView3);
         Ambulantori = (TextView) findViewById(R.id.textView4);
@@ -247,7 +249,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
 //                fragment.show(getSupportFragmentManager(), TAG);
 //            }
 //        });
-
 
 
         new AsyncTask<Boolean, Boolean, Boolean>() {
@@ -300,8 +301,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
 
     //methods to change the languages
 
-    public void setLocale(String localeName){
-        if(!localeName.equals(currentLang)){
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
             Context context = LocaleHelper.setLocale(this, localeName);
             //Resources resources = context.getResources();
             myLocale = new Locale(localeName);
@@ -313,26 +314,15 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
             Intent refresh = new Intent(this, MainActivity.class);
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
-        }else{
+        } else {
             Toast.makeText(MainActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
-
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
-
-
 
     String fDate;
 
@@ -749,35 +739,33 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
 
         if (unSyncedReturnList.size() > 0) {
 
-        ReturnPostObject returnPostObject = new ReturnPostObject();
-        returnPostObject.setToken(preferences.getToken());
-        returnPostObject.setUser_id(preferences.getUserId());
-        returnPostObject.setRetrunPost(unSyncedReturnList);
-        apiService.postReturn(returnPostObject)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(responseBody -> {
-                    if (responseBody.getSuccess()) {
-                        for (int i = 0; i < unSyncedReturnList.size(); i++) {
-                            unSyncedReturnList.get(i).setSynced(true);
-                            realmHelper.saveInvoices(unSyncedReturnList.get(i));
+            ReturnPostObject returnPostObject = new ReturnPostObject();
+            returnPostObject.setToken(preferences.getToken());
+            returnPostObject.setUser_id(preferences.getUserId());
+            returnPostObject.setRetrunPost(unSyncedReturnList);
+            apiService.postReturn(returnPostObject)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(responseBody -> {
+                        if (responseBody.getSuccess()) {
+                            for (int i = 0; i < unSyncedReturnList.size(); i++) {
+                                unSyncedReturnList.get(i).setSynced(true);
+                                realmHelper.saveInvoices(unSyncedReturnList.get(i));
+                            }
+                            uploadInvoices();
+                        } else {
+                            hideLoader();
+                            Toast.makeText(getApplicationContext(), responseBody.getError().getText(), Toast.LENGTH_SHORT).show();
                         }
-                        uploadInvoices();
-                    } else {
+                    }, throwable -> {
                         hideLoader();
-                        Toast.makeText(getApplicationContext(), responseBody.getError().getText(), Toast.LENGTH_SHORT).show();
-                    }
-                }, throwable -> {
-                    hideLoader();
-                    sendError(throwable);
-                });
-    } else
+                        sendError(throwable);
+                    });
+        } else {
+            uploadInvoices();
+        }
 
-    {
-        uploadInvoices();
     }
-
-}
 
 
     private void uploadInvoices() {
@@ -826,7 +814,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
     }
 
     public double cutTo2(double value) {
-        return Double.parseDouble(String.format(Locale.ENGLISH,"%.2f", value));
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
     }
 
     String dDate;
@@ -1051,10 +1039,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
     }
 
     private void saveCompanyPic(String src) {
-        new  AsyncTask<Void, Void, Void>() {
+        new AsyncTask<Void, Void, Void>() {
 
             @Override
-            protected Void  doInBackground(Void... voids) {
+            protected Void doInBackground(Void... voids) {
                 System.out.println("download image ");
                 InputStream in = null;
                 OutputStream out = null;
@@ -1125,7 +1113,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
                 });
     }
 
-    private void checkDeviceDisplaySize(){
+    private void checkDeviceDisplaySize() {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -1133,7 +1121,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         int mHeightPixels = size.y;
 
         DisplayMetrics dm = new DisplayMetrics();
-       getWindowManager().getDefaultDisplay().getMetrics(dm);
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
         double x = Math.pow(mWidthPixels / dm.xdpi, 2);
         double y = Math.pow(mHeightPixels / dm.ydpi, 2);
 
@@ -1144,8 +1132,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         }
     }
 
-    void registerDevice(String newToken){
-        apiService.deleteDevice(new NotificationPost(preferences.getToken(), preferences.getUserId(),preferences.getDeviceid(),"",""))
+    void registerDevice(String newToken) {
+        apiService.deleteDevice(new NotificationPost(preferences.getToken(), preferences.getUserId(), preferences.getDeviceid(), "", ""))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(transferDetailRespose -> {
@@ -1181,44 +1169,57 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onClick(int title, int positon) {
-        switch (title){
-            case R.string.title_fatura:openInvoiceActivity();
-            break;
-
-            case R.string.title_stoku:openStockActivity();
+        switch (title) {
+            case R.string.title_fatura:
+                openInvoiceActivity();
                 break;
 
-            case R.string.title_inkasimi:InkasimiPanel();
+            case R.string.title_stoku:
+                openStockActivity();
                 break;
 
-            case R.string.title_depozita:openDepozit();
+            case R.string.title_inkasimi:
+                InkasimiPanel();
                 break;
 
-            case R.string.title_raportet:openRaportActivity();
+            case R.string.title_depozita:
+                openDepozit();
                 break;
 
-            case R.string.title_kthimMalli:openKtheMallinActivity();
+            case R.string.title_raportet:
+                openRaportActivity();
                 break;
 
-            case R.string.title_transfere:openTransferOrder();
+            case R.string.title_kthimMalli:
+                openKtheMallinActivity();
                 break;
 
-            case R.string.title_klientet:openClientsActivity();
+            case R.string.title_transfere:
+                openTransferOrder();
                 break;
 
-            case R.string.title_target:openTargetActivity();
+            case R.string.title_klientet:
+                openClientsActivity();
                 break;
 
-            case R.string.title_porositeInterne:openOrderActivity();
+            case R.string.title_target:
+                openTargetActivity();
                 break;
 
-            case R.string.title_ngarkimet:openNgarkimeOrder();
+            case R.string.title_porositeInterne:
+                openOrderActivity();
                 break;
 
-            case R.string.title_shpenzimet:openShpenzimetActivity();
+            case R.string.title_ngarkimet:
+                openNgarkimeOrder();
                 break;
 
-            case R.string.title_aksionet:openAksionetActivity();
+            case R.string.title_shpenzimet:
+                openShpenzimetActivity();
+                break;
+
+            case R.string.title_aksionet:
+                openAksionetActivity();
                 break;
 
 

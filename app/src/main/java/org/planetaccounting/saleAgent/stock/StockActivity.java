@@ -14,8 +14,11 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
@@ -26,6 +29,12 @@ import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.StockMainLayoutBinding;
 import org.planetaccounting.saleAgent.helper.LocaleHelper;
+import org.planetaccounting.saleAgent.model.Token;
+import org.planetaccounting.saleAgent.model.login.LoginData;
+import org.planetaccounting.saleAgent.model.login.LoginPost;
+import org.planetaccounting.saleAgent.model.role.InvoiceRole;
+import org.planetaccounting.saleAgent.model.role.Stock;
+import org.planetaccounting.saleAgent.model.role.TableStock;
 import org.planetaccounting.saleAgent.model.stock.Item;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
 import org.planetaccounting.saleAgent.utils.ClientCardPrintUtil;
@@ -38,6 +47,8 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import io.realm.RealmResults;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by macb on 09/12/17.
@@ -109,6 +120,7 @@ public class StockActivity extends Activity {
                 }
         );
 
+//        setRole();
 
         currentLanguage = getIntent().getStringExtra(currentLang);
     }
@@ -132,15 +144,6 @@ public class StockActivity extends Activity {
             Toast.makeText(StockActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
-
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
