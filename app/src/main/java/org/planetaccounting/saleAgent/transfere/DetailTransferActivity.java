@@ -62,43 +62,43 @@ public class DetailTransferActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        transferId = getIntent().getIntExtra("transferId",0);
-        from = getIntent().getIntExtra("from",0);
+        transferId = getIntent().getIntExtra("transferId", 0);
+        from = getIntent().getIntExtra("from", 0);
         type = getIntent().getStringExtra("type");
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_detail_transfer);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_detail_transfer);
         Kontabiliteti.getKontabilitetiComponent().inject(this);
 
         binding.barTitle.setText("Transfer Detail");
 
-        if (from == 1){
+        if (from == 1) {
             binding.acceptOtherTransfer.setVisibility(View.INVISIBLE);
-            }
+        }
 
-        if (type.equals("tp")){
+        if (type.equals("tp")) {
             binding.acceptOtherTransfer.setVisibility(View.INVISIBLE);
             binding.cancelOtherTransfer.setVisibility(View.INVISIBLE);
         }
 
 
         binding.cancelOtherTransfer.setOnClickListener(view ->
-                dialog("anuloni transferin ",true)
+                dialog("anuloni transferin ", true)
         );
 
         binding.acceptOtherTransfer.setOnClickListener(view ->
-                dialog("pranoni transferin",false)
+                dialog("pranoni transferin", false)
         );
 
         getTransferDetail();
 
         currentLanguage = getIntent().getStringExtra(currentLang);
 
-        }
+    }
 
 
     //methods to change the languages
 
-    public void setLocale(String localeName){
-        if(!localeName.equals(currentLang)){
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
             Context context = LocaleHelper.setLocale(this, localeName);
             //Resources resources = context.getResources();
             myLocale = new Locale(localeName);
@@ -110,19 +110,10 @@ public class DetailTransferActivity extends AppCompatActivity {
             Intent refresh = new Intent(this, MainActivity.class);
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
-        }else{
+        } else {
             Toast.makeText(DetailTransferActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
-
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -130,29 +121,29 @@ public class DetailTransferActivity extends AppCompatActivity {
     }
 
 
-        private void getTransferDetail(){
+    private void getTransferDetail() {
 
-        TransferPost transferPost = new TransferPost(preferences.getToken(),preferences.getUserId(),transferId + "");
+        TransferPost transferPost = new TransferPost(preferences.getToken(), preferences.getUserId(), transferId + "");
 
         apiService.getDetailTransfer(transferPost)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(transferDetailRespose -> {
                     if (transferDetailRespose.getSuccess()) {
-                        TransferDetail detail =  transferDetailRespose.getData();
+                        TransferDetail detail = transferDetailRespose.getData();
 
-                        if ( detail.getFromStationId() != null){
+                        if (detail.getFromStationId() != null) {
 
                             binding.titleText.setText(detail.getFromStationId());
-                            }
+                        }
 
-                            binding.number.setText(String.valueOf(detail.getNumber()));
+                        binding.number.setText(String.valueOf(detail.getNumber()));
                         binding.date.setText(detail.getDate());
                         binding.description.setText(detail.getDescription());
 
                         setItemDetail(detail.getItems());
 
-                        } else {
+                    } else {
                         Toast.makeText(this, transferDetailRespose.getError().getText(), Toast.LENGTH_SHORT).show();
                     }
                 }, throwable -> {
@@ -161,31 +152,31 @@ public class DetailTransferActivity extends AppCompatActivity {
 
 
                 });
-        }
+    }
 
-        private void setItemDetail(ArrayList<TransferItem>items){
+    private void setItemDetail(ArrayList<TransferItem> items) {
 
         for (int i = 0; i < items.size(); i++) {
 
-                TransferItem item = items.get(i);
+            TransferItem item = items.get(i);
 
-                DetailItemTransferBinding itemBinding = DataBindingUtil.inflate(getLayoutInflater(),
-                        R.layout.detail_item_transfer, binding.itemsHolder, false);
-                itemBinding.number.setText(item.getNumber());
-                itemBinding.name.setText(item.getName());
-                itemBinding.unit.setText(item.getUnit());
-                itemBinding.quantity.setText(item.getQuantity());
-                binding.itemsHolder.addView(itemBinding.getRoot());
-
-            }
+            DetailItemTransferBinding itemBinding = DataBindingUtil.inflate(getLayoutInflater(),
+                    R.layout.detail_item_transfer, binding.itemsHolder, false);
+            itemBinding.number.setText(item.getNumber());
+            itemBinding.name.setText(item.getName());
+            itemBinding.unit.setText(item.getUnit());
+            itemBinding.quantity.setText(item.getQuantity());
+            binding.itemsHolder.addView(itemBinding.getRoot());
 
         }
+
+    }
 
 
     public void dialog(String njesia, boolean isCancel) {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         mBuilder.setTitle("");
-        mBuilder.setMessage("A dëshironi të "+njesia);
+        mBuilder.setMessage("A dëshironi të " + njesia);
         // Setting Negative "NO" Button
         mBuilder.setNegativeButton("JO", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -198,7 +189,7 @@ public class DetailTransferActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to invoke NO event
 
-                if (isCancel){
+                if (isCancel) {
                     cancelTransfer();
                 } else {
                     aceptTransfer();
@@ -211,23 +202,23 @@ public class DetailTransferActivity extends AppCompatActivity {
         mBuilder.show();
     }
 
-    private void aceptTransfer(){
+    private void aceptTransfer() {
 
-        apiService.acceptlTransfer(new TransferPost(preferences.getToken(),preferences.getUserId(),transferId + ""))
+        apiService.acceptlTransfer(new TransferPost(preferences.getToken(), preferences.getUserId(), transferId + ""))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(transferDetailRespose -> {
                     if (transferDetailRespose.getSuccess()) {
                         getStock();
-                        } else {
+                    } else {
                         Toast.makeText(this, transferDetailRespose.getError().getText(), Toast.LENGTH_SHORT).show();
                     }
                 }, this::sendError);
     }
 
-    private void cancelTransfer(){
+    private void cancelTransfer() {
 
-        apiService.cancelTransfer(new TransferPost(preferences.getToken(),preferences.getUserId(),transferId + ""))
+        apiService.cancelTransfer(new TransferPost(preferences.getToken(), preferences.getUserId(), transferId + ""))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(transferDetailRespose -> {

@@ -1,9 +1,13 @@
 package org.planetaccounting.saleAgent.vendors;
 
+import org.planetaccounting.saleAgent.inkasimi.InkasimiDetail;
+import org.planetaccounting.saleAgent.raportet.raportmodels.RaportsPostObject;
 import org.planetaccounting.saleAgent.raportet.raportmodels.ReportsList;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by tahirietrit on 3/15/18.
@@ -22,6 +26,7 @@ public class VendorPost  extends RealmObject{
     String type;
     String typeName;
     boolean isSynced;
+    String current_page;
 
     public VendorPost(String parite_id, String type, String amount,
                       String date, String comment, String no_invoice) {
@@ -42,6 +47,20 @@ public class VendorPost  extends RealmObject{
         this.comment = reports.comment;
         this.no_invoice = reports.docNumber;
         this.isSynced = true;
+        this.current_page = reports.currentPage;
+//        this.current_page = reports.currentPage;
+    }
+
+    public void setVendorFromReport(ReportsList reports){
+        this.id = reports.id;
+        this.furnitori = reports.partieName;
+        this.type = reports.type;
+        this.amount = reports.amount;
+        this.date =reports.date;
+        this.comment = reports.comment;
+        this.no_invoice = reports.docNumber;
+        this.isSynced = true;
+        this.current_page = reports.currentPage;
     }
 
 
@@ -114,4 +133,9 @@ public class VendorPost  extends RealmObject{
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setCurrent_page(String current_page) { this.current_page = current_page;}
+
+    public String getCurrent_page(){ return current_page; }
+
 }

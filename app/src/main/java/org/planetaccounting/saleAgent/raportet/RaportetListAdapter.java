@@ -3,6 +3,7 @@ package org.planetaccounting.saleAgent.raportet;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ public class RaportetListAdapter extends RecyclerView.Adapter<RaportetListAdapte
     private List<DepositPost> depositPosts;
     private Context ctx;
     int type;
+    private LayoutInflater mInflater;
 
     //type 0 = shpenzimet
     //type 1 =inkasimi
@@ -62,7 +64,7 @@ public class RaportetListAdapter extends RecyclerView.Adapter<RaportetListAdapte
             binding.col2.setText(vendorPosts.get(position).getFurnitori());
             binding.col3.setText(vendorPosts.get(position).getType());
             binding.col4.setText(vendorPosts.get(position).getNo_invoice());
-            binding.col5.setText(""+cutTo2(vendorPosts.get(position).getAmount()));
+            binding.col5.setText("" + cutTo2(vendorPosts.get(position).getAmount()));
             binding.col6.setText("" + vendorPosts.get(position).getComment());
 
             if (vendorPosts.get(position).isSynced()) {
@@ -124,13 +126,15 @@ public class RaportetListAdapter extends RecyclerView.Adapter<RaportetListAdapte
     @Override
     public int getItemCount() {
         if (type == 0) {
-            return vendorPosts.size();
+            return null != vendorPosts ? vendorPosts.size() : 0;
         } else if (type == 1) {
-            return inkasimiDetails.size();
+            return null != inkasimiDetails ? inkasimiDetails.size() : 0;
         } else {
-            return depositPosts.size();
+            return null != depositPosts ? depositPosts.size() : 0;
         }
     }
+
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private RaportDetailItemBinding binding;

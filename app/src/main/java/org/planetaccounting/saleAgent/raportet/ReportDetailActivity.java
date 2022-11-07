@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
+import android.databinding.adapters.AbsSpinnerBindingAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Toast;
@@ -47,6 +50,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import io.realm.RealmResults;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -58,6 +62,7 @@ import rx.schedulers.Schedulers;
 public class ReportDetailActivity extends Activity {
     RaportDetailActivityBinding binding;
     RaportetListAdapter adapter;
+
     List<VendorPost> vendorPosts = new ArrayList<>();
     List<InkasimiDetail> inkasimiDetails = new ArrayList<>();
     List<DepositPost> depositPosts = new ArrayList<>();
@@ -65,6 +70,14 @@ public class ReportDetailActivity extends Activity {
     List<VendorPost> unsyncedVendor = new ArrayList<>();
     List<DepositPost> unsyncedDeposits = new ArrayList<>();
     List<InkasimiDetail> unsyncedInkasime = new ArrayList<>();
+
+    List<VendorPost> vendorSearchResults = new ArrayList<>();
+    List<InkasimiDetail> inkasimiSearchResults = new ArrayList<>();
+    List<DepositPost> depositSearchResults = new ArrayList<>();
+
+    RealmResults<InkasimiDetail> inkasimiResults;
+
+
     @Inject
     RealmHelper realmHelper;
     @Inject
@@ -77,7 +90,7 @@ public class ReportDetailActivity extends Activity {
     int currentPage = 0;
     private boolean isLoading = false;
 
-    Locale myLocale ;
+    Locale myLocale;
     String currentLanguage = "sq", currentLang;
     public static final String TAG = "bottom_sheet";
 
@@ -87,6 +100,7 @@ public class ReportDetailActivity extends Activity {
         type = getIntent().getIntExtra("type", 0);
         binding = DataBindingUtil.setContentView(this, R.layout.raport_detail_activity);
         Kontabiliteti.getKontabilitetiComponent().inject(this);
+        inkasimiResults = realmHelper.getInkasimi();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         binding.recycler.setLayoutManager(mLayoutManager);
         binding.recycler.setItemAnimator(new DefaultItemAnimator());
@@ -104,6 +118,8 @@ public class ReportDetailActivity extends Activity {
             binding.col4.setText(R.string.nr_fatures);
             binding.col5.setText(R.string.shuma);
             binding.col6.setText(R.string.komenti);
+            binding.totali.setText(preferences.getCurrentPage() + " : " + realmHelper.getAutoIncrementIfForReturn());
+
         } else if (type == 1) {
             inkasimiDetails.addAll(realmHelper.getInkasimi());
             adapter.setInkasimiDetails(inkasimiDetails);
@@ -117,6 +133,9 @@ public class ReportDetailActivity extends Activity {
             binding.col4.setVisibility(View.GONE);
             binding.col5.setText(R.string.shuma);
             binding.col6.setText(R.string.komenti);
+            binding.totali.setText(preferences.getCurrentPage() + " : " + realmHelper.getAutoIncrementIfForReturn());
+
+
         } else if (type == 2) {
             depositPosts.addAll(realmHelper.getDepozitat());
             adapter.setDepositPosts(depositPosts);
@@ -131,7 +150,10 @@ public class ReportDetailActivity extends Activity {
             binding.col4.setVisibility(View.GONE);
             binding.col5.setText(R.string.shuma);
             binding.col6.setText(R.string.komenti);
+            binding.totali.setText(preferences.getCurrentPage() + " : " + realmHelper.getAutoIncrementIfForReturn());
+
         }
+
         binding.sync.setOnClickListener(view -> {
             System.out.println("click " + type);
             if (type == 0) {
@@ -142,11 +164,139 @@ public class ReportDetailActivity extends Activity {
                 syncDepozitat();
             }
         });
+
+        if (type == 0) {
+
+            getVendorRepors();
+            binding.searchEdittext.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    vendorSearchResults.clear();
+
+                    for (int i = 0; i < vendorPosts.size(); i++) {
+                        if (vendorPosts.get(i).getFurnitori().toLowerCase().startsWith(s.toString().toLowerCase())) {
+                            vendorSearchResults.add(vendorPosts.get(i));
+                        }
+                    }
+                    if (s.length() > 0) {
+                        adapter = new RaportetListAdapter(0);
+                        adapter.setVendorPosts(vendorSearchResults);
+                        binding.pageLayout.setVisibility(View.GONE);
+                        binding.recycler.setAdapter(adapter);
+                    } else if (s.length() <= 0) {
+                        adapter.setVendorPosts(vendorPosts);
+                        getVendorRepors();
+                        binding.recycler.setAdapter(adapter);
+                    } else {
+                        adapter.setVendorPosts(vendorPosts);
+                        adapter = new RaportetListAdapter(0);
+                        binding.pageLayout.setVisibility(View.VISIBLE);
+                        binding.recycler.setAdapter(adapter);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        }
+
+        if (type == 1) {
+
+            binding.searchEdittext.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    inkasimiSearchResults.clear();
+
+                    for (int i = 0; i < inkasimiDetails.size(); i++) {
+                        if (inkasimiDetails.get(i).getKlienti().toLowerCase().startsWith(s.toString().toLowerCase())) {
+                            inkasimiSearchResults.add(inkasimiDetails.get(i));
+                        }
+                    }
+                    if (s.length() > 0) {
+                        adapter = new RaportetListAdapter(1);
+                        adapter.setInkasimiDetails(inkasimiSearchResults);
+                        binding.pageLayout.setVisibility(View.GONE);
+                        binding.recycler.setAdapter(adapter);
+                    } else if (s.length() <= 0) {
+                        adapter.setInkasimiDetails(inkasimiDetails);
+                        binding.recycler.setAdapter(adapter);
+                        getPaymentRepors();
+                    } else {
+                        adapter.setInkasimiDetails(inkasimiDetails);
+                        adapter = new RaportetListAdapter(1);
+                        binding.pageLayout.setVisibility(View.VISIBLE);
+                        binding.recycler.setAdapter(adapter);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        }
+        if (type == 2) {
+
+            getDepositRepors();
+            binding.searchEdittext.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    depositSearchResults.clear();
+
+                    for (int k = 0; k < depositPosts.size(); k++) {
+                        if (depositPosts.get(k).getBranch().toLowerCase().startsWith(s.toString().toLowerCase())) {
+                            depositSearchResults.add(depositPosts.get(k));
+                        }
+                    }
+
+                    if (s.length() > 0) {
+                        adapter.setDepositPosts(depositSearchResults);
+                        adapter = new RaportetListAdapter(2);
+                        binding.pageLayout.setVisibility(View.GONE);
+                        binding.recycler.setAdapter(adapter);
+                    } else if (s.length() <= 0) {
+                        adapter.setDepositPosts(depositPosts);
+                        getDepositRepors();
+                        binding.recycler.setAdapter(adapter);
+                    } else {
+                        adapter.setDepositPosts(depositPosts);
+                        adapter = new RaportetListAdapter(2);
+                        binding.pageLayout.setVisibility(View.VISIBLE);
+                        binding.recycler.setAdapter(adapter);
+                    }
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        }
+
         Gson gson = new Gson();
         String vendors = realmHelper.getVendorsString();
         List<VendorPost> savedVendors = (ArrayList<VendorPost>) gson.fromJson(vendors,
                 new TypeToken<ArrayList<VendorPost>>() {
                 }.getType());
+        unsyncedVendor = new ArrayList<>();
         for (int i = 0; i < savedVendors.size(); i++) {
             if (!savedVendors.get(i).isSynced()) {
                 unsyncedVendor.add(savedVendors.get(i));
@@ -154,12 +304,12 @@ public class ReportDetailActivity extends Activity {
         }
 
         String deposits = realmHelper.getDepositString();
-        List<DepositPost> savetDeposits = (ArrayList<DepositPost>) gson.fromJson(deposits,
+        List<DepositPost> savedDeposits = (ArrayList<DepositPost>) gson.fromJson(deposits,
                 new TypeToken<ArrayList<DepositPost>>() {
                 }.getType());
-        for (int i = 0; i < savetDeposits.size(); i++) {
-            if (!savetDeposits.get(i).isSynced()) {
-                unsyncedDeposits.add(savetDeposits.get(i));
+        for (int i = 0; i < savedDeposits.size(); i++) {
+            if (!savedDeposits.get(i).isSynced()) {
+                unsyncedDeposits.add(savedDeposits.get(i));
             }
         }
 
@@ -198,13 +348,14 @@ public class ReportDetailActivity extends Activity {
         });
 
         currentLanguage = getIntent().getStringExtra(currentLang);
+
     }
 
 
     //methods to change the languages
 
-    public void setLocale(String localeName){
-        if(!localeName.equals(currentLang)){
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
             Context context = LocaleHelper.setLocale(this, localeName);
             //Resources resources = context.getResources();
             myLocale = new Locale(localeName);
@@ -216,8 +367,8 @@ public class ReportDetailActivity extends Activity {
             Intent refresh = new Intent(this, MainActivity.class);
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
-        }else{
-            Toast.makeText(ReportDetailActivity.this, R.string.language_already_selected , Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ReportDetailActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -236,29 +387,30 @@ public class ReportDetailActivity extends Activity {
     }
 
 
-
     private void syncShpenzimet() {
-        showLoader();
-        VendorPostObject vendorPostObject = new VendorPostObject(preferences.getToken(), preferences.getUserId(), unsyncedVendor);
-        apiService.postVendor(vendorPostObject)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(response -> {
-                    if (response.getSuccess()) {
-                        for (int i = 0; i < unsyncedVendor.size(); i++) {
-                            unsyncedVendor.get(i).setSynced(true);
-                            realmHelper.saveVendor(unsyncedVendor.get(i));
+        if (unsyncedVendor.size() > 0) {
+            showLoader();
+            VendorPostObject vendorPostObject = new VendorPostObject(preferences.getToken(), preferences.getUserId(), unsyncedVendor);
+            apiService.postVendor(vendorPostObject)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(response -> {
+                        if (response.getSuccess()) {
+                            for (int i = 0; i < unsyncedVendor.size(); i++) {
+                                unsyncedVendor.get(i).setSynced(true);
+                                realmHelper.saveVendor(unsyncedVendor.get(i));
+                            }
+                            adapter.setVendorPosts(realmHelper.getVendors());
+                            hideLoader();
+                        } else {
+                            Toast.makeText(this, response.getError().getText(), Toast.LENGTH_SHORT).show();
                         }
-                        adapter.setVendorPosts(realmHelper.getVendors());
+                        showLoader();
+                    }, throwable -> {
+                        Toast.makeText(ReportDetailActivity.this, R.string.shpenzimi_nuk_u_ruajt_ne_server, Toast.LENGTH_SHORT).show();
                         hideLoader();
-                    } else {
-                        Toast.makeText(this, response.getError().getText(), Toast.LENGTH_SHORT).show();
-                    }
-                    showLoader();
-                }, throwable -> {
-                    Toast.makeText(ReportDetailActivity.this, R.string.shpenzimi_nuk_u_ruajt_ne_server, Toast.LENGTH_SHORT).show();
-                    hideLoader();
-                });
+                    });
+        }
     }
 
 
@@ -328,7 +480,7 @@ public class ReportDetailActivity extends Activity {
 
         if (currentPage == 0) {
             if (!vendorPosts.isEmpty()) {
-                raportsPostObject.setLast_document_number(vendorPosts.get(vendorPosts.size() - 1).getNo_invoice());
+                raportsPostObject.setLast_document_number(String.valueOf(vendorPosts.get(vendorPosts.size() - 1).getNo_invoice()));
             }
             currentPage++;
             raportsPostObject.setPage(currentPage++);
@@ -348,7 +500,9 @@ public class ReportDetailActivity extends Activity {
                         totalPage = responseBody.getTotalPage();
 
                         for (ReportsList report : responseBody.data) {
-                            VendorPost vendorPost = new VendorPost(report);
+//                            VendorPost vendorPost = new VendorPost(report);
+                            VendorPost vendorPost = new VendorPost();
+                            vendorPost.setVendorFromReport(report);
                             vendorPosts.add(vendorPost);
                         }
                         adapter.notifyItemRangeInserted(0, vendorPosts.size());

@@ -60,15 +60,16 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 public class CreateTransferActivity extends AppCompatActivity {
+
     private ActivityCreateTransferBinding binding;
 
     @Inject
     ApiService apiService;
     @Inject
     Preferences preferences;
-
     @Inject
     RealmHelper realmHelper;
+
     ArrayList<InvoiceItem> stockItems = new ArrayList<>();
     String fDate;
     String dDate;
@@ -80,6 +81,9 @@ public class CreateTransferActivity extends AppCompatActivity {
     List<Varehouse> varehouses = new ArrayList<>();
     String stationID = "2";
     String description = "";
+    String sasiaTotale = "0";
+    String nrArtikujtTotal = "0";
+
 
     Locale myLocale;
     String currentLanguage = "sq", currentLang;
@@ -119,8 +123,8 @@ public class CreateTransferActivity extends AppCompatActivity {
                     } else {
                 Toast.makeText(getApplicationContext(), R.string.shtoni_se_paku_nje_artikull, Toast.LENGTH_SHORT).show();
             }
-        } );
-        binding.dataLinar.setOnClickListener(v -> getdata() );
+        });
+        binding.dataLinar.setOnClickListener(v -> getdata());
 
         binding.depoEdittext.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -146,7 +150,6 @@ public class CreateTransferActivity extends AppCompatActivity {
         currentLanguage = getIntent().getStringExtra(currentLang);
     }
 
-
     //methods to change the languages
 
     public void setLocale(String localeName){
@@ -167,23 +170,10 @@ public class CreateTransferActivity extends AppCompatActivity {
         }
     }
 
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
-
-
-
-
 
     //        this part is for to show DropDown when clicked editText for secound time and more ...
     private void shopDropDownList() {
@@ -275,6 +265,9 @@ public class CreateTransferActivity extends AppCompatActivity {
                     invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString());
                 }
                 fillInvoiceItemData(itemBinding, invoiceItem[0]);
+
+                calculateSasiaTotale();
+                calculateArtikujtTotal();
             }
 
             @Override
@@ -284,15 +277,20 @@ public class CreateTransferActivity extends AppCompatActivity {
         });
         itemBinding.removeButton.setOnClickListener(view ->
         {
-            int pos = (int) itemBinding.getRoot().getTag();
-            if (stockItems.size() > 0) {
-                try {
-                    stockItems.remove(pos);
-                } catch (Exception e) {
+            doYouWantToDeleteThisArticleDialog(itemBinding.emertimiTextview.getText().toString(), itemBinding.sasiaTextview.getText().toString(), () -> {
 
+                int pos = (int) itemBinding.getRoot().getTag();
+                if (stockItems.size() > 0) {
+                    try {
+                        stockItems.remove(pos);
+                    } catch (Exception e) {
+
+                    }
                 }
-            }
-            binding.invoiceItemHolder.removeView(itemBinding.getRoot());
+                binding.invoiceItemHolder.removeView(itemBinding.getRoot());
+                calculateSasiaTotale();
+                calculateArtikujtTotal();
+            });
         });
         itemBinding.getRoot().setTag(binding.invoiceItemHolder.getChildCount());
         binding.invoiceItemHolder.addView(itemBinding.getRoot());
@@ -352,6 +350,28 @@ public class CreateTransferActivity extends AppCompatActivity {
         }
     }
 
+    private void doYouWantToDeleteThisArticleDialog(String name, String sasia, DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener){
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("");
+        String message = getString(R.string.do_you_want_to_delete_this_article) + " " + name + " me sasi " + sasia;
+        builder.setMessage(message);
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                doYouWantToDeleteThisArticleListener.Yes();
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    }
+
     public void descriptionDialog() {
 
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
@@ -401,5 +421,37 @@ public class CreateTransferActivity extends AppCompatActivity {
                                 android.R.layout.simple_dropdown_item_1line, stations));
                     }
                 }, Throwable::printStackTrace);
+    }
+
+    public void calculateArtikujtTotal(){
+        int artTotal = 0;
+        for(int i=0; i<stockItems.size();i++){
+
+            String cap = stockItems.get(i).getName().trim();
+
+            if(cap.length() > 0){
+                artTotal++;
+            }
+        }
+        this.nrArtikujtTotal = String.valueOf(cutTo2(artTotal));
+        binding.artikujTeZgjedhur.setText("Nr. i artikujve te zgjedhur : " + artTotal);
+
+    }
+
+    public void calculateSasiaTotale(){
+        double quaTotal = 0;
+        for(int i =0; i<stockItems.size();i++){
+            quaTotal += Double.parseDouble(stockItems.get(i).getSasia());
+        }
+        this.sasiaTotale = String.valueOf(cutTo2(quaTotal));
+        binding.artikujtSasiaTotale.setText("Sasia Totale : " + cutTo2(quaTotal));
+    }
+
+    public double cutTo2(double value){
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
+    }
+
+    interface DoYouWantToDeleteThisArticleListener{
+        void Yes();
     }
 }
