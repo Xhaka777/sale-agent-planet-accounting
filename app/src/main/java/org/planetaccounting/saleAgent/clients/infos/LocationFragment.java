@@ -17,21 +17,31 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import org.planetaccounting.saleAgent.Kontabiliteti;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.ClientLocationLayoutBinding;
 import org.planetaccounting.saleAgent.databinding.ClientUnitItemBinding;
+import org.planetaccounting.saleAgent.databinding.InvoiceItemBinding;
+import org.planetaccounting.saleAgent.model.VarehouseReponse;
 import org.planetaccounting.saleAgent.model.clients.Client;
+import org.planetaccounting.saleAgent.model.clients.ClientsResponse;
 import org.planetaccounting.saleAgent.model.clients.Station;
+import org.planetaccounting.saleAgent.model.stock.StockPost;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
 import org.planetaccounting.saleAgent.utils.Preferences;
 
 import java.security.spec.ECField;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class LocationFragment extends Fragment {
 
@@ -45,8 +55,9 @@ public class LocationFragment extends Fragment {
     RealmHelper realmHelper;
 
     Context context;
-    ArrayList<Client> client = new ArrayList<>();
-    int stationPos;
+    List<Client> client = new ArrayList<>();
+    Client clientS;
+
 
     public LocationFragment() {
 
@@ -95,17 +106,6 @@ public class LocationFragment extends Fragment {
 
         //itemBinding of addLocation layout...
         ClientUnitItemBinding itemBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.client_unit_item, binding.clientUnitHolder, false);
-
-//        clients[0] = new Client(realmHelper.getStationsByName(itemBinding.locationUnitEdittext.getText().toString()));
-//        int pos = (int) itemBinding.getRoot().getTag();
-//        try{
-//            client.set(pos, clients[0]);
-//        }catch (IndexOutOfBoundsException e){
-//            client.add(pos, clients[0]);
-//        }
-//        itemBinding.locationUnitEdittext.requestFocus();
-//        findCodeAndPosition(clients[0]);
-//        fillClientLocationData(itemBinding, clients[0]);
 
 
         itemBinding.bilanceUnitEdittext.addTextChangedListener(new TextWatcher() {
@@ -197,6 +197,8 @@ public class LocationFragment extends Fragment {
         //The part that shows the Alert Message
         mBuilder.show();
     }
+
+
 
     interface DoYouWantToDeleteThisClientUnit {
         void Yes();
