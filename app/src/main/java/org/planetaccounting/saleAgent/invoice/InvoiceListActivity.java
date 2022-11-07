@@ -1,10 +1,12 @@
 package org.planetaccounting.saleAgent.invoice;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintManager;
@@ -18,7 +20,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
@@ -26,10 +31,9 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,10 +44,9 @@ import org.planetaccounting.saleAgent.Kontabiliteti;
 import org.planetaccounting.saleAgent.MainActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
-import org.planetaccounting.saleAgent.bottomsheetreport.BottomSheetReport;
-import org.planetaccounting.saleAgent.databinding.ActivityBottomSheetReportBinding;
 import org.planetaccounting.saleAgent.databinding.InvoiceListActivityBinding;
 import org.planetaccounting.saleAgent.databinding.InvoiceListItemBinding;
+import org.planetaccounting.saleAgent.databinding.TotalSaleTargetActivityDemoBindingImpl;
 import org.planetaccounting.saleAgent.escpostprint.EscPostPrintFragment;
 import org.planetaccounting.saleAgent.events.RePrintInvoiceEvent;
 import org.planetaccounting.saleAgent.helper.LocaleHelper;
@@ -51,6 +54,7 @@ import org.planetaccounting.saleAgent.model.clients.Client;
 import org.planetaccounting.saleAgent.model.invoice.InvoicePost;
 import org.planetaccounting.saleAgent.model.invoice.InvoicePostObject;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
+import org.planetaccounting.saleAgent.raportet.RaportetListAdapter;
 import org.planetaccounting.saleAgent.raportet.raportmodels.InvoiceForReportObject;
 import org.planetaccounting.saleAgent.raportet.raportmodels.RaportsPostObject;
 import org.planetaccounting.saleAgent.raportet.raportmodels.ReportsList;
@@ -70,6 +74,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import io.realm.RealmResults;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -79,10 +84,7 @@ import rx.schedulers.Schedulers;
 
 public class InvoiceListActivity extends AppCompatActivity {
 
-    private InvoiceListActivityBinding binding;
-    private InvoiceListItemBinding bindingAdapter;
-//    private InvoiceListAdapterBinding
-//    private ActivityBottomSheetReportBinding bindingReport;
+    public InvoiceListActivityBinding bindingActivity;
 
     @Inject
     RealmHelper realmHelper;
@@ -90,21 +92,26 @@ public class InvoiceListActivity extends AppCompatActivity {
     Preferences preferences;
     @Inject
     ApiService apiService;
+
     RecyclerView recyclerView;
     InvoiceListAdapter adapter;
     RecyclerView.LayoutManager mLayoutManager;
     double shuma;
-    int numberFaildAttempt;
     String dDate;
     ArrayList<InvoicePost> inv;
-    List<InvoicePost> invoicePosts = new ArrayList<>();
+
+    ArrayList<InvoicePost> invRes;
+    ArrayList<InvoicePost> invoiceSearch = new ArrayList<>();
+    ArrayList<InvoicePost> returnSearch = new ArrayList<>();
+
+
     List<InvoicePost> unSyncedList = new ArrayList<>();
+    List<InvoicePost> switchReport = new ArrayList<>();
+
     InvoicePost invoicePost;
     WebView webView;
     RelativeLayout loader;
     FrameLayout fragment;
-
-    TextView nr_fatures;
 
     int totalPage = 0;
     int currentPage = 0;
@@ -115,18 +122,18 @@ public class InvoiceListActivity extends AppCompatActivity {
     public static final String TAG = "bottom_sheet";
 
     String from; // 0->Invoice 1->Return
+    Context context;
 
     Button myButton;
     View myView;
     boolean isUp;
-    ArrayList<InvoicePost> invoicePostReports;
-    ListView listView;
+    public static TextView nr_fatures;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.invoice_list_activity);
+        bindingActivity = DataBindingUtil.setContentView(this, R.layout.invoice_list_activity);
 
         myView = findViewById(R.id.my_view);
         myButton = findViewById(R.id.congif_btn);
@@ -143,21 +150,10 @@ public class InvoiceListActivity extends AppCompatActivity {
         }
 
         ((Kontabiliteti) getApplication()).getKontabilitetiComponent().inject(this);
+
         printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
         Date cDate = new Date();
         dDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
-
-
-//        ImageButton showbottomSheet = (ImageButton) findViewById(R.id.congif_btn);
-//
-//        showbottomSheet.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                BottomSheetFReport fReport = new BottomSheetFReport();
-//                BottomSheetReport report = new BottomSheetReport();
-//                report.show(getSupportFragmentManager(), TAG);
-//            }
-//        });
 
 
         recyclerView = (RecyclerView) findViewById(R.id.invoice_list);
@@ -167,8 +163,8 @@ public class InvoiceListActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        nr_fatures = findViewById(R.id.invoice_number);
 
-//        binding.invoiceNr.setVisibility(View.VISIBLE);
 
         if (from.equals("inv")) {
 
@@ -187,19 +183,24 @@ public class InvoiceListActivity extends AppCompatActivity {
                     new TypeToken<ArrayList<InvoicePost>>() {
                     }.getType());
 
+
         }
 
-        adapter = new InvoiceListAdapter(inv);
+        adapter = new InvoiceListAdapter(context, inv);
+//        adapter = new InvoiceListAdapter(inv, InvoiceListActivity.this);
         recyclerView.setAdapter(adapter);
         for (int i = 0; i < inv.size(); i++) {
             if (inv.get(i).getInvoice_date().equalsIgnoreCase(dDate)) {
                 shuma += Double.parseDouble(inv.get(i).getAmount_with_vat());
+
             }
         }
+
+
 //        TextView shuma = findViewById(R.id.totali);
 //        shuma.setText("Numri i faqes " + " eshte: " + this.shuma);
 //
-        binding.totali.setText(preferences.getCurrentPage() + " : " + realmHelper.getAutoIncrementIfForReturn());
+        bindingActivity.totali.setText(preferences.getCurrentPage() + " : " + realmHelper.getAutoIncrementIfForReturn());
 
         String invoices = realmHelper.getInvoicesString();
         Gson gson = new Gson();
@@ -212,6 +213,110 @@ public class InvoiceListActivity extends AppCompatActivity {
                 unSyncedList.add(savedInvoices.get(i));
             }
         }
+
+        if (from.equals("ret")) {
+//            getOrderReports();
+            bindingActivity.searchEdittext.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    invoiceSearch.clear();
+                    //e provojme edhe me getAllInvoicesString (nuk po bon me allStrings)...
+                    //me getInvoicesString() po bon mirpo pas fshirjes ne search po i shfaq vetem returInvoices...
+                    String invoices = realmHelper.getAllReturnInvoicesString();
+                    Gson gson = new Gson();
+                    inv = (ArrayList<InvoicePost>) gson.fromJson(invoices, new TypeToken<ArrayList<InvoicePost>>() {
+
+                    }.getType());
+
+                    invoiceSearch = new ArrayList<>();
+
+
+                    for (int i = 0; i < inv.size(); i++) {
+                        if (inv.get(i).getPartie_name().toLowerCase().startsWith(s.toString().toLowerCase())) {
+                            invoiceSearch.add(inv.get(i));
+                        }
+                    }
+                    if (s.length() > 0) {
+                        adapter.setInvoicesList(invoiceSearch);
+                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, invoiceSearch);
+                        bindingActivity.invoiceList.setAdapter(adapter);
+                        bindingActivity.pageLayout.setVisibility(View.GONE);
+                    } else if (s.length() <= 0) {
+                        adapter.setInvoicesList(inv);
+                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
+                        bindingActivity.invoiceList.setAdapter(adapter);
+                    } else {
+                        adapter.setInvoicesList(inv);
+                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
+                        bindingActivity.invoiceList.setAdapter(adapter);
+                    }
+                }
+//                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+
+        }
+
+        if(from.equals("inv")){
+
+            getInvoicesRepors();
+            bindingActivity.searchEdittext.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    invoiceSearch.clear();
+
+                    String returns = realmHelper.getInvoicesString();
+
+                    inv = (ArrayList<InvoicePost>) new Gson().fromJson(returns,
+                            new TypeToken<ArrayList<InvoicePost>>() {
+                            }.getType());
+
+//                    getInvoicesRepors();
+
+                    for(int i = 0; i < inv.size(); i++){
+                        if (inv.get(i).getPartie_name().toLowerCase().startsWith(s.toString().toLowerCase())){
+                            invoiceSearch.add(inv.get(i));
+                        }
+                    }
+                    if(s.length() > 0){
+                        adapter.setInvoicesList(invoiceSearch);
+                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, invoiceSearch);
+                        bindingActivity.pageLayout.setVisibility(View.GONE);
+                        bindingActivity.invoiceList.setAdapter(adapter);
+                    }else if(s.length() <= 0){
+                        adapter.setInvoicesList(inv);
+                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
+                        bindingActivity.invoiceList.setAdapter(adapter);
+                    }else{
+                        adapter.setInvoicesList(inv);
+                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
+                        bindingActivity.invoiceList.setAdapter(adapter);
+                    }
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        }
+
         Button button = findViewById(R.id.sync);
         button.setOnClickListener(view -> uploadInvoices());
 
@@ -238,14 +343,13 @@ public class InvoiceListActivity extends AppCompatActivity {
         });
 
         currentLanguage = getIntent().getStringExtra(currentLang);
-
     }
 
 
     //methods to change the languages
 
-    public void setLocale(String localeName){
-        if(!localeName.equals(currentLang)){
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
             Context context = LocaleHelper.setLocale(this, localeName);
             //Resources resources = context.getResources();
             myLocale = new Locale(localeName);
@@ -257,71 +361,160 @@ public class InvoiceListActivity extends AppCompatActivity {
             Intent refresh = new Intent(this, MainActivity.class);
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
-        }else{
+        } else {
             Toast.makeText(InvoiceListActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
 
     //slide the view from below itself to the current position
-    public void slideUp(View view){
+    public void slideUp(View view) {
 
         view.setVisibility(View.VISIBLE);
         TranslateAnimation animate = new TranslateAnimation(
-                0,0,view.getHeight(),0);
+                0, 0, view.getHeight(), 0);
         animate.setDuration(500);
         animate.setFillAfter(true);
         view.startAnimation(animate);
     }
 
     //slide th view from its current position to below itself
-    public void slideDown(View view){
+    public void slideDown(View view) {
         TranslateAnimation animate = new TranslateAnimation(
-                0,0,0,view.getHeight());
+                0, 0, 0, view.getHeight());
         animate.setDuration(500);
         animate.setFillAfter(true);
         view.startAnimation(animate);
     }
 
-    public void onSlideViewButtonclick(View view){
 
-//        InvoiceListItemBinding bindingAdapterr = new InvoiceListItemBinding();
+    //
+    public void onSlideViewButtonclick(View view) {
+//  public void mainSwitchReport(final boolean isUpdate, final InvoicePost invoicePost, final int position){
+
+        InvoiceListItemBinding itemBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.invoice_list_item, bindingActivity.invoiceList, false);
+
+        LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+        View viewType = layoutInflater.inflate(R.layout.invoice_list_item, null);
+
+        TextView invoiceNumber = viewType.findViewById(R.id.invoice_number);
+        TextView clientName = viewType.findViewById(R.id.company_name_textview);
 
 
-        if(isUp){
+        if (isUp) {
             slideDown(myView);
             myButton.setText("Konfig");
-            binding.printSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            bindingActivity.printSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-                        binding.invoiceNr.setVisibility(View.VISIBLE);
-//                        bindingAdapterr.invoiceNr.setVisibility(View.VISIBLE);
-                    }
-                    else{
-                        binding.invoiceNr.setVisibility(View.GONE);
-//                        bindingAdapter.invoiceNr.setVisibility(View.GONE);
+
+
+                    if (isChecked) {
+                        bindingActivity.invoiceNr.setVisibility(View.VISIBLE);
+                        invoiceNumber.setVisibility(View.VISIBLE);
+//                        adapter = new InvoiceListAdapter(inv, context);
+//                        recyclerView.setAdapter(adapter);
+                    } else {
+                        bindingActivity.invoiceNr.setVisibility(View.GONE);
+                        invoiceNumber.setVisibility(View.GONE);
+//                        removeSingleItem(itemNrInvoice);
+//                        updateSingleItem(itemNrInvoice,1);
                     }
                 }
+
             });
 
-            binding.clientSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-                        binding.client.setVisibility(View.VISIBLE);
-//                        bindingAdapter.companyNameTextview.setVisibility(View.VISIBLE);
-                    }
-                    else{
-                        binding.client.setVisibility(View.GONE);
-//                        bindingAdapter.companyNameTextview.setVisibility(View.GONE);
-                    }
-                }
-            });
-        }else{
+        } else {
             slideUp(myView);
             myButton.setText("Config");
         }
         isUp = !isUp;
+    }
+
+    public void mainSwitchReport(final boolean isUpdate, final InvoicePost invoicePost, final int position) {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+        View view = layoutInflater.inflate(R.layout.switch_reports, null);
+
+        TextView invoiceNumber = view.findViewById(R.id.invoice_number);
+        TextView clientName = view.findViewById(R.id.company_name_textview);
+
+        if (isUpdate && invoicePost != null) {
+            bindingActivity.clientSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        bindingActivity.client.setVisibility(View.GONE);
+                        invoiceNumber.setVisibility(View.GONE);
+                    } else {
+                        bindingActivity.client.setVisibility(View.VISIBLE);
+//                        clientName.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+        }
+
+        if (isUpdate && invoicePost != null) {
+            updateReport(invoiceNumber.getText().toString(), clientName.getText().toString(), position);
+        } else {
+            createContact(invoiceNumber.getText().toString(), clientName.getText().toString());
+        }
+
+
+    }
+
+    private void updateReport(String invNumer, String clientName, int position) {
+
+        InvoicePost invoicePost = inv.get(position);
+
+        invoicePost.setNo_invoice(invNumer);
+        invoicePost.setPartie_name(clientName);
+
+        if (bindingActivity.invoiceNr.getText().length() < 0) {
+            invoicePost.setNo_invoice("");
+        }
+
+        new UpdateContactAsyncTask().execute(invoicePost);
+
+        inv.set(position, invoicePost);
+    }
+
+    private class UpdateContactAsyncTask extends AsyncTask<InvoicePost, Void, Void> {
+
+        @Override
+        protected Void doInBackground(InvoicePost... invoicePosts) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            super.onPostExecute(unused);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private void createContact(String nrInvoice, String clientName) {
+
+        new CreateContactAsyncTask().execute(new InvoicePost(0, nrInvoice, clientName));
+    }
+
+    private class CreateContactAsyncTask extends AsyncTask<InvoicePost, Void, Void> {
+
+        @Override
+        protected Void doInBackground(InvoicePost... invoicePosts) {
+
+            if (invoicePosts != null) {
+                inv.add(0, invoicePost);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -344,6 +537,14 @@ public class InvoiceListActivity extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
     }
 
+    private void showLoader() {
+        bindingActivity.loader.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoader() {
+        bindingActivity.loader.setVisibility(View.GONE);
+    }
+
     private void uploadInvoices() {
 
         if (unSyncedList.size() > 0) {
@@ -352,6 +553,7 @@ public class InvoiceListActivity extends AppCompatActivity {
             invoicePostObject.setToken(preferences.getToken());
             invoicePostObject.setUser_id(preferences.getUserId());
             invoicePostObject.setInvoices(savedInvoices);
+
             apiService.postFaturat(invoicePostObject)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -374,11 +576,57 @@ public class InvoiceListActivity extends AppCompatActivity {
         }
     }
 
+    public void switchReportList() {
+        showLoader();
+        RaportsPostObject raportsPostObject = new RaportsPostObject();
+        raportsPostObject.setToken(preferences.getToken());
+        raportsPostObject.setUser_id(preferences.getUserId());
+//        raportsPostObject.setInvoices(switchReport);
+
+        apiService.getRaportInvoiceList(raportsPostObject)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(responseBody -> {
+                    isLoading = false;
+
+                    if (responseBody.getSuccess()) {
+
+                        currentPage = responseBody.getCurrentPage();
+                        totalPage = responseBody.getTotalPage();
+
+                        for (ReportsList reportsList : responseBody.data) {
+                            InvoicePost invoice = new InvoicePost();
+                            invoice.setInvoiceFromReports(reportsList);
+                            inv.add(invoice);
+                        }
+
+//                        for (int i = 0; i < switchReport.size(); i++) {
+//                            switchReport.get(i).setSwitchDlt(true);
+//                            realmHelper.saveInvoices(switchReport.get(i));
+//
+//                        }
+
+//                        adapter.setSwitchReportList(realmHelper.getInvoices());
+                        adapter.notifyItemRangeInserted(0, inv.size());
+                        hideLoader();
+                    } else {
+                        Toast.makeText(this, responseBody.getError().getText(), Toast.LENGTH_SHORT).show();
+                    }
+                    hideLoader();
+
+                }, throwable -> {
+                    hideLoader();
+                    Toast.makeText(this, "Inkasimi nuk u ruajt ne server!", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+
     private void loadNextPage() {
         isLoading = true;
 
         if (from.equals("inv")) {
             getInvoicesRepors();
+
         }
     }
 
@@ -426,8 +674,6 @@ public class InvoiceListActivity extends AppCompatActivity {
                 });
 
     }
-
-
 
     private void getOrderReports() {
 
@@ -682,6 +928,22 @@ public class InvoiceListActivity extends AppCompatActivity {
 
         alertDialog.show();
     }
+//
+//    @Override
+//    public void switchList(boolean isUp) {
+//
+//        bindingActivity.clientSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    bindingActivity.client.setVisibility(View.VISIBLE);
+//                } else {
+//                    bindingActivity.client.setVisibility(View.GONE);
+//                }
+//            }
+//        });
+//    }
+//
 
     interface StatusClick {
         void Printer();
@@ -700,7 +962,5 @@ public class InvoiceListActivity extends AppCompatActivity {
         }
 
     }
-
-
 
 }

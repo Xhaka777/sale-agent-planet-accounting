@@ -18,6 +18,7 @@ public class InvoiceItemPost extends RealmObject {
     String quantity;
     String unit;
     String price;
+    String comment;
     String discount;
     String barcode = "";
     //    String discount_extra;
@@ -31,7 +32,6 @@ public class InvoiceItemPost extends RealmObject {
     boolean isAction;
     boolean isCollection;
     String base_quantity;
-
     String amount_no_vat;
 
     public String getPrice_base() {
@@ -84,6 +84,10 @@ public class InvoiceItemPost extends RealmObject {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public void setDiscount(String discount) {
@@ -158,6 +162,10 @@ public class InvoiceItemPost extends RealmObject {
         return price;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
     public String getDiscount() {
         return discount;
     }
@@ -225,6 +233,7 @@ public class InvoiceItemPost extends RealmObject {
                 ", quantity='" + quantity + '\'' +
                 ", unit='" + unit + '\'' +
                 ", price='" + price + '\'' +
+                ", comment='" + comment + '\'' +
                 ", discount='" + discount + '\'' +
 //                ", discount_extra='" + discount_extra + '\'' +
                 ", vat_id='" + vat_id + '\'' +

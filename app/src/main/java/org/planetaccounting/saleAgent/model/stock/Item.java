@@ -38,6 +38,9 @@ public class Item extends RealmObject implements Parent<SubItem>  {
     @SerializedName("manufacturer")
     @Expose
     public String manufacturer;
+    @SerializedName("cover")
+    @Expose
+    public String cover;
     @SerializedName("brand")
     @Expose
     public String brand;
@@ -53,6 +56,10 @@ public class Item extends RealmObject implements Parent<SubItem>  {
     @SerializedName("items")
     @Expose
     public RealmList<SubItem> items = null;
+    @SerializedName("comment")
+    @Expose
+    public String comment;
+
 
     int selectedPosition;
 
@@ -80,6 +87,8 @@ public class Item extends RealmObject implements Parent<SubItem>  {
         return manufacturer;
     }
 
+    public String getCover() { return cover; }
+
     public String getBrand() {
         return brand;
     }
@@ -95,6 +104,8 @@ public class Item extends RealmObject implements Parent<SubItem>  {
     public List<SubItem> getItems() {
         return items;
     }
+
+    public String getComment() { return comment; }
 
     public String getItemsRelation(int selectedPosition){
         String relacioni = items.get(selectedPosition).getRelacion()+"";

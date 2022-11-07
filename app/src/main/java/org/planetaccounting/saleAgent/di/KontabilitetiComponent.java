@@ -11,6 +11,10 @@ import org.planetaccounting.saleAgent.aksionet.ActionCollectionDetailActivity;
 import org.planetaccounting.saleAgent.aksionet.ActionDetailActivity;
 import org.planetaccounting.saleAgent.clients.ClientsActivity;
 import org.planetaccounting.saleAgent.clients.ClientsDetailActivity;
+import org.planetaccounting.saleAgent.clients.ClientsListActivity;
+import org.planetaccounting.saleAgent.clients.infos.AdresaFragment;
+import org.planetaccounting.saleAgent.clients.infos.LocationFragment;
+import org.planetaccounting.saleAgent.clients.infos.OptionsFragment;
 import org.planetaccounting.saleAgent.db.DatabaseOperations;
 import org.planetaccounting.saleAgent.inkasimi.InkasimPanel;
 import org.planetaccounting.saleAgent.inkasimi.ListaInkasimit;
@@ -67,6 +71,7 @@ public interface KontabilitetiComponent {
     void inject(ActivityPrint activity);
     void inject(InvoiceListActivity activity);
     void inject(OrdersListActivity activity);
+    void inject(ClientsListActivity activity);
     void inject(OrderListDetail activity);
     void inject(RealmHelper helper);
     void inject(LocaleManager localeManager);
@@ -101,6 +106,9 @@ public interface KontabilitetiComponent {
     void inject(SettingsActivity activity);
     void inject(ESCSettingsActivity activity);
     void inject(AboutPage activity);
+    void inject(LocationFragment locationFragment);
+    void inject(OptionsFragment activity);
+    void inject(AdresaFragment activity);
     void inject(MyFirebaseMessagingService service);
 
 }

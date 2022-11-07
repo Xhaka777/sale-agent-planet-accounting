@@ -721,6 +721,8 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                                             fillInvoiceItemData(itemBinding, invoiceItem[0]);
 
                                             calculcation_form();
+                                            calculateSasiaTotale();
+
 
                                         }
                                         binding.loader.setVisibility(View.GONE);
@@ -766,8 +768,8 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                             fillInvoiceItemData(itemBinding, invoiceItem[0]);
                             calculcation_form();
 
-                            calculateSasiaTotale();
                             calculateArtikujtTotal();
+                            calculateSasiaTotale();
                             calculateTotal();
                             calculateVleraPaTvsh();
                             calculateVleraEZbritur();
@@ -875,7 +877,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 invoiceItem.setSelectedItemCode(invoiceItem.getItems().get(i).getNumber());
                 invoiceItem.setSelectedUnit(invoiceItem.getItems().get(i).getUnit());
                 invoiceItem.setSelectedPosition(checked);
-                System.out.println("sasia11 " + String.valueOf(invoiceItem.getItems().get(i).getRelacion()));
+                System.out.println("sasia11 " + invoiceItem.getItems().get(i).getRelacion());
                 invoiceItem.setRelacion(String.valueOf(invoiceItem.getItems().get(i).getRelacion()));
                 invoiceItem.setBaseDiscount(invoiceItem.getItems().get(i).getDiscount());
                 invoiceItem.setBarcode(invoiceItem.getItems().get(i).getBarcode());
@@ -885,7 +887,8 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         }
     }
 
-    //        this part is for to show DropDown when clicked editText for secound time and more ...
+    //this part is for to show DropDown when clicked editText for secound time and more ...
+
     private void shopDropDownList() {
         binding.emriKlientit.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -955,7 +958,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 //               binding.artikujTeZgjedhur.setText("Nr. i artikujve te zgjedhur : " + count);
 
 
-                // Write your code here to invoke NO event
+                // Write your code here to invoke Yes event
                 doYouWantToDeleteThisArticleListener.Yes();
                 dialog.cancel();
 
@@ -1190,6 +1193,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             invoicePost.setPartie_station_id("0");
         }
         invoicePost.setPartie_station_name(binding.njersiaEdittext.getText().toString());
+        invoicePost.setComment(binding.komentiEdittext.getText().toString());
         invoicePost.setPartie_address(client.getAddress());
         invoicePost.setPartie_city(client.getCity());
         invoicePost.setPartie_state_id(client.getState());
@@ -1292,6 +1296,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             invoicePost.setPartie_station_id("0");
         }
         invoicePost.setPartie_station_name(binding.njersiaEdittext.getText().toString());
+        invoicePost.setComment(binding.komentiEdittext.getText().toString());
         invoicePost.setPartie_address(client.getAddress());
         invoicePost.setPartie_city(client.getCity());
         invoicePost.setPartie_state_id(client.getState());
@@ -1370,19 +1375,15 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.cash_dialog_layout, null);
         dialogBuilder.setView(dialogView);
-        Button keshButton = (Button) dialogView.findViewById(R.id.kesh_button);
-        Button pritjeButton = (Button) dialogView.findViewById(R.id.later_button);
-        Button konfirmoButton = (Button) dialogView.findViewById(R.id.ok_button);
-        EditText keshEditText = (EditText) dialogView.findViewById(R.id.shuma_editText);
+        Button keshButton = dialogView.findViewById(R.id.kesh_button);
+        Button pritjeButton = dialogView.findViewById(R.id.later_button);
+        Button konfirmoButton = dialogView.findViewById(R.id.ok_button);
+        EditText keshEditText = dialogView.findViewById(R.id.shuma_editText);
         keshEditText.setText(totaliFatures);
-        LinearLayout buttonHolder = (LinearLayout) dialogView.findViewById(R.id.button_holder);
-        LinearLayout keshHolder = (LinearLayout) dialogView.findViewById(R.id.kesh_holder);
+        LinearLayout buttonHolder = dialogView.findViewById(R.id.button_holder);
+        LinearLayout keshHolder = dialogView.findViewById(R.id.kesh_holder);
         double totali = Double.parseDouble(totaliFatures);
-        if (Double.parseDouble(client.getPaymentDeadline()) > 0 && totali < Double.parseDouble(client.getLimitBalance())) {
-            pritjeButton.setEnabled(true);
-        } else {
-            pritjeButton.setEnabled(false);
-        }
+        pritjeButton.setEnabled(Double.parseDouble(client.getPaymentDeadline()) > 0 && totali < Double.parseDouble(client.getLimitBalance()));
         keshButton.setOnClickListener(view -> {
             buttonHolder.setVisibility(View.GONE);
             keshHolder.setVisibility(View.VISIBLE);
@@ -1436,11 +1437,11 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.cash_dialog_layout, null);
         dialogBuilder.setView(dialogView);
-        Button keshButton = (Button) dialogView.findViewById(R.id.kesh_button);
-        Button pritjeButton = (Button) dialogView.findViewById(R.id.later_button);
-        Button konfirmoButton = (Button) dialogView.findViewById(R.id.ok_button);
-        LinearLayout buttonHolder = (LinearLayout) dialogView.findViewById(R.id.button_holder);
-        LinearLayout keshHolder = (LinearLayout) dialogView.findViewById(R.id.kesh_holder);
+        Button keshButton = dialogView.findViewById(R.id.kesh_button);
+        Button pritjeButton = dialogView.findViewById(R.id.later_button);
+        Button konfirmoButton = dialogView.findViewById(R.id.ok_button);
+        LinearLayout buttonHolder = dialogView.findViewById(R.id.button_holder);
+        LinearLayout keshHolder = dialogView.findViewById(R.id.kesh_holder);
 
         keshButton.setText("Fature");
         pritjeButton.setText("Kupon Fiskal");
@@ -1474,9 +1475,9 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.printing_mode_dialog, null);
         dialogBuilder.setView(dialogView);
-        Button print = (Button) dialogView.findViewById(R.id.print_button);
-        Button print80mm = (Button) dialogView.findViewById(R.id.print_80_button);
-        LinearLayout buttonHolder = (LinearLayout) dialogView.findViewById(R.id.button_holder);
+        Button print = dialogView.findViewById(R.id.print_button);
+        Button print80mm = dialogView.findViewById(R.id.print_80_button);
+        LinearLayout buttonHolder = dialogView.findViewById(R.id.button_holder);
 
 
         AlertDialog alertDialog = dialogBuilder.create();
@@ -1525,7 +1526,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         final int[] actionCount = {count};
         int[] positions = new int[invoiceItem.getItems().size()];
         for (int h = 0; h < invoiceItem.getItems().size(); h++) {
-            Item stock = realmHelper.getItemsByid(invoiceItem.getItems().get(h).getGroupItem().toString());
+            Item stock = realmHelper.getItemsByid(invoiceItem.getItems().get(h).getGroupItem());
             final SubItem[] item = {invoiceItem.getItems().get(h)};
             double availableQuantity = Double.parseDouble(stock.getQuantity()) / item[0].getRelacion();
             double sasia = Double.parseDouble(item[0].getQuantity()) * actionCount[0];
@@ -1585,6 +1586,8 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                     binding.invoiceItemHolder.removeViewAt(positions[i - 1]);
                     stockItems.remove(positions[i - 1]);
                 }
+                calculateSasiaTotale();
+                calculateArtikujtTotal();
                 calculateTotal();
                 calculateVleraPaTvsh();
                 calculateVleraEZbritur();
@@ -1884,11 +1887,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 }
             }
 
-            if (mainItem.getRelacion() >= actionItem.getRelacion()) {
-                return true;
-            } else {
-                return false;
-            }
+            return mainItem.getRelacion() >= actionItem.getRelacion();
         }
 
     }
@@ -2177,19 +2176,19 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     }
 
     public void calculateArtikujtTotal() {
-        double artTotal = 0;
-        for (int i=0;i<stockItems.size();i++){
+        int artTotal = 0;
+        for (int i = 0; i < stockItems.size(); i++) {
 
             String cap = stockItems.get(i).getName().trim();
 
-            if(cap.length() > 0){
+            if (cap.length() > 0) {
                 artTotal++;
             }
 
 //            artTotal+= Double.parseDouble(stockItems.get(i).getSelectedItemCode());
         }
         this.nrArtikujtTotal = String.valueOf(cutTo2(artTotal));
-        binding.artikujTeZgjedhur.setText("nr. i artikujve te zgjedhur : " + cutTo2(artTotal));
+        binding.artikujTeZgjedhur.setText("Nr. i artikujve te zgjedhur : " + artTotal);
     }
 
     public void calculateSasiaTotale() {
@@ -2198,7 +2197,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             quaTotal += Double.parseDouble(stockItems.get(i).getSasia());
         }
         this.sasiaTotale = String.valueOf(cutTo2(quaTotal));
-        binding.artikujtSasiaTotale.setText("Vlera Totale: " + cutTo2(quaTotal));
+        binding.artikujtSasiaTotale.setText("Sasia Totale : " + cutTo2(quaTotal));
     }
 
     public void calculateTotal() {

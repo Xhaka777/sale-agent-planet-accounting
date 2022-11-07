@@ -25,6 +25,8 @@ public class InvoiceItem implements Parcelable {
     public String name;
     public String number;
     public String quantity;
+    //Variabel per koment te fatures
+    public String comment;
     public String manufacturer;
     public String brand;
     public String category;
@@ -59,6 +61,7 @@ public class InvoiceItem implements Parcelable {
         this.name = item.getName();
         this.number = item.getNumber();
         this.quantity = item.getQuantity();
+        this.comment = item.getComment();
         this.manufacturer = item.getManufacturer();
         this.brand = item.getBrand();
         this.category = item.getCategory();
@@ -74,6 +77,7 @@ public class InvoiceItem implements Parcelable {
         this.name = item.getName();
         this.number = item.getNumber();
         this.quantity = item.getQuantity();
+        this.comment = item.getComment();
         this.manufacturer = item.getManufacturer();
         this.brand = item.getBrand();
         this.category = item.getCategory();
@@ -120,6 +124,8 @@ public class InvoiceItem implements Parcelable {
     public String getQuantity() {
         return quantity;
     }
+
+    public String getComment() { return comment; }
 
     public String getManufacturer() {
         return manufacturer;
@@ -206,6 +212,8 @@ public class InvoiceItem implements Parcelable {
     public void setSasia(String sasia) {
         this.sasia = sasia;
     }
+
+    public void setComment(String comment) { this.comment = comment; }
 
     public double getVleraPaTvsh() {
         return vleraPaTvsh;
@@ -354,6 +362,7 @@ public class InvoiceItem implements Parcelable {
         dest.writeString(this.name);
         dest.writeString(this.number);
         dest.writeString(this.quantity);
+        dest.writeString(this.comment);
         dest.writeString(this.manufacturer);
         dest.writeString(this.brand);
         dest.writeString(this.category);
@@ -388,6 +397,7 @@ public class InvoiceItem implements Parcelable {
         this.name = in.readString();
         this.number = in.readString();
         this.quantity = in.readString();
+        this.comment = in.readString();
         this.manufacturer = in.readString();
         this.brand = in.readString();
         this.category = in.readString();

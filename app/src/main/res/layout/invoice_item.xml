@@ -1,177 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/content"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:gravity="center_vertical"-->
-<!--        android:orientation="horizontal">-->
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/content"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:orientation="horizontal">-->
 
-<!--        &lt;!&ndash;#	SHIFRA	BARKODI	EMERTIMI	SASIA [A]	NJESIA	CMIMI [B]	ZBRITJA % [C]-->
-<!--        ZBRITJA EXTRA % [D]	CMIMI PA TVSH  [E]	KODI (NORMA) [F]	CMIMI ME TVSH  [G]	VLERA PA TVSH  [H]	VLERA E TVSH-SË  [I]	VLERA ME TVSH  [J]	LLOGARIA	DEPO	PROJEKTI&ndash;&gt;-->
-<!--        <AutoCompleteTextView-->
-<!--            android:id="@+id/shifra_textview"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="SHIFRA"-->
-<!--            android:padding="5dp"-->
-<!--            android:paddingTop="5dp"-->
-<!--            android:textColor="#000"-->
-<!--            android:textSize="15sp"-->
-<!--            />-->
+    <!--        &lt;!&ndash;#	SHIFRA	BARKODI	EMERTIMI	SASIA [A]	NJESIA	CMIMI [B]	ZBRITJA % [C]-->
+    <!--        ZBRITJA EXTRA % [D]	CMIMI PA TVSH  [E]	KODI (NORMA) [F]	CMIMI ME TVSH  [G]	VLERA PA TVSH  [H]	VLERA E TVSH-SË  [I]	VLERA ME TVSH  [J]	LLOGARIA	DEPO	PROJEKTI&ndash;&gt;-->
+    <!--        <AutoCompleteTextView-->
+    <!--            android:id="@+id/shifra_textview"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:hint="SHIFRA"-->
+    <!--            android:padding="5dp"-->
+    <!--            android:paddingTop="5dp"-->
+    <!--            android:textColor="#000"-->
+    <!--            android:textSize="15sp"-->
+    <!--            />-->
 
-<!--        <AutoCompleteTextView-->
-<!--            android:id="@+id/emertimi_textview"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:hint="EMERTIMI"-->
-<!--            android:padding="5dp"-->
-<!--            android:paddingTop="5dp"-->
+    <!--        <AutoCompleteTextView-->
+    <!--            android:id="@+id/emertimi_textview"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:hint="EMERTIMI"-->
+    <!--            android:padding="5dp"-->
+    <!--            android:paddingTop="5dp"-->
 
-<!--            android:textColor="#000"-->
-<!--            android:textSize="15sp"-->
-<!--            />-->
+    <!--            android:textColor="#000"-->
+    <!--            android:textSize="15sp"-->
+    <!--            />-->
 
-<!--        <AutoCompleteTextView-->
-<!--            android:id="@+id/njesia_textview"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:focusable="false"-->
-<!--            android:hint="NJESIA"-->
-<!--            android:paddingTop="5dp"-->
+    <!--        <AutoCompleteTextView-->
+    <!--            android:id="@+id/njesia_textview"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:focusable="false"-->
+    <!--            android:hint="NJESIA"-->
+    <!--            android:paddingTop="5dp"-->
 
-<!--            android:padding="5dp"-->
-<!--            android:textColor="#000"-->
-<!--            android:textSize="15sp"-->
-<!--            />-->
+    <!--            android:padding="5dp"-->
+    <!--            android:textColor="#000"-->
+    <!--            android:textSize="15sp"-->
+    <!--            />-->
 
-<!--        <AutoCompleteTextView-->
-<!--            android:id="@+id/sasia_textview"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="SASIA"-->
-<!--            android:paddingTop="5dp"-->
+    <!--        <AutoCompleteTextView-->
+    <!--            android:id="@+id/sasia_textview"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:hint="SASIA"-->
+    <!--            android:paddingTop="5dp"-->
 
-<!--            android:inputType="numberDecimal"-->
-<!--            android:padding="5dp"-->
-<!--            android:textColor="#000"-->
-<!--            android:textSize="15sp"-->
-<!--            />-->
+    <!--            android:inputType="numberDecimal"-->
+    <!--            android:padding="5dp"-->
+    <!--            android:textColor="#000"-->
+    <!--            android:textSize="15sp"-->
+    <!--            />-->
 
-<!--        <AutoCompleteTextView-->
-<!--            android:id="@+id/base_price"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:enabled="false"-->
-<!--            android:hint="CMIMI .B"-->
-<!--            android:paddingTop="5dp"-->
+    <!--        <AutoCompleteTextView-->
+    <!--            android:id="@+id/base_price"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:enabled="false"-->
+    <!--            android:hint="CMIMI .B"-->
+    <!--            android:paddingTop="5dp"-->
 
-<!--            android:padding="5dp"-->
-<!--            android:textColor="#000"-->
-<!--            android:textSize="15sp"-->
-<!--            />-->
+    <!--            android:padding="5dp"-->
+    <!--            android:textColor="#000"-->
+    <!--            android:textSize="15sp"-->
+    <!--            />-->
 
-<!--        <AutoCompleteTextView-->
-<!--            android:id="@+id/zbritja_textview"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:enabled="true"-->
-<!--            android:hint="ZBRITJE%"-->
-<!--            android:paddingTop="5dp"-->
-<!--            android:inputType="numberDecimal"-->
-<!--            android:padding="5dp"-->
-<!--            android:textColor="#000"-->
-<!--            android:textSize="15sp"-->
-<!--            />-->
+    <!--        <AutoCompleteTextView-->
+    <!--            android:id="@+id/zbritja_textview"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:enabled="true"-->
+    <!--            android:hint="ZBRITJE%"-->
+    <!--            android:paddingTop="5dp"-->
+    <!--            android:inputType="numberDecimal"-->
+    <!--            android:padding="5dp"-->
+    <!--            android:textColor="#000"-->
+    <!--            android:textSize="15sp"-->
+    <!--            />-->
 
-<!--        <AutoCompleteTextView-->
-<!--            android:id="@+id/cmimi_tvsh"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:enabled="false"-->
-<!--            android:hint="CMIMI"-->
-<!--            android:paddingTop="5dp"-->
+    <!--        <AutoCompleteTextView-->
+    <!--            android:id="@+id/cmimi_tvsh"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:enabled="false"-->
+    <!--            android:hint="CMIMI"-->
+    <!--            android:paddingTop="5dp"-->
 
-<!--            android:padding="5dp"-->
-<!--            android:textColor="#000"-->
-<!--            android:textSize="15sp"-->
-<!--            />-->
+    <!--            android:padding="5dp"-->
+    <!--            android:textColor="#000"-->
+    <!--            android:textSize="15sp"-->
+    <!--            />-->
 
 
-<!--        <AutoCompleteTextView-->
-<!--            android:id="@+id/vlera"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:enabled="false"-->
-<!--            android:hint="VLERA"-->
-<!--            android:paddingTop="5dp"-->
+    <!--        <AutoCompleteTextView-->
+    <!--            android:id="@+id/vlera"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:enabled="false"-->
+    <!--            android:hint="VLERA"-->
+    <!--            android:paddingTop="5dp"-->
 
-<!--            android:padding="5dp"-->
-<!--            android:textColor="#000"-->
-<!--            android:textSize="15sp"-->
-<!--            />-->
+    <!--            android:padding="5dp"-->
+    <!--            android:textColor="#000"-->
+    <!--            android:textSize="15sp"-->
+    <!--            />-->
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/remove_button"-->
-<!--            android:layout_width="35dp"-->
-<!--            android:layout_height="35dp"-->
-<!--            android:background="@android:drawable/ic_menu_close_clear_cancel"-->
-<!--            />-->
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/remove_button"-->
+    <!--            android:layout_width="35dp"-->
+    <!--            android:layout_height="35dp"-->
+    <!--            android:background="@android:drawable/ic_menu_close_clear_cancel"-->
+    <!--            />-->
 
-<!--        <Button-->
-<!--            android:id="@+id/add_button"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:text="+"-->
-<!--            android:visibility="gone"-->
-<!--            android:textSize="20dp" />-->
+    <!--        <Button-->
+    <!--            android:id="@+id/add_button"-->
+    <!--            android:layout_width="40dp"-->
+    <!--            android:layout_height="40dp"-->
+    <!--            android:text="+"-->
+    <!--            android:visibility="gone"-->
+    <!--            android:textSize="20dp" />-->
 
-<!--        <Button-->
-<!--            android:id="@+id/sub_button"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:text="-"-->
-<!--            android:textSize="20dp"-->
-<!--            android:visibility="gone"/>-->
+    <!--        <Button-->
+    <!--            android:id="@+id/sub_button"-->
+    <!--            android:layout_width="40dp"-->
+    <!--            android:layout_height="40dp"-->
+    <!--            android:text="-"-->
+    <!--            android:textSize="20dp"-->
+    <!--            android:visibility="gone"/>-->
 
-<!--    </LinearLayout>-->
+    <!--    </LinearLayout>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content">
 
-        >
-    <RelativeLayout
-        android:id="@+id/base"
-        android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/base"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_white_radius_5"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        >
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/border_white_radius_5">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="6dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginRight="2dp"
                         android:layout_weight="0.4"
                         android:orientation="vertical">
@@ -181,26 +177,24 @@
                             android:layout_height="wrap_content"
                             android:text="Shifra"
                             android:textColor="#b3414042"
-                            android:textSize="12sp"
-                            />
+                            android:textSize="12sp" />
 
                         <AutoCompleteTextView
                             android:id="@+id/shifra_textview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:textSize="15sp"
                             android:background="@drawable/edit_field_corner"
                             android:hint="Shifra"
-                            />
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="2dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginRight="2dp"
                         android:layout_weight="0.6"
                         android:orientation="vertical">
@@ -210,24 +204,23 @@
                             android:layout_height="wrap_content"
                             android:text="Emri"
                             android:textColor="#b3414042"
-                            android:textSize="12dp"
-                            />
+                            android:textSize="12dp" />
 
                         <AutoCompleteTextView
                             android:id="@+id/emertimi_textview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:textSize="15sp"
                             android:background="@drawable/edit_field_corner"
-                            android:hint="Emri" />
+                            android:hint="Emri"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="2dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_weight="0.3"
                         android:orientation="vertical">
@@ -237,8 +230,7 @@
                             android:layout_height="wrap_content"
                             android:text="Njesia"
                             android:textColor="#b3414042"
-                            android:textSize="12sp"
-                            />
+                            android:textSize="12sp" />
 
                         <AutoCompleteTextView
                             android:id="@+id/njesia_textview"
@@ -246,28 +238,25 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:background="@drawable/edit_field_corner"
-                            android:textSize="15sp"
-                            android:hint="Njesia"
                             android:focusable="false"
-                            />
+                            android:hint="Njesia"
+                            android:textSize="15sp" />
 
                     </LinearLayout>
                 </LinearLayout>
 
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginBottom="4dp"
-                    >
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="6dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginRight="2dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -277,8 +266,7 @@
                             android:layout_height="wrap_content"
                             android:text="Sasia"
                             android:textColor="#b3414042"
-                            android:textSize="12sp"
-                            />
+                            android:textSize="12sp" />
 
                         <AutoCompleteTextView
                             android:id="@+id/sasia_textview"
@@ -286,17 +274,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:background="@drawable/edit_field_corner"
+                            android:hint="Sasia"
                             android:inputType="numberDecimal"
-                            android:textSize="14sp"
-                            android:hint="Sasia" />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="2dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginRight="2dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -306,16 +294,15 @@
                             android:layout_height="wrap_content"
                             android:text="Cmimi.B"
                             android:textColor="#b3414042"
-                            android:textSize="12dp"
-                            />
+                            android:textSize="12dp" />
 
                         <AutoCompleteTextView
                             android:id="@+id/base_price"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:enabled="false"
                             android:layout_marginTop="6dp"
                             android:background="@drawable/edit_field_corner"
+                            android:enabled="false"
                             android:hint="Cmimi.B"
                             android:textSize="14sp"
 
@@ -329,8 +316,8 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="2dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginRight="2dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -340,18 +327,17 @@
                             android:layout_height="wrap_content"
                             android:text="Zbritje%"
                             android:textColor="#b3414042"
-                            android:textSize="12dp"
-                            />
+                            android:textSize="12dp" />
 
                         <AutoCompleteTextView
                             android:id="@+id/zbritja_textview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:enabled="true"
-                            android:inputType="numberDecimal"
                             android:layout_marginTop="6dp"
                             android:background="@drawable/edit_field_corner"
+                            android:enabled="true"
                             android:hint="Zbritje%"
+                            android:inputType="numberDecimal"
                             android:textSize="14sp"
 
                             />
@@ -362,8 +348,8 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="2dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginRight="2dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -373,8 +359,7 @@
                             android:layout_height="wrap_content"
                             android:text="Cmimi"
                             android:textColor="#b3414042"
-                            android:textSize="12sp"
-                            />
+                            android:textSize="12sp" />
 
                         <AutoCompleteTextView
                             android:id="@+id/cmimi_tvsh"
@@ -383,10 +368,10 @@
                             android:layout_marginTop="6dp"
                             android:background="@drawable/edit_field_corner"
                             android:enabled="false"
-                            android:textSize="14sp"
+                            android:hint="Cmimi"
 
 
-                            android:hint="Cmimi" />
+                            android:textSize="14sp" />
 
 
                     </LinearLayout>
@@ -395,28 +380,26 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="2dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginRight="6dp"
-                        android:orientation="vertical"
                         android:layout_weight="1"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Vlera"
                             android:textColor="#b3414042"
-                            android:textSize="12dp"
-                            />
+                            android:textSize="12dp" />
 
                         <AutoCompleteTextView
                             android:id="@+id/vlera"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:enabled="false"
                             android:layout_marginTop="6dp"
                             android:background="@drawable/edit_field_corner"
+                            android:enabled="false"
                             android:hint="Vlera"
                             android:textSize="14sp"
 
@@ -432,19 +415,17 @@
 
 
         </RelativeLayout>
+
         <ImageButton
             android:id="@+id/remove_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_alignRight="@id/base"
+            android:layout_alignParentTop="@+id/base"
             android:layout_marginTop="-5dp"
             android:layout_marginRight="-5dp"
-            android:background="@drawable/cancel_2_icon"
-            android:layout_alignRight="@id/base"
-            android:layout_alignParentTop="@+id/base"/>
+            android:background="@drawable/cancel_2_icon" />
     </RelativeLayout>
-
-
-
 
 
 </layout>
