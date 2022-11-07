@@ -79,6 +79,8 @@ public class OrdersActivity extends AppCompatActivity {
     List<Varehouse> varehouses = new ArrayList<>();
     String stationID = "2";
     int pozitaeArtikullit = 0;
+    String nrArtikujtTotal = "0";
+    String sasiaTotale = "0";
 
     Locale myLocale;
     String currentLanguage = "sq", currentLang;
@@ -351,6 +353,10 @@ public class OrdersActivity extends AppCompatActivity {
 
                     }
                     fillInvoiceItemData(itemBinding, invoiceItem[0]);
+
+                    calculateSasinTotale();
+                    calculateArtikujtTotal();
+
                 } catch (Exception e) {
                     Toast.makeText(OrdersActivity.this, R.string.nuk_keni_sasi_te_mjaftueshme_ne_depo, Toast.LENGTH_SHORT).show();
                 }
@@ -492,6 +498,8 @@ public class OrdersActivity extends AppCompatActivity {
                     }
                 }
                 binding.invoiceItemHolder.removeView(itemBinding.getRoot());
+                calculateSasinTotale();
+                calculateArtikujtTotal();
             });
         });
         itemBinding.getRoot().setTag(binding.invoiceItemHolder.getChildCount());
@@ -682,6 +690,40 @@ public class OrdersActivity extends AppCompatActivity {
                         throwable.printStackTrace();
                     }
                 });
+    }
+
+    public void calculateArtikujtTotal(){
+
+        int artTotal = 0;
+
+        for(int i =0; i<stockItems.size(); i++){
+
+            String cap = stockItems.get(i).getName().trim();
+
+            if(cap.length() > 0){
+                artTotal++;
+            }
+        }
+        this.nrArtikujtTotal = String.valueOf(cutTo2(artTotal));
+        binding.artikujTeZgjedhur.setText("Nr. i artikujve te zgjedhur : " + artTotal);
+    }
+
+    public void calculateSasinTotale(){
+
+        double quaTotal = 0;
+
+        for(int i =0; i<stockItems.size(); i++){
+
+            quaTotal += Double.parseDouble(stockItems.get(i).getSasia());
+
+        }
+
+        this.sasiaTotale = String.valueOf(cutTo2(quaTotal));
+        binding.artikujtSasiaTotale.setText("Sasia Totale : " + quaTotal);
+    }
+
+    public double cutTo2(double value){
+        return Double.parseDouble(String.format(Locale.ENGLISH,"%2.f", value));
     }
 
     interface DoYouWantToDeleteThisArticleListener {

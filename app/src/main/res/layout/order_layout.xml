@@ -20,17 +20,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
                     android:text="Porosi"
-                    android:layout_centerVertical="true"
                     android:textColor="#000" />
 
                 <LinearLayout
                     android:id="@+id/data_linar"
                     android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_margin="10dp"
                     android:layout_marginRight="10dp"
                     android:orientation="horizontal">
@@ -57,16 +57,15 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:checked="false"
-                    android:textColor="@android:color/black"
                     android:text="Klienti"
-                    android:visibility="gone"
-                    />
+                    android:textColor="@android:color/black"
+                    android:visibility="gone" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#E5E5E5"
-                    android:layout_alignParentBottom="true"/>
+                    android:layout_alignParentBottom="true"
+                    android:background="#E5E5E5" />
             </RelativeLayout>
 
             <ScrollView
@@ -124,9 +123,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#b3414042"
+                            android:text="Njesia  "
 
-                            android:text="Njesia  " />
+                            android:textColor="#b3414042" />
 
                         <AutoCompleteTextView
                             android:id="@+id/njersia_edittext"
@@ -147,8 +146,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Depo"
-                            android:textColor="#b3414042"
-                            />
+                            android:textColor="#b3414042" />
 
                         <AutoCompleteTextView
                             android:id="@+id/depo_edittext"
@@ -161,43 +159,43 @@
 
 
                     <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_marginRight="50dp"-->
-                        <!--android:orientation="horizontal">-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginRight="50dp"-->
+                    <!--android:orientation="horizontal">-->
 
-                        <!--&lt;!&ndash;#	SHIFRA	BARKODI	EMERTIMI	SASIA [A]	NJESIA	CMIMI [B]	ZBRITJA % [C]-->
-                        <!--ZBRITJA EXTRA % [D]	CMIMI PA TVSH  [E]	KODI (NORMA) [F]	CMIMI ME TVSH  [G]	VLERA PA TVSH  [H]	VLERA E TVSH-SË  [I]	VLERA ME TVSH  [J]	LLOGARIA	DEPO	PROJEKTI&ndash;&gt;-->
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:hint="SHIFRA"-->
-                            <!--android:padding="10dp"-->
-                            <!--android:textColor="#000" />-->
+                    <!--&lt;!&ndash;#	SHIFRA	BARKODI	EMERTIMI	SASIA [A]	NJESIA	CMIMI [B]	ZBRITJA % [C]-->
+                    <!--ZBRITJA EXTRA % [D]	CMIMI PA TVSH  [E]	KODI (NORMA) [F]	CMIMI ME TVSH  [G]	VLERA PA TVSH  [H]	VLERA E TVSH-SË  [I]	VLERA ME TVSH  [J]	LLOGARIA	DEPO	PROJEKTI&ndash;&gt;-->
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="SHIFRA"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:textColor="#000" />-->
 
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:hint="EMERTIMI"-->
-                            <!--android:padding="10dp"-->
-                            <!--android:textColor="#000" />-->
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:hint="EMERTIMI"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:textColor="#000" />-->
 
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:focusable="false"-->
-                            <!--android:hint="NJESIA"-->
-                            <!--android:padding="10dp"-->
-                            <!--android:textColor="#000" />-->
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:focusable="false"-->
+                    <!--android:hint="NJESIA"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:textColor="#000" />-->
 
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:hint="SASIA"-->
-                            <!--android:inputType="numberDecimal"-->
-                            <!--android:padding="10dp"-->
-                            <!--android:textColor="#000" />-->
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="SASIA"-->
+                    <!--android:inputType="numberDecimal"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:textColor="#000" />-->
 
                     <!--</LinearLayout>-->
 
@@ -213,12 +211,36 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
+                        android:background="@drawable/button_rounder_corner_2"
                         android:padding="15dp"
                         android:text="SHTO"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/button_rounder_corner_2"
-                        />
+                        android:textColor="@android:color/white" />
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/artikuj_te_zgjedhur"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/artikujt_sasia_totale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+                    </RelativeLayout>
                 </LinearLayout>
             </ScrollView>
 
@@ -232,26 +254,27 @@
                     android:id="@+id/porosit_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dergo Porosine"
-                    android:padding="10dp"
-                    android:textColor="@android:color/white"
                     android:background="@drawable/button_rounder_corner"
-                    />
+                    android:padding="10dp"
+                    android:text="Dergo Porosine"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 
 
         </LinearLayout>
+
         <RelativeLayout
             android:id="@+id/loader"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#80666666"
             android:visibility="gone">
+
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true" />
         </RelativeLayout>
     </RelativeLayout>
 </layout>
