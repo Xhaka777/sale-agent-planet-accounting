@@ -22,10 +22,10 @@
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                android:text="@string/title_inkasimi"
                 android:gravity="center"
-                android:textSize="25sp"
-                android:textColor="#FFFFFF"/>
+                android:text="@string/title_inkasimi"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -36,12 +36,12 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -52,6 +52,7 @@
                     android:text="@string/klienti"
                     android:textSize="20sp" />
 
+
                 <AutoCompleteTextView
                     android:id="@+id/spinner"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
@@ -59,8 +60,8 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/edit_field_corner"
-                    android:hint="@string/klienti"
-                    />
+                    android:hint="@string/klienti" />
+
 
                 <TextView
                     android:id="@+id/textView6"
@@ -86,10 +87,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:hint="@string/shuma"
-                    android:digits="0123456789."
-                    android:inputType="numberDecimal"
                     android:background="@drawable/edit_field_corner"
+                    android:digits="0123456789."
+                    android:hint="@string/shuma"
+                    android:inputType="numberDecimal"
 
                     android:textSize="20sp" />
 
@@ -98,9 +99,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
+                    android:background="@drawable/edit_field_corner"
                     android:hint="@string/komenti"
                     android:textSize="20sp"
-                    android:background="@drawable/edit_field_corner"
 
                     />
 
@@ -110,15 +111,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:background="@drawable/button_rounder_corner"
                     android:onClick="Inkasimi"
                     android:text="@string/btn_inkaso"
-                    android:textColor="@android:color/white"
-                    android:background="@drawable/button_rounder_corner" />
+                    android:textColor="@android:color/white" />
+
                 <ProgressBar
                     android:id="@+id/progress_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </LinearLayout>
 
         </LinearLayout>

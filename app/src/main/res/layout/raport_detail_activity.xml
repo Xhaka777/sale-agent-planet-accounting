@@ -4,28 +4,79 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        >
+        android:background="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <!--            <RelativeLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="50dp"-->
+            <!--                android:background="@android:color/white">-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/title"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_centerVertical="true"-->
+            <!--                    android:layout_marginLeft="19dp"-->
+            <!--                    android:text="@string/raportet"-->
+            <!--                    android:textAllCaps="true"-->
+            <!--                    android:textColor="#000" />-->
+
+            <!--                <EditText-->
+            <!--                    android:id="@+id/search_edittext"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="56dp"-->
+            <!--                    android:drawableLeft="@drawable/ic_search"-->
+            <!--                    android:hint="@string/kerko"-->
+            <!--                    android:imeOptions="flagNoFullscreen"-->
+            <!--                    android:textColor="#000" />-->
+
+            <!--                <Button-->
+            <!--                    android:id="@+id/sync"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_alignParentRight="true"-->
+            <!--                    android:layout_centerVertical="true"-->
+            <!--                    android:layout_marginRight="19dp"-->
+            <!--                    android:background="@android:color/white" />-->
+            <!--                &lt;!&ndash;                    android:background="@drawable/button_rounder_corner"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:padding="15dp"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:text="Sinkronizo"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:textColor="@android:color/white" />&ndash;&gt;-->
+            <!--            </RelativeLayout>-->
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@android:color/white">
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="19dp"
+                    android:layout_marginLeft="20dp"
                     android:text="@string/raportet"
                     android:textAllCaps="true"
-                    android:textColor="#000" />
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@id/search_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_search"
+                    android:imeOptions="flagNoFullscreen"
+                    android:textColor="#000"
+                    android:hint="@string/kerko"/>
 
                 <Button
                     android:id="@+id/sync"
@@ -35,18 +86,15 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="19dp"
                     android:background="@android:color/white" />
-<!--                    android:background="@drawable/button_rounder_corner"-->
-<!--                    android:padding="15dp"-->
-<!--                    android:text="Sinkronizo"-->
-<!--                    android:textColor="@android:color/white" />-->
-            </RelativeLayout>
+
+            </LinearLayout>
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#E5E5E5"
                 android:layout_gravity="bottom"
-                />
+                android:background="#E5E5E5" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -55,92 +103,88 @@
 
 
             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#f0f0f0"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/col_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:textColor="#000" />
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/col_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000" />
 
 
-
-            <TextView
-                android:id="@+id/col_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:textColor="#000" />
-
+                <TextView
+                    android:id="@+id/col_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000" />
 
 
-            <TextView
-                android:id="@+id/col_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/col_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000" />
 
 
-
-            <TextView
-                android:id="@+id/col_4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:textColor="#000" />
-
-
-            <TextView
-                android:id="@+id/col_5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/col_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000" />
 
 
+                <TextView
+                    android:id="@+id/col_5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000" />
 
-            <TextView
-                android:id="@+id/col_6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:textColor="#000"
 
-                />
+                <TextView
+                    android:id="@+id/col_6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
 
-            <ImageView
-                android:id="@+id/synced_indicator"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="#ff0000"
-                android:visibility="invisible"/>
+                    />
 
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/synced_indicator"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="#ff0000"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -151,6 +195,28 @@
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/page_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:background="#fff"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/numri_faqes"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/totali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000" />
 
         </LinearLayout>
 

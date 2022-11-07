@@ -65,7 +65,7 @@
                 android:id="@+id/accept_other_transfer"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/ic_close"
+                android:background="@drawable/ic_check"
                 />
             <ImageButton
                 android:id="@+id/cancel_other_transfer"
