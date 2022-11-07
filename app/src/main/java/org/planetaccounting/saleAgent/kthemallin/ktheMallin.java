@@ -100,10 +100,13 @@ public class ktheMallin extends AppCompatActivity {
     String vleraZbritur = "0";
     String vleraETvsh = "0";
     String totaliFatures = "0";
+    String sasiaTotale = "0";
+    String nrArtikujveTotal = "0";
     private PrintManager printManager;
     ActionData actionData;
     private InvoiceActivityOriginal.InvoiceState invoiceState = InvoiceActivityOriginal.InvoiceState.FATUR;
     String stationID = "2";
+    int count  = 0;
 
     PlanetLocationManager planetLocationManager;
 
@@ -294,6 +297,10 @@ public class ktheMallin extends AppCompatActivity {
             int pos = (int) itemBinding.getRoot().getTag();
             findCodeAndPosition(invoiceItem[0]);
 
+            count++;
+            binding.artikujTeZgjedhur.setText("Nr. i artikujve te zgjedhur : " + (count));
+
+
             hideLoader();
             try {
                 stockItems.set(pos, invoiceItem[0]);
@@ -303,6 +310,8 @@ public class ktheMallin extends AppCompatActivity {
             itemBinding.sasiaTextview.requestFocus();
             fillInvoiceItemData(itemBinding, invoiceItem[0]);
 
+//            calculateSasiaTotale();
+//            calculateArtikujtTotal();
             calculateTotal();
             calculateVleraPaTvsh();
             calculateVleraETVSH();
@@ -344,6 +353,8 @@ public class ktheMallin extends AppCompatActivity {
 
                 fillInvoiceItemData(itemBinding, invoiceItem[0]);
 
+                calculateArtikujtTotal();
+                calculateSasiaTotale();
                 calculateTotal();
                 calculateVleraPaTvsh();
                 calculateVleraETVSH();
@@ -370,6 +381,8 @@ public class ktheMallin extends AppCompatActivity {
                     }
                 }
                 binding.invoiceItemHolder.removeView(itemBinding.getRoot());
+                calculateSasiaTotale();
+                calculateArtikujtTotal();
                 calculateTotal();
                 calculateVleraPaTvsh();
                 calculateVleraETVSH();
@@ -425,6 +438,9 @@ public class ktheMallin extends AppCompatActivity {
                 invoiceItem.setRelacion(String.valueOf(invoiceItem.getItems().get(checked).getRelacion()));
                 hideLoader();
                 fillInvoiceItemData(binding, invoiceItem);
+
+                calculateSasiaTotale();
+                calculateArtikujtTotal();
                 calculateTotal();
                 calculateVleraPaTvsh();
                 calculateVleraETVSH();
@@ -568,6 +584,29 @@ public class ktheMallin extends AppCompatActivity {
         finalValues.add(amount_with_vat);
         finalValues.add(priceSale.doubleValue());
         return finalValues;
+    }
+
+    public void calculateArtikujtTotal(){
+        int artiTotal = 0;
+        for(int i=0;i<stockItems.size(); i++){
+
+            String cap = stockItems.get(i).getName().trim();
+
+            if(cap.length() > 0){
+                artiTotal++;
+            }
+        }
+        this.nrArtikujveTotal = String.valueOf(cutTo2(artiTotal));
+        binding.artikujTeZgjedhur.setText("Nr. i artikujve te zgjedhur : " + artiTotal);
+    }
+
+    public void calculateSasiaTotale() {
+        double quaTotal = 0;
+        for(int i = 0; i < stockItems.size(); i++){
+            quaTotal += Double.parseDouble(stockItems.get(i).getSasia());
+        }
+        this.sasiaTotale = String.valueOf(cutTo2(quaTotal));
+        binding.artikujTeZgjedhur.setText("Sasia Totale : " + cutTo2(quaTotal));
     }
 
     public void calculateVleraPaTvsh() {
