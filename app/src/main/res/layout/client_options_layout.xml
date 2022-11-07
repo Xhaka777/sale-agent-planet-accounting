@@ -115,7 +115,10 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@drawable/edit_field_corner"
-                                android:hint="Zgjedh..." />
+                                android:hint="Zgjedh..."
+                                android:textSize="16sp"
+                                android:gravity="center"
+                                android:textAlignment="center"/>
 
                         </LinearLayout>
 
@@ -204,7 +207,8 @@
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginRight="8dp"
-                                android:background="@drawable/edit_field_corner" />
+                                android:background="@drawable/edit_field_corner"
+                                android:drawableRight="@drawable/ic_calendar"/>
 
                         </LinearLayout>
 
@@ -230,15 +234,15 @@
                                 android:textColor="#b3414042"
                                 android:layout_marginLeft="10dp"/>
 
-                                <AutoCompleteTextView
-                                    android:id="@+id/clientDiscount_edittext"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginTop="8dp"
-                                    android:background="@drawable/edit_field_corner"
-                                    android:hint="%"
-                                    android:gravity="end" />
+                            <AutoCompleteTextView
+                                android:id="@+id/clientDiscount_edittext"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/edit_field_corner"
+                                android:hint="%"
+                                android:gravity="end" />
 
                         </LinearLayout>
 

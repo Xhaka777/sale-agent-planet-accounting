@@ -77,6 +77,7 @@
                                 android:textColor="#b3414042" />
 
                             <AutoCompleteTextView
+                                android:id="@+id/clientState_bank"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="8dp"
@@ -102,6 +103,7 @@
                                 android:textColor="#b3414042" />
 
                             <AutoCompleteTextView
+                                android:id="@+id/client_bank"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="8dp"
@@ -114,6 +116,11 @@
                         </LinearLayout>
 
                     </LinearLayout>
+
+<!--                    <include-->
+<!--                        layout="@layout/dialog_searchable_state"-->
+<!--                        android:layout_width="185dp"-->
+<!--                        android:layout_height="wrap_content" />-->
 
                     <LinearLayout
                         android:layout_width="match_parent"

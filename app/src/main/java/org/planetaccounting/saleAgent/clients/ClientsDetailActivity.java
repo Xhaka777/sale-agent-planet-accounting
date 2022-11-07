@@ -131,15 +131,6 @@ public class ClientsDetailActivity extends Activity implements DatePickerDialog.
         }
     }
 
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LocaleHelper.onAttach(newBase));
@@ -162,7 +153,7 @@ public class ClientsDetailActivity extends Activity implements DatePickerDialog.
     }
 
     private void getClientCard() {
-        apiService.getClientsCard(new ClientCardPost(preferences.getToken(), preferences.getUserId(), client.getId(), nga, deri))
+        apiService.getClientsCard(new ClientCardPost(preferences.getToken(), preferences.getUserId(),  client.getId(), nga, deri))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(clientCardResponse -> {

@@ -22,6 +22,7 @@ public class Client extends RealmObject implements Parcelable {
     @SerializedName("id")
     @Expose
     public String id;
+
     @SerializedName("is_company")
     @Expose
     public String isCompany;
@@ -113,7 +114,7 @@ public class Client extends RealmObject implements Parcelable {
         return balance;
     }
 
-    public void setBalance(String balance){
+    public void setBalance(String balance) {
         this.balance = balance;
     }
 
@@ -129,7 +130,7 @@ public class Client extends RealmObject implements Parcelable {
         return numberBusniess;
     }
 
-    public void setNumberBusniess(String numberBusniess){
+    public void setNumberBusniess(String numberBusniess) {
         this.numberBusniess = numberBusniess;
     }
 
@@ -203,7 +204,7 @@ public class Client extends RealmObject implements Parcelable {
     public Client() {
     }
 
-    public Client(Client client){
+    public Client(Client client) {
         this.id = client.id;
         this.isCompany = client.isCompany;
         this.name = client.name;

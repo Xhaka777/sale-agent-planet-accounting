@@ -19,6 +19,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -71,7 +72,7 @@ import rx.schedulers.Schedulers;
  * Created by planetaccounting on 13/12/17.
  */
 
-public class ClientsActivity extends AppCompatActivity {
+public class ClientsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     ClientsActivityLayoutBinding binding;
     ClientLocationLayoutBinding bindingLocation;
@@ -92,7 +93,6 @@ public class ClientsActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener dateSh;
     private Calendar calendar;
     private java.util.Timer timer;
-
     String fDate;
     String dDate;
     String shDate;
@@ -115,19 +115,26 @@ public class ClientsActivity extends AppCompatActivity {
 
         //pjesa per paraqitjen e dates aktuale kur krijojme kliente...
         Date cDate = new Date();
-        calendar = Calendar.getInstance();
-
         fDate = new SimpleDateFormat("dd-MM-yyyy").format(cDate);
         dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cDate);
-//        binding.numriKlientit.setText(preferences.);
-//        binding.dataEdittext.setText(fDate);
+        binding.dataEdittext.setText(fDate);
+        calendar = Calendar.getInstance();
+        dateSh = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-//        ViewPager viewPager = findViewById(R.id.viewpager);
-//        FragmentAdapter fragmentadapter=new FragmentAdapter(getSupportFragmentManager());
-//        viewPager.setAdapter(fragmentadapter);
-//
-//        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
-//        tabLayout.setupWithViewPager(viewPager);
+                fDate = new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime());
+                dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(calendar.getTime());
+                binding.dataEdittext.setText(fDate);
+            }
+        };
+
+        binding.dataEdittext.setOnClickListener(v -> getData());
+
+        binding.numriKlientit.setText(preferences.getEmployNumber() + "-");
 
 
         viewPager = findViewById(R.id.viewpager);
@@ -140,7 +147,13 @@ public class ClientsActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
+    }
 
+    //method for data (Calendar)
+
+    private void getData(){
+        new DatePickerDialog(getApplicationContext(), dateSh, calendar.get(Calendar.YEAR),
+                                calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     //methods to change the languages
@@ -188,6 +201,14 @@ public class ClientsActivity extends AppCompatActivity {
         startActivity(i);
 
     }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+    }
+
+
+
 
 //    private void getClients() {
 //        apiService.getClients(new StockPost(preferences.getToken(), preferences.getUserId()))

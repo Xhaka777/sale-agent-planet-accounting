@@ -53,45 +53,29 @@ import rx.schedulers.Schedulers;
  * Created by macb on 13/12/17.
  */
 
-public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.ViewHolder> implements Filterable {
+public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.ViewHolder> {
 
     private List<Client> clients = new ArrayList<>();
-    private List<Client> clientFull = new ArrayList<>();
     private Context ctx;
-    private LayoutInflater mInflater;
+
 
     @Override
     public ClientsListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ctx = parent.getContext();
         ClientsListItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(ctx),
                 org.planetaccounting.saleAgent.R.layout.clients_list_item, parent, false);
-        return new ClientsListAdapter.ViewHolder(binding);
-    }
-
-    ClientsListAdapter(List<Client> clients){
-        this.clients = clients;
-        clientFull = new ArrayList<>(clients);
-    }
-
-    public ClientsListAdapter(Context context, @NonNull List<Client> clientList){
-        this.clients = clientList;
-        mInflater = LayoutInflater.from(context);
-        ctx = context;
+        return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ClientsListItemBinding binding = holder.binding;
-        Client client = clients.get(position);
-        double vBilance = Double.parseDouble(client.getBalance());
 
-        binding.numberTextview.setText(client.getNumber());
-        binding.uniqueNumberTextview.setText(client.getUnique_number());
-        binding.emriTextview.setText(client.getName());
-        binding.kontaktTextview.setText(client.getPhone());
-        binding.bilanciTextview.setText("" + cutTo2(vBilance));
-
-
+        binding.numberTextview.setText(clients.get(position).getNumber());
+        binding.emriTextview.setText(clients.get(position).getName());
+        binding.kontaktTextview.setText(clients.get(position).getPhone());
+        binding.bilanciTextview.setText(clients.get(position).getBalance());
+        binding.bilanciTextview.setText(clients.get(position).getBalance());
         Glide.with(ctx).load(clients.get(position).getLogo()).into(binding.imageClient);
         if (clients.get(position).getPhone() != null) {
             if (clients.get(position).getPhone().length() > 0) {
@@ -112,7 +96,6 @@ public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.
 
     }
 
-
     @Override
     public int getItemCount() {
         return clients.size();
@@ -124,56 +107,13 @@ public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.
         notifyDataSetChanged();
     }
 
-    @Override
-    public Filter getFilter() {
-        return exampleFilter;
-    }
-
-    private Filter exampleFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Client> filteredList = new ArrayList<>();
-
-            if(constraint == null || constraint.length() == 0){
-                filteredList.addAll(clientFull);
-            }else{
-                String filterPattern = constraint.toString().toLowerCase().trim();
-
-                for(Client client : clientFull){
-                    if(client.getName().toLowerCase().contains(filterPattern)){
-                        filteredList.add(client);
-                    }
-                }
-            }
-
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-
-            return  results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            clients.clear();
-            clients.addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-    };
-
-
     static class ViewHolder extends RecyclerView.ViewHolder {
-    private ClientsListItemBinding binding;
+        private ClientsListItemBinding binding;
 
-    ViewHolder(ClientsListItemBinding binding) {
-        super(binding.getRoot());
-        this.binding = binding;
+        ViewHolder(ClientsListItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
 
+        }
     }
-}
-
-    public double cutTo2(double value) {
-        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
-    }
-
-
 }
