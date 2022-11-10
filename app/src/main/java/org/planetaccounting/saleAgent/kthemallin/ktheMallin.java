@@ -168,7 +168,7 @@ public class ktheMallin extends AppCompatActivity {
                 binding.njersiaEdittext.setText("--");
                 binding.njersiaEdittext.setEnabled(false);
             }
-            binding.zbritjaKlientit.setText(R.string.zbritja_maksimale + client.getDiscount() + " %");
+            binding.zbritjaKlientit.setText("Zbritja e klientit: " + client.getDiscount() + " %");
         });
 
 
