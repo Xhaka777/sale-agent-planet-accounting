@@ -20,6 +20,8 @@ import org.planetaccounting.saleAgent.clients.ClientsListActivity;
 import org.planetaccounting.saleAgent.databinding.RaportActivityBinding;
 import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.invoice.InvoiceListActivity;
+import org.planetaccounting.saleAgent.ngarkime.NgarkimeListAdapter;
+import org.planetaccounting.saleAgent.ngarkime.ngarkimeActivity;
 
 import static org.planetaccounting.saleAgent.MainActivity.isConnected;
 
@@ -49,6 +51,9 @@ public class RaportetActivity extends Activity {
         binding.returnList.setOnClickListener(view -> openReturnsActivity() );
         binding.dailyMarket.setOnClickListener(view -> openDailyMarket());
         binding.listaKlientave.setOnClickListener(view -> openClientListActivity());
+        binding.listaNgarkimeve.setOnClickListener(view -> openLoadListActivity());
+
+        currentLanguage = getIntent().getStringExtra(currentLang);
 
     }
     private void openInvoicesActivity() {
@@ -101,10 +106,13 @@ public class RaportetActivity extends Activity {
         startActivity(i);
     }
 
-
+    //Pjesa qe na e hape Listen e ngarkesave...
+    private void openLoadListActivity(){
+        Intent i = new Intent(this, ngarkimeActivity.class);
+        startActivity(i);
+    }
 
     //methods to change the languages
-
     public void setLocale(String localeName){
         if(!localeName.equals(currentLang)){
             Context context = LocaleHelper.setLocale(this, localeName);

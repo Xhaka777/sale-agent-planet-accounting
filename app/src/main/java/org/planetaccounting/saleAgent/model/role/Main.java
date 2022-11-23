@@ -154,7 +154,7 @@ public class Main extends RealmObject {
     public ArrayList<Integer> isInRole() {
         ArrayList<Integer> list = new ArrayList<>();
 
-      list.add(getInvoice());
+        list.add(getInvoice());
         list.add(getStock());
 
         list.add(getCashCollection());
@@ -172,9 +172,6 @@ public class Main extends RealmObject {
         list.add(getTargets());
 
         list.add(getOrders());
-
-
-        list.add(getUploads());
 
         list.add(getExpenses());
 

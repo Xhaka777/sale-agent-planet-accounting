@@ -16,10 +16,9 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
     private Context mContext;
     Listener listener;
 
+    private int[] title = {R.string.title_fatura, R.string.title_stoku, R.string.title_inkasimi, R.string.title_depozita, R.string.title_raportet, R.string.title_kthimMalli, R.string.title_transfere, R.string.title_klientet, R.string.title_target, R.string.title_porositeInterne, R.string.title_shpenzimet, R.string.title_aksionet};
 
-    private int[] title  = {R.string.title_fatura,R.string.title_stoku,R.string.title_inkasimi,R.string.title_depozita,R.string.title_raportet,R.string.title_kthimMalli,R.string.title_transfere,R.string.title_klientet,R.string.title_target,R.string.title_porositeInterne,R.string.title_ngarkimet,R.string.title_shpenzimet,R.string.title_aksionet};
-//  private String[] main_title = res.getStringArray(R.array.main_titles);
-    private int[] icon  = {R.drawable.ic_fatura,R.drawable.ic_stokut,R.drawable.ic_inkasimet,R.drawable.ic_bank,R.drawable.ic_raportet,R.drawable.ic_return,R.drawable.ic_transferet,R.drawable.ic_klientet,R.drawable.ic_targetet,R.drawable.ic_prosit,R.drawable.ic_ngarkesat,R.drawable.ic_shpenzim,R.drawable.ic_action};
+    private int[] icon = {R.drawable.ic_fatura, R.drawable.ic_stokut, R.drawable.ic_inkasimet, R.drawable.ic_bank, R.drawable.ic_raportet, R.drawable.ic_return, R.drawable.ic_transferet, R.drawable.ic_klientet, R.drawable.ic_targetet, R.drawable.ic_prosit, R.drawable.ic_shpenzim, R.drawable.ic_action };
 
     private ArrayList<MainAdaperModel> rols =  new ArrayList<>();
 
@@ -43,7 +42,7 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext = parent.getContext();
 
-        RecyclerviewMainActivityBinding    binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.recyclerview_main_activity,parent,false);
+        RecyclerviewMainActivityBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.recyclerview_main_activity,parent,false);
 
         return new ViewHolder(binding);
     }
@@ -70,7 +69,7 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private RecyclerviewMainActivityBinding binding;
+        private final RecyclerviewMainActivityBinding binding;
 
         ViewHolder( RecyclerviewMainActivityBinding binding) {
             super(binding.getRoot());
@@ -80,6 +79,6 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
     }
 
     interface Listener{
-        public void onClick(int title, int positon);
+        void onClick(int title, int positon);
     }
 }

@@ -402,12 +402,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         startActivity(i);
     }
 
-    private void openNgarkimeOrder() {
-//        Toast.makeText(getApplicationContext(), "Moduli nuk është aktiv.", Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(getApplicationContext(), ngarkimeActivity.class);
-        startActivity(i);
-    }
-
     private void openTransferOrder() {
 //        Toast.makeText(getApplicationContext(), "Moduli nuk është aktiv.", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getApplicationContext(), transfereActivity.class);
@@ -1208,10 +1202,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
 
             case R.string.title_porositeInterne:
                 openOrderActivity();
-                break;
-
-            case R.string.title_ngarkimet:
-                openNgarkimeOrder();
                 break;
 
             case R.string.title_shpenzimet:
