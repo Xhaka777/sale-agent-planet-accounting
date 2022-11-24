@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.databinding.DataBindingUtil;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.clients.ClientsListAdapter;
+import org.planetaccounting.saleAgent.databinding.ActivityInkasimPanelBinding;
 import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.clients.Client;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
@@ -48,6 +50,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class InkasimPanel extends AppCompatActivity {
+
+    private ActivityInkasimPanelBinding binding;
 
     private String Tokeni;
     private String user_id;
@@ -71,7 +75,8 @@ public class InkasimPanel extends AppCompatActivity {
     ProgressBar progressBar;
     Button inkaso;
 
-
+    Client client;
+    int stationPos;
 
     @Inject
     RealmHelper realmHelper;
@@ -87,7 +92,7 @@ public class InkasimPanel extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inkasim_panel);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_inkasim_panel);
         Kontabiliteti.getKontabilitetiComponent().inject(this);
 
         Bundle extras = getIntent().getExtras();
@@ -96,30 +101,62 @@ public class InkasimPanel extends AppCompatActivity {
         Clientet = realmHelper.getClients();
         listaemrav = realmHelper.getClientsBalance();
 
-        ClientList = (AutoCompleteTextView) findViewById(R.id.spinner);
-        StationList = (AutoCompleteTextView) findViewById(R.id.Spinner2);
+        ClientList = (AutoCompleteTextView) findViewById(R.id.emri_klientit);
+        StationList = (AutoCompleteTextView) findViewById(R.id.njesia_klientit);
         progressBar = findViewById(R.id.progress_bar);
         inkaso = findViewById(R.id.buttonInkaso);
         shopDropDownList();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listaemrav);
-        ClientList.setAdapter(adapter);
-        ClientList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                try {
-                    listaStationev = realmHelper.getClientStations(ClientList.getText().toString());
-                } catch (NullPointerException ex) {
-                    listaStationev = new String[0];
-                }
 
-                njesia(listaStationev);
+        binding.emriKlientit.setAdapter(new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, realmHelper.getClientsNames()));
+
+
+        binding.emriKlientit.setOnItemClickListener((adapterView, view, i, l) -> {
+            System.out.println("Cleint name " + binding.emriKlientit.getText().toString().substring(0, binding.emriKlientit.getText().toString().indexOf(" nrf:")));
+            client = realmHelper.getClientFromName(binding.emriKlientit.getText().toString().substring(0, binding.emriKlientit.getText().toString().indexOf(" nrf:")));
+            if(realmHelper.getClientStations(client.getName()).length > 0){
+                binding.njesiaKlientit.setAdapter(new ArrayAdapter<String>(this,
+                        android.R.layout.simple_dropdown_item_1line, realmHelper.getClientStations(client.getName())));
+                binding.njesiaKlientit.setEnabled(true);
+                binding.njesiaKlientit.requestFocus();
+                binding.njesiaKlientit.showDropDown();
+                binding.njesiaKlientit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        stationPos = position;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+            }else {
+                binding.njesiaKlientit.setText("--");
+                binding.njesiaKlientit.setEnabled(false);
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
         });
+//pjesa e vjeter per emer te klientit(nuk e shfaqke pjesen e njesise)...
+//        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listaemrav);
+//        ClientList.setAdapter(adapter);
+//        ClientList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                try {
+//                    listaStationev = realmHelper.getClientStations(ClientList.getText().toString());
+//                } catch (NullPointerException ex) {
+//                    listaStationev = new String[0];
+//                }
+//
+//                njesia(listaStationev);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         Amount = (EditText) findViewById(R.id.amount);
         Comment = (EditText) findViewById(R.id.comment);
@@ -154,15 +191,6 @@ public class InkasimPanel extends AppCompatActivity {
             Toast.makeText(InkasimPanel.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
-
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
