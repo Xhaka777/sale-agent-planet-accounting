@@ -249,7 +249,7 @@ public class ReportDetailActivity extends Activity {
         }
         if (type == 2) {
 
-            getDepositRepors();
+//            getDepositRepors();
             binding.searchEdittext.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -261,20 +261,20 @@ public class ReportDetailActivity extends Activity {
                     depositSearchResults.clear();
 
                     for (int k = 0; k < depositPosts.size(); k++) {
-                        if (depositPosts.get(k).getBranch().toLowerCase().startsWith(s.toString().toLowerCase())) {
+                        if (depositPosts.get(k).getEmri_bankes().toLowerCase().startsWith(s.toString().toLowerCase())) {
                             depositSearchResults.add(depositPosts.get(k));
                         }
                     }
 
                     if (s.length() > 0) {
-                        adapter.setDepositPosts(depositSearchResults);
                         adapter = new RaportetListAdapter(2);
+                        adapter.setDepositPosts(depositSearchResults);
                         binding.pageLayout.setVisibility(View.GONE);
                         binding.recycler.setAdapter(adapter);
                     } else if (s.length() <= 0) {
                         adapter.setDepositPosts(depositPosts);
-                        getDepositRepors();
                         binding.recycler.setAdapter(adapter);
+                        getDepositRepors();
                     } else {
                         adapter.setDepositPosts(depositPosts);
                         adapter = new RaportetListAdapter(2);
