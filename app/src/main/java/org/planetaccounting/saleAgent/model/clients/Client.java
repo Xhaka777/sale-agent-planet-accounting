@@ -185,6 +185,10 @@ public class Client extends RealmObject implements Parcelable {
         return discount;
     }
 
+    public void setDiscount(String discount){
+        this.discount = discount;
+    }
+
     public String getLimitBalance() {
         return limitBalance;
     }

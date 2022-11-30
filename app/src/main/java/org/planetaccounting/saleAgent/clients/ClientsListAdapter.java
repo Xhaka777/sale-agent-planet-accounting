@@ -1,5 +1,6 @@
 package org.planetaccounting.saleAgent.clients;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -67,19 +68,21 @@ public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.
         return new ViewHolder(binding);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ClientsListItemBinding binding = holder.binding;
 
+        double pBilanci = Double.parseDouble(clients.get(position).getBalance());
+
         binding.numberTextview.setText(clients.get(position).getNumber());
+        binding.uniqueNumberTextview.setText(clients.get(position).getUnique_number());
         binding.emriTextview.setText(clients.get(position).getName());
         binding.kontaktTextview.setText(clients.get(position).getPhone());
-        binding.bilanciTextview.setText(clients.get(position).getBalance());
-        binding.bilanciTextview.setText(clients.get(position).getBalance());
+        binding.bilanciTextview.setText("" + cutTo2(pBilanci));
         Glide.with(ctx).load(clients.get(position).getLogo()).into(binding.imageClient);
         if (clients.get(position).getPhone() != null) {
             if (clients.get(position).getPhone().length() > 0) {
-
                 binding.dail.setVisibility(View.VISIBLE);
             } else {
                 binding.dail.setVisibility(View.GONE);
@@ -115,5 +118,8 @@ public class ClientsListAdapter extends RecyclerView.Adapter<ClientsListAdapter.
             this.binding = binding;
 
         }
+    }
+    public double cutTo2(double value){
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
     }
 }
