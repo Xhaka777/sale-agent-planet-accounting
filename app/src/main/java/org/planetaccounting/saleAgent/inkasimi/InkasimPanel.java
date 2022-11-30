@@ -132,7 +132,8 @@ public class InkasimPanel extends AppCompatActivity {
                     }
                 });
             }else {
-                binding.njesiaKlientit.setText("--");
+                binding.njesiaKlientit.setText("");
+                binding.njesiaKlientit.setHint("");
                 binding.njesiaKlientit.setEnabled(false);
             }
 
@@ -173,7 +174,6 @@ public class InkasimPanel extends AppCompatActivity {
 
 
     //methods to change the languages
-
     public void setLocale(String localeName){
         if(!localeName.equals(currentLang)){
             Context context = LocaleHelper.setLocale(this, localeName);

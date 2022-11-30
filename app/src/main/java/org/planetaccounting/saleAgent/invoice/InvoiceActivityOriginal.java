@@ -224,7 +224,8 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                     }
                 });
             } else {
-                binding.njersiaEdittext.setText("--");
+                binding.njersiaEdittext.setText("");
+                binding.njersiaEdittext.setHint("");
                 binding.njersiaEdittext.setEnabled(false);
             }
 //            }if(realmHelper.getSubItemDiscount(subItem.getDiscount()).length > 0){

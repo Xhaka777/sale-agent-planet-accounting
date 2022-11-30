@@ -165,7 +165,8 @@ public class ktheMallin extends AppCompatActivity {
                     }
                 });
             } else {
-                binding.njersiaEdittext.setText("--");
+                binding.njersiaEdittext.setText("");
+                binding.njersiaEdittext.setHint("");
                 binding.njersiaEdittext.setEnabled(false);
             }
             binding.zbritjaKlientit.setText("Zbritja e klientit: " + client.getDiscount() + " %");
