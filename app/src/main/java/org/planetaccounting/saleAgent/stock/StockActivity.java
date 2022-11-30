@@ -120,8 +120,6 @@ public class StockActivity extends Activity {
                 }
         );
 
-//        setRole();
-
         currentLanguage = getIntent().getStringExtra(currentLang);
     }
 

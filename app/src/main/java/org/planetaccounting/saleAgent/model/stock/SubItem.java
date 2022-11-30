@@ -50,9 +50,6 @@ public class SubItem extends RealmObject implements Parcelable {
     @SerializedName("vat_code_sale")
     @Expose
     public String vatCodeSale;
-    @SerializedName("cover_img")
-    @Expose
-    public String coverImg;
     @SerializedName("discount")
     @Expose
     public String discount;
@@ -114,10 +111,6 @@ public class SubItem extends RealmObject implements Parcelable {
         return vatCodeSale;
     }
 
-    public String getCoverImg() {
-        return coverImg;
-    }
-
     public String getDiscount() {
         return discount;
     }
@@ -162,7 +155,6 @@ public class SubItem extends RealmObject implements Parcelable {
                 ", priceSale='" + priceSale + '\'' +
                 ", priceVatSale='" + priceVatSale + '\'' +
                 ", vatCodeSale='" + vatCodeSale + '\'' +
-                ", coverImg='" + coverImg + '\'' +
                 ", discount='" + discount + '\'' +
                 ", vatRate='" + vatRate + '\'' +
                 ", barcode='" + barcode + '\'' +
@@ -187,7 +179,6 @@ public class SubItem extends RealmObject implements Parcelable {
         dest.writeString(this.priceSale);
         dest.writeString(this.priceVatSale);
         dest.writeString(this.vatCodeSale);
-        dest.writeString(this.coverImg);
         dest.writeString(this.discount);
         dest.writeString(this.vatRate);
         dest.writeString(this.vatCodeFisalPrinter);
@@ -195,6 +186,25 @@ public class SubItem extends RealmObject implements Parcelable {
     }
 
     public SubItem() {
+    }
+
+    public SubItem(SubItem subItem){
+        this.id = subItem.id;
+        this.quantity = subItem.quantity;
+        this.groupItem = subItem.groupItem;
+        this.name = subItem.name;
+        this.acronym = subItem.acronym;
+        this.number = subItem.number;
+        this.unit = subItem.unit;
+        this.relacion = subItem.relacion;
+        this.priceSale = subItem.priceSale;
+        this.priceVatSale = subItem.priceVatSale;
+        this.vatCodeSale = subItem.vatCodeSale;
+        this.discount = subItem.discount;
+        this.vatRate = subItem.vatRate;
+        this.vatCodeFisalPrinter = subItem.vatCodeFisalPrinter;
+        this.barcode = subItem.barcode;
+
     }
 
     protected SubItem(Parcel in) {
@@ -209,7 +219,6 @@ public class SubItem extends RealmObject implements Parcelable {
         this.priceSale = in.readString();
         this.priceVatSale = in.readString();
         this.vatCodeSale = in.readString();
-        this.coverImg = in.readString();
         this.discount = in.readString();
         this.vatRate = in.readString();
         this.vatCodeFisalPrinter = in.readString();
