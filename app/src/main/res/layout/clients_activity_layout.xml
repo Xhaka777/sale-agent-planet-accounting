@@ -91,18 +91,19 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Emertimi"
-                            android:textColor="#b3414042" />
+                            android:text="Shteti"
+                            android:textColor="#b3414042"
+                            android:layout_marginLeft="7dp"/>
 
                         <AutoCompleteTextView
-                            android:id="@+id/emri_klientit"
-                            android:layout_width="match_parent"
+                            android:id="@+id/shteti_klientit"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/edit_field_corner"
-                            android:hint="Emertimi" />
+                            android:background="@drawable/state_btn_dropdown"
+                            android:hint="Kosovë" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -121,6 +122,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Nr. Unik"
+                                    android:layout_marginLeft="7dp"
 
                                     android:textColor="#b3414042" />
 
@@ -133,6 +135,65 @@
                                     android:layout_marginRight="8dp"
                                     android:background="@drawable/edit_field_corner"
                                     android:hint="Nr. Unik" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_weight="1.5"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nr. Biznesit (ID)"
+                                    android:textColor="#b3414042"
+                                    android:layout_marginLeft="7dp"/>
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/business_number_edittext"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginRight="8dp"
+                                    android:background="@drawable/edit_field_corner"
+                                    android:hint="Nr. Biznesit" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nr. TVSH"
+                                    android:textColor="#b3414042"
+                                    android:layout_marginLeft="7dp"/>
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/vat_number_edittext"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginRight="8dp"
+                                    android:background="@drawable/edit_field_corner"
+                                    android:hint="Nr. TVSH" />
 
                             </LinearLayout>
 
@@ -167,37 +228,37 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:orientation="horizontal">-->
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="8dp"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:orientation="vertical">-->
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Nr. Biznesit (ID)"
-                                    android:textColor="#b3414042" />
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:text="Nr. Biznesit (ID)"-->
+<!--                                    android:textColor="#b3414042" />-->
 
-                                <AutoCompleteTextView
-                                    android:id="@+id/business_number_edittext"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginRight="8dp"
-                                    android:background="@drawable/edit_field_corner"
-                                    android:hint="Nr. Biznesit" />
+<!--                                <AutoCompleteTextView-->
+<!--                                    android:id="@+id/business_number_edittext"-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginLeft="8dp"-->
+<!--                                    android:layout_marginTop="8dp"-->
+<!--                                    android:layout_marginRight="8dp"-->
+<!--                                    android:background="@drawable/edit_field_corner"-->
+<!--                                    android:hint="Nr. Biznesit" />-->
 
-                            </LinearLayout>
+<!--                            </LinearLayout>-->
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -215,7 +276,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Nr. Fiskal"
-                                    android:textColor="#b3414042" />
+                                    android:textColor="#b3414042"
+                                    android:layout_marginLeft="7dp"/>
 
                                 <AutoCompleteTextView
                                     android:id="@+id/fiscal_number_edittext"
@@ -271,18 +333,20 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Nr. TVSH"
-                                    android:textColor="#b3414042" />
+                                    android:text="Emertimi"
+                                    android:textColor="#b3414042"
+                                    android:layout_marginLeft="7dp"/>
 
                                 <AutoCompleteTextView
-                                    android:id="@+id/vat_number_edittext"
+                                    android:id="@+id/emri_klientit"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="8dp"
                                     android:layout_marginTop="8dp"
                                     android:layout_marginRight="8dp"
                                     android:background="@drawable/edit_field_corner"
-                                    android:hint="Nr. TVSH" />
+                                    android:hint="Emertimi" />
+
 
                             </LinearLayout>
 

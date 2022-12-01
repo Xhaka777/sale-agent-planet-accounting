@@ -74,7 +74,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Qyteti"
-                                android:textColor="#b3414042" />
+                                android:textColor="#b3414042"
+                                android:layout_marginLeft="7dp"/>
 
                             <AutoCompleteTextView
                                 android:id="@+id/city_adress"
@@ -102,7 +103,8 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="Zip"
-                                android:textColor="#b3414042" />
+                                android:textColor="#b3414042"
+                                android:layout_marginLeft="7dp"/>
 
                             <AutoCompleteTextView
                                 android:id="@+id/zipAdress_edittext"
@@ -134,7 +136,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Adresa"
-                                android:textColor="#b3414042"/>
+                                android:textColor="#b3414042"
+                                android:layout_marginLeft="7dp"/>
 
                             <AutoCompleteTextView
                                 android:id="@+id/client_adress"
@@ -210,7 +213,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Telefoni"
-                                android:textColor="#b3414042" />
+                                android:textColor="#b3414042"
+                                android:layout_marginLeft="7dp"/>
 
                             <AutoCompleteTextView
                                 android:id="@+id/client_phone"
@@ -238,7 +242,8 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="Web"
-                                android:textColor="#b3414042" />
+                                android:textColor="#b3414042"
+                                android:layout_marginLeft="7dp"/>
 
                             <AutoCompleteTextView
                                 android:id="@+id/web_edittext"
@@ -270,7 +275,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="E-mail"
-                                android:textColor="#b3414042"/>
+                                android:textColor="#b3414042"
+                                android:layout_marginLeft="7dp"/>
 
                             <AutoCompleteTextView
                                 android:id="@+id/client_mail"
