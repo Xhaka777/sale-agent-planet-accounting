@@ -1,5 +1,6 @@
 package org.planetaccounting.saleAgent.ngarkime;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -25,6 +26,7 @@ import org.planetaccounting.saleAgent.databinding.ActivityNgarkimeBinding;
 import org.planetaccounting.saleAgent.events.OpenOrderDetailEvent;
 import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.ngarkimet.Uploads;
+import org.planetaccounting.saleAgent.model.ngarkimet.UploadsResponse;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
 import org.planetaccounting.saleAgent.utils.Preferences;
 
@@ -34,6 +36,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 public class ngarkimeActivity extends AppCompatActivity {
@@ -43,6 +46,7 @@ public class ngarkimeActivity extends AppCompatActivity {
 
     ArrayList<Uploads> uploads = new ArrayList<>();
     NgarkimeListAdapter adapter;
+    String uploadsID = "2";
 
     @Inject
     ApiService apiService;
@@ -57,7 +61,7 @@ public class ngarkimeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding  = DataBindingUtil.setContentView(this, R.layout.activity_ngarkime);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_ngarkime);
 
         Kontabiliteti.getKontabilitetiComponent().inject(this);
 
@@ -67,16 +71,15 @@ public class ngarkimeActivity extends AppCompatActivity {
         adapter = new NgarkimeListAdapter(uploads);
         binding.ngarkimeList.setAdapter(adapter);
 
-        getUploads();
-
+//        getUploads();
+        getOutUploads();
         currentLanguage = getIntent().getStringExtra(currentLang);
-        }
-
+    }
 
     //methods to change the languages
 
-    public void setLocale(String localeName){
-        if(!localeName.equals(currentLang)){
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
             Context context = LocaleHelper.setLocale(this, localeName);
             //Resources resources = context.getResources();
             myLocale = new Locale(localeName);
@@ -88,7 +91,7 @@ public class ngarkimeActivity extends AppCompatActivity {
             Intent refresh = new Intent(this, MainActivity.class);
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
-        }else{
+        } else {
             Toast.makeText(ngarkimeActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
@@ -99,8 +102,13 @@ public class ngarkimeActivity extends AppCompatActivity {
         super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
 
-
-    private  void getUploads(){
+    /*
+     * ne kete metode e thirrim api per te gjitha transferet e krijuara deri me tani
+     * kerkese ke me marr vetem transferet me in : out ( mos me marr edhe in edhe out), por vetem si ne web qe po na dergon vetem nje per transfer...
+     *
+     * */
+    @SuppressLint("NotifyDataSetChanged")
+    private void getUploads() {
         showLoader();
         apiService.getUploads(new StockPost(preferences.getToken(), preferences.getUserId()))
                 .subscribeOn(Schedulers.io())
@@ -109,6 +117,43 @@ public class ngarkimeActivity extends AppCompatActivity {
                     uploads = uploadsResponse.getData();
                     adapter.setUploads(uploads);
                     hideLoader();
+                }, Throwable::printStackTrace);
+    }
+
+    //tentim borxh me filtru pjesen e ngarkesave me in dhe out
+
+    private void getOutUploads() {
+
+        apiService.getUploads(new StockPost(preferences.getToken(), preferences.getUserId()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(uploadsResponse -> {
+                    uploads = uploadsResponse.getData();
+
+                    Toast.makeText(this, "toast para loopes!!", Toast.LENGTH_SHORT).show();
+
+
+                    for (int i = 0; i < uploads.size(); i++) {
+                        if (uploads.get(i).getIn().equals("out")) {
+                            Toast.makeText(this, "Toast per if ", Toast.LENGTH_SHORT).show();
+                            adapter.setUploads(uploads);
+                        } else {
+                            uploads.remove(uploads.get(i));
+                            adapter.notifyDataSetChanged();
+                            Toast.makeText(this, "Toast per else ", Toast.LENGTH_SHORT).show();
+                            adapter.setUploads(uploads);
+                        }
+                    }
+                    /**
+                     * po hin ne loop kushti i pare po plotsohet ,
+                     * edhe kushti ne else po plotsohet (dmth pasi plotsohet kushti else) pe bon remove elementin nga array
+                     * pastaj po hin loop perseri ne if me korigju perseri....
+                     */
+
+
+                    //pjesa ku adapteri i merr te gjitha te dhenat nga api...
+                    //me filtru listen para se me qit ne adapter
+//                    adapter.setUploads(uploads);
                 }, Throwable::printStackTrace);
     }
 
@@ -123,11 +168,12 @@ public class ngarkimeActivity extends AppCompatActivity {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
+
     @Subscribe
-    public void onEvent(OpenOrderDetailEvent event){
+    public void onEvent(OpenOrderDetailEvent event) {
         Intent i = new Intent(getApplicationContext(), UploadDetailActivity.class);
-        i.putExtra("id",event.getOrderId());
-        i.putExtra("type",event.getOrderType());
+        i.putExtra("id", event.getOrderId());
+        i.putExtra("type", event.getOrderType());
 //        String transfer_id  = event.getOrderId();
 //        i.putExtra("id", transfer_id );
         startActivity(i);
@@ -140,6 +186,5 @@ public class ngarkimeActivity extends AppCompatActivity {
     private void hideLoader() {
         binding.loader.setVisibility(View.GONE);
     }
-
 
 }
