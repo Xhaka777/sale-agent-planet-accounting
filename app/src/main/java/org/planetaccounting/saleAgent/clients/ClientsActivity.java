@@ -10,6 +10,7 @@ import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -18,7 +19,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
@@ -41,6 +45,8 @@ import org.planetaccounting.saleAgent.databinding.ClientsListItemBinding;
 import org.planetaccounting.saleAgent.databinding.InvoiceItemBinding;
 import org.planetaccounting.saleAgent.events.OpenClientsCardEvent;
 import org.planetaccounting.saleAgent.helper.LocaleHelper;
+import org.planetaccounting.saleAgent.model.clientState.State;
+import org.planetaccounting.saleAgent.model.clientState.StateResponse;
 import org.planetaccounting.saleAgent.model.clients.Client;
 import org.planetaccounting.saleAgent.model.clients.ClientsResponse;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
@@ -86,10 +92,10 @@ public class ClientsActivity extends AppCompatActivity implements DatePickerDial
 
     RealmResults<Client> clients;
     ArrayList<Client> searchResults = new ArrayList<>();
-
-    private Context ctx;
+    List<State> stateList = new ArrayList<>();
     String stationID = "2";
 
+    private Context ctx;
     private DatePickerDialog.OnDateSetListener dateSh;
     private Calendar calendar;
     private java.util.Timer timer;
@@ -102,7 +108,7 @@ public class ClientsActivity extends AppCompatActivity implements DatePickerDial
     String currentLanguage = "sq", currentLang;
     public static final String TAG = "bottom_sheet";
 
-    TabLayout tabLayout ;
+    TabLayout tabLayout;
     ViewPager viewPager;
     FragmentAdapter viewPagerAdapter;
 
@@ -146,14 +152,36 @@ public class ClientsActivity extends AppCompatActivity implements DatePickerDial
         //connect TabLayout with ViewPager
         tabLayout.setupWithViewPager(viewPager);
 
+        binding.shtetiKlientit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                stationID = stateList.get(position).getId();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+         getClientState();
+         showDropDownStateList();
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                binding.shtetiKlientit.showDropDown();
+//                binding.shtetiKlientit.requestFocus();
+//            }
+//        }, 500);
+
+        currentLanguage = getIntent().getStringExtra(currentLang);
     }
 
     //method for data (Calendar)
 
-    private void getData(){
+    private void getData() {
         new DatePickerDialog(getApplicationContext(), dateSh, calendar.get(Calendar.YEAR),
-                                calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+                calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     //methods to change the languages
@@ -207,7 +235,43 @@ public class ClientsActivity extends AppCompatActivity implements DatePickerDial
 
     }
 
+    private void showDropDownStateList(){
+        binding.shtetiKlientit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                binding.shtetiKlientit.showDropDown();
+                return false;
+            }
+        });
+    }
 
+
+    public void getClientState() {
+        apiService.getStates(new StockPost(preferences.getToken(), preferences.getUserId()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<StateResponse>() {
+                    @Override
+                    public void call(StateResponse stateResponse) {
+                        stateList = stateResponse.getStates();
+                        stationID = stateList.get(0).getId();
+                        String[] state = new String[stateList.size()];
+
+                        for (int i = 0; i < stateList.size(); i++) {
+                            state[i] = stateList.get(i).getName();
+
+                            if (stateList.get(i).getId().equals("22")){
+                                binding.shtetiKlientit.setText(stateList.get(i).getName());;
+                            }
+                        }
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(ClientsActivity.this,
+                                android.R.layout.simple_dropdown_item_1line, state);
+
+                        binding.shtetiKlientit.setAdapter(adapter);
+                    }
+                }, Throwable::printStackTrace);
+    }
 
 
 //    private void getClients() {

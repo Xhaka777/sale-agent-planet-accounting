@@ -19,9 +19,14 @@ import org.planetaccounting.saleAgent.model.OrderDetailPost;
 import org.planetaccounting.saleAgent.model.OrderDetailResponse;
 import org.planetaccounting.saleAgent.model.UserToken;
 import org.planetaccounting.saleAgent.model.VarehouseReponse;
+import org.planetaccounting.saleAgent.model.clientState.StateResponse;
 import org.planetaccounting.saleAgent.model.clients.ClientCardPost;
 import org.planetaccounting.saleAgent.model.clients.ClientCardResponse;
 import org.planetaccounting.saleAgent.model.clients.ClientsResponse;
+import org.planetaccounting.saleAgent.model.deviceNumber.DevNumber;
+import org.planetaccounting.saleAgent.model.deviceNumber.DeviceConfig;
+import org.planetaccounting.saleAgent.model.empStock.EmpStockResponse;
+import org.planetaccounting.saleAgent.model.empStock.EmployeeStockPost;
 import org.planetaccounting.saleAgent.model.invoice.InvoicePostObject;
 import org.planetaccounting.saleAgent.model.invoice.OrderPostObject;
 import org.planetaccounting.saleAgent.model.login.LoginPost;
@@ -175,7 +180,6 @@ public interface ApiService {
     @POST("api/new_transfer_agent_saler")
     Observable<GetTransferCreateResposnse> createTransfer(@Body TransferCreatePost transferCreatePost);
 
-
     @POST("api/cancel_transfer_agent_saler")
     Observable<BaseTranserResponse> cancelTransfer(@Body TransferPost transferPost);
 
@@ -194,7 +198,6 @@ public interface ApiService {
     @POST("api/get_order_data")
     Observable<GetInvoiceForReportResponse> getRaportOrderDetail(@Body InvoiceForReportObject invoiceForReportObject);
 
-
     @POST("api/get_expense_list")
     Observable<GetReportsListResponse> getRaportExpenseList(@Body RaportsPostObject raportsPostObject);
 
@@ -204,4 +207,9 @@ public interface ApiService {
     @POST("api/get_payment_list")
     Observable<GetReportsListResponse> getRaportPaymentList(@Body RaportsPostObject raportsPostObject);
 
+    @POST("api/employee_new__pos")
+    Observable<EmpStockResponse> getEmployee(@Body EmployeeStockPost stockPost);
+
+    @POST("api/get_states")
+    Observable<StateResponse> getStates (@Body StockPost stockPost);
 }
