@@ -41,26 +41,14 @@ public class InvoicePost extends RealmObject {
     String is_bill;
     String location;
     String total_without_discount;
-    String current_page;
-    String comment ;
-
     RealmList<InvoiceItemPost> items = new RealmList<>();
+    String comment;
+    String current_page;
     boolean synced = false;
-    boolean switchDlt = false;
     String relacioni;
 
     @Ignore
     boolean isFromServer = false;
-
-    public InvoicePost(){
-
-    }
-
-    public InvoicePost(int id, String no_invoice, String partie_name){
-        this.id = id;
-        this.no_invoice = no_invoice;
-        this.partie_name = partie_name;
-    }
 
     public void setRelacioni(String relacioni) {
         this.relacioni = relacioni;
@@ -170,14 +158,6 @@ public class InvoicePost extends RealmObject {
         this.synced = synced;
     }
 
-    public boolean getSwitchDlt() {
-        return switchDlt;
-    }
-
-    public void setSwitchDlt(boolean switchDlt) {
-        this.switchDlt = switchDlt;
-    }
-
     public void setPartie_zip(String partie_zip) {
         this.partie_zip = partie_zip;
     }
@@ -185,12 +165,6 @@ public class InvoicePost extends RealmObject {
     public void setData_ship(String data_ship) {
         this.data_ship = data_ship;
     }
-
-    public void setCurrent_page(String current_page) {
-        this.current_page = current_page;
-    }
-
-    public void setComment(String comment) { this.comment = comment; }
 
     public RealmList<InvoiceItemPost> getItems() {
         return items;
@@ -201,7 +175,6 @@ public class InvoicePost extends RealmObject {
     }
 
     public String getNo_invoice() {
-
         return no_invoice;
     }
 
@@ -329,32 +302,29 @@ public class InvoicePost extends RealmObject {
         this.device_serial_number = device_serial_number;
     }
 
-    public String getCurrent_page() {
-        return current_page;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
-    public String getComment() { return comment; }
+    public String getComment() {
+        return comment;
+    }
+
+    public void setCurrent_page(String current_page){
+        this.current_page = current_page;
+    }
+
+    public String getCurrent_page(){
+        return current_page;
+    }
 
     public void setInvoiceFromReports(ReportsList reports) {
         this.id = reports.id;
         this.no_invoice = reports.docNumber;
         this.amount_with_vat = reports.amount;
         this.partie_name = reports.partieName;
+        this.sale_station_name = reports.partieStationName;
         this.invoice_date = reports.date;
-        this.current_page = reports.currentPage;
-        this.comment = reports.comment;
-        this.synced = true;
-//        this.switchDlt = true;
-        this.isFromServer = true;
-    }
-
-    public void setInvoiceNoInvoice(ReportsList reports) {
-        this.id = reports.id;
-        this.amount_with_vat = reports.amount;
-        this.partie_name = reports.partieName;
-        this.invoice_date = reports.date;
-        this.current_page = reports.currentPage;
-        this.comment = reports.comment;
         this.synced = true;
         this.isFromServer = true;
     }

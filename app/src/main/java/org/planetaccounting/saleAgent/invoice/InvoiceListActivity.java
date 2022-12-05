@@ -99,15 +99,7 @@ public class InvoiceListActivity extends AppCompatActivity {
     double shuma;
     String dDate;
     ArrayList<InvoicePost> inv;
-
-    ArrayList<InvoicePost> invRes;
-    ArrayList<InvoicePost> invoiceSearch = new ArrayList<>();
-    ArrayList<InvoicePost> returnSearch = new ArrayList<>();
-
-
     List<InvoicePost> unSyncedList = new ArrayList<>();
-    List<InvoicePost> switchReport = new ArrayList<>();
-
     InvoicePost invoicePost;
     WebView webView;
     RelativeLayout loader;
@@ -149,8 +141,8 @@ public class InvoiceListActivity extends AppCompatActivity {
             titleBar.setText(R.string.l_kthimMalli);
         }
 
-        ((Kontabiliteti) getApplication()).getKontabilitetiComponent().inject(this);
-
+//        ((Kontabiliteti) getApplication()).getKontabilitetiComponent().inject(this);
+        Kontabiliteti.getKontabilitetiComponent().inject(this);
         printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
         Date cDate = new Date();
         dDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
@@ -163,7 +155,7 @@ public class InvoiceListActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        nr_fatures = findViewById(R.id.invoice_number);
+        nr_fatures = findViewById(R.id.invoice_nr);
 
 
         if (from.equals("inv")) {
@@ -186,7 +178,7 @@ public class InvoiceListActivity extends AppCompatActivity {
 
         }
 
-        adapter = new InvoiceListAdapter(context, inv);
+        adapter = new InvoiceListAdapter(inv);
 //        adapter = new InvoiceListAdapter(inv, InvoiceListActivity.this);
         recyclerView.setAdapter(adapter);
         for (int i = 0; i < inv.size(); i++) {
@@ -214,108 +206,108 @@ public class InvoiceListActivity extends AppCompatActivity {
             }
         }
 
-        if (from.equals("ret")) {
-//            getOrderReports();
-            bindingActivity.searchEdittext.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    invoiceSearch.clear();
-                    //e provojme edhe me getAllInvoicesString (nuk po bon me allStrings)...
-                    //me getInvoicesString() po bon mirpo pas fshirjes ne search po i shfaq vetem returInvoices...
-                    String invoices = realmHelper.getAllReturnInvoicesString();
-                    Gson gson = new Gson();
-                    inv = (ArrayList<InvoicePost>) gson.fromJson(invoices, new TypeToken<ArrayList<InvoicePost>>() {
-
-                    }.getType());
-
-                    invoiceSearch = new ArrayList<>();
-
-
-                    for (int i = 0; i < inv.size(); i++) {
-                        if (inv.get(i).getPartie_name().toLowerCase().startsWith(s.toString().toLowerCase())) {
-                            invoiceSearch.add(inv.get(i));
-                        }
-                    }
-                    if (s.length() > 0) {
-                        adapter.setInvoicesList(invoiceSearch);
-                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, invoiceSearch);
-                        bindingActivity.invoiceList.setAdapter(adapter);
-                        bindingActivity.pageLayout.setVisibility(View.GONE);
-                    } else if (s.length() <= 0) {
-                        adapter.setInvoicesList(inv);
-                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
-                        bindingActivity.invoiceList.setAdapter(adapter);
-                    } else {
-                        adapter.setInvoicesList(inv);
-                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
-                        bindingActivity.invoiceList.setAdapter(adapter);
-                    }
-                }
+//        if (from.equals("ret")) {
+////            getOrderReports();
+//            bindingActivity.searchEdittext.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
 //                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                    invoiceSearch.clear();
+//                    //e provojme edhe me getAllInvoicesString (nuk po bon me allStrings)...
+//                    //me getInvoicesString() po bon mirpo pas fshirjes ne search po i shfaq vetem returInvoices...
+//                    String invoices = realmHelper.getAllReturnInvoicesString();
+//                    Gson gson = new Gson();
+//                    inv = (ArrayList<InvoicePost>) gson.fromJson(invoices, new TypeToken<ArrayList<InvoicePost>>() {
+//
+//                    }.getType());
+//
+//                    invoiceSearch = new ArrayList<>();
+//
+//
+//                    for (int i = 0; i < inv.size(); i++) {
+//                        if (inv.get(i).getPartie_name().toLowerCase().startsWith(s.toString().toLowerCase())) {
+//                            invoiceSearch.add(inv.get(i));
+//                        }
+//                    }
+//                    if (s.length() > 0) {
+//                        adapter.setInvoicesList(invoiceSearch);
+//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, invoiceSearch);
+//                        bindingActivity.invoiceList.setAdapter(adapter);
+//                        bindingActivity.pageLayout.setVisibility(View.GONE);
+//                    } else if (s.length() <= 0) {
+//                        adapter.setInvoicesList(inv);
+//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
+//                        bindingActivity.invoiceList.setAdapter(adapter);
+//                    } else {
+//                        adapter.setInvoicesList(inv);
+//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
+//                        bindingActivity.invoiceList.setAdapter(adapter);
+//                    }
+//                }
+////                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//
+//                }
+//            });
+//
+//        }
 
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
-
-        }
-
-        if(from.equals("inv")){
-
-            getInvoicesRepors();
-            bindingActivity.searchEdittext.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    invoiceSearch.clear();
-
-                    String returns = realmHelper.getInvoicesString();
-
-                    inv = (ArrayList<InvoicePost>) new Gson().fromJson(returns,
-                            new TypeToken<ArrayList<InvoicePost>>() {
-                            }.getType());
-
-//                    getInvoicesRepors();
-
-                    for(int i = 0; i < inv.size(); i++){
-                        if (inv.get(i).getPartie_name().toLowerCase().startsWith(s.toString().toLowerCase())){
-                            invoiceSearch.add(inv.get(i));
-                        }
-                    }
-                    if(s.length() > 0){
-                        adapter.setInvoicesList(invoiceSearch);
-                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, invoiceSearch);
-                        bindingActivity.pageLayout.setVisibility(View.GONE);
-                        bindingActivity.invoiceList.setAdapter(adapter);
-                    }else if(s.length() <= 0){
-                        adapter.setInvoicesList(inv);
-                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
-                        bindingActivity.invoiceList.setAdapter(adapter);
-                    }else{
-                        adapter.setInvoicesList(inv);
-                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
-                        bindingActivity.invoiceList.setAdapter(adapter);
-                    }
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
-        }
+//        if (from.equals("inv")) {
+//
+//            getInvoicesRepors();
+//            bindingActivity.searchEdittext.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                    invoiceSearch.clear();
+//
+//                    String returns = realmHelper.getInvoicesString();
+//
+//                    inv = (ArrayList<InvoicePost>) new Gson().fromJson(returns,
+//                            new TypeToken<ArrayList<InvoicePost>>() {
+//                            }.getType());
+//
+////                    getInvoicesRepors();
+//
+//                    for (int i = 0; i < inv.size(); i++) {
+//                        if (inv.get(i).getPartie_name().toLowerCase().startsWith(s.toString().toLowerCase())) {
+//                            invoiceSearch.add(inv.get(i));
+//                        }
+//                    }
+//                    if (s.length() > 0) {
+//                        adapter.setInvoicesList(invoiceSearch);
+//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, invoiceSearch);
+//                        bindingActivity.pageLayout.setVisibility(View.GONE);
+//                        bindingActivity.invoiceList.setAdapter(adapter);
+//                    } else if (s.length() <= 0) {
+//                        adapter.setInvoicesList(inv);
+//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
+//                        bindingActivity.invoiceList.setAdapter(adapter);
+//                    } else {
+//                        adapter.setInvoicesList(inv);
+//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
+//                        bindingActivity.invoiceList.setAdapter(adapter);
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//
+//                }
+//            });
+//        }
 
         Button button = findViewById(R.id.sync);
         button.setOnClickListener(view -> uploadInvoices());
@@ -396,7 +388,7 @@ public class InvoiceListActivity extends AppCompatActivity {
         LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
         View viewType = layoutInflater.inflate(R.layout.invoice_list_item, null);
 
-        TextView invoiceNumber = viewType.findViewById(R.id.invoice_number);
+        TextView invoiceNumber = viewType.findViewById(R.id.invoice_nr);
         TextView clientName = viewType.findViewById(R.id.company_name_textview);
 
 
@@ -436,7 +428,7 @@ public class InvoiceListActivity extends AppCompatActivity {
         LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
         View view = layoutInflater.inflate(R.layout.switch_reports, null);
 
-        TextView invoiceNumber = view.findViewById(R.id.invoice_number);
+        TextView invoiceNumber = view.findViewById(R.id.invoice_nr);
         TextView clientName = view.findViewById(R.id.company_name_textview);
 
         if (isUpdate && invoicePost != null) {
@@ -495,7 +487,7 @@ public class InvoiceListActivity extends AppCompatActivity {
 
     private void createContact(String nrInvoice, String clientName) {
 
-        new CreateContactAsyncTask().execute(new InvoicePost(0, nrInvoice, clientName));
+//        new CreateContactAsyncTask().execute(new InvoicePost(0, nrInvoice, clientName));
     }
 
     private class CreateContactAsyncTask extends AsyncTask<InvoicePost, Void, Void> {
@@ -546,7 +538,7 @@ public class InvoiceListActivity extends AppCompatActivity {
     }
 
     private void uploadInvoices() {
-
+        System.out.println("Api i pare qe e kena thirr...");
         if (unSyncedList.size() > 0) {
             loader.setVisibility(View.VISIBLE);
             InvoicePostObject invoicePostObject = new InvoicePostObject();
@@ -575,50 +567,50 @@ public class InvoiceListActivity extends AppCompatActivity {
                     });
         }
     }
-
-    public void switchReportList() {
-        showLoader();
-        RaportsPostObject raportsPostObject = new RaportsPostObject();
-        raportsPostObject.setToken(preferences.getToken());
-        raportsPostObject.setUser_id(preferences.getUserId());
-//        raportsPostObject.setInvoices(switchReport);
-
-        apiService.getRaportInvoiceList(raportsPostObject)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(responseBody -> {
-                    isLoading = false;
-
-                    if (responseBody.getSuccess()) {
-
-                        currentPage = responseBody.getCurrentPage();
-                        totalPage = responseBody.getTotalPage();
-
-                        for (ReportsList reportsList : responseBody.data) {
-                            InvoicePost invoice = new InvoicePost();
-                            invoice.setInvoiceFromReports(reportsList);
-                            inv.add(invoice);
-                        }
-
-//                        for (int i = 0; i < switchReport.size(); i++) {
-//                            switchReport.get(i).setSwitchDlt(true);
-//                            realmHelper.saveInvoices(switchReport.get(i));
 //
+//    public void switchReportList() {
+//        showLoader();
+//        RaportsPostObject raportsPostObject = new RaportsPostObject();
+//        raportsPostObject.setToken(preferences.getToken());
+//        raportsPostObject.setUser_id(preferences.getUserId());
+////        raportsPostObject.setInvoices(switchReport);
+//
+//        apiService.getRaportInvoiceList(raportsPostObject)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(responseBody -> {
+//                    isLoading = false;
+//
+//                    if (responseBody.getSuccess()) {
+//
+//                        currentPage = responseBody.getCurrentPage();
+//                        totalPage = responseBody.getTotalPage();
+//
+//                        for (ReportsList reportsList : responseBody.data) {
+//                            InvoicePost invoice = new InvoicePost();
+//                            invoice.setInvoiceFromReports(reportsList);
+//                            inv.add(invoice);
 //                        }
-
-//                        adapter.setSwitchReportList(realmHelper.getInvoices());
-                        adapter.notifyItemRangeInserted(0, inv.size());
-                        hideLoader();
-                    } else {
-                        Toast.makeText(this, responseBody.getError().getText(), Toast.LENGTH_SHORT).show();
-                    }
-                    hideLoader();
-
-                }, throwable -> {
-                    hideLoader();
-                    Toast.makeText(this, "Inkasimi nuk u ruajt ne server!", Toast.LENGTH_SHORT).show();
-                });
-    }
+//
+////                        for (int i = 0; i < switchReport.size(); i++) {
+////                            switchReport.get(i).setSwitchDlt(true);
+////                            realmHelper.saveInvoices(switchReport.get(i));
+////
+////                        }
+//
+////                        adapter.setSwitchReportList(realmHelper.getInvoices());
+//                        adapter.notifyItemRangeInserted(0, inv.size());
+//                        hideLoader();
+//                    } else {
+//                        Toast.makeText(this, responseBody.getError().getText(), Toast.LENGTH_SHORT).show();
+//                    }
+//                    hideLoader();
+//
+//                }, throwable -> {
+//                    hideLoader();
+//                    Toast.makeText(this, "Inkasimi nuk u ruajt ne server!", Toast.LENGTH_SHORT).show();
+//                });
+//    }
 
 
     private void loadNextPage() {
@@ -626,7 +618,6 @@ public class InvoiceListActivity extends AppCompatActivity {
 
         if (from.equals("inv")) {
             getInvoicesRepors();
-
         }
     }
 
@@ -638,7 +629,7 @@ public class InvoiceListActivity extends AppCompatActivity {
 
         if (currentPage == 0) {
             if (!inv.isEmpty()) {
-                raportsPostObject.setLast_document_number(inv.get(inv.size() - 1).getNo_invoice());
+                raportsPostObject.setLast_document_number(String.valueOf(inv.get(inv.size() - 1).getId()));
             }
             currentPage++;
             raportsPostObject.setPage(currentPage++);
@@ -681,17 +672,17 @@ public class InvoiceListActivity extends AppCompatActivity {
         raportsPostObject.setToken(preferences.getToken());
         raportsPostObject.setUser_id(preferences.getUserId());
 
-        if (currentPage == 0) {
-            if (!inv.isEmpty()) {
-                raportsPostObject.setLast_document_number(inv.get(inv.size() - 1).getNo_invoice());
-            }
-            currentPage++;
-            raportsPostObject.setPage(currentPage++);
-        } else {
-            raportsPostObject.setLast_document_number("");
-            currentPage++;
-            raportsPostObject.setPage(currentPage);
-        }
+//        if (currentPage == 0) {
+//            if (!inv.isEmpty()) {
+//                raportsPostObject.setLast_document_number(inv.get(inv.size() - 1).getNo_invoice());
+//            }
+//            currentPage++;
+//            raportsPostObject.setPage(currentPage++);
+//        } else {
+//            raportsPostObject.setLast_document_number("");
+//            currentPage++;
+//            raportsPostObject.setPage(currentPage);
+//        }
         apiService.getRaportOrderList(raportsPostObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -723,7 +714,7 @@ public class InvoiceListActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void printInvoices(int id, boolean isPrint) {
-
+        System.out.println("Api i trete qe e kena thirr...");
         InvoiceForReportObject invoiceForReportObject = new InvoiceForReportObject();
         invoiceForReportObject.setToken(preferences.getToken());
         invoiceForReportObject.setUser_id(preferences.getUserId());

@@ -338,9 +338,7 @@
                             android:enabled="true"
                             android:hint="Zbritje%"
                             android:inputType="numberDecimal"
-                            android:textSize="14sp"
-
-                            />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
