@@ -323,7 +323,7 @@ public class InvoicePost extends RealmObject {
         this.no_invoice = reports.docNumber;
         this.amount_with_vat = reports.amount;
         this.partie_name = reports.partieName;
-        this.sale_station_name = reports.partieStationName;
+        this.partie_station_name = reports.partieStationName;
         this.invoice_date = reports.date;
         this.synced = true;
         this.isFromServer = true;
