@@ -211,7 +211,7 @@ class EscPostPrintFragment : Fragment() {
                     .textList(getItems())
                     //
                     .dividerDouble()
-                    .menuLine("Totali pa Zbritje", "${minvoicePost?.total_without_discount} EUR")
+                    .menuLine("Totali pa Zbritje", String.format("%.2f","${minvoicePost?.total_without_discount} EUR"))
                     .menuLine("Vlera e Zbritur", "${minvoicePost?.amount_discount} EUR")
                     .menuLine("TVSH", "${minvoicePost?.amount_of_vat} EUR")
                     .menuLine("Pagesa", if (pay != null) {
