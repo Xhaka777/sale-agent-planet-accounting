@@ -59,21 +59,20 @@ public class transfereActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_transfere);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_transfere);
         Kontabiliteti.getKontabilitetiComponent().inject(this);
 
-        binding.addNewTransfer.setOnClickListener(view -> startActivity(new Intent(this,CreateTransferActivity.class)));
+        binding.addNewTransfer.setOnClickListener(view -> startActivity(new Intent(this, CreateTransferActivity.class)));
 
         allTransfer();
 
-            currentLanguage = getIntent().getStringExtra(currentLang);
-        }
+        currentLanguage = getIntent().getStringExtra(currentLang);
+    }
 
 
     //methods to change the languages
-
-    public void setLocale(String localeName){
-        if(!localeName.equals(currentLang)){
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
             Context context = LocaleHelper.setLocale(this, localeName);
             //Resources resources = context.getResources();
             myLocale = new Locale(localeName);
@@ -85,7 +84,7 @@ public class transfereActivity extends AppCompatActivity {
             Intent refresh = new Intent(this, MainActivity.class);
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
-        }else{
+        } else {
             Toast.makeText(transfereActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
@@ -97,84 +96,83 @@ public class transfereActivity extends AppCompatActivity {
     }
 
 
-    private void allTransfer(){
+    private void allTransfer() {
 
-        apiService.getOtherTransfere(new UserToken(preferences.getUserId(),preferences.getToken())).subscribeOn(Schedulers.io())
+        apiService.getOtherTransfere(new UserToken(preferences.getUserId(), preferences.getToken()))
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getTranseteResponse -> {
 
-                    if (getTranseteResponse.getSuccess()){
+                            if (getTranseteResponse.getSuccess()) {
 
-                       ArrayList<GetTransfere> transfere  = getTranseteResponse.data;
+                                ArrayList<GetTransfere> transfere = getTranseteResponse.data;
 
-                        otherTransfer(transfere);
-                        myTransfer(transfere);
+                                otherTransfer(transfere);
+                                myTransfer(transfere);
+                            }
 
-
-                        }
-
-
-                    },
-                        throwable -> {});
-        }
+                        },
+                        throwable -> {
+                        });
+    }
 
 
-        private void otherTransfer(ArrayList<GetTransfere> transfere){
+    private void otherTransfer(ArrayList<GetTransfere> transfere) {
 
 
-            for(int i = 0; i<transfere.size();i++ ){
-                GetTransfere getTransfere = transfere.get(i);
-
-                if (!getTransfere.getFromStationId().equals(preferences.getStationId())){
-                    return;
-                }
-
-                OthersTransfereItemBinding itemBinding = DataBindingUtil.inflate(getLayoutInflater(),
-                        R.layout.others_transfere_item, binding.otherTransfersHolder, false);
-
-                itemBinding.numri.setText(getTransfere.getNumber() + "");
-
-                String[] date = getTransfere.getDate().split(" ");
-                itemBinding.data.setText(date[0] +"\n"+ date[1]);
-
-                if (getTransfere.getFromStationId() != null){
-                    itemBinding.njesia.setText(getTransfere.getFromStationName());
-                }
-
-                if (getTransfere.getType().equals("tp")){
-                    itemBinding.acceptOtherTransfer.setVisibility(View.INVISIBLE);
-                    itemBinding.cancelOtherTransfer.setVisibility(View.INVISIBLE);
-                }
-
-                itemBinding.cancelOtherTransfer.setOnClickListener(view ->
-                        dialog("anuloni transferin ",true,itemBinding.getRoot(),getTransfere.getId())
-                );
-
-                itemBinding.acceptOtherTransfer.setOnClickListener(view ->
-                        dialog("pranoni transferin ",false,itemBinding.getRoot(),getTransfere.getId())
-                );
-
-                itemBinding.seenOtherTransfer.setOnClickListener(view ->
-                {
-                    startActivity(new Intent(this,DetailTransferActivity.class)
-                            .putExtra("transferId",getTransfere.getId())
-                            .putExtra("from",0)
-                            .putExtra("type",getTransfere.getType()));
-
-                });
-
-                binding.otherTransfersHolder.addView(itemBinding.getRoot());
-            }
-
-        }
-
-    private void myTransfer(ArrayList<GetTransfere> transfere){
-
-
-        for(int i = 0; i<transfere.size();i++ ){
+        for (int i = 0; i < transfere.size(); i++) {
             GetTransfere getTransfere = transfere.get(i);
 
-            if (!getTransfere.getToStationId().equals(preferences.getStationId())){
+            if (!getTransfere.getFromStationId().equals(preferences.getStationId())) {
+                return;
+            }
+
+            OthersTransfereItemBinding itemBinding = DataBindingUtil.inflate(getLayoutInflater(),
+                    R.layout.others_transfere_item, binding.otherTransfersHolder, false);
+
+            itemBinding.numri.setText(getTransfere.getNumber() + "");
+
+            String[] date = getTransfere.getDate().split(" ");
+            itemBinding.data.setText(date[0] + "\n" + date[1]);
+
+            if (getTransfere.getFromStationId() != null) {
+                itemBinding.njesia.setText(getTransfere.getFromStationName());
+            }
+
+            if (getTransfere.getType().equals("tp")) {
+                itemBinding.acceptOtherTransfer.setVisibility(View.INVISIBLE);
+                itemBinding.cancelOtherTransfer.setVisibility(View.INVISIBLE);
+            }
+
+            itemBinding.cancelOtherTransfer.setOnClickListener(view ->
+                    dialog("anuloni transferin ", true, itemBinding.getRoot(), getTransfere.getId())
+            );
+
+            itemBinding.acceptOtherTransfer.setOnClickListener(view ->
+                    dialog("pranoni transferin ", false, itemBinding.getRoot(), getTransfere.getId())
+            );
+
+            itemBinding.seenOtherTransfer.setOnClickListener(view ->
+            {
+                startActivity(new Intent(this, DetailTransferActivity.class)
+                        .putExtra("transferId", getTransfere.getId())
+                        .putExtra("from", 0)
+                        .putExtra("type", getTransfere.getType()));
+
+            });
+
+            binding.otherTransfersHolder.addView(itemBinding.getRoot());
+        }
+
+    }
+
+    private void myTransfer(ArrayList<GetTransfere> transfere) {
+
+
+        for (int i = 0; i < transfere.size(); i++) {
+            GetTransfere getTransfere = transfere.get(i);
+
+            if (!getTransfere.getToStationId().equals(preferences.getStationId())) {
                 return;
             }
 
@@ -184,27 +182,27 @@ public class transfereActivity extends AppCompatActivity {
             itemBinding.numri.setText(getTransfere.getNumber() + "");
 
             String[] date = getTransfere.getDate().split(" ");
-            itemBinding.data.setText(date[0] +"\n"+ date[1]);
+            itemBinding.data.setText(date[0] + "\n" + date[1]);
 
-            if (getTransfere.getFromStationId() != null){
+            if (getTransfere.getFromStationId() != null) {
                 itemBinding.njesia.setText(getTransfere.getFromStationName());
             }
 
-            if (getTransfere.getType().equals("tp")){
+            if (getTransfere.getType().equals("tp")) {
                 itemBinding.cancelOtherTransfer.setVisibility(View.INVISIBLE);
             }
 
             itemBinding.cancelOtherTransfer.setOnClickListener(view ->
-                    dialog("anuloni transferin ",true,itemBinding.getRoot(),getTransfere.getId())
+                    dialog("anuloni transferin ", true, itemBinding.getRoot(), getTransfere.getId())
             );
 
 
             itemBinding.seenOtherTransfer.setOnClickListener(view ->
             {
-                startActivity(new Intent(this,DetailTransferActivity.class)
-                        .putExtra("transferId",getTransfere.getId())
-                        .putExtra("from",1)
-                        .putExtra("type",getTransfere.getType()));
+                startActivity(new Intent(this, DetailTransferActivity.class)
+                        .putExtra("transferId", getTransfere.getId())
+                        .putExtra("from", 1)
+                        .putExtra("type", getTransfere.getType()));
 
             });
 
@@ -213,10 +211,10 @@ public class transfereActivity extends AppCompatActivity {
 
     }
 
-    public void dialog(String njesia, boolean isCancel, View view,int transferId) {
+    public void dialog(String njesia, boolean isCancel, View view, int transferId) {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         mBuilder.setTitle("");
-        mBuilder.setMessage("A dëshironi të "+njesia);
+        mBuilder.setMessage("A dëshironi të " + njesia);
         // Setting Negative "NO" Button
         mBuilder.setNegativeButton("JO", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -229,7 +227,7 @@ public class transfereActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to invoke NO event
 
-                if (isCancel){
+                if (isCancel) {
                     cancelTransfer(transferId);
 
                 } else {
@@ -243,9 +241,9 @@ public class transfereActivity extends AppCompatActivity {
     }
 
 
-    private void aceptTransfer(int transferId){
+    private void aceptTransfer(int transferId) {
 
-        apiService.acceptlTransfer(new TransferPost(preferences.getToken(),preferences.getUserId(),transferId + ""))
+        apiService.acceptlTransfer(new TransferPost(preferences.getToken(), preferences.getUserId(), transferId + ""))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(transferDetailRespose -> {
@@ -257,9 +255,9 @@ public class transfereActivity extends AppCompatActivity {
                 }, this::sendError);
     }
 
-    private void cancelTransfer(int transferId){
+    private void cancelTransfer(int transferId) {
 
-        apiService.cancelTransfer(new TransferPost(preferences.getToken(),preferences.getUserId(),transferId + ""))
+        apiService.cancelTransfer(new TransferPost(preferences.getToken(), preferences.getUserId(), transferId + ""))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(transferDetailRespose -> {
