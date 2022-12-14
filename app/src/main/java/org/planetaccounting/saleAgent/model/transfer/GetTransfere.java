@@ -61,7 +61,6 @@ public class GetTransfere {
         return fromStationId;
         }
 
-
     public String getType() {
         return type;
     }
