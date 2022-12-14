@@ -15,8 +15,8 @@ import io.realm.annotations.Ignore;
  */
 
 public class InvoiceItem implements Parcelable {
-    public String discount= "0";
-    public String baseDiscount ="0";
+    public String discount = "0";
+    public String baseDiscount = "0";
     @Ignore
     public String maxDiscound = "0";
     public String id;
@@ -54,7 +54,6 @@ public class InvoiceItem implements Parcelable {
     String minQuantityForDiscount = "0";
 
 
-
     public InvoiceItem(Item item) {
         this.id = item.getId();
         this.type = item.getType();
@@ -71,7 +70,7 @@ public class InvoiceItem implements Parcelable {
         this.amount = item.getAmount();
     }
 
-    public InvoiceItem(InvoiceItem item){
+    public InvoiceItem(InvoiceItem item) {
         this.id = item.getId();
         this.type = item.getType();
         this.name = item.getName();
@@ -86,9 +85,9 @@ public class InvoiceItem implements Parcelable {
         this.selectedUnit = item.getSelectedUnit();
         this.items = item.getItems();
         this.sasia = item.getSasia();
-        }
+    }
 
-   public double getPriceWithvat() {
+    public double getPriceWithvat() {
         return priceWithvat;
     }
 
@@ -96,6 +95,9 @@ public class InvoiceItem implements Parcelable {
         this.basePrice = basePrice;
     }
 
+    public double getBasePrice() {
+        return basePrice;
+    }
 
     public void setPriceWithvat(double priceWithvat) {
         this.priceWithvat = priceWithvat;
@@ -125,7 +127,9 @@ public class InvoiceItem implements Parcelable {
         return quantity;
     }
 
-    public String getComment() { return comment; }
+    public String getComment() {
+        return comment;
+    }
 
     public String getManufacturer() {
         return manufacturer;
@@ -147,6 +151,9 @@ public class InvoiceItem implements Parcelable {
         return items;
     }
 
+    public void setItems(List<SubItem> items) {
+        this.items = items;
+    }
 
     public String getRelacion() {
         return relacion;
@@ -177,9 +184,9 @@ public class InvoiceItem implements Parcelable {
         this.discount = discount;
     }
 
-    public void setDiscount(String discount,boolean isFromEditText) {
+    public void setDiscount(String discount, boolean isFromEditText) {
 
-        if (!isFromEditText){
+        if (!isFromEditText) {
             this.maxDiscound = discount;
         }
         this.discount = discount;
@@ -213,7 +220,9 @@ public class InvoiceItem implements Parcelable {
         this.sasia = sasia;
     }
 
-    public void setComment(String comment) { this.comment = comment; }
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
     public double getVleraPaTvsh() {
         return vleraPaTvsh;
@@ -320,7 +329,6 @@ public class InvoiceItem implements Parcelable {
     }
 
 
-
     public String getAvailableQuantity() {
         return availableQuantity;
     }
@@ -335,12 +343,6 @@ public class InvoiceItem implements Parcelable {
 
     public void setCollection(boolean collection) {
         isCollection = collection;
-    }
-
-    public double getBasePrice(){
-
-   return this.basePrice;
-
     }
 
     public void setQuantity(String quantity) {

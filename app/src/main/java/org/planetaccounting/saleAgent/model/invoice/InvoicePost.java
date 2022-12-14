@@ -325,7 +325,9 @@ public class InvoicePost extends RealmObject {
         this.partie_name = reports.partieName;
         this.partie_station_name = reports.partieStationName;
         this.invoice_date = reports.date;
+        this.current_page = reports.currentPage;
         this.synced = true;
+        this.type = reports.type;
         this.isFromServer = true;
     }
 

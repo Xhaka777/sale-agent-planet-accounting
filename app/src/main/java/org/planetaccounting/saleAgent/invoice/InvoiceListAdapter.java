@@ -17,6 +17,7 @@ import org.planetaccounting.saleAgent.model.invoice.InvoicePost;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import io.realm.RealmResults;
@@ -51,7 +52,8 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
         binding.companyUnitTextview.setText(invoices.get(position).getPartie_station_name());
         binding.data.setText(invoices.get(position).getInvoice_date());
         binding.invoiceNr.setText(invoices.get(position).getNo_invoice());
-        binding.vlera.setText("" + cutTo2(pVlera));
+        binding.vlera.setText(invoices.get(position).getAmount_with_vat());
+
         if (invoices.get(position).getSynced()) {
             binding.syncedIndicator.setImageResource(R.drawable.ic_green);
 
@@ -71,6 +73,11 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
 
 
     public void setCompanies(ArrayList<InvoicePost> invoices) {
+        this.invoices = invoices;
+        notifyDataSetChanged();
+    }
+
+    public void setInvoices(ArrayList<InvoicePost> invoices){
         this.invoices = invoices;
         notifyDataSetChanged();
     }
