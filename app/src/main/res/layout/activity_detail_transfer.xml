@@ -86,11 +86,10 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                 android:id="@+id/title_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
-                android:textSize="16sp"
+                android:layout_marginTop="16dp"
                 android:text="-//-"
-                />
+                android:textSize="16sp" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -98,92 +97,153 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                 android:background="#E5E5E5"
                 />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#000"
-                    android:text="@string/nr"
-                    />
-
-                 <TextView
-                    android:id="@+id/number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:textSize="16sp"
-                    android:text="@string/nr"
-                    />
-            </LinearLayout>
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#000"
-                    android:text="@string/data"
-                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#F4F4F4"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/numri"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/nr"
+                        android:textColor="#000"
+                        android:textSize="16sp"/>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000"/>
+
+                    <TextView
+                        android:id="@+id/data"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/data"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000"/>
+
+                    <TextView
+                        android:id="@+id/pershkrimi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/pershkrimi"
+                        android:textColor="#000"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/transfer_details"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:textSize="16sp"
-                    android:text="@string/data"
-                    />
+                    android:orientation="vertical"/>
+
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#000"
-                    android:text="@string/pershkrimi"
-                    />
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginLeft="16dp">-->
 
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:textSize="16sp"
-                    android:text="@string/pershkrimi"
-                    />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#000"-->
+<!--                    android:text="@string/nr"-->
+<!--                    />-->
+
+<!--                 <TextView-->
+<!--                    android:id="@+id/number"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="6dp"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:text="@string/nr"-->
+<!--                    />-->
+<!--            </LinearLayout>-->
+
+
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginLeft="16dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#000"-->
+<!--                    android:text="@string/data"-->
+<!--                    />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/date"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="6dp"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:text="@string/data"-->
+<!--                    />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginLeft="16dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#000"-->
+<!--                    android:text="@string/pershkrimi"-->
+<!--                    />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/description"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="6dp"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:text="@string/pershkrimi"-->
+<!--                    />-->
+<!--            </LinearLayout>-->
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_marginTop="16dp"
-                android:background="#fafafa" />
-
+                android:background="#E5E5E5" />
 
             <LinearLayout
                 android:layout_width="match_parent"
