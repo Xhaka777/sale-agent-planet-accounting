@@ -103,7 +103,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
                             android:background="@drawable/state_btn_dropdown"
-                            android:hint="Kosovë" />
+                            android:hint="          "/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
