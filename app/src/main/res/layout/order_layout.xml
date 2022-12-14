@@ -31,7 +31,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_margin="10dp"
                     android:layout_marginRight="10dp"
                     android:orientation="horizontal">
 
@@ -41,13 +40,16 @@
                         android:text="Data: "
                         android:textColor="#000" />
 
-                    <TextView
+
+                    <AutoCompleteTextView
                         android:id="@+id/data_edittext"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        android:hint="Data"
-                        android:textColor="#000" />
+                        android:textColor="#000"
+                        android:hint="@string/data"
+                        android:textSize="14sp" />
+
                 </LinearLayout>
 
                 <Switch

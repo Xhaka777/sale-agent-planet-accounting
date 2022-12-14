@@ -1,5 +1,6 @@
 package org.planetaccounting.saleAgent;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -9,12 +10,18 @@ import android.view.ViewGroup;
 
 import org.planetaccounting.saleAgent.databinding.OrderListItemBinding;
 import org.planetaccounting.saleAgent.events.OpenOrderDetailEvent;
+import org.planetaccounting.saleAgent.model.clients.Client;
 import org.planetaccounting.saleAgent.model.order.Order;
 
 import org.greenrobot.eventbus.EventBus;
+import org.planetaccounting.saleAgent.persistence.RealmHelper;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+import javax.inject.Inject;
+
+import io.realm.RealmResults;
 
 /**
  * Created by macb on 06/02/18.
@@ -22,10 +29,13 @@ import java.util.Locale;
 
 public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.ViewHolder> {
 
+    @Inject
+    RealmHelper realmHelper;
+
     ArrayList<Order> orders = new ArrayList<>();
     private Context ctx;
-
     private CancelOrder listener;
+    Client client;
 
     public OrdersListAdapter(ArrayList<Order> orders) {
         this.orders = orders;
@@ -40,7 +50,7 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(OrdersListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(OrdersListAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         OrderListItemBinding binding = holder.binding;
         double vValue = Double.parseDouble(orders.get(position).getAmount());
 

@@ -5,45 +5,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:background="#fff">
-
+        <LinearLayout
+            android:id="@+id/order_layoutAdapter"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            android:background="#fff">
 
 
             <TextView
                 android:id="@+id/order_nr"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="Nr."
                 android:textColor="#000" />
 
 
-
             <ImageView
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000"/>
+                android:background="#000" />
 
             <TextView
                 android:id="@+id/data"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="center"
                 android:layout_weight="1"
 
 
@@ -53,15 +47,15 @@
             <ImageView
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000"/>
+                android:background="#000" />
 
             <TextView
                 android:id="@+id/ware_house"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="center"
                 android:layout_weight="1"
 
 
@@ -71,32 +65,33 @@
             <ImageView
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000"/>
+                android:background="#000" />
 
             <TextView
                 android:id="@+id/client"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="center"
                 android:layout_weight="1"
 
 
                 android:text="Klienti"
                 android:textColor="#000" />
+
             <ImageView
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000"/>
+                android:background="#000" />
 
             <TextView
                 android:id="@+id/njesia"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="center"
                 android:layout_weight="1"
 
 
@@ -106,56 +101,55 @@
             <ImageView
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000"/>
+                android:background="#000" />
 
             <TextView
                 android:id="@+id/tipi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="center"
                 android:layout_weight="1"
 
 
                 android:text="Tipi"
                 android:textColor="#000" />
+
             <ImageView
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000"/>
+                android:background="#000" />
 
             <TextView
                 android:id="@+id/vlera"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="center"
                 android:layout_weight="1"
 
 
                 android:text="Vlera"
                 android:textColor="#000" />
 
-        <TextView
-            android:id="@+id/anulo_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="2dp"
-            android:layout_gravity="center"
+            <TextView
+                android:id="@+id/anulo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="2dp"
 
 
-            android:padding="15dp"
-            android:text="Anulo"
-            android:textColor="@android:color/white"
-            android:background="@drawable/button_rounder_corner_2"
-            />
+                android:background="@drawable/button_rounder_corner_2"
+                android:padding="15dp"
+                android:text="Anulo"
+                android:textColor="@android:color/white" />
 
 
-
-    </LinearLayout>
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

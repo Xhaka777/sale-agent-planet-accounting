@@ -39,6 +39,7 @@ import org.planetaccounting.saleAgent.model.order.OrderObject;
 import org.planetaccounting.saleAgent.model.order.OrderPost;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
+import org.planetaccounting.saleAgent.transfere.CreateTransferActivity;
 import org.planetaccounting.saleAgent.utils.Preferences;
 
 import java.text.SimpleDateFormat;
@@ -353,9 +354,8 @@ public class OrdersActivity extends AppCompatActivity {
 
                     }
                     fillInvoiceItemData(itemBinding, invoiceItem[0]);
-
-                    calculateSasinTotale();
-                    calculateArtikujtTotal();
+                    calculateTotalQuantity();
+                    calculateTotalOfArticles();
 
                 } catch (Exception e) {
                     Toast.makeText(OrdersActivity.this, R.string.nuk_keni_sasi_te_mjaftueshme_ne_depo, Toast.LENGTH_SHORT).show();
@@ -485,7 +485,6 @@ public class OrdersActivity extends AppCompatActivity {
 //        });
 
         itemBinding.removeButton.setOnClickListener(view ->
-
         {
             doYouWantToDeleteThisArticleDialog(itemBinding.emertimiTextview.getText().toString(), itemBinding.sasiaTextview.getText().toString(), () -> {
 
@@ -498,8 +497,8 @@ public class OrdersActivity extends AppCompatActivity {
                     }
                 }
                 binding.invoiceItemHolder.removeView(itemBinding.getRoot());
-                calculateSasinTotale();
-                calculateArtikujtTotal();
+                calculateTotalQuantity();
+               calculateTotalOfArticles();
             });
         });
         itemBinding.getRoot().setTag(binding.invoiceItemHolder.getChildCount());
@@ -587,27 +586,28 @@ public class OrdersActivity extends AppCompatActivity {
         }
     }
 
-    private void doYouWantToDeleteThisArticleDialog(String name, String sasia, DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener) {
-        android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(this);
-        mBuilder.setTitle("");
+    private void doYouWantToDeleteThisArticleDialog(String name, String sasia, DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener){
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("");
         String message = getString(R.string.do_you_want_to_delete_this_article) + " " + name + " me sasi " + sasia;
-        mBuilder.setMessage(message);
-        mBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+        builder.setMessage(message);
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
 
-        mBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 doYouWantToDeleteThisArticleListener.Yes();
                 dialog.cancel();
             }
         });
-        mBuilder.show();
+        builder.show();
     }
+
 
     private void createOrder() {
         binding.loader.setVisibility(View.VISIBLE);
@@ -692,41 +692,35 @@ public class OrdersActivity extends AppCompatActivity {
                 });
     }
 
-    public void calculateArtikujtTotal(){
-
-        int artTotal = 0;
-
-        for(int i =0; i<stockItems.size(); i++){
+    public void calculateTotalOfArticles() {
+        int arcTotal = 0;
+        for (int i = 0; i < stockItems.size(); i++) {
 
             String cap = stockItems.get(i).getName().trim();
 
-            if(cap.length() > 0){
-                artTotal++;
+            if (cap.length() > 0) {
+                arcTotal++;
             }
         }
-        this.nrArtikujtTotal = String.valueOf(cutTo2(artTotal));
-        binding.artikujTeZgjedhur.setText("Nr. i artikujve te zgjedhur : " + artTotal);
+        this.nrArtikujtTotal = String.valueOf(cutTo2(arcTotal));
+        binding.artikujTeZgjedhur.setText("Nr. i artikujve te zgjedhur : " + arcTotal);
     }
 
-    public void calculateSasinTotale(){
-
+    public void calculateTotalQuantity() {
         double quaTotal = 0;
-
-        for(int i =0; i<stockItems.size(); i++){
-
+        for (int i = 0; i < stockItems.size(); i++) {
             quaTotal += Double.parseDouble(stockItems.get(i).getSasia());
-
         }
-
         this.sasiaTotale = String.valueOf(cutTo2(quaTotal));
-        binding.artikujtSasiaTotale.setText("Sasia Totale : " + quaTotal);
+        binding.artikujtSasiaTotale.setText("Sasia totale : " + cutTo2(quaTotal));
     }
+
 
     public double cutTo2(double value){
-        return Double.parseDouble(String.format(Locale.ENGLISH,"%2.f", value));
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
     }
 
-    interface DoYouWantToDeleteThisArticleListener {
+    interface DoYouWantToDeleteThisArticleListener{
         void Yes();
     }
 }

@@ -42,9 +42,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#f0f0f0"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:background="#f0f0f0">
 
                 <TextView
                     android:id="@+id/shifra"
@@ -52,6 +50,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
 
                     android:text="@string/shifra"
@@ -69,6 +69,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
 
                     android:text="@string/barcode"
@@ -85,6 +87,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
 
                     android:text="@string/emri"
@@ -101,6 +105,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
 
                     android:text="@string/njesia"
@@ -117,6 +123,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
 
                     android:text="@string/sasia"
@@ -133,6 +141,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
 
                     android:layout_weight="1"
                     android:text="@string/cmimi"
@@ -149,6 +159,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
 
                     android:layout_weight="1"
                     android:text="@string/vlera"

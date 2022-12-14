@@ -70,7 +70,6 @@ public class OrdersListActivity extends Activity implements OrdersListAdapter.Ca
         currentLanguage = getIntent().getStringExtra(currentLang);
     }
 
-
     //methods to change the languages
 
     public void setLocale(String localeName){
@@ -91,20 +90,10 @@ public class OrdersListActivity extends Activity implements OrdersListAdapter.Ca
         }
     }
 
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
-
 
     private  void getOrders(){
         showLoader();
@@ -146,7 +135,8 @@ public class OrdersListActivity extends Activity implements OrdersListAdapter.Ca
     @Override
     public void onCancelPressed(Order order) {
         showLoader();
-        apiService.cancelOrder(new OrderDetailPost(preferences.getToken(), preferences.getUserId(), order.getId(),order.getType())) .subscribeOn(Schedulers.io())
+        apiService.cancelOrder(new OrderDetailPost(preferences.getToken(), preferences.getUserId(), order.getId(),order.getType()))
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(ordersResponse -> {
                     hideLoader();
@@ -159,7 +149,5 @@ public class OrdersListActivity extends Activity implements OrdersListAdapter.Ca
 
                     }
                 }, Throwable::printStackTrace);
-
-
     }
 }

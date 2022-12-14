@@ -119,19 +119,15 @@
                 android:layout_weight="1"
 
                 android:text="@string/vlera"
-                android:textColor="#000"
-                />
+                android:textColor="#000" />
 
-<!--            <ImageView-->
-<!--                android:layout_width="1dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="#000"/>-->
         </LinearLayout>
 
-
-
-
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000"
+            android:layout_gravity="bottom"/>
 
     </LinearLayout>
 </layout>

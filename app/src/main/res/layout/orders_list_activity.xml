@@ -49,21 +49,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="#f0f0f0"
-                >
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="#f0f0f0">
 
                 <TextView
                     android:id="@+id/order_nr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:text="Nr."
                     android:textColor="#000" />
-
-
 
                 <ImageView
                     android:layout_width="1dp"
@@ -74,8 +73,10 @@
                     android:id="@+id/data"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="13dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
 
                     android:text="@string/data"
@@ -90,8 +91,10 @@
                     android:id="@+id/ware_house"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="7dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
 
                     android:text="@string/depo"
@@ -106,8 +109,10 @@
                     android:id="@+id/client"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="7dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
 
                     android:text="@string/klienti"
@@ -123,6 +128,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
 
                     android:text="@string/njesia"
@@ -138,6 +145,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
 
                     android:layout_marginRight="10dp"
@@ -152,7 +161,9 @@
                     android:id="@+id/vlera"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
 
                     android:layout_marginRight="10dp"
@@ -162,18 +173,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="2dp"
-
                     android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/button_rounder_corner_2"
                     android:padding="15dp"
-                    android:visibility="invisible"
                     android:text="Anulo"
                     android:textColor="@android:color/white"
-                    android:background="@drawable/button_rounder_corner_2"
-                    />
+                    android:visibility="invisible" />
 
             </LinearLayout>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -184,8 +195,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/title"
-                android:background="#fff"
-                 />
+                android:background="#fff"/>
 
         </LinearLayout>
 

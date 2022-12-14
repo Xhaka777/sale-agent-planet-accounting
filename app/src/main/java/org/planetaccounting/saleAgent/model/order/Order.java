@@ -3,11 +3,13 @@ package org.planetaccounting.saleAgent.model.order;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+
 /**
  * Created by macb on 06/02/18.
  */
 
-public class Order {
+public class Order extends RealmObject {
 
     @SerializedName("id")
     @Expose
@@ -37,8 +39,6 @@ public class Order {
     @Expose
     public String clientStation;
 
-
-
     @SerializedName("type")
     @Expose
     public String type;
@@ -50,15 +50,6 @@ public class Order {
     @SerializedName("cancel_allowed")
     @Expose
     public int cancelAllowed;
-
-
-
-
-
-
-
-
-
 
     public String getId() {
         return id;
@@ -102,5 +93,22 @@ public class Order {
 
     public String getClientStation() {
         return clientStation;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id='" + id + '\'' +
+                ", noOrder='" + noOrder + '\'' +
+                ", pariteName='" + pariteName + '\'' +
+                ", data='" + data + '\'' +
+                ", pariteStationName='" + pariteStationName + '\'' +
+                ", warehouse='" + warehouse + '\'' +
+                ", client='" + client + '\'' +
+                ", clientStation='" + clientStation + '\'' +
+                ", type='" + type + '\'' +
+                ", amount='" + amount + '\'' +
+                ", cancelAllowed=" + cancelAllowed +
+                '}';
     }
 }

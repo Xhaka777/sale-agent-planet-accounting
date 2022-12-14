@@ -18,6 +18,7 @@ import org.planetaccounting.saleAgent.databinding.OrderListDetailBinding;
 import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.OrderDetailItem;
 import org.planetaccounting.saleAgent.model.OrderDetailPost;
+import org.planetaccounting.saleAgent.model.order.Order;
 import org.planetaccounting.saleAgent.utils.Preferences;
 
 import java.util.ArrayList;
@@ -42,8 +43,10 @@ public class OrderListDetail extends Activity {
     ApiService apiService;
     @Inject
     Preferences preferences;
-    String orderId;
-    String orderType;
+    String orderId="1";
+    String orderType="1";
+    Order postOrder;
+
 
     Locale myLocale;
     private String currentLanguage = "sq", currentLang;
@@ -91,7 +94,7 @@ public class OrderListDetail extends Activity {
     }
 
     private void getOrders() {
-        apiService.getOrderDetail(new OrderDetailPost(preferences.getToken(), preferences.getUserId(), orderId,orderType))
+        apiService.getOrderDetail(new OrderDetailPost(preferences.getToken(), preferences.getUserId(), orderId, orderType))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(ordersResponse -> {
