@@ -1,7 +1,9 @@
 package org.planetaccounting.saleAgent.ngarkime;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ public class UploadDetailListAdapter extends RecyclerView.Adapter<UploadDetailLi
         this.uploadsDetailItems = uploadsDetailItems;
     }
 
+    @NonNull
     @Override
     public UploadDetailListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ctx = parent.getContext();
@@ -29,14 +32,17 @@ public class UploadDetailListAdapter extends RecyclerView.Adapter<UploadDetailLi
         return new UploadDetailListAdapter.ViewHolder(binding);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(UploadDetailListAdapter.ViewHolder holder, int position) {
         UploadDetailListItemBinding binding = holder.binding;
 
+        double pQuantity  = Double.parseDouble(uploadsDetailItems.get(position).getQuantity());
+
         binding.shifra.setText(uploadsDetailItems.get(position).getNumber());
         binding.name.setText(uploadsDetailItems.get(position).getName());
 //      binding.sasia.setText(uploadsDetailItems.get(position).getQuantity());
-        binding.sasia.setText("" + cutTo2(Double.parseDouble(uploadsDetailItems.get(position).getQuantity())));
+        binding.sasia.setText(""+cutTo2(pQuantity));
         binding.barkod.setText(uploadsDetailItems.get(position).getBarcode());
         binding.njesia.setText(uploadsDetailItems.get(position).getUnit());
         }
@@ -46,6 +52,7 @@ public class UploadDetailListAdapter extends RecyclerView.Adapter<UploadDetailLi
         return uploadsDetailItems.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setOrders(ArrayList<UploadsDetailItem> uploadsDetailItems) {
         this.uploadsDetailItems = uploadsDetailItems;
         System.out.println("items "+uploadsDetailItems.size());
@@ -62,7 +69,6 @@ public class UploadDetailListAdapter extends RecyclerView.Adapter<UploadDetailLi
     }
 
     public double cutTo2(double value){
-
         return Double.parseDouble(String.format(Locale.ENGLISH,"%.2f",value));
     }
 }
