@@ -104,15 +104,6 @@ public class ActionCollectionDetailActivity extends AppCompatActivity {
             Toast.makeText(ActionCollectionDetailActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
         }
     }
-//
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
