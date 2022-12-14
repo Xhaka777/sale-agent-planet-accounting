@@ -43,4 +43,5 @@ public class Role extends RealmObject {
     public Stock getStock() {
         return stock;
     }
+
 }

@@ -372,15 +372,6 @@ public class ReportDetailActivity extends Activity {
         }
     }
 
-//    public void onBackPressed(){
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//        System.exit(0);
-//    }
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LocaleHelper.onAttach(newBase));
@@ -500,9 +491,9 @@ public class ReportDetailActivity extends Activity {
                         totalPage = responseBody.getTotalPage();
 
                         for (ReportsList report : responseBody.data) {
-//                            VendorPost vendorPost = new VendorPost(report);
-                            VendorPost vendorPost = new VendorPost();
-                            vendorPost.setVendorFromReport(report);
+                            VendorPost vendorPost = new VendorPost(report);
+//                            VendorPost vendorPost = new VendorPost();
+//                            vendorPost.setVendorFromReport(report);
                             vendorPosts.add(vendorPost);
                         }
                         adapter.notifyItemRangeInserted(0, vendorPosts.size());

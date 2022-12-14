@@ -1,9 +1,11 @@
 package org.planetaccounting.saleAgent.raportet.raportmodels;
+
 public class RaportsPostObject {
     String token;
     String user_id;
     int page;
     String Last_document_number;
+
     public void setToken(String token) {
         this.token = token;
     }

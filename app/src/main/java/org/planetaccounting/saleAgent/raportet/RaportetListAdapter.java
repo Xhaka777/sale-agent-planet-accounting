@@ -83,7 +83,6 @@ public class RaportetListAdapter extends RecyclerView.Adapter<RaportetListAdapte
 
             if (inkasimiDetails.get(position).isSynced()) {
                 binding.syncedIndicator.setImageResource(R.drawable.ic_green);
-
             } else {
                 binding.syncedIndicator.setImageResource(R.drawable.ic_red);
             }
@@ -97,7 +96,6 @@ public class RaportetListAdapter extends RecyclerView.Adapter<RaportetListAdapte
 
             if (depositPosts.get(position).isSynced()) {
                 binding.syncedIndicator.setImageResource(R.drawable.ic_green);
-
             } else {
                 binding.syncedIndicator.setImageResource(R.drawable.ic_red);
             }

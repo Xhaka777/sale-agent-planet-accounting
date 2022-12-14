@@ -16,6 +16,10 @@ public class ReportsList {
     @Expose
     public String partieName;
 
+    @SerializedName("partie_station_name")
+    @Expose
+    public String partieStationName;
+
     @SerializedName("date")
     @Expose
     public String date;
@@ -52,15 +56,6 @@ public class ReportsList {
     @SerializedName("branch")
     @Expose
     public String branch = "";
-
-
-
-
-
-
-
-
-
 
 
 }
