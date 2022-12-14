@@ -51,19 +51,6 @@ public class VendorPost  extends RealmObject{
 //        this.current_page = reports.currentPage;
     }
 
-    public void setVendorFromReport(ReportsList reports){
-        this.id = reports.id;
-        this.furnitori = reports.partieName;
-        this.type = reports.type;
-        this.amount = reports.amount;
-        this.date =reports.date;
-        this.comment = reports.comment;
-        this.no_invoice = reports.docNumber;
-        this.isSynced = true;
-        this.current_page = reports.currentPage;
-    }
-
-
     public VendorPost(){}
 
     public void setId(int id) {
