@@ -120,8 +120,7 @@ public class ngarkimeActivity extends AppCompatActivity {
                 }, Throwable::printStackTrace);
     }
 
-    //tentim borxh me filtru pjesen e ngarkesave me in dhe out
-
+    @SuppressLint("NotifyDataSetChanged")
     private void getOutUploads() {
 
         apiService.getUploads(new StockPost(preferences.getToken(), preferences.getUserId()))
@@ -130,18 +129,14 @@ public class ngarkimeActivity extends AppCompatActivity {
                 .subscribe(uploadsResponse -> {
                     uploads = uploadsResponse.getData();
 
-                    Toast.makeText(this, "toast para loopes!!", Toast.LENGTH_SHORT).show();
-
-
                     for (int i = 0; i < uploads.size(); i++) {
                         if (uploads.get(i).getIn().equals("out")) {
-                            Toast.makeText(this, "Toast per if ", Toast.LENGTH_SHORT).show();
                             adapter.setUploads(uploads);
                         } else {
                             uploads.remove(uploads.get(i));
-                            adapter.notifyDataSetChanged();
-                            Toast.makeText(this, "Toast per else ", Toast.LENGTH_SHORT).show();
                             adapter.setUploads(uploads);
+                            adapter.notifyDataSetChanged();
+
                         }
                     }
                     /**
