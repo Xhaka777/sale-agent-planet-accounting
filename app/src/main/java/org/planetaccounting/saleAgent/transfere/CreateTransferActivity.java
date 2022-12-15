@@ -18,8 +18,10 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -36,6 +38,7 @@ import org.planetaccounting.saleAgent.model.InvoiceItem;
 import org.planetaccounting.saleAgent.model.Varehouse;
 import org.planetaccounting.saleAgent.model.VarehouseReponse;
 import org.planetaccounting.saleAgent.model.clients.Client;
+import org.planetaccounting.saleAgent.model.order.CheckQuantity;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
 import org.planetaccounting.saleAgent.model.transfer.TransferCreate;
 import org.planetaccounting.saleAgent.model.transfer.TransferCreateItem;
@@ -92,7 +95,7 @@ public class CreateTransferActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_create_transfer);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_create_transfer);
         Kontabiliteti.getKontabilitetiComponent().inject(this);
 
 
@@ -120,7 +123,7 @@ public class CreateTransferActivity extends AppCompatActivity {
 
             if (stockItems.size() > 0) {
                 descriptionDialog();
-                    } else {
+            } else {
                 Toast.makeText(getApplicationContext(), R.string.shtoni_se_paku_nje_artikull, Toast.LENGTH_SHORT).show();
             }
         });
@@ -152,8 +155,8 @@ public class CreateTransferActivity extends AppCompatActivity {
 
     //methods to change the languages
 
-    public void setLocale(String localeName){
-        if(!localeName.equals(currentLang)){
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
             Context context = LocaleHelper.setLocale(this, localeName);
             //Resources resources = context.getResources();
             myLocale = new Locale(localeName);
@@ -165,7 +168,7 @@ public class CreateTransferActivity extends AppCompatActivity {
             Intent refresh = new Intent(this, MainActivity.class);
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
-        }else{
+        } else {
             Toast.makeText(CreateTransferActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
@@ -222,6 +225,8 @@ public class CreateTransferActivity extends AppCompatActivity {
                 android.R.layout.simple_dropdown_item_1line, realmHelper.getStockItemsName()));
         itemBinding.emertimiTextview.setOnItemClickListener((adapterView, view, i, l) -> {
             invoiceItem[0] = new InvoiceItem(realmHelper.getItemsByName(itemBinding.emertimiTextview.getText().toString()));
+            itemBinding.sasiaTextview.setText("1");
+            invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString());
             int pos = (int) itemBinding.getRoot().getTag();
             try {
                 stockItems.set(pos, invoiceItem[0]);
@@ -231,6 +236,7 @@ public class CreateTransferActivity extends AppCompatActivity {
             itemBinding.sasiaTextview.requestFocus();
             findCodeAndPosition(invoiceItem[0]);
             fillInvoiceItemData(itemBinding, invoiceItem[0]);
+            checkedQuantity();
         });
 
         itemBinding.emertimiTextview.showDropDown();
@@ -242,6 +248,7 @@ public class CreateTransferActivity extends AppCompatActivity {
             itemBinding.sasiaTextview.requestFocus();
             findCodeAndPosition(invoiceItem[0]);
             fillInvoiceItemData(itemBinding, invoiceItem[0]);
+            checkedQuantity();
         });
         itemBinding.njesiaTextview.setOnClickListener(view -> dialog(invoiceItem[0], itemBinding));
         itemBinding.emertimiTextview.setOnTouchListener(new View.OnTouchListener() {
@@ -265,7 +272,7 @@ public class CreateTransferActivity extends AppCompatActivity {
                     invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString());
                 }
                 fillInvoiceItemData(itemBinding, invoiceItem[0]);
-
+                checkedQuantity();
                 calculateSasiaTotale();
                 calculateArtikujtTotal();
             }
@@ -296,11 +303,60 @@ public class CreateTransferActivity extends AppCompatActivity {
         binding.invoiceItemHolder.addView(itemBinding.getRoot());
     }
 
+    private void checkedQuantity() {
+        binding.loader.setVisibility(View.VISIBLE);
+
+        if (stockItems.size() > 0) {
+            InvoiceItem stock = stockItems.get(stockItems.size() - 1);
+            String stockItemId = stockItems.get(stockItems.size() - 1).getItems().get(stockItems.get(stockItems.size() - 1).getSelectedPosition()).getId();
+
+            CheckQuantity checkQuantity = new CheckQuantity(
+                    preferences.getUserId(),
+                    preferences.getToken(),
+                    stock.getSasia(),
+                    stationID,
+                    dDate,
+                    stockItemId
+            );
+            apiService.checkQuantity(checkQuantity)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(invoiceUploadResponse -> {
+
+                        final int childCount = binding.invoiceItemHolder.getChildCount();
+                        ViewGroup v = (ViewGroup) binding.invoiceItemHolder.getChildAt(childCount - 1);
+
+                        ViewGroup v2 = (ViewGroup) v.getChildAt(0);
+                        ViewGroup v3 = (ViewGroup) v2.getChildAt(0);
+                        ViewGroup v4 = (ViewGroup) v3.getChildAt(1);
+                        ViewGroup v5 = (ViewGroup) v4.getChildAt(1);
+                        View v6 = v5.getChildAt(1);
+
+                        AutoCompleteTextView sasia_depo = (AutoCompleteTextView) v6;
+                        sasia_depo.setText(String.valueOf(invoiceUploadResponse.getCurrentQuantity()));
+
+                        if (!invoiceUploadResponse.getSuccess()) {
+                            Toast.makeText(this, invoiceUploadResponse.getError().getText(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, R.string.artikulli_eshte_ne_stok, Toast.LENGTH_SHORT).show();
+                        }
+                        binding.loader.setVisibility(View.GONE);
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            throwable.printStackTrace();
+                        }
+                    });
+        } else {
+            binding.loader.setVisibility(View.GONE);
+        }
+    }
+
     private void createTransfer() {
         binding.loader.setVisibility(View.VISIBLE);
         ArrayList<TransferCreateItem> transferCreateItems = new ArrayList<>();
         for (int i = 0; i < stockItems.size(); i++) {
-            transferCreateItems.add(new TransferCreateItem( stockItems.get(i).getItems().get(stockItems.get(i).getSelectedPosition()).getId(),
+            transferCreateItems.add(new TransferCreateItem(stockItems.get(i).getItems().get(stockItems.get(i).getSelectedPosition()).getId(),
                     stockItems.get(i).getId(),
                     stockItems.get(i).getItems().get(stockItems.get(i).getSelectedPosition()).getUnit(),
                     stockItems.get(i).getItems().get(stockItems.get(i).getSelectedPosition()).getQuantity()
@@ -310,7 +366,7 @@ public class CreateTransferActivity extends AppCompatActivity {
         TransferCreate transferCreate = new TransferCreate(stationID,
                 description,
                 transferCreateItems);
-        TransferCreatePost transferCreatePost= new TransferCreatePost(preferences.getUserId(), preferences.getToken(),transferCreate);
+        TransferCreatePost transferCreatePost = new TransferCreatePost(preferences.getUserId(), preferences.getToken(), transferCreate);
         apiService.createTransfer(transferCreatePost)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -350,7 +406,7 @@ public class CreateTransferActivity extends AppCompatActivity {
         }
     }
 
-    private void doYouWantToDeleteThisArticleDialog(String name, String sasia, DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener){
+    private void doYouWantToDeleteThisArticleDialog(String name, String sasia, DoYouWantToDeleteThisArticleListener doYouWantToDeleteThisArticleListener) {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         builder.setTitle("");
         String message = getString(R.string.do_you_want_to_delete_this_article) + " " + name + " me sasi " + sasia;
@@ -403,7 +459,6 @@ public class CreateTransferActivity extends AppCompatActivity {
     }
 
 
-
     private void getVareHouses() {
         apiService.getWareHouses(new StockPost(preferences.getToken(), preferences.getUserId()))
                 .subscribeOn(Schedulers.io())
@@ -423,13 +478,13 @@ public class CreateTransferActivity extends AppCompatActivity {
                 }, Throwable::printStackTrace);
     }
 
-    public void calculateArtikujtTotal(){
+    public void calculateArtikujtTotal() {
         int artTotal = 0;
-        for(int i=0; i<stockItems.size();i++){
+        for (int i = 0; i < stockItems.size(); i++) {
 
             String cap = stockItems.get(i).getName().trim();
 
-            if(cap.length() > 0){
+            if (cap.length() > 0) {
                 artTotal++;
             }
         }
@@ -438,20 +493,20 @@ public class CreateTransferActivity extends AppCompatActivity {
 
     }
 
-    public void calculateSasiaTotale(){
+    public void calculateSasiaTotale() {
         double quaTotal = 0;
-        for(int i =0; i<stockItems.size();i++){
+        for (int i = 0; i < stockItems.size(); i++) {
             quaTotal += Double.parseDouble(stockItems.get(i).getSasia());
         }
         this.sasiaTotale = String.valueOf(cutTo2(quaTotal));
         binding.artikujtSasiaTotale.setText("Sasia Totale : " + cutTo2(quaTotal));
     }
 
-    public double cutTo2(double value){
+    public double cutTo2(double value) {
         return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
     }
 
-    interface DoYouWantToDeleteThisArticleListener{
+    interface DoYouWantToDeleteThisArticleListener {
         void Yes();
     }
 }
