@@ -116,6 +116,8 @@ public class InvoiceListActivity extends AppCompatActivity {
     String from; // 0->Invoice 1->Return
     Context context;
 
+    ArrayList<InvoicePost> invoiceSearchList = new ArrayList<>();
+
     Button myButton;
     View myView;
     boolean isUp;
@@ -174,8 +176,47 @@ public class InvoiceListActivity extends AppCompatActivity {
             inv = (ArrayList<InvoicePost>) new Gson().fromJson(returns,
                     new TypeToken<ArrayList<InvoicePost>>() {
                     }.getType());
+        }
 
+        if(from.equals("inv")){
+            bindingActivity.searchEdittext.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    invoiceSearchList.clear();
+
+                    for (int i = 0 ; i < inv.size(); i++){
+                        if(inv.get(i).getPartie_name().toLowerCase().startsWith(s.toString().toLowerCase())){
+                            invoiceSearchList.add(inv.get(i));
+                        }
+                    }
+
+                    if(s.length() > 0){
+                        adapter = new InvoiceListAdapter(inv);
+                        adapter.setInvoices(invoiceSearchList);
+                        bindingActivity.pageLayout.setVisibility(View.GONE);
+                        bindingActivity.invoiceList.setAdapter(adapter);
+                    }else if(s.length() <= 0){
+                        adapter.setInvoices(inv);
+                        bindingActivity.invoiceList.setAdapter(adapter);
+                        getInvoicesRepors();
+                    }else {
+                        adapter.setInvoices(inv);
+                        adapter = new InvoiceListAdapter(inv);
+                        bindingActivity.pageLayout.setVisibility(View.VISIBLE);
+                        bindingActivity.invoiceList.setAdapter(adapter);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
         }
 
         adapter = new InvoiceListAdapter(inv);
@@ -192,7 +233,9 @@ public class InvoiceListActivity extends AppCompatActivity {
 //        TextView shuma = findViewById(R.id.totali);
 //        shuma.setText("Numri i faqes " + " eshte: " + this.shuma);
 //
-        bindingActivity.totali.setText(preferences.getCurrentPage() + " : " + realmHelper.getAutoIncrementIfForReturn());
+//        bindingActivity.totali.setText(preferences.getCurrentPage() + " : " + currentPage);
+
+        bindingActivity.totali.setText(preferences.getCurrentPage() + " : "  );
 
         String invoices = realmHelper.getInvoicesString();
         Gson gson = new Gson();
@@ -205,109 +248,6 @@ public class InvoiceListActivity extends AppCompatActivity {
                 unSyncedList.add(savedInvoices.get(i));
             }
         }
-
-//        if (from.equals("ret")) {
-////            getOrderReports();
-//            bindingActivity.searchEdittext.addTextChangedListener(new TextWatcher() {
-//                @Override
-//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//                }
-//
-//                @Override
-//                public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                    invoiceSearch.clear();
-//                    //e provojme edhe me getAllInvoicesString (nuk po bon me allStrings)...
-//                    //me getInvoicesString() po bon mirpo pas fshirjes ne search po i shfaq vetem returInvoices...
-//                    String invoices = realmHelper.getAllReturnInvoicesString();
-//                    Gson gson = new Gson();
-//                    inv = (ArrayList<InvoicePost>) gson.fromJson(invoices, new TypeToken<ArrayList<InvoicePost>>() {
-//
-//                    }.getType());
-//
-//                    invoiceSearch = new ArrayList<>();
-//
-//
-//                    for (int i = 0; i < inv.size(); i++) {
-//                        if (inv.get(i).getPartie_name().toLowerCase().startsWith(s.toString().toLowerCase())) {
-//                            invoiceSearch.add(inv.get(i));
-//                        }
-//                    }
-//                    if (s.length() > 0) {
-//                        adapter.setInvoicesList(invoiceSearch);
-//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, invoiceSearch);
-//                        bindingActivity.invoiceList.setAdapter(adapter);
-//                        bindingActivity.pageLayout.setVisibility(View.GONE);
-//                    } else if (s.length() <= 0) {
-//                        adapter.setInvoicesList(inv);
-//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
-//                        bindingActivity.invoiceList.setAdapter(adapter);
-//                    } else {
-//                        adapter.setInvoicesList(inv);
-//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
-//                        bindingActivity.invoiceList.setAdapter(adapter);
-//                    }
-//                }
-////                }
-//
-//                @Override
-//                public void afterTextChanged(Editable s) {
-//
-//                }
-//            });
-//
-//        }
-
-//        if (from.equals("inv")) {
-//
-//            getInvoicesRepors();
-//            bindingActivity.searchEdittext.addTextChangedListener(new TextWatcher() {
-//                @Override
-//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//                }
-//
-//                @Override
-//                public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//                    invoiceSearch.clear();
-//
-//                    String returns = realmHelper.getInvoicesString();
-//
-//                    inv = (ArrayList<InvoicePost>) new Gson().fromJson(returns,
-//                            new TypeToken<ArrayList<InvoicePost>>() {
-//                            }.getType());
-//
-////                    getInvoicesRepors();
-//
-//                    for (int i = 0; i < inv.size(); i++) {
-//                        if (inv.get(i).getPartie_name().toLowerCase().startsWith(s.toString().toLowerCase())) {
-//                            invoiceSearch.add(inv.get(i));
-//                        }
-//                    }
-//                    if (s.length() > 0) {
-//                        adapter.setInvoicesList(invoiceSearch);
-//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, invoiceSearch);
-//                        bindingActivity.pageLayout.setVisibility(View.GONE);
-//                        bindingActivity.invoiceList.setAdapter(adapter);
-//                    } else if (s.length() <= 0) {
-//                        adapter.setInvoicesList(inv);
-//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
-//                        bindingActivity.invoiceList.setAdapter(adapter);
-//                    } else {
-//                        adapter.setInvoicesList(inv);
-//                        adapter = new InvoiceListAdapter(InvoiceListActivity.this, inv);
-//                        bindingActivity.invoiceList.setAdapter(adapter);
-//                    }
-//
-//                }
-//
-//                @Override
-//                public void afterTextChanged(Editable s) {
-//
-//                }
-//            });
-//        }
 
         Button button = findViewById(R.id.sync);
         button.setOnClickListener(view -> uploadInvoices());
