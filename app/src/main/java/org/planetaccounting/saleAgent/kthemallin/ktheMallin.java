@@ -564,8 +564,6 @@ public class ktheMallin extends AppCompatActivity {
             // Amount VAT - Real Sale
             amount_vat_total = amount_vat_total.setScale(2, BigDecimal.ROUND_HALF_UP);
             invoiceItem.setVleraTotale(amount_vat_total.doubleValue());
-            // Amount of Discount
-//            invoiceItem.setVleraEZbritur(amount_of_discount.doubleValue());
             // Amount of VAT
             invoiceItem.setVleraETvsh(amount_of_vat.doubleValue());
             // Price for fiscal Printer
