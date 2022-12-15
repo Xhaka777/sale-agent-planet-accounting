@@ -80,7 +80,7 @@ public class ListaInkasimit extends Activity {
         binding.invoiceList.setAdapter(adapter);
         getOrders();
     }
-    private  void getOrders(){
+    private void getOrders(){
         apiService.getOrders(new StockPost(preferences.getToken(), preferences.getUserId()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
