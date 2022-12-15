@@ -250,6 +250,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
+                android:background="#f1f1f1"
                 android:gravity="center">
 
                 <Button
