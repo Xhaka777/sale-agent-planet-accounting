@@ -46,8 +46,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        android:textColor="#000"
                         android:hint="@string/data"
+                        android:textColor="#000"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -61,7 +61,7 @@
                     android:checked="false"
                     android:text="Klienti"
                     android:textColor="@android:color/black"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <View
                     android:layout_width="match_parent"
@@ -130,7 +130,7 @@
                             android:textColor="#b3414042" />
 
                         <AutoCompleteTextView
-                            android:id="@+id/njersia_edittext"
+                            android:id="@+id/njesia_edittext"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
