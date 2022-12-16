@@ -23,6 +23,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
@@ -163,8 +164,37 @@ public class ClientsActivity extends AppCompatActivity implements DatePickerDial
 
             }
         });
-         getClientState();
-         showDropDownStateList();
+
+        binding.klientiCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    binding.stateLayout.setVisibility(View.GONE);
+                    binding.firstLinearL.setVisibility(View.GONE);
+                    binding.secondLinearL.setVisibility(View.GONE);
+                    binding.thirdLinearL.setVisibility(View.GONE);
+                } else {
+                    binding.stateLayout.setVisibility(View.VISIBLE);
+                    binding.firstLinearL.setVisibility(View.VISIBLE);
+                    binding.secondLinearL.setVisibility(View.VISIBLE);
+                    binding.thirdLinearL.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        binding.furnitoriCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    binding.furnitorRelativeLayout.setVisibility(View.VISIBLE);
+                } else {
+                    binding.furnitorRelativeLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        getClientState();
+        showDropDownStateList();
 
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
@@ -235,7 +265,7 @@ public class ClientsActivity extends AppCompatActivity implements DatePickerDial
 
     }
 
-    private void showDropDownStateList(){
+    private void showDropDownStateList() {
         binding.shtetiKlientit.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -260,8 +290,9 @@ public class ClientsActivity extends AppCompatActivity implements DatePickerDial
                         for (int i = 0; i < stateList.size(); i++) {
                             state[i] = stateList.get(i).getName();
 
-                            if (stateList.get(i).getId().equals("22")){
-                                binding.shtetiKlientit.setText(stateList.get(i).getName());;
+                            if (stateList.get(i).getId().equals("22")) {
+                                binding.shtetiKlientit.setText(stateList.get(i).getName());
+                                ;
                             }
                         }
 

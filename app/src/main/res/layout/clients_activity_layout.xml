@@ -49,7 +49,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NR. :"
+                        android:text="Nr.Klientit:"
                         android:textColor="#000"
                         android:textSize="15sp" />
 
@@ -58,8 +58,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        android:hint="NR. klientit"
-                        android:textColor="#000" />
+                        android:hint="      "
+                        android:textColor="#000"/>
 
                 </LinearLayout>
 
@@ -69,6 +69,40 @@
                     android:layout_alignParentBottom="true"
                     android:background="#E5E5E5" />
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/furnitor_relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nr.Furnitori:"
+                        android:textColor="#000"
+                        android:textSize="15sp"/>
+
+                    <AutoCompleteTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:hint="     "
+                        android:textColor="#000"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
 
             <ScrollView
                 android:layout_width="fill_parent"
@@ -88,6 +122,12 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
+                        <LinearLayout
+                            android:id="@+id/state_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -105,7 +145,10 @@
                             android:background="@drawable/state_btn_dropdown"
                             android:hint="          "/>
 
+                        </LinearLayout>
+
                         <LinearLayout
+                            android:id="@+id/first_linearL"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -167,6 +210,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/second_linearL"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -176,7 +220,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:layout_weight="1"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:visibility="visible">
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -228,44 +273,13 @@
 
                         </LinearLayout>
 
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:orientation="horizontal">-->
-
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginTop="8dp"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:orientation="vertical">-->
-
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:text="Nr. Biznesit (ID)"-->
-<!--                                    android:textColor="#b3414042" />-->
-
-<!--                                <AutoCompleteTextView-->
-<!--                                    android:id="@+id/business_number_edittext"-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginLeft="8dp"-->
-<!--                                    android:layout_marginTop="8dp"-->
-<!--                                    android:layout_marginRight="8dp"-->
-<!--                                    android:background="@drawable/edit_field_corner"-->
-<!--                                    android:hint="Nr. Biznesit" />-->
-
-<!--                            </LinearLayout>-->
-
-<!--                        </LinearLayout>-->
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal">
 
                             <LinearLayout
+                                android:id="@+id/third_linearL"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
@@ -292,6 +306,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
@@ -299,6 +314,7 @@
                                 android:orientation="vertical">
 
                                 <CheckBox
+                                    android:id="@+id/klienti_checkbox"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="35dp"
@@ -307,6 +323,7 @@
                                     android:textColor="#b3414042" />
 
                                 <CheckBox
+                                    android:id="@+id/furnitori_checkbox"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="35dp"
