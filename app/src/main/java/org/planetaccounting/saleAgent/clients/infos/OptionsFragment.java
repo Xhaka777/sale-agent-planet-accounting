@@ -16,12 +16,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.ClientOptionsLayoutBinding;
+import org.planetaccounting.saleAgent.databinding.LoginActivityBinding;
 import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.Varehouse;
 import org.planetaccounting.saleAgent.model.VarehouseReponse;
@@ -40,6 +43,9 @@ import org.planetaccounting.saleAgent.model.deviceNumber.DeviceConfig;
 import org.planetaccounting.saleAgent.model.empStock.EmpStockResponse;
 import org.planetaccounting.saleAgent.model.empStock.Employee;
 import org.planetaccounting.saleAgent.model.empStock.EmployeeStockPost;
+import org.planetaccounting.saleAgent.model.login.LoginData;
+import org.planetaccounting.saleAgent.model.login.LoginPost;
+import org.planetaccounting.saleAgent.model.login.LoginResponse;
 import org.planetaccounting.saleAgent.model.role.Main;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
@@ -69,6 +75,7 @@ import rx.schedulers.Schedulers;
 public class OptionsFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
     ClientOptionsLayoutBinding binding;
+    LoginActivityBinding loginBinding;
 
     @Inject
     ApiService apiService;
@@ -95,6 +102,8 @@ public class OptionsFragment extends Fragment implements DatePickerDialog.OnDate
     Locale myLocale;
     String currentLanguage = "sq", currentLang;
     public static final String TAG = "botom_sheet";
+
+    AutoCompleteTextView agjenti;
 
     public OptionsFragment() {
 
@@ -133,6 +142,11 @@ public class OptionsFragment extends Fragment implements DatePickerDialog.OnDate
             }
         };
 
+//        agjenti = (AutoCompleteTextView) Objects.requireNonNull(getView()).findViewById(R.id.clientAgjenti_edittext);
+        agjenti = (AutoCompleteTextView) binding.clientAgjentiEdittext.findViewById(R.id.clientAgjenti_edittext);
+        agjenti.setText(preferences.getFullName() + "");
+
+
         showDropDownList();
 //        getVareHouses();
 //        binding.clientDataOptions.setOnClickListener(view -> datePickerDialog.show());
@@ -149,21 +163,12 @@ public class OptionsFragment extends Fragment implements DatePickerDialog.OnDate
         ));
         binding.clientLocationEdittext.setOnClickListener(view -> binding.clientLocationEdittext.showDropDown());
 
-        binding.clientAgjentiEdittext.setOnClickListener(view -> binding.clientAgjentiEdittext.showDropDown());
-
-        binding.clientAgjentiEdittext.setAdapter(new ArrayAdapter<>(
-                getContext(), android.R.layout.simple_dropdown_item_1line, realmHelper.getEmployeeName()
-        ));
-
-        binding.clientAgjentiEdittext.setOnClickListener(view -> binding.clientAgjentiEdittext.showDropDown());
 
         //pjesa per paraqitjen e dates (calendarin)...
         binding.clientDataOptions.setOnClickListener(v -> getData());
 
         showDropDownList();
         getVareHouses();
-        getEmployee();
-//        getEmployeeNames();
 
         vendorTypes = realmHelper.getVendorTypes();
         vendorSalers = realmHelper.getVendorNames();
@@ -224,51 +229,6 @@ public class OptionsFragment extends Fragment implements DatePickerDialog.OnDate
                     }
                 }, Throwable::printStackTrace);
     }
-
-//    private void getEmployeeNames() {
-//
-//        apiService.getEmployeeList(new EmployeeStockPost(preferences.getDevToken(), preferences.getDevNumber()))
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Action1<EmpStockResponse>() {
-//                    @Override
-//                    public void call(EmpStockResponse empStockResponse) {
-//                        employees = empStockResponse.getEmployees();
-//                        employeeID = employees.get(0).getEmployee_id();
-//                        String[] empS = new String[employees.size()];
-//                        realmHelper.saveEmployees(empStockResponse.getEmployees());
-//
-//                        for (int i = 0; i < employees.size(); i++) {
-//                            empS[i] = employees.get(i).getFirst_name();
-//                        }
-//                        binding.clientAgjentiEdittext.setAdapter(new ArrayAdapter<String>(
-//                                getContext(), android.R.layout.simple_dropdown_item_1line, empS));
-//                    }
-//                }, Throwable::printStackTrace);
-//    }
-
-    private void getEmployee() {
-        apiService.getEmployee(new EmployeeStockPost(preferences.getDevNumber(), preferences.getDevToken()))
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<EmpStockResponse>() {
-                    @Override
-                    public void call(EmpStockResponse empStockResponse) {
-                        realmHelper.saveEmployee(empStockResponse.getEmployees());
-
-                        employees = empStockResponse.getEmployees();
-                        employeeID = employees.get(0).getEmployee_id();
-                        String[] empS = new String[employees.size()];
-
-                        for (int i = 0; i < employees.size(); i++) {
-                            empS[i] = employees.get(i).getFirst_name();
-                        }
-                        binding.clientAgjentiEdittext.setAdapter(new ArrayAdapter<String>(
-                                getContext(), android.R.layout.simple_dropdown_item_1line, empS));
-                    }
-                }, Throwable::printStackTrace);
-    }
-
 
     //this part is for showing DropDown when clicked editText for second time and more...
     private void showDropDownList() {
