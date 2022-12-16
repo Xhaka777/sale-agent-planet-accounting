@@ -94,7 +94,6 @@ public class OrdersActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.order_layout);
 
         Kontabiliteti.getKontabilitetiComponent().inject(this);
-        binding.shtoTextview.setOnClickListener(view -> checkedQuantity());
         Date cDate = new Date();
         fDate = new SimpleDateFormat("dd-MM-yyyy").format(cDate);
         dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cDate);
@@ -122,12 +121,12 @@ public class OrdersActivity extends AppCompatActivity {
             client = realmHelper.getClientFromName(binding.emriKlientit.getText().toString().substring(0, binding.emriKlientit.getText().toString().indexOf(" nrf:")));
 
             if (realmHelper.getClientStations(client.getName()).length > 0) {
-                binding.njersiaEdittext.setAdapter(new ArrayAdapter<String>(this,
+                binding.njesiaEdittext.setAdapter(new ArrayAdapter<String>(this,
                         android.R.layout.simple_dropdown_item_1line, realmHelper.getClientStations(client.getName())));
-                binding.njersiaEdittext.setEnabled(true);
-                binding.njersiaEdittext.requestFocus();
-                binding.njersiaEdittext.showDropDown();
-                binding.njersiaEdittext.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                binding.njesiaEdittext.setEnabled(true);
+                binding.njesiaEdittext.requestFocus();
+                binding.njesiaEdittext.showDropDown();
+                binding.njesiaEdittext.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         stationPos = i;
@@ -139,10 +138,13 @@ public class OrdersActivity extends AppCompatActivity {
                     }
                 });
             } else {
-                binding.njersiaEdittext.setText("--");
-                binding.njersiaEdittext.setEnabled(false);
+                binding.njesiaEdittext.setText("");
+                binding.njesiaEdittext.setHint("");
+                binding.njesiaEdittext.setEnabled(false);
             }
         });
+
+        binding.shtoTextview.setOnClickListener(view -> addOrderItem());
 
         binding.porositButton.setOnClickListener(view -> {
             if (stockItems.size() > 0) {
@@ -177,7 +179,7 @@ public class OrdersActivity extends AppCompatActivity {
                     binding.clientLinar.setVisibility(View.GONE);
                     binding.stationLinar.setVisibility(View.GONE);
                     binding.emriKlientit.getText().clear();
-                    binding.njersiaEdittext.getText().clear();
+                    binding.njesiaEdittext.getText().clear();
 
                     client = null;
                     stationPos = null;
@@ -246,10 +248,10 @@ public class OrdersActivity extends AppCompatActivity {
             }
         });
 
-        binding.njersiaEdittext.setOnTouchListener(new View.OnTouchListener() {
+        binding.njesiaEdittext.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                binding.njersiaEdittext.showDropDown();
+                binding.njesiaEdittext.showDropDown();
                 return false;
             }
         });
@@ -287,6 +289,8 @@ public class OrdersActivity extends AppCompatActivity {
                 android.R.layout.simple_dropdown_item_1line, realmHelper.getStockItemsName()));
         itemBinding.emertimiTextview.setOnItemClickListener((adapterView, view, i, l) -> {
             invoiceItem[0] = new InvoiceItem(realmHelper.getItemsByName(itemBinding.emertimiTextview.getText().toString()));
+            itemBinding.sasiaTextview.setText("1");
+            invoiceItem[0].setSasia(itemBinding.sasiaTextview.getText().toString());
             int pos = (int) itemBinding.getRoot().getTag();
             try {
                 stockItems.set(pos, invoiceItem[0]);
@@ -296,6 +300,7 @@ public class OrdersActivity extends AppCompatActivity {
             itemBinding.sasiaTextview.requestFocus();
             findCodeAndPosition(invoiceItem[0]);
             fillInvoiceItemData(itemBinding, invoiceItem[0]);
+            checkedQuantity();
         });
 
         itemBinding.emertimiTextview.showDropDown();
@@ -307,6 +312,7 @@ public class OrdersActivity extends AppCompatActivity {
             itemBinding.sasiaTextview.requestFocus();
             findCodeAndPosition(invoiceItem[0]);
             fillInvoiceItemData(itemBinding, invoiceItem[0]);
+            checkedQuantity();
         });
         itemBinding.njesiaTextview.setOnClickListener(view -> dialog(invoiceItem[0], itemBinding));
         itemBinding.emertimiTextview.setOnTouchListener(new View.OnTouchListener() {
@@ -352,10 +358,13 @@ public class OrdersActivity extends AppCompatActivity {
                         //Quantity available on warehouse
                         double quantity_base_on_warehouse = Double.parseDouble(invoiceItem[0].getQuantity());
 
+//                        itemBinding.sasiaDepoTextview.setText(String.valueOf((quantity_base_on_warehouse) / relacion));
+
                     }
                     fillInvoiceItemData(itemBinding, invoiceItem[0]);
                     calculateTotalQuantity();
                     calculateTotalOfArticles();
+                    checkedQuantity();
 
                 } catch (Exception e) {
                     Toast.makeText(OrdersActivity.this, R.string.nuk_keni_sasi_te_mjaftueshme_ne_depo, Toast.LENGTH_SHORT).show();
@@ -524,15 +533,12 @@ public class OrdersActivity extends AppCompatActivity {
                         ViewGroup v5 = (ViewGroup) v4.getChildAt(1);
                         View v6 = v5.getChildAt(1);
 
-
                         AutoCompleteTextView sasia_depo = (AutoCompleteTextView) v6;
                         sasia_depo.setText(String.valueOf(invoiceUploadResponse.getCurrentQuantity()));
 
                         if (!invoiceUploadResponse.getSuccess()) {
                             Toast.makeText(getApplicationContext(), invoiceUploadResponse.getError().getText(), Toast.LENGTH_SHORT).show();
-
                         } else {
-                            addOrderItem();
                             Toast.makeText(getApplicationContext(), R.string.artikulli_eshte_ne_stok, Toast.LENGTH_SHORT).show();
                         }
                         binding.loader.setVisibility(View.GONE);
@@ -544,8 +550,6 @@ public class OrdersActivity extends AppCompatActivity {
                     });
         } else {
             binding.loader.setVisibility(View.GONE);
-            addOrderItem();
-
         }
     }
 
