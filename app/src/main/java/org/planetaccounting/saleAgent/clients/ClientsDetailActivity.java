@@ -1,5 +1,6 @@
 package org.planetaccounting.saleAgent.clients;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -34,8 +35,10 @@ import org.planetaccounting.saleAgent.model.clients.ClientCardPost;
 import org.planetaccounting.saleAgent.utils.ClientCardPrintUtil;
 import org.planetaccounting.saleAgent.utils.Preferences;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -65,10 +68,16 @@ public class ClientsDetailActivity extends Activity implements DatePickerDialog.
     String nga = "";
     String deri = "";
 
-    Locale myLocale ;
+    String fDate;
+    String dDate;
+    private DatePickerDialog.OnDateSetListener date;
+    private Calendar calendar;
+
+    Locale myLocale;
     String currentLanguage = "sq", currentLang;
     public static final String TAG = "bottom_sheet";
 
+    @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,14 +93,33 @@ public class ClientsDetailActivity extends Activity implements DatePickerDialog.
         printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
         binding.printButton.setOnClickListener(view -> {
             ClientCardPrintUtil print = new ClientCardPrintUtil(cardItems, binding.web,
-                    getApplicationContext(), client, printManager) ;
+                    getApplicationContext(), client, printManager);
         });
+
+        Date cDate = new Date();
+        fDate = new SimpleDateFormat("dd-MM-yyyy").format(cDate);
+        dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cDate);
+        binding.deri.setText(getString(R.string.to) + " " + fDate);
+        calendar = Calendar.getInstance();
+        date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                fDate = new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime());
+                dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(calendar.getTime());
+                binding.deri.setText(getString(R.string.to) + " " + fDate);
+            }
+        };
+
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
         datePickerDialog = new DatePickerDialog(
-                ClientsDetailActivity.this, this, year , month, day);
+                ClientsDetailActivity.this, this, year, month, day);
         binding.nga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,8 +141,8 @@ public class ClientsDetailActivity extends Activity implements DatePickerDialog.
 
     //methods to change the languages
 
-    public void setLocale(String localeName){
-        if(!localeName.equals(currentLang)){
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLang)) {
             Context context = LocaleHelper.setLocale(this, localeName);
             //Resources resources = context.getResources();
             myLocale = new Locale(localeName);
@@ -126,7 +154,7 @@ public class ClientsDetailActivity extends Activity implements DatePickerDialog.
             Intent refresh = new Intent(this, MainActivity.class);
             refresh.putExtra(currentLang, localeName);
             startActivity(refresh);
-        }else{
+        } else {
             Toast.makeText(ClientsDetailActivity.this, R.string.language_already_selected, Toast.LENGTH_SHORT).show();
         }
     }
@@ -137,23 +165,24 @@ public class ClientsDetailActivity extends Activity implements DatePickerDialog.
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void setupData(Client client) {
-        Glide.with(getApplicationContext()).load("http://" + client.getLogo()).into(binding.companyLogo);
+        Glide.with(getApplicationContext()).load(client.getLogo()).into(binding.companyLogo);
         binding.emriKlientit.setText(client.getName().toUpperCase());
-        binding.bilanciTextview.setText(R.string.bilanci+"\n" + client.getBalance());
+        binding.bilanciTextview.setText(getString(R.string.bilanci) + " :  " + cutTo2(Double.parseDouble(client.getBalance())));
         binding.idTextview.setText("ID: " + client.getId());
         binding.idTextview.setText("Nr. K: " + client.getNumber());
-        binding.nrtvshTextview.setText(R.string.nr_tvsh + client.getNumberFiscal());
-        binding.adresaTextview.setText(R.string.adresa + client.getAddress());
-        binding.qytetiTextview.setText(R.string.qyteti + client.getCity());
-        binding.shtetiTextview.setText(R.string.shteti + client.getState());
-        binding.telefonTextview.setText(R.string.tel + client.getPhone());
-        binding.faxTextview.setText(R.string.fax + client.getFax());
-        binding.webTextview.setText(R.string.web + client.getWeb());
+        binding.nrtvshTextview.setText(getString(R.string.nr_tvsh) + client.getNumberFiscal());
+        binding.adresaTextview.setText(getString(R.string.adresa) + client.getAddress());
+        binding.qytetiTextview.setText(getString(R.string.qyteti) + client.getCity());
+        binding.shtetiTextview.setText(getString(R.string.shteti) + client.getState());
+        binding.telefonTextview.setText(getString(R.string.tel) + client.getPhone());
+        binding.faxTextview.setText(getString(R.string.fax) + client.getFax());
+        binding.webTextview.setText(getString(R.string.web) + client.getWeb());
     }
 
     private void getClientCard() {
-        apiService.getClientsCard(new ClientCardPost(preferences.getToken(), preferences.getUserId(),  client.getId(), nga, deri))
+        apiService.getClientsCard(new ClientCardPost(preferences.getToken(), preferences.getUserId(), client.getId(), nga, deri))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(clientCardResponse -> {
@@ -164,15 +193,20 @@ public class ClientsDetailActivity extends Activity implements DatePickerDialog.
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        if(selectFrom){
-            nga = i+"-"+(i1+1)+"-"+i2;
-            binding.nga.setText(R.string.from + nga);
-        }else{
-            deri = i+"-"+(i1+1)+"-"+i2;
-            binding.deri.setText(R.string.to + deri);
+        if (selectFrom) {
+            nga = i2 + "-" + (i1 + 1) + "-" + i;
+            binding.nga.setText(getString(R.string.from) + ":  " + nga);
+        } else {
+            deri = i2 + "-" + (i1 + 1) + "-" + i;
+            binding.deri.setText(getString(R.string.to) + ":  " + deri);
         }
         getClientCard();
+    }
+
+    public double cutTo2(double value){
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
     }
 }
