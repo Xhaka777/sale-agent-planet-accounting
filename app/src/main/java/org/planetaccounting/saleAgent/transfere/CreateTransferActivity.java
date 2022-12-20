@@ -359,7 +359,7 @@ public class CreateTransferActivity extends AppCompatActivity {
             transferCreateItems.add(new TransferCreateItem(stockItems.get(i).getItems().get(stockItems.get(i).getSelectedPosition()).getId(),
                     stockItems.get(i).getId(),
                     stockItems.get(i).getItems().get(stockItems.get(i).getSelectedPosition()).getUnit(),
-                    stockItems.get(i).getItems().get(stockItems.get(i).getSelectedPosition()).getQuantity()
+                    String.valueOf(cutTo2(Double.parseDouble(stockItems.get(i).getSasia())))
             ));
         }
 

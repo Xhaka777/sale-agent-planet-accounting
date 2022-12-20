@@ -1,5 +1,6 @@
 package org.planetaccounting.saleAgent.transfere;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,11 +20,18 @@ import org.planetaccounting.saleAgent.OrdersActivity;
 import org.planetaccounting.saleAgent.R;
 import org.planetaccounting.saleAgent.api.ApiService;
 import org.planetaccounting.saleAgent.databinding.ActivityDetailTransferBinding;
+import org.planetaccounting.saleAgent.databinding.ActivityTransfereBinding;
 import org.planetaccounting.saleAgent.databinding.DetailItemTransferBinding;
+import org.planetaccounting.saleAgent.databinding.MyTranferDetailItemsBinding;
+import org.planetaccounting.saleAgent.databinding.OthersTransfereItemBinding;
 import org.planetaccounting.saleAgent.helper.LocaleHelper;
 import org.planetaccounting.saleAgent.model.Error;
 import org.planetaccounting.saleAgent.model.ErrorPost;
+import org.planetaccounting.saleAgent.model.UserToken;
+import org.planetaccounting.saleAgent.model.ngarkimet.Uploads;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
+import org.planetaccounting.saleAgent.model.transfer.GetTransferDetailResponse;
+import org.planetaccounting.saleAgent.model.transfer.GetTransfere;
 import org.planetaccounting.saleAgent.model.transfer.TransferDetail;
 import org.planetaccounting.saleAgent.model.transfer.TransferItem;
 import org.planetaccounting.saleAgent.model.transfer.TransferPost;
@@ -154,6 +162,7 @@ public class DetailTransferActivity extends AppCompatActivity {
                 });
     }
 
+    @SuppressLint("SetTextI18n")
     private void setItemDetail(ArrayList<TransferItem> items) {
 
         for (int i = 0; i < items.size(); i++) {
@@ -162,10 +171,14 @@ public class DetailTransferActivity extends AppCompatActivity {
 
             DetailItemTransferBinding itemBinding = DataBindingUtil.inflate(getLayoutInflater(),
                     R.layout.detail_item_transfer, binding.itemsHolder, false);
+
+            double trQuantity = Double.parseDouble(item.getQuantity());
+
             itemBinding.number.setText(item.getNumber());
             itemBinding.name.setText(item.getName());
             itemBinding.unit.setText(item.getUnit());
-            itemBinding.quantity.setText(item.getQuantity());
+            itemBinding.quantity.setText(cutTo2(trQuantity)+"");
+
             binding.itemsHolder.addView(itemBinding.getRoot());
 
         }
@@ -271,4 +284,9 @@ public class DetailTransferActivity extends AppCompatActivity {
 
                 });
     }
+
+    public double cutTo2(double value){
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
+    }
 }
+
