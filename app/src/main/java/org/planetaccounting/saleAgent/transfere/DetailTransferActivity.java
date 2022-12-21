@@ -96,12 +96,14 @@ public class DetailTransferActivity extends AppCompatActivity {
                 dialog("pranoni transferin", false)
         );
 
+        //info for transfer
+        getTransferInfo();
+        //info for items of transfer
         getTransferDetail();
 
         currentLanguage = getIntent().getStringExtra(currentLang);
 
     }
-
 
     //methods to change the languages
 
@@ -128,6 +130,40 @@ public class DetailTransferActivity extends AppCompatActivity {
         super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
 
+    private void getTransferInfo() {
+        apiService.getOtherTransfere(new UserToken(preferences.getUserId(), preferences.getToken()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getTranseteResponse -> {
+
+                    if (getTranseteResponse.getSuccess()) {
+
+                        ArrayList<GetTransfere> transferes = getTranseteResponse.data;
+
+                        for (int i = 0; i < transferes.size(); i++) {
+
+                            GetTransfere getTransfere = transferes.get(i);
+
+                            if (!getTransfere.getToStationId().equals(preferences.getStationId())) {
+                                return;
+                            }
+
+                            if (transferes.get(i).getId() == transferId) {
+
+                                binding.titleText.setText(getTransfere.getFromStationName());
+
+                                binding.number.setText(String.valueOf(getTransfere.getNumber()));
+
+                                binding.date.setText(getTransfere.getDate());
+
+                                binding.description.setText(getTransfere.getDescription());
+                            }
+                        }
+
+                    }
+                });
+    }
+
 
     private void getTransferDetail() {
 
@@ -144,10 +180,6 @@ public class DetailTransferActivity extends AppCompatActivity {
 
                             binding.titleText.setText(detail.getFromStationId());
                         }
-
-                        binding.number.setText(String.valueOf(detail.getNumber()));
-                        binding.date.setText(detail.getDate());
-                        binding.description.setText(detail.getDescription());
 
                         setItemDetail(detail.getItems());
 
@@ -177,7 +209,7 @@ public class DetailTransferActivity extends AppCompatActivity {
             itemBinding.number.setText(item.getNumber());
             itemBinding.name.setText(item.getName());
             itemBinding.unit.setText(item.getUnit());
-            itemBinding.quantity.setText(cutTo2(trQuantity)+"");
+            itemBinding.quantity.setText(cutTo2(trQuantity) + "");
 
             binding.itemsHolder.addView(itemBinding.getRoot());
 
@@ -285,7 +317,7 @@ public class DetailTransferActivity extends AppCompatActivity {
                 });
     }
 
-    public double cutTo2(double value){
+    public double cutTo2(double value) {
         return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
     }
 }
