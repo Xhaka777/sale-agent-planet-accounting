@@ -85,7 +85,8 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@drawable/edit_field_corner"
-                                android:hint="Qyteti" />
+                                android:hint="Qyteti"
+                                android:enabled="false"/>
 
 
                         </LinearLayout>
@@ -114,7 +115,8 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@drawable/edit_field_corner"
-                                android:hint="Zip" />
+                                android:hint="Zip"
+                                android:enabled="false"/>
 
                         </LinearLayout>
 
@@ -147,7 +149,8 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@drawable/edit_field_corner"
-                                android:hint="Rruga, Lagja, Numri"/>
+                                android:hint="Rruga, Lagja, Numri"
+                                android:enabled="false"/>
 
 
                         </LinearLayout>
@@ -224,7 +227,8 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@drawable/edit_field_corner"
-                                android:hint="Telefoni" />
+                                android:hint="Telefoni"
+                                android:enabled="false"/>
 
 
                         </LinearLayout>
@@ -253,7 +257,8 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@drawable/edit_field_corner"
-                                android:hint="Web" />
+                                android:hint="Web"
+                                android:enabled="false"/>
 
                         </LinearLayout>
 
@@ -286,7 +291,8 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginRight="8dp"
                                 android:background="@drawable/edit_field_corner"
-                                android:hint="E-mail"/>
+                                android:hint="E-mail"
+                                android:enabled="false"/>
 
 
                         </LinearLayout>
