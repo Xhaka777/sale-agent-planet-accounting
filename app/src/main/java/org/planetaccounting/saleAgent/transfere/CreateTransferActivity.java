@@ -1,5 +1,6 @@
 package org.planetaccounting.saleAgent.transfere;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -92,6 +93,7 @@ public class CreateTransferActivity extends AppCompatActivity {
     String currentLanguage = "sq", currentLang;
     public static final String TAG = "bottom_sheet";
 
+    @SuppressLint("SimpleDateFormat")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,20 +102,21 @@ public class CreateTransferActivity extends AppCompatActivity {
 
 
         Date cDate = new Date();
+        calendar = Calendar.getInstance();
         fDate = new SimpleDateFormat("dd-MM-yyyy").format(cDate);
         dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cDate);
-        binding.dataEdittext.setText(fDate);
-        calendar = Calendar.getInstance();
+        binding.dataEdittext.setText( " "+ fDate);
         date = new DatePickerDialog.OnDateSetListener() {
+            @SuppressLint("SimpleDateFormat")
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, monthOfYear);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                fDate = new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime());
+                String f = new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime());
                 dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(calendar.getTime());
-                binding.dataEdittext.setText(fDate);
+                binding.dataEdittext.setText(f);
 
             }
         };
