@@ -71,7 +71,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="#E5E5E5"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp">
 
@@ -130,7 +130,6 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="8dp"
                 android:background="#000" />
 
             <android.support.v7.widget.RecyclerView
