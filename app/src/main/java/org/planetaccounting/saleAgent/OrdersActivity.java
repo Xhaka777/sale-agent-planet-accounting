@@ -534,7 +534,7 @@ public class OrdersActivity extends AppCompatActivity {
                         View v6 = v5.getChildAt(1);
 
                         AutoCompleteTextView sasia_depo = (AutoCompleteTextView) v6;
-                        sasia_depo.setText(String.valueOf(invoiceUploadResponse.getCurrentQuantity()));
+                        sasia_depo.setText(String.valueOf(cutTo2(invoiceUploadResponse.getCurrentQuantity())));
 
                         if (!invoiceUploadResponse.getSuccess()) {
                             Toast.makeText(getApplicationContext(), invoiceUploadResponse.getError().getText(), Toast.LENGTH_SHORT).show();
