@@ -3,6 +3,7 @@ package org.planetaccounting.saleAgent;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,6 +31,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,9 +63,13 @@ import org.planetaccounting.saleAgent.login.LoginActivity;
 import org.planetaccounting.saleAgent.model.CompanyInfo;
 import org.planetaccounting.saleAgent.model.Error;
 import org.planetaccounting.saleAgent.model.ErrorPost;
+import org.planetaccounting.saleAgent.model.InvoiceItem;
 import org.planetaccounting.saleAgent.model.NotificationPost;
+import org.planetaccounting.saleAgent.model.invoice.InvoiceItemPost;
 import org.planetaccounting.saleAgent.model.invoice.InvoicePost;
 import org.planetaccounting.saleAgent.model.invoice.InvoicePostObject;
+import org.planetaccounting.saleAgent.model.pazari.PazarData;
+import org.planetaccounting.saleAgent.model.pazari.PazarResponse;
 import org.planetaccounting.saleAgent.model.role.Main;
 import org.planetaccounting.saleAgent.model.stock.StockPost;
 import org.planetaccounting.saleAgent.ngarkime.ngarkimeActivity;
@@ -92,19 +98,24 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
 
+import io.realm.RealmList;
 import io.realm.RealmResults;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 import static org.planetaccounting.saleAgent.invoice.InvoiceActivity.ACTION;
@@ -123,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
     RealmHelper realmHelper;
 
     List<InvoicePost> unSyncedList = new ArrayList<>();
+    ArrayList<InvoiceItem> stockItems = new ArrayList<>();
 
     Locale myLocale;
     String currentLanguage = "sq", currentLang;
@@ -141,6 +153,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
     private Main mainRole;
 
     private int gmsize = 2;
+
+    String dDate;
+    String fDate;
+    private DatePickerDialog.OnDateSetListener date;
+    private Calendar calendar;
+    String dailyStation = "2";
+    List<PazarData> pazarDataList = new ArrayList<>();
 
 
     //Keshi i marr nga shitjet + Inkasimi - Shpenzimet - Depozitat = Bilanci Ditore.
@@ -203,9 +222,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
 
         getcompanyInfo();
 
+        getPazariDitor();
+
         cLogo = (ImageView) findViewById(R.id.cLogoImg);
 
-        /* ---------------------------------------------------------------------------------------  */
+
+        /* --------------------------------------------------------------------------------------- */
 //
 //        String LogoLinku = realmHelper.getCompanyInfo().getLogo()+"";
 //        if(LogoLinku.length()  < 59){
@@ -273,7 +295,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
                     binding.connectivityTextivew.setTextColor(Color.parseColor("#27AE60"));
                     binding.connectivityTextivew.setText(getString(R.string.server_solid));
 
-//                    uploadInvoices();
                 } else {
                     Log.d("Ska Internet - ", aBoolean.toString());
                     binding.networkIndicator.setTextColor(Color.parseColor("#a2a2a2"));
@@ -285,8 +306,21 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
             }
         }.execute();
         Date cDate = new Date();
-        dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cDate);
         fDate = new SimpleDateFormat("dd-MM-yyyy").format(cDate);
+        dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cDate);
+        calendar = Calendar.getInstance();
+        date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                    fDate = new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime());
+                    dDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(calendar.getTime());
+                    getPazariDitor();
+            }
+        };
         try {
             CompanyInfo companyInfo = realmHelper.getCompanyInfo();
             Glide.with(getApplicationContext()).load(companyInfo.getLogo()).into(binding.cLogoImg);
@@ -324,7 +358,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
 
-    String fDate;
 
     public void getStockAction() {
         apiService.getStockAction(new ActionPost(preferences.getToken(), preferences.getUserId()))
@@ -432,7 +465,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
                 unSyncedList.add(savedInvoices.get(i));
             }
         }
-        calculateDailyBalance();
+//        calculateDailyBalance();
+//          getPazariDitor();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -676,6 +710,26 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
                         throwable -> hideLoader());
     }
 
+    //Pazari ditor...
+    private void getPazariDitor() {
+
+        StockPost stockPost = new StockPost(preferences.getToken(), preferences.getUserId());
+
+        stockPost.setData(dDate);
+        apiService.getPazariDitor(stockPost)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<PazarResponse>() {
+                    @Override
+                    public void call(PazarResponse pazarResponse) {
+
+                        pazarDataList = pazarResponse.getData();
+                        dailyStation = pazarDataList.get(0).getTotal();
+                        binding.pazariDitor.setText(dailyStation);
+                    }
+                });
+      }
+
     private void logoutUser() {
         if (unSyncedList.size() > 0) {
             Toast.makeText(getApplicationContext(), R.string.please_sync_invoice, Toast.LENGTH_SHORT).show();
@@ -724,7 +778,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
 
     private void uploadRetruns() {
 
-
         String returns = realmHelper.getRInvoicesString();
 
         List<InvoicePost> unSyncedReturnList = (ArrayList<InvoicePost>) gson.fromJson(returns,
@@ -753,7 +806,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
                         }
                     }, throwable -> {
                         hideLoader();
-                        sendError(throwable);
+//                        sendError(throwable);
+                        throwable.printStackTrace();
                     });
         } else {
             uploadInvoices();
@@ -764,42 +818,70 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
 
     private void uploadInvoices() {
 
+//        String invoices = realmHelper.getInvoicesString();
         String returns = realmHelper.getTInvoicesString();
+
+//        List<InvoicePost> savedInvoices = (ArrayList<InvoicePost>)gson.fromJson(invoices,
+//                new TypeToken<ArrayList<InvoicePost>>(){
+//                }.getType());
+//        unSyncedList = new ArrayList<>();
+//
+//        for(int i = 0; i < savedInvoices.size(); i++){
+//            if(!savedInvoices.get(i).getSynced()){
+//                unSyncedList.add(savedInvoices.get(i));
+////                unSyncedList.get(i).setType("inv");
+////                unSyncedList.get(i).setSynced(true);
+//                realmHelper.saveInvoices(unSyncedList.get(i));
+//            }
+//        }
+//
 
         List<InvoicePost> unSyncedInvoicenList = (ArrayList<InvoicePost>) gson.fromJson(returns,
                 new TypeToken<ArrayList<InvoicePost>>() {
                 }.getType());
 
-        if (unSyncedInvoicenList.size() > 0) {
+        if (unSyncedList.size() > 0) {
             InvoicePostObject invoicePostObject = new InvoicePostObject();
             invoicePostObject.setToken(preferences.getToken());
             invoicePostObject.setUser_id(preferences.getUserId());
             invoicePostObject.setInvoices(unSyncedInvoicenList);
+
+            System.out.println("Hajde ishalla hajr");
             apiService.postFaturat(invoicePostObject)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(responseBody -> {
-                        if (responseBody.getSuccess()) {
+                    .subscribe(invoiceUploadResponse -> {
 
+                        if (invoiceUploadResponse.getSuccess()) {
                             for (int i = 0; i < unSyncedInvoicenList.size(); i++) {
+                                unSyncedInvoicenList.get(i).setType("inv");
                                 unSyncedInvoicenList.get(i).setSynced(true);
                                 realmHelper.saveInvoices(unSyncedInvoicenList.get(i));
+                                syncInkasimi();
                             }
-                            syncInkasimi();
                         } else {
                             hideLoader();
-                            Toast.makeText(getApplicationContext(), responseBody.getError().getText(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), invoiceUploadResponse.getError().getText(), Toast.LENGTH_SHORT).show();
+                        }
+                        for (int i = 0; i < unSyncedInvoicenList.size(); i++) {
+                            unSyncedInvoicenList.get(i).setType("inv");
+                            unSyncedInvoicenList.get(i).setSynced(false);
+                            realmHelper.saveInvoices(unSyncedInvoicenList.get(i));
+                            syncInkasimi();
                         }
                     }, throwable -> {
                         hideLoader();
-                        sendError(throwable);
+//                        sendError(throwable);
+                        throwable.printStackTrace();
                     });
+
         } else {
             syncInkasimi();
         }
     }
 
     //    Keshi i marr nga shitjet + Inkasimi - Shpenzimet - Depozitat = Bilanci Ditore.
+    @SuppressLint("SetTextI18n")
     void calculateDailyBalance() {
 
         double dailyBalance = getCashFromSale() + getInkasimi() - getShpenzimet() - getDepozitat();
@@ -811,16 +893,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", value));
     }
 
-    String dDate;
-
     private double getCashFromSale() {
 
         double amount = 0;
         RealmResults<InvoicePost> inv = realmHelper.getInvoices();
         for (int i = 0; i < inv.size(); i++) {
+            assert inv.get(i) != null;
             String invoiceDate = inv.get(i).getInvoice_date().substring(0, 10);
             String date = dDate.substring(0, 10);
             if (invoiceDate.equalsIgnoreCase(date)) {
+                assert inv.get(i) != null;
                 amount += Double.parseDouble(inv.get(i).getAmount_payed());
             }
         }
@@ -913,6 +995,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
     private void sync() {
         showLoader();
         uploadRetruns();
+//        uploadInvoices();
     }
 
     private void syncShpenzimet() {
@@ -950,7 +1033,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         }
     }
 
-
     public void syncInkasimi() {
         String inkasimet = realmHelper.getInkasimiString();
         List<InkasimiDetail> inkasimetList = (ArrayList<InkasimiDetail>) gson.fromJson(inkasimet,
@@ -959,6 +1041,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
         for (int i = 0; i < inkasimetList.size(); i++) {
             if (!inkasimetList.get(i).isSynced()) {
                 unsyncedInkasime.add(inkasimetList.get(i));
+                realmHelper.saveInkasimi(unsyncedInkasime.get(i));
             }
         }
         if (unsyncedInkasime.size() > 0) {
@@ -977,8 +1060,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
                             hideLoader();
                             Toast.makeText(getApplicationContext(), responseBody.getError().getText(), Toast.LENGTH_SHORT).show();
                         }
+                        for (int i = 0; i < unsyncedInkasime.size(); i++) {
+                            unsyncedInkasime.get(i).setSynced(true);
+                            realmHelper.saveInkasimi(unsyncedInkasime.get(i));
+                        }
                     }, throwable -> {
-                        sendError(throwable);
+//                        sendError(throwable);
+                        throwable.printStackTrace();
                         hideLoader();
                     });
         } else {
