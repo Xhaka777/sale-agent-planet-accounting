@@ -84,19 +84,19 @@
                     android:orientation="horizontal"
                     android:visibility="gone">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Data Sh.: "
-                        android:textColor="#000" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Data Sh.: "-->
+<!--                        android:textColor="#000" />-->
 
-                    <TextView
-                        android:id="@+id/data_ship"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:hint="Data"
-                        android:textColor="#000" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/data_ship"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:enabled="false"-->
+<!--                        android:hint="Data"-->
+<!--                        android:textColor="#000" />-->
                 </LinearLayout>
 
 
