@@ -167,6 +167,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
     int countNoName = 0;
     int countSasia = 0;
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -310,7 +311,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
                 String f = new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime());
                 shDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(calendar.getTime());
-                binding.dataShip.setText(f);
+//                binding.dataShip.setText(f);
             }
         };
     }
@@ -536,6 +537,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         return true;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void addInvoiceItem() {
         final InvoiceItem[] invoiceItem = new InvoiceItem[1];
 
@@ -850,74 +852,10 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
 
-                if (!hasFocus) {
-                    if (invoiceState == InvoiceState.FATUR) {
-                        if (itemBinding.zbritjaTextview.getText().toString().trim().isEmpty()) {
-                            itemBinding.zbritjaTextview.setText("0");
-                            invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString(), true);
-                        }
-
-                        double zbritja = 0;
-                        if (itemBinding.zbritjaTextview.getText().length() > 0) {
-                            zbritja = Double.parseDouble(itemBinding.zbritjaTextview.getText().toString());
-                        }
-
-                        if (zbritja > 0f) {
-                            if (itemBinding.zbritjaTextview.getText().length() == 0) {
-                                invoiceItem[0].setDiscount("0");
-                            } else {
-                                invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString());
-                            }
-
-                            checkIfArticleIsInAction(invoiceItem[0]);
-                            //po gjuan nje Errorë
-                            fillInvoiceItemData(itemBinding, invoiceItem[0]);
-                            calculcation_form();
-
-                            calculateSasiaTotale();
-                            calculateArtikujtTotal();
-                            calculateTotal();
-                            calculateVleraPaTvsh();
-                            calculateVleraEZbritur();
-                            calculateVleraETVSH();
-                        } else {
-                            invoiceItem[0].setDiscount("0");
-                            if (!itemBinding.zbritjaTextview.getText().toString().equals("0") && !itemBinding.zbritjaTextview.getText().toString().equals("") && !itemBinding.zbritjaTextview.getText().toString().isEmpty()) {
-                            }
-                        }
-                    }
-
-                    if (invoiceState == InvoiceState.POROSI) {
-                        if (itemBinding.zbritjaTextview.getText().toString().trim().isEmpty()) {
-                            itemBinding.zbritjaTextview.setText("0");
-                            invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString(), true);
-                        }
-                        double zbritja = 0;
-                        if (itemBinding.zbritjaTextview.getText().length() > 0) {
-                            zbritja = Double.parseDouble(itemBinding.zbritjaTextview.getText().toString());
-                        }
-                        if (zbritja > 0f) {
-                            if (itemBinding.zbritjaTextview.getText().length() == 0) {
-                                invoiceItem[0].setDiscount("0");
-                            } else {
-                                invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString());
-                            }
-
-                            checkIfArticleIsInAction(invoiceItem[0]);
-                            fillInvoiceItemData(itemBinding, invoiceItem[0]);
-
-                            calculcation_form();
-                            calculateSasiaTotale();
-                            calculateArtikujtTotal();
-                            calculateTotal();
-                            calculateVleraEZbritur();
-                            calculateVleraETVSH();
-                            calculateVleraPaTvsh();
-                        } else {
-                            invoiceItem[0].setDiscount("0");
-                            if (!itemBinding.zbritjaTextview.getText().equals("0") && !itemBinding.zbritjaTextview.getText().equals("") && !itemBinding.zbritjaTextview.getText().toString().isEmpty()) {
-                            }
-                        }
+                if(!hasFocus){
+                    if(itemBinding.zbritjaTextview.getText().toString().trim().isEmpty()){
+                        itemBinding.zbritjaTextview.setText("0");
+                        invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString(), true);
                     }
                 }
             }
@@ -929,71 +867,9 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
             }
 
-            @SuppressLint("SetTextI18n")
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                if (invoiceState == InvoiceState.FATUR) {
-
-                    double zbritja = 0;
-                    if (itemBinding.zbritjaTextview.getText().length() > 0) {
-                        zbritja = Double.parseDouble(itemBinding.zbritjaTextview.getText().toString());
-                    }
-                    if (zbritja > 0f) {
-                        if (itemBinding.zbritjaTextview.getText().length() == 0) {
-                            invoiceItem[0].setDiscount("0");
-                        } else {
-                            invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString());
-                            float operator = Float.parseFloat(itemBinding.zbritjaTextview.getText().toString());
-//                                    binding.zbritjaKlientit.setText("Zbritja e klientit: " + ((Float.parseFloat(client.getDiscount())) + Float.parseFloat(String.valueOf(operator))));
-                        }
-                        checkIfArticleIsInAction(invoiceItem[0]);
-                        //po gjuan nje Errorë
-//                        fillInvoiceItemData(itemBinding, invoiceItem[0]);
-                        calculcation_form();
-
-                        calculateSasiaTotale();
-                        calculateArtikujtTotal();
-                        calculateTotal();
-                        calculateVleraPaTvsh();
-                        calculateVleraEZbritur();
-                        calculateVleraETVSH();
-                    } else {
-                        invoiceItem[0].setDiscount("0");
-                        if (!itemBinding.zbritjaTextview.getText().toString().equals("0") && !itemBinding.zbritjaTextview.getText().toString().equals("") && !itemBinding.zbritjaTextview.getText().toString().isEmpty()) {
-                        }
-                    }
-                }
-
-                if (invoiceState == InvoiceState.POROSI) {
-
-                    double zbritja = 0;
-                    if (itemBinding.zbritjaTextview.getText().length() > 0) {
-                        zbritja = Double.parseDouble(itemBinding.zbritjaTextview.getText().toString());
-                    }
-
-                    if (zbritja > 0f) {
-                        if (itemBinding.zbritjaTextview.getText().length() == 0) {
-                            invoiceItem[0].setDiscount("0");
-                        } else {
-                            invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString());
-                            float operator = Float.parseFloat(itemBinding.zbritjaTextview.getText().toString());
-//                                    binding.zbritjaKlientit.setText("Zbritja e klientit: " + ((-Float.parseFloat(client.getDiscount())) +  Float.parseFloat(String.valueOf(operator))));
-                        }
-                        checkIfArticleIsInAction(invoiceItem[0]);
-
-                        calculcation_form();
-                        calculateSasiaTotale();
-                        calculateTotal();
-                        calculateVleraPaTvsh();
-                        calculateVleraEZbritur();
-                        calculateVleraETVSH();
-                    } else {
-                        invoiceItem[0].setDiscount("0");
-                        if (!itemBinding.zbritjaTextview.getText().toString().equals("0") && !itemBinding.zbritjaTextview.getText().toString().equals("") && !itemBinding.zbritjaTextview.getText().toString().isEmpty()) {
-                        }
-                    }
-                }
 
             }
 
@@ -1005,7 +881,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                     float discount = Float.parseFloat(invoiceItem[0].getMaxDiscound());
                     if (zbritja > discount) {
                         fillInvoiceItemData(itemBinding, invoiceItem[0]);
-                        Toast.makeText(getApplicationContext(), "Zbritja qitu pe qet" + invoiceItem[0].getDiscount(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Zbritja maksimale esht: " + invoiceItem[0].getDiscount(), Toast.LENGTH_SHORT).show();
                     }
                     if ((zbritja <= discount) && !(zbritja < 0)) {
                         invoiceItem[0].setDiscount(itemBinding.zbritjaTextview.getText().toString(), true);
@@ -1037,9 +913,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
             });
         });
-        itemBinding.getRoot().
-
-                setTag(binding.invoiceItemHolder.getChildCount());
+        itemBinding.getRoot().setTag(binding.invoiceItemHolder.getChildCount());
         binding.invoiceItemHolder.addView(itemBinding.getRoot());
     }
 
@@ -1061,8 +935,8 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         itemBinding.njesiaTextview.setText(invoiceItem.getSelectedUnit());
         itemBinding.zbritjaTextview.setText(invoiceItem.getDiscount());
         List<Double> amontAndPrice = calculateValueOfItem(invoiceItem);
-        itemBinding.vlera.setText("" + String.format(Locale.ENGLISH, "%.6f", BigDecimal.valueOf(amontAndPrice.get(0))));
-        itemBinding.cmimiTvsh.setText("" + String.format(Locale.ENGLISH, "%.6f", BigDecimal.valueOf(amontAndPrice.get(1))));
+        itemBinding.vlera.setText("" + String.format(Locale.ENGLISH, "%.3f", BigDecimal.valueOf(amontAndPrice.get(0))));
+        itemBinding.cmimiTvsh.setText("" + String.format(Locale.ENGLISH, "%.3f", BigDecimal.valueOf(amontAndPrice.get(1))));
         itemBinding.basePrice.setText(invoiceItem.getBasePrice() + "");
     }
 
@@ -1251,7 +1125,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             double vat_rate = 0;
             vat_rate = Double.parseDouble(invoiceItem.getChildList().get(invoiceItem.getSelectedPosition()).getVatRate()) * 0.01;
             BigDecimal vatRate = new BigDecimal(vat_rate);
-            vatRate = vatRate.setScale(5, RoundingMode.HALF_UP);
+            vatRate = vatRate.setScale(2, RoundingMode.HALF_UP);
 
             // Client Discount
             double client_discount = Double.parseDouble(client.getDiscount()) * 0.01;
@@ -1269,7 +1143,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             // Price no VAT with Discount, Price Base, Price no VAT, Price Real Sale
             BigDecimal vat_rate_for_divide = vatRate.add(new BigDecimal(1));
 
-            BigDecimal price_base = priceSale.divide(vat_rate_for_divide, 5, RoundingMode.HALF_UP);
+            BigDecimal price_base = priceSale.divide(vat_rate_for_divide, 2, RoundingMode.HALF_UP);
 
             // Price no VAT
             invoiceItem.setVleraPaTvsh(price_base.doubleValue());
@@ -1292,15 +1166,15 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
 
             price_vat_real_sale = price_no_vat.multiply(vat_rate_for_divide);
-            price_vat_real_sale = price_vat_real_sale.setScale(5, RoundingMode.HALF_UP);
+            price_vat_real_sale = price_vat_real_sale.setScale(2, RoundingMode.HALF_UP);
 
             // Amount with VAT - Imagine
             BigDecimal amount_vat_imagine = priceSale.multiply(quantity);
-            amount_vat_imagine = amount_vat_imagine.setScale(5, RoundingMode.HALF_UP);
+            amount_vat_imagine = amount_vat_imagine.setScale(2, RoundingMode.HALF_UP);
 
             // Amount with VAT - Sale Real
             BigDecimal amount_vat_total = price_vat_real_sale.multiply(quantity);
-            amount_vat_total = amount_vat_total.setScale(5, RoundingMode.HALF_UP);
+            amount_vat_total = amount_vat_total.setScale(2, RoundingMode.HALF_UP);
             amount_with_vat = amount_vat_total.doubleValue();
 
             // Amount no VAT
@@ -1427,7 +1301,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
             invoiceItemPost.setUnit(stockItems.get(i).getSelectedUnit());
             double vleraPaTvsh = stockItems.get(i).getVleraPaTvsh() / Double.parseDouble(stockItems.get(i).getSasia());
             BigDecimal vleraNoTvsh = new BigDecimal(vleraPaTvsh);
-            vleraNoTvsh = vleraNoTvsh.setScale(3, RoundingMode.UP);
+            vleraNoTvsh = vleraNoTvsh.setScale(2, RoundingMode.UP);
             invoiceItemPost.setPrice(String.valueOf(vleraNoTvsh));
             System.out.println("zbritja " + stockItems.get(i).getDiscount());
             invoiceItemPost.setDiscount(stockItems.get(i).getDiscount());
@@ -1551,14 +1425,13 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(responseBody -> {
 
-
                     if (responseBody.getSuccess()) {
                         Toast.makeText(getApplicationContext(), R.string.porosia_u_krye_me_sukses, Toast.LENGTH_SHORT).show();
                         finish();
 
                     } else {
                         Toast.makeText(getApplicationContext(), responseBody.getError().getText(), Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(this, "gjuajtje errori per porosine!!!", Toast.LENGTH_SHORT).show();
                     }
 
                 }, throwable -> {
@@ -1579,11 +1452,12 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         Button pritjeButton = dialogView.findViewById(R.id.later_button);
         Button konfirmoButton = dialogView.findViewById(R.id.ok_button);
         EditText keshEditText = dialogView.findViewById(R.id.shuma_editText);
+//        pritjeButton.setEnabled(true);
         keshEditText.setText(totaliFatures);
-        LinearLayout buttonHolder = dialogView.findViewById(R.id.button_holder);
-        LinearLayout keshHolder = dialogView.findViewById(R.id.kesh_holder);
         double totali = Double.parseDouble(totaliFatures);
         pritjeButton.setEnabled(Double.parseDouble(client.getPaymentDeadline()) > 0 && totali < Double.parseDouble(client.getLimitBalance()));
+        LinearLayout buttonHolder = dialogView.findViewById(R.id.button_holder);
+        LinearLayout keshHolder = dialogView.findViewById(R.id.kesh_holder);
         keshButton.setOnClickListener(view -> {
             buttonHolder.setVisibility(View.GONE);
             keshHolder.setVisibility(View.VISIBLE);
@@ -1650,19 +1524,15 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 
         keshButton.setOnClickListener(view -> {
 
-
             InvoiceActivity.isBill = "1";
             createOrderPostItem();
-
             alertDialog.dismiss();
-
 
         });
         pritjeButton.setOnClickListener(view -> {
             InvoiceActivity.isBill = "0";
             createOrderPostItem();
             alertDialog.dismiss();
-
 
         });
 
@@ -1717,6 +1587,7 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
 //            }
 //        }
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -1970,12 +1841,12 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
                                         case R.id.cmimi_tvsh:
                                             AutoCompleteTextView cmimitvsh = (AutoCompleteTextView) v3;
 
-                                            cmimitvsh.setText("" + String.format(Locale.ENGLISH, "%.6f", BigDecimal.valueOf(amontAndPrice.get(1))));
+                                            cmimitvsh.setText("" + String.format(Locale.ENGLISH, "%.2f", BigDecimal.valueOf(amontAndPrice.get(1))));
                                             break;
 
                                         case R.id.vlera:
                                             AutoCompleteTextView vlera = (AutoCompleteTextView) v3;
-                                            vlera.setText("" + String.format(Locale.ENGLISH, "%.6f", BigDecimal.valueOf(amontAndPrice.get(0))));
+                                            vlera.setText("" + String.format(Locale.ENGLISH, "%.2f", BigDecimal.valueOf(amontAndPrice.get(0))));
                                             break;
 
                                     }
@@ -2423,8 +2294,8 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         for (int i = 0; i < stockItems.size(); i++) {
             total += stockItems.get(i).getVleraTotale();
         }
-        this.totaliFatures = String.valueOf((total));
-        binding.vleraTotale.setText("Vlera Totale: " + (total));
+        this.totaliFatures = String.valueOf(cutTo2(total));
+        binding.vleraTotale.setText("Vlera Totale: " + cutTo2(total));
     }
 
     @SuppressLint("SetTextI18n")
@@ -2433,8 +2304,8 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         for (int i = 0; i < stockItems.size(); i++) {
             vleraPaTvsh += stockItems.get(i).getVleraPaTvsh();
         }
-        this.vleraPaTvsh = String.valueOf((vleraPaTvsh));
-        binding.vleraPaTvsh.setText("Vlera pa TVSH: " + (vleraPaTvsh));
+        this.vleraPaTvsh = String.valueOf(cutTo2(vleraPaTvsh));
+        binding.vleraPaTvsh.setText("Vlera pa TVSH: " + cutTo2(vleraPaTvsh));
     }
 
     @SuppressLint("SetTextI18n")
@@ -2453,8 +2324,8 @@ public class InvoiceActivityOriginal extends AppCompatActivity implements RadioG
         for (int i = 0; i < stockItems.size(); i++) {
             vleraETvsh += stockItems.get(i).getVleraETvsh();
         }
-        this.vleraETvsh = String.valueOf((vleraETvsh));
-        binding.vleraETvsh.setText("Vlera e TVSH-së: " + (vleraETvsh));
+        this.vleraETvsh = String.valueOf(cutTo2(vleraETvsh));
+        binding.vleraETvsh.setText("Vlera e TVSH-së: " + cutTo2(vleraETvsh));
     }
 
 
