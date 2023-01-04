@@ -60,12 +60,28 @@ public class StockPrintUtil {
         line = ReadFromfile("stock_list.html", ctx);
         line = line.replace("sellerName", companyInfo.getName() + "");
         line = line.replace("sellerFiscal", companyInfo.getFiscalNumber() + "");
-        line = line.replace("sellerTel", companyInfo.getPhone() + "");
-        line = line.replace("sellerEmail", companyInfo.getEmail() + "");
+        if(companyInfo.phone != null){
+            line = line.replace("sellerTel",companyInfo.getPhone() + "");
+        }else{
+            line = line.replace("sellerTel", "");
+        }
+        if(companyInfo.email != null){
+            line = line.replace("sellerEmail",companyInfo.getEmail() + "");
+        }else {
+            line = line.replace("sellerEmail","");
+        }
         line = line.replace("sellerBussines", companyInfo.getBusniessNumber() + "");
         line = line.replace("sellerTvshNumber", companyInfo.getVatNumber() + "");
-        line = line.replace("sellerAdress", companyInfo.getAddress() + "");
-        line = line.replace("sellerCity", companyInfo.getCity() + "");
+        if(companyInfo.address != null){
+            line = line.replace("sellerAdress", companyInfo.getAddress() + "");
+        }else{
+            line = line.replace("sellerAdress", "");
+        }
+        if(companyInfo.city != null){
+            line = line.replace("sellerCity", companyInfo.getCity() + "");
+        }else{
+            line = line.replace("sellerCity", "");
+        }
         line = line.replace("sellerState", companyInfo.getState() + "");
         line = line.replace(".no_invoice_hide { display: none;}", "");
 
@@ -77,7 +93,9 @@ public class StockPrintUtil {
 
 
         line = line.replace("cardItems", createArticleHtml(stockItemst));
-        line = line.replace("balance", String.format(Locale.ENGLISH,"%.2f", balance));
+        line = line.replace("quantityBalance", String.format(Locale.ENGLISH, "%.2f", quantityBalance));
+        line = line.replace("balance", String.format(Locale.ENGLISH, "%.2f", balance));
+
 
         WebView baseWebView = new WebView(ctx);
         swebView = baseWebView;
@@ -88,6 +106,7 @@ public class StockPrintUtil {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
+
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             public void onPageFinished(WebView view, String url) {
                 createWebPrintJob(view);
@@ -150,9 +169,9 @@ public class StockPrintUtil {
                 printAdapter = webView.createPrintDocumentAdapter();
             }
             String fileName = "listaeartikujve.pdf";
-            this.file = path+"/" + fileName;
+            this.file = path + "/" + fileName;
             pdfPrint.printNew(printAdapter, path, fileName, ctx.getCacheDir().getPath());
-            System.out.println("pathiiii "+ getFile());
+            System.out.println("pathiiii " + getFile());
             new Handler().postDelayed(() -> {
                 PrintJob printJob = printManager.print("Planet Accounting", new PDFPrintDocumentAdapter(ctx, "Kartela.pdf", getFile()), null);
             }, 1000);
@@ -164,14 +183,19 @@ public class StockPrintUtil {
     public String getFile() {
         return file;
     }
+
     double balance = 0;
+    double quantityBalance = 0;
+
     String createArticleHtml(List<Item> stockItem) {
         String finalCode = "";
         double balance = 0.0;
+        double quantityBalance = 0.0;
         for (int i = 0; i < stockItem.size(); i++) {
-            try{
-                balance += Double.parseDouble( stockItem.get(i).getAmount().replace(",",""));
-            }catch (Exception e){
+            try {
+                balance += Double.parseDouble(stockItem.get(i).getAmount().replace(",", ""));
+                quantityBalance += Double.parseDouble(stockItem.get(i).getQuantity().replace(",", ""));
+            } catch (Exception e) {
 
             }
             finalCode = finalCode + "<tr >" +
@@ -180,11 +204,12 @@ public class StockPrintUtil {
                     "<td ></td >"+
                     "<td class=\"t-c\">"+ stockItem.get(i).getName() +"</td >"+
                     "<td>"+ stockItem.get(i).getDefaultUnit() +"</td >"+
-                    "<td class=\"text-right number_fs\">"+  stockItem.get(i).getQuantity() +"</td >"+
-                    "<td class=\"text-right number_fs\">"+ stockItem.get(i).getAmount() +"</td >"+
+                    "<td class=\"text-right number_fs\">"+  cutTo2(Double.parseDouble(stockItem.get(i).getQuantity())) +"</td >"+
+                    "<td class=\"text-right number_fs\">"+ cutTo2(Double.parseDouble(stockItem.get(i).getAmount())) +"</td >"+
                     "</tr >";
         }
         this.balance = balance;
+        this.quantityBalance = quantityBalance;
         return finalCode;
     }
 
@@ -196,5 +221,9 @@ public class StockPrintUtil {
                     + " : " + companyInfo.getBankAccounts().get(i).getBankAccountNumber() + "</b></div>";
         }
         return finalCode;
-}
+    }
+
+    public double cutTo2(double value) {
+        return Double.parseDouble(String.format(Locale.ENGLISH, "%.3f", value));
+    }
 }
