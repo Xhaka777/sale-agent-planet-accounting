@@ -19,6 +19,7 @@ import org.planetaccounting.saleAgent.model.CompanyInfo;
 import org.planetaccounting.saleAgent.model.clients.CardItem;
 import org.planetaccounting.saleAgent.model.clients.Client;
 import org.planetaccounting.saleAgent.model.stock.Item;
+import org.planetaccounting.saleAgent.model.stock.SubItem;
 import org.planetaccounting.saleAgent.persistence.RealmHelper;
 
 import java.io.BufferedReader;
@@ -29,6 +30,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -60,26 +62,26 @@ public class StockPrintUtil {
         line = ReadFromfile("stock_list.html", ctx);
         line = line.replace("sellerName", companyInfo.getName() + "");
         line = line.replace("sellerFiscal", companyInfo.getFiscalNumber() + "");
-        if(companyInfo.phone != null){
-            line = line.replace("sellerTel",companyInfo.getPhone() + "");
-        }else{
+        if (companyInfo.phone != null) {
+            line = line.replace("sellerTel", companyInfo.getPhone() + "");
+        } else {
             line = line.replace("sellerTel", "");
         }
-        if(companyInfo.email != null){
-            line = line.replace("sellerEmail",companyInfo.getEmail() + "");
-        }else {
-            line = line.replace("sellerEmail","");
+        if (companyInfo.email != null) {
+            line = line.replace("sellerEmail", companyInfo.getEmail() + "");
+        } else {
+            line = line.replace("sellerEmail", "");
         }
         line = line.replace("sellerBussines", companyInfo.getBusniessNumber() + "");
         line = line.replace("sellerTvshNumber", companyInfo.getVatNumber() + "");
-        if(companyInfo.address != null){
+        if (companyInfo.address != null) {
             line = line.replace("sellerAdress", companyInfo.getAddress() + "");
-        }else{
+        } else {
             line = line.replace("sellerAdress", "");
         }
-        if(companyInfo.city != null){
+        if (companyInfo.city != null) {
             line = line.replace("sellerCity", companyInfo.getCity() + "");
-        }else{
+        } else {
             line = line.replace("sellerCity", "");
         }
         line = line.replace("sellerState", companyInfo.getState() + "");
@@ -93,7 +95,7 @@ public class StockPrintUtil {
 
 
         line = line.replace("cardItems", createArticleHtml(stockItemst));
-        line = line.replace("quantityBalance", String.format(Locale.ENGLISH, "%.2f", quantityBalance));
+        line = line.replace("sasia", String.format(Locale.ENGLISH, "%.2f", quantityBalance));
         line = line.replace("balance", String.format(Locale.ENGLISH, "%.2f", balance));
 
 
@@ -187,6 +189,7 @@ public class StockPrintUtil {
     double balance = 0;
     double quantityBalance = 0;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     String createArticleHtml(List<Item> stockItem) {
         String finalCode = "";
         double balance = 0.0;
@@ -198,16 +201,22 @@ public class StockPrintUtil {
             } catch (Exception e) {
 
             }
-            finalCode = finalCode + "<tr >" +
-                    "<td class=\"text-center\">"+ (i+1)+"</td >"+
-                    "<td class=\"text-center\">"+ stockItem.get(i).getNumber() +"</td >"+
-                    "<td ></td >"+
-                    "<td class=\"t-c\">"+ stockItem.get(i).getName() +"</td >"+
-                    "<td>"+ stockItem.get(i).getDefaultUnit() +"</td >"+
-                    "<td class=\"text-right number_fs\">"+  cutTo2(Double.parseDouble(stockItem.get(i).getQuantity())) +"</td >"+
-                    "<td class=\"text-right number_fs\">"+ cutTo2(Double.parseDouble(stockItem.get(i).getAmount())) +"</td >"+
-                    "</tr >";
+            List<SubItem> subItems = stockItem.get(i).getItems();
+
+            for (int j = 0; j < subItems.size(); j++) {
+
+                finalCode = finalCode + "<tr >" +
+                        "<td class=\"text-center\">" + (i + 1) + "</td >" +
+                        "<td class=\"text-center\">" + stockItem.get(i).getNumber() + "</td >" +
+                        "<td class=\"text-center\">" + subItems.get(j).getBarcode() + "</td >" +
+                        "<td class=\"t-c\">" + stockItem.get(i).getName() + "</td >" +
+                        "<td>" + stockItem.get(i).getDefaultUnit() + "</td >" +
+                        "<td class=\"text-right number_fs\">" + cutTo2(Double.parseDouble(stockItem.get(i).getQuantity())) + "</td >" +
+                        "<td class=\"text-right number_fs\">" + cutTo2(Double.parseDouble(stockItem.get(i).getAmount())) + "</td >" +
+                        "</tr >";
+            }
         }
+
         this.balance = balance;
         this.quantityBalance = quantityBalance;
         return finalCode;
