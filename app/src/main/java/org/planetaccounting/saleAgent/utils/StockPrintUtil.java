@@ -72,8 +72,16 @@ public class StockPrintUtil {
         } else {
             line = line.replace("sellerEmail", "");
         }
-        line = line.replace("sellerBussines", companyInfo.getBusniessNumber() + "");
-        line = line.replace("sellerTvshNumber", companyInfo.getVatNumber() + "");
+        if (companyInfo.busniessNumber != null) {
+            line = line.replace("sellerBussines", companyInfo.getBusniessNumber() + "");
+        } else {
+            line = line.replace("sellerBussines", "");
+        }
+        if (companyInfo.vatNumber != null) {
+            line = line.replace("sellerTvshNumber", companyInfo.getVatNumber() + "");
+        } else {
+            line = line.replace("sellerTvshNumber", "");
+        }
         if (companyInfo.address != null) {
             line = line.replace("sellerAdress", companyInfo.getAddress() + "");
         } else {
@@ -84,7 +92,11 @@ public class StockPrintUtil {
         } else {
             line = line.replace("sellerCity", "");
         }
-        line = line.replace("sellerState", companyInfo.getState() + "");
+        if (companyInfo.state != null && companyInfo.state.equals("22")) {
+            line = line.replace("sellerState", "Kosovë");
+        } else {
+            line = line.replace("sellerState", "");
+        }
         line = line.replace(".no_invoice_hide { display: none;}", "");
 
 
